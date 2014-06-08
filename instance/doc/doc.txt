@@ -1,0 +1,263 @@
+/******************/
+Install
+/******************/
+1. Install fresh version from https://github.com/LiveHelperChat/livehelperchat
+
+2. Add these settings in settings/settings.ini.php file under site section
+'seller_url' => 'http://livehelperchat.com',// Change to main site url
+'seller_mail' => 'info@livehelperchat.com', // Change mail
+'seller_title' => 'Live Helper Chat',	    // Change to your company title
+'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
+      
+3. In db section add
+'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id
+
+4. Extract "instance" extension to extension folder 
+
+5. Execute in fresh installed database query from extension/instance/doc/install.sql
+
+6. Active extension in fresh installed LHC
+'extensions' =>
+      array ('instance')
+
+7. Edit var/autolaods/lhextension_autoload.php
+And make it look like
+return array(
+		'erLhcoreClassModelInstance' => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' => 'extension/instance/classes/erlhcoreclassinstance.php'
+);
+Now you will see instance from top menu. There you can create manually new instances.
+
+8. Setup cronjon to run every minit. I have prepared also sh version of cronjob witch avoid runing script more than once at the same time.
+
+// Plain php version
+php cron.php -s site_admin -e instance -c cron/maintain
+
+// You main need to adjust paths here and in cron_lhc.sh script itself. sh script is located at 
+extension/instance/doc/cron_lhcs.sh
+* * * * * cd /home/www/cronjobs && ./cron_lhc.sh > cron_lhc.log /dev/null 2>&1
+
+
+9. This plugins limits functionality purely by time and purchased request number.
+Setu this cronjob every 30 minits or so.
+php cron.php -s site_admin -e instance -c cron/update_counter
+
+Nginx log format for update view counter to work correctly.
+log_format  main  '$remote_addr $http_host - [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+You will need to make some changes in extension/instance/modules/lhcron/update_counter.php script. Provide correct log path and so on.
+
+10. Now make copy of installed lhc to another directory where all request for <lhc_name>.example.com will go.
+
+11. Delete from copied folder extension/instance
+
+11. All subdomains should be pointed to 9 directory.
+
+12. Edit var/autolaods/lhextension_autoload.php in copied directory and make it look like
+return array(
+		'erLhcoreClassModelInstance' 			 => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' 				 => 'extension/instance/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instance/classes/lhdb.php'
+    );
+    
+13. Put instancecustomer extension to extension folder
+
+14. Activate extension. It should look like
+'extensions' =>
+      array (
+      		'instancecustomer'
+),
+
+That's it.
+
+15. Don't forget to clear cache
+
+/******************/
+Manager nginx example
+/******************/
+# manager chat
+	server {
+	   listen          *:80;
+	   server_name    manager.livehelperchat.com;
+	   root           /home/www/domains/livehelperchat_manager_com;
+       access_log     /var/log/nginx/access_chat_manager.log main;
+
+       location ~* (^(?!(?:(?!(php)).)*/(albums|bin|var|lib|cache|doc|settings|pos|modules)/).*?(index\.php)$) {
+	 	  include        /etc/nginx/fastcgi_params;
+	 	  fastcgi_pass   127.0.0.1:9000;
+	      fastcgi_index  index.php;
+	      fastcgi_param  PATH_INFO          $query_string;
+	      fastcgi_param  SCRIPT_FILENAME /home/www/domains/livehelperchat_manager_com/$fastcgi_script_name;
+	   }
+
+	   #Allow hotlinking to normal and thumb size images
+       location ~* (normal_|thumb_|^/design|^/cache)(.*)\.(eot|woff|ttf|svg|gif|jpe?g?|png|mp3|ogg|wav|bmp|htm|swf|css|js|swf|pdf|ico)$ {
+	        ## @todo: add expires headers...
+	        # favicon is only stored in 1 dir, the design one; But browsers ask for it in the root
+
+	       if ($http_user_agent ~* "(WebReaper|wget|SiteSucker|SuperBot|Mihov Picture Downloader|TALWinHttpClient|A1 Website Download|WebCopier|Download Ninja|Microsoft URL Control|GetRight|Arachmo|MJ12bot|Gaisbot|Anonymous|Yanga|Twiceler|psbot|Irvine|Indy Library|HTTrack)" ) {
+                return 403;
+           }
+
+           if ($http_referer ~* (stockingteensex.info|cbox.ws|teensos.net|dpstream.net|tagged.com|kaskus.us|gorilladatingservice.info|taringa.net|discuss.com|craigslist.org|poringa.net)) {
+              return 403;
+           }
+
+           aio on;
+           directio 512;
+
+	       expires max;
+	       access_log        off;
+	       root           /home/www/domains/livehelperchat_manager_com;
+	   }
+
+	   # Do not allow to hotlink full size images except our self and major search engines
+       location ~* \.(eot|woff|ttf|svg|gif|jpe?g?|png|bmp|swf|css|js|swf|mp3|ogg|wav|pdf|ico|txt)$ {
+            ## @todo: add expires headers...
+
+           valid_referers none blocked server_names ~(livehelperchat.com|google.|reddit.|bing.|yahoo.);
+           if ($invalid_referer) {
+                 return 403;
+           }
+
+           if ($http_user_agent ~* "(WebReaper|wget|SiteSucker|SuperBot|Mihov Picture Downloader|TALWinHttpClient|A1 Website Download|WebCopier|Download Ninja|Microsoft URL Control|GetRight|Arachmo|MJ12bot|Gaisbot|Anonymous|Yanga|Twiceler|psbot|Irvine|Indy Library|HTTrack)" ) {
+                    return 403;
+           }
+
+           if ($http_referer ~* (stockingteensex.info|cbox.ws|teensos.net|dpstream.net|tagged.com|kaskus.us|gorilladatingservice.info|taringa.net|discuss.com|craigslist.org|poringa.net)) {
+              return 403;
+           }
+
+           aio on;
+           directio 512;
+
+           expires max;
+           root           /home/www/domains/livehelperchat_manager_com;
+       }
+
+	   location / {
+	       rewrite "^(.*)$" "/index.php?$1" last;
+	   }
+}
+
+/***************************/
+Client subdomains nginx example
+/***************************/
+
+server {
+	   listen          *:80;
+	   server_name    *.livehelperchat.com;
+	   root           /home/www/domains/livehelperchat_manager_client_com;
+       access_log     /var/log/nginx/access_chat_manager_client.log main;
+
+       location ~* (^(?!(?:(?!(php)).)*/(albums|bin|var|lib|cache|doc|settings|pos|modules)/).*?(index\.php)$) {
+	 	  include        /etc/nginx/fastcgi_params;
+
+
+
+
+	 	  fastcgi_pass   127.0.0.1:9000;
+	      fastcgi_index  index.php;
+	      fastcgi_param  PATH_INFO          $query_string;
+
+
+	      fastcgi_param GEOIP_COUNTRY_CODE $geoip_country_code;
+  		  fastcgi_param GEOIP_COUNTRY_CODE3 $geoip_country_code3;
+  		  fastcgi_param GEOIP_COUNTRY_NAME $geoip_country_name;
+
+  		fastcgi_param GEOIP_CITY_COUNTRY_CODE $geoip_city_country_code;
+  		fastcgi_param GEOIP_CITY_COUNTRY_CODE3 $geoip_city_country_code3;
+  		fastcgi_param GEOIP_CITY_COUNTRY_NAME $geoip_city_country_name;
+  		fastcgi_param GEOIP_REGION $geoip_region;
+  		fastcgi_param GEOIP_CITY $geoip_city;
+  		fastcgi_param GEOIP_POSTAL_CODE $geoip_postal_code;
+  		fastcgi_param GEOIP_CITY_CONTINENT_CODE $geoip_city_continent_code;
+ 		fastcgi_param GEOIP_LATITUDE $geoip_latitude;
+  		fastcgi_param GEOIP_LONGITUDE $geoip_longitude;
+
+
+	      fastcgi_param  SCRIPT_FILENAME /home/www/domains/livehelperchat_manager_client_com/$fastcgi_script_name;
+	   }
+
+	   #Allow hotlinking to normal and thumb size images
+       location ~* (normal_|thumb_|^/design|^/cache)(.*)\.(eot|woff|ttf|svg|gif|jpe?g?|png|mp3|ogg|wav|bmp|htm|swf|css|js|swf|pdf|ico)$ {
+	        ## @todo: add expires headers...
+	        # favicon is only stored in 1 dir, the design one; But browsers ask for it in the root
+
+	       if ($http_user_agent ~* "(WebReaper|wget|SiteSucker|SuperBot|Mihov Picture Downloader|TALWinHttpClient|A1 Website Download|WebCopier|Download Ninja|Microsoft URL Control|GetRight|Arachmo|MJ12bot|Gaisbot|Anonymous|Yanga|Twiceler|psbot|Irvine|Indy Library|HTTrack)" ) {
+                return 403;
+           }
+
+           if ($http_referer ~* (stockingteensex.info|cbox.ws|teensos.net|dpstream.net|tagged.com|kaskus.us|gorilladatingservice.info|taringa.net|discuss.com|craigslist.org|poringa.net)) {
+              return 403;
+           }
+
+           aio on;
+           directio 512;
+
+	       expires max;
+	       access_log        off;
+	       root           /home/www/domains/livehelperchat_manager_client_com;
+	   }
+
+	   # Do not allow to hotlink full size images except our self and major search engines
+       location ~* \.(eot|woff|ttf|svg|gif|jpe?g?|png|bmp|swf|css|js|swf|mp3|ogg|wav|pdf|ico|txt)$ {
+            ## @todo: add expires headers...
+
+           valid_referers none blocked server_names ~(livehelperchat.com|google.|reddit.|bing.|yahoo.);
+           if ($invalid_referer) {
+                 return 403;
+           }
+
+           if ($http_user_agent ~* "(WebReaper|wget|SiteSucker|SuperBot|Mihov Picture Downloader|TALWinHttpClient|A1 Website Download|WebCopier|Download Ninja|Microsoft URL Control|GetRight|Arachmo|MJ12bot|Gaisbot|Anonymous|Yanga|Twiceler|psbot|Irvine|Indy Library|HTTrack)" ) {
+                    return 403;
+           }
+
+           if ($http_referer ~* (stockingteensex.info|cbox.ws|teensos.net|dpstream.net|tagged.com|kaskus.us|gorilladatingservice.info|taringa.net|discuss.com|craigslist.org|poringa.net)) {
+              return 403;
+           }
+
+           aio on;
+           directio 512;
+
+           expires max;
+           root           /home/www/domains/livehelperchat_manager_client_com;
+       }
+
+	   location / {
+	       rewrite "^(.*)$" "/index.php?$1" last;
+	   }
+}
+	
+
+
+
+/***************************/
+API TUTORIAL
+/***************************/
+
+/***************************/
+Check does exists instance
+/***************************/
+http://manager.livehelperchat.com/instance/isfree/newinstance
+http://manager.livehelperchat.com/instance/isfree/<address>
+
+/***************************/
+Admin
+/***************************/
+At the top will be instance menu item
+
+/***************************/
+Create request:
+/***************************/
+Change seller_secret_hash in settings/settings.ini.php
+$secretHash = $cfg->getSetting('site','seller_secret_hash');;
+$validateHash = sha1((string)$Params['user_parameters']['address'].(string)$Params['user_parameters']['email'].(string)$Params['user_parameters']['request'].(string)$Params['user_parameters']['period'].$secretHash);
+
+Example:
+http://manager.livehelperchat.com/index.php/instance/registerinstance/remdex/remdex@gmail.com/6000/160/138d07f5c478cbd4d1fcbfcc6ccd49d5961273bd
+http://manager.livehelperchat.com/index.php/instance/registerinstance/<address>/<email>/<requestnumber>/<valid_duration_in_days>/<hashas>
+
+Address only latin letters without spaces

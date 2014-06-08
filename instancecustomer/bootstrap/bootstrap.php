@@ -20,6 +20,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('file.new.file_path',array($this,'newFilePath'));
 		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
+				
+		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
+		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;
+		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
+		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;		
 	}
 
 	public function screenshotPath($params) {
