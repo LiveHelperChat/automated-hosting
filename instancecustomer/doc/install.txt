@@ -1,0 +1,16 @@
+1. Edit var/autoloads/lhextension_autoload.php and make it look like
+<?php
+/**
+ * Autoloader definition for Live Helper Extension files.
+ *
+ */
+
+return array(
+		'erLhcoreClassModelInstance' 			 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' 				 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',
+    );
+
+?>
+
+2. For full install refer to instance extension install tutorial.

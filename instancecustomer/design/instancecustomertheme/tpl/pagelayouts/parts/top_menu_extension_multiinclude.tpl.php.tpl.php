@@ -1,0 +1,2 @@
+<li class="divider"></li>
+<li><a href="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('pagelayout/pagelayout','Billing');?></a></li>
