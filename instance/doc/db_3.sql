@@ -920,3 +920,9 @@ CREATE TABLE `lh_abstract_widget_theme` (
   `offline_text` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`)
+VALUES ('new_user_bn', '', '');
+
+INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`)
+VALUES ('new_user_sound', '', '');
