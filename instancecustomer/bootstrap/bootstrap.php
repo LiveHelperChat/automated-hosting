@@ -19,6 +19,15 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('file.uploadfileadmin.file_path',array($this,'screenshotPath'));
 		$dispatcher->listen('file.new.file_path',array($this,'newFilePath'));
 		
+		// Themes listeners
+		$dispatcher->listen('theme.edit.logo_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.need_help_image_path',array($this,'themeStoragePath'));	
+		$dispatcher->listen('theme.edit.offline_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.online_image_path',array($this,'themeStoragePath'));
+		
+		// temporary path
+		$dispatcher->listen('theme.temppath',array($this,'tempStoragePath'));
+		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
 		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
@@ -27,6 +36,14 @@ class erLhcoreClassExtensionInstancecustomer {
 		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;		
 	}
 
+	public function tempStoragePath($params){
+		$params['dir'] = 'var/tmpfiles/'.erLhcoreClassInstance::getInstance()->id.'/';
+	}
+	
+	public function themeStoragePath($params){
+		$params['dir'] = 'var/storagetheme/'.date('Y').'y/'.date('m').'/'.date('d').'/'.erLhcoreClassInstance::getInstance()->id.'/'.$params['storage_id'].'/';
+	}
+		
 	public function screenshotPath($params) {
 		$params['path'] = 'var/storage/'.date('Y').'y/'.date('m').'/'.date('d').'/'.erLhcoreClassInstance::getInstance()->id.'/'.$params['storage_id'].'/';
 	}
