@@ -918,6 +918,10 @@ CREATE TABLE `lh_abstract_widget_theme` (
   `need_help_text` varchar(250) NOT NULL,
   `online_text` varchar(250) NOT NULL,
   `offline_text` varchar(250) NOT NULL,
+  `copyright_image` varchar(250) NOT NULL,
+  `copyright_image_path` varchar(250) NOT NULL,
+  `widget_copyright_url` varchar(250) NOT NULL,
+  `show_copyright` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -930,3 +934,6 @@ VALUES ('new_user_sound', '', '');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('allow_reopen_closed','1', 0, 'Allow user to reopen closed chats?', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('reopen_as_new','1', 0, 'Reopen closed chat as new? Otherwise it will be reopened as active.', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('default_theme_id','0', 0, 'Default theme ID.', '1');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('update_ip','127.0.0.1',0,'Which ip should be allowed to update DB by executing http request, separate by comma?',0);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('track_if_offline','0',0,'Track online visitors even if there is no online operators',0);
+
