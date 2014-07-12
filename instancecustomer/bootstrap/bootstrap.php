@@ -28,6 +28,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		// temporary path
 		$dispatcher->listen('theme.temppath',array($this,'tempStoragePath'));
 		
+		// Disable database variables cache
+		$dispatcher->listen('tpl.new',array($this,'changeTemplateSettings'));
+		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
 		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
@@ -35,7 +38,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
 		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;		
 	}
-
+	
+	public function changeTemplateSettings($params){
+		$params['tpl']->cacheDbVariables = false;
+	}
+	
 	public function tempStoragePath($params){
 		$params['dir'] = 'var/tmpfiles/'.erLhcoreClassInstance::getInstance()->id.'/';
 	}
