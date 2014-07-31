@@ -5,6 +5,7 @@ Install
 
 2. Add these settings in settings/settings.ini.php file under site section
 'seller_url' => 'http://livehelperchat.com',// Change to main site url
+'seller_domain' => 'livehelperchat.com',// Change to main site url
 'seller_mail' => 'info@livehelperchat.com', // Change mail
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
@@ -57,9 +58,9 @@ You will need to make some changes in extension/instance/modules/lhcron/update_c
 
 12. Edit var/autolaods/lhextension_autoload.php in copied directory and make it look like
 return array(
-		'erLhcoreClassModelInstance' 			 => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
-		'erLhcoreClassInstance' 				 => 'extension/instance/classes/erlhcoreclassinstance.php',
-		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instance/classes/lhdb.php'
+		'erLhcoreClassModelInstance' 			 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' 				 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',
     );
     
 13. Put instancecustomer extension to extension folder
@@ -261,3 +262,21 @@ http://manager.livehelperchat.com/index.php/instance/registerinstance/remdex/rem
 http://manager.livehelperchat.com/index.php/instance/registerinstance/<address>/<email>/<requestnumber>/<valid_duration_in_days>/<hashas>
 
 Address only latin letters without spaces
+
+/***************************/
+Remove instance data call, instance is marked as pending termination, and cronjob terminates it's during next run
+/***************************/
+$secretHash = $cfg->getSetting('site','seller_secret_hash');;
+$validateHash = sha1((string)$Params['user_parameters']['address'].$secretHash);
+
+http://manager.livehelperchat.com/index.php/instance/terminateinstance/remdex/138d07f5c478cbd4d1fcbfcc6ccd49d5961273bd
+http://manager.livehelperchat.com/index.php/instance/terminateinstance/<address>/<hash>
+
+/***************************/
+Suspend instance
+/***************************/
+$secretHash = $cfg->getSetting('site','seller_secret_hash');;
+$validateHash = sha1((string)$Params['user_parameters']['address'].(string)$Params['user_parameters']['status'].$secretHash);
+
+http://manager.livehelperchat.com/index.php/instance/suspendinstance/remdex/1/138d07f5c478cbd4d1fcbfcc6ccd49d5961273bd
+http://manager.livehelperchat.com/index.php/instance/suspendinstance/<address>/<status>/<hash>

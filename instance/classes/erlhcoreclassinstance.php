@@ -36,6 +36,33 @@ class erLhcoreClassInstance{
    		}
    }
 
+   public static function removeCustomer($instance) {
+   
+	   	$cfg = erConfigClassLhConfig::getInstance();
+	   	$secretHash = $cfg->getSetting('site','seller_secret_hash');
+	   
+	   	$hash = sha1($instance->id . date('Ym') . $secretHash);
+	   
+	   	$url = 'http://'.$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
+	   
+	   	$responseData = json_decode($response);
+	   	 
+	   	if (isset($responseData->error) && $responseData->error == false){
+	   		self::deleteDADatabase($instance->id);
+	   		return true;
+	   	} else {
+	   		throw new Exception('Instance removement failed');
+	   	}
+   }
+   
+   public static function deleteDADatabase($client_id){   		
+	   	$db = ezcDbInstance::get();
+	   	$cfg = erConfigClassLhConfig::getInstance();
+	   	$db->query('DROP DATABASE IF EXISTS '.$cfg->getSetting( 'db', 'database_user_prefix').$client_id.';');
+   }
+   
+   
    public static function getInstance() {
    		if (self::$instanceChat !== null) {
    			return self::$instanceChat;
@@ -64,9 +91,10 @@ class erLhcoreClassInstance{
    		$replaceArray = array($instance->email,sha1($password. $cfg->getSetting( 'site', 'secrethash') .sha1($password)),erLhcoreClassModelForgotPassword::randomPassword(10),$chat_box_hash,strlen($chat_box_hash));
 
 	   	$db = ezcDbInstance::get();
-	   	$db->query('DROP DATABASE IF EXISTS lhc_manage_client_'.$instance->id.';');
-	   	$db->query('CREATE DATABASE lhc_manage_client_'.$instance->id.';');
-	   	$db->query('USE lhc_manage_client_'.$instance->id);
+	   	self::deleteDADatabase($instance->id);
+	   	$db->query('CREATE DATABASE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id.';');
+	   		   	
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id);
 	   	$sql = file_get_contents('extension/instance/doc/db_3.sql');
 	   	$sql = str_replace($searchArray, $replaceArray, $sql);
 	   	$db->query($sql);

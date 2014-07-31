@@ -56,6 +56,7 @@ CREATE TABLE `lh_abstract_proactive_chat_invitation` (
   `position` int(11) NOT NULL,
   `identifier` varchar(50) NOT NULL,
   `requires_email` int(11) NOT NULL,
+  `requires_phone` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `time_on_site_pageviews_siteaccess_position` (`time_on_site`,`pageviews`,`siteaccess`,`identifier`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -225,6 +226,7 @@ CREATE TABLE `lh_chat_online_user` (
   				  `tt_time_on_site` int(11) NOT NULL,
         	   	  `requires_email` int(11) NOT NULL,
         	   	  `requires_username` int(11) NOT NULL,
+        	   	  `requires_phone` int(11) NOT NULL,
         	   	  `screenshot_id` int(11) NOT NULL,
         	   	  `identifier` varchar(50) NOT NULL,
         	   	  `operation` varchar(200) NOT NULL,
@@ -939,4 +941,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('default_theme_id','0', 0, 'Default theme ID.', '1');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('update_ip','127.0.0.1',0,'Which ip should be allowed to update DB by executing http request, separate by comma?',0);
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('track_if_offline','0',0,'Track online visitors even if there is no online operators',0);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('min_phone_length','8',0,'Minimum phone number length',0);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
+('geoadjustment_data',	'a:8:{i:0;b:0;s:18:\"use_geo_adjustment\";b:0;s:13:\"available_for\";s:0:\"\";s:15:\"other_countries\";s:6:\"custom\";s:8:\"hide_for\";s:0:\"\";s:12:\"other_status\";s:7:\"offline\";s:11:\"rest_status\";s:6:\"hidden\";s:12:\"apply_widget\";i:0;}',	0,	'Geo adjustment settings',	1);
 

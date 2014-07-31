@@ -31,6 +31,8 @@ class erLhcoreClassExtensionInstancecustomer {
 		// Disable database variables cache
 		$dispatcher->listen('tpl.new',array($this,'changeTemplateSettings'));
 		
+		erLhcoreClassModule::$cacheDbVariables = false;
+		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
 		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;

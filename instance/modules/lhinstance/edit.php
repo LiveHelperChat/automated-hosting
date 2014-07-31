@@ -9,6 +9,35 @@ if ( isset($_POST['Cancel_departament']) ) {
     exit;
 }
 
+if (isset($_POST['ChangePassword']) )
+{
+	$definition = array(
+			'InstancePassword' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+			),
+			'InstanceUsername' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+			));
+	$form = new ezcInputForm( INPUT_POST, $definition );
+	$Errors = array();
+
+	if ( $form->hasValidData( 'InstancePassword' ) && $form->InstancePassword != '' )
+	{
+		$Instance->setPassword($form->InstancePassword);
+		$tpl->set('updated',true);
+	} else {
+		$tpl->set('errors',array('Password was not change'));
+	}
+
+	if ( $form->hasValidData( 'InstanceUsername' ) && $form->InstanceUsername != '' )
+	{
+		$Instance->setUsername($form->InstanceUsername);
+		$tpl->set('updated',true);
+	} else {
+		$tpl->set('errors',array('Username was not change'));
+	}
+}
+
 if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
 {
    $definition = array(
@@ -17,6 +46,12 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
         ),
         'Email' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'validate_email'
+        ), 
+   		'Suspended' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'Terminate' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         ),
         'Request' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'string'
@@ -51,7 +86,21 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
     {
         $Instance->request = $form->Request;
     }
-
+    
+    if ( $form->hasValidData( 'Suspended' ) && $form->Suspended == true )
+    {
+    	$Instance->suspended = 1;
+    } else {
+    	$Instance->suspended = 0;
+    }
+    
+    if ( $form->hasValidData( 'Terminate' ) && $form->Terminate == true )
+    {
+    	$Instance->terminate = 1;
+    } else {
+    	$Instance->terminate = 0;
+    }
+    
     if ( $form->hasValidData( 'RequestUsed' ) )
     {
         $Instance->request_used = $form->RequestUsed;

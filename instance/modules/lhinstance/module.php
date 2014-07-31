@@ -29,6 +29,16 @@ $ViewList['registerinstance'] = array(
 		'functions' => array( )
 );
 
+$ViewList['suspendinstance'] = array(
+		'params' => array('address','status','hash'),
+		'functions' => array( )
+);
+
+$ViewList['terminateinstance'] = array(
+		'params' => array('address','hash'),
+		'functions' => array( )
+);
+
 $FunctionList['manageinstance'] = array('explain' => 'Access to instance management');
 
 ?>

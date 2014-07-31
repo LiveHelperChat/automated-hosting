@@ -10,6 +10,10 @@
 <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Status');?>,0 - pending activation, 1 - activated</label>
 <input type="text" name="Status"  value="<?php echo htmlspecialchars($instance->status);?>" />
 
+<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Suspended');?> <input type="checkbox" name="Suspended" value="on" <?php echo $instance->suspended ? 'checked="checked"' : '';?> /></label>
+
+<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Terminate');?> <input type="checkbox" name="Terminate" value="on" <?php echo $instance->terminate ? 'checked="checked"' : '';?> /></label>
+
 <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Expires');?></label>
 <input type="text" name="Expires"  value="<?php echo htmlspecialchars($instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : date('Y-m-d H:i:s',time()+6*31*24*3600));?>" />
 

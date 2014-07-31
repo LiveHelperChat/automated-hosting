@@ -54,6 +54,15 @@ $def->properties['date_date_hour_format']->columnName   = 'date_date_hour_format
 $def->properties['date_date_hour_format']->propertyName = 'date_date_hour_format';
 $def->properties['date_date_hour_format']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['suspended'] = new ezcPersistentObjectProperty();
+$def->properties['suspended']->columnName   = 'suspended';
+$def->properties['suspended']->propertyName = 'suspended';
+$def->properties['suspended']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['terminate'] = new ezcPersistentObjectProperty();
+$def->properties['terminate']->columnName   = 'terminate';
+$def->properties['terminate']->propertyName = 'terminate';
+$def->properties['terminate']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 return $def;
 

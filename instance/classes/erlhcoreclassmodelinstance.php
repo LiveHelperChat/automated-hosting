@@ -15,6 +15,8 @@ class erLhcoreClassModelInstance {
                'date_format'    		=> $this->date_format,
                'date_hour_format'    	=> $this->date_hour_format,
                'date_date_hour_format'  => $this->date_date_hour_format,
+       		   'suspended'  	=> $this->suspended,
+       		   'terminate'  	=> $this->terminate,
        );
    }
 
@@ -39,18 +41,31 @@ class erLhcoreClassModelInstance {
    		return $this->email;
    }
 
-   public function removeThis() {
+  /*  public function removeThis() {
    		$db = ezcDbInstance::get();
    		$cfg = erConfigClassLhConfig::getInstance();
    		$db->query('DROP DATABASE IF EXISTS '.$cfg->getSetting( 'db', 'database_user_prefix').$this->id.';');
 
    		erLhcoreClassInstance::getSession()->delete($this);
+   } */
+   
+   public function removeThis() {   	 
+	   	try {
+	   		erLhcoreClassInstance::removeCustomer($this);
+	   	  
+	   		erLhcoreClassInstance::getSession()->delete($this);
+	   
+	   		return true;
+	   
+	   	} catch (Exception $e) {
+	   		return false;
+	   	}
    }
 
    public function __get($var) {
 	   	switch ($var) {
 	   		case 'is_active':
-	   			$this->is_active = $this->request > 0;
+	   			$this->is_active = $this->request > 0 && $this->expires > time() && $this->suspended == 0;
 	   			return $this->is_active;
 	   		break;
 
@@ -70,6 +85,35 @@ class erLhcoreClassModelInstance {
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
 	   	$this->saveThis();	   	
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+   }
+   
+   public function setPassword($password) {
+	   	$cfg = erConfigClassLhConfig::getInstance();
+	   
+	   	$db = ezcDbInstance::get();
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$this->id); // Switch to intance DB
+	   		
+	   	$secretHash = $cfg->getSetting( 'site', 'secrethash' );
+	   	$password = sha1($password.$secretHash.sha1($password));
+	   	 
+	   	$stmt = $db->prepare('UPDATE lh_users SET password = :password WHERE id = 1');
+	   	$stmt->bindValue( ':password',$password);
+	   	$stmt->execute();
+	   
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
+   }
+    
+   public function setUsername($username) {
+	   	$cfg = erConfigClassLhConfig::getInstance();
+	   
+	   	$db = ezcDbInstance::get();
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$this->id); // Switch to intance DB
+	   
+	   	$stmt = $db->prepare('UPDATE lh_users SET username = :username WHERE id = 1');
+	   	$stmt->bindValue( ':username',$username);
+	   	$stmt->execute();
+	   
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
    }
    
    public static function getCount($params = array())
@@ -165,6 +209,8 @@ class erLhcoreClassModelInstance {
    public $id = null;
    public $request = 0;   
    public $expires = 0;
+   public $suspended = 0;
+   public $terminate = 0;
    public $address = '';
    public $email = '';
    public $time_zone = '';

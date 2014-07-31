@@ -15,6 +15,8 @@ class erLhcoreClassModelInstance {
                'date_format'    		=> $this->date_format,
                'date_hour_format'    	=> $this->date_hour_format,
                'date_date_hour_format'  => $this->date_date_hour_format,
+               'suspended'  	=> $this->suspended,
+               'terminate'  	=> $this->terminate,
        );
    }
 
@@ -25,7 +27,36 @@ class erLhcoreClassModelInstance {
            $this->$key = $val;
        }
    }
-
+   
+   public function removeInstanceData(){
+   
+	   	foreach (erLhAbstractModelFormCollected::getList(array('limit' => 1000000)) as $item){
+	   		$item->removeThis();
+	   	}
+	   
+	   	foreach (erLhAbstractModelWidgetTheme::getList(array('limit' => 1000000)) as $item){
+	   		$item->removeThis();
+	   	}
+	   
+	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000)) as $item){
+	   		$item->removeThis();
+	   	}
+	   
+	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000),'erLhcoreClassModelChatFile','lh_chat_file') as $item){
+	   		$item->removeThis();
+	   	}
+	   		
+	   	foreach (erLhcoreClassModelDocShare::getList(array('limit' => 1000000)) as $item){
+	   		$item->removeThis();
+	   	}
+	   
+	   	foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
+	   		$item->removeFile();
+	   	}
+	   	 
+	   	return true;
+   }
+   
    public function fetch($dep_id, $useCache = false) {
 
    		if ($useCache == true && isset($GLOBALS['erLhcoreClassModelInstance'.$dep_id])) return $GLOBALS['erLhcoreClassModelInstance'.$dep_id];
@@ -50,7 +81,7 @@ class erLhcoreClassModelInstance {
    public function __get($var) {
 	   	switch ($var) {
 	   		case 'is_active':
-	   			$this->is_active = $this->request > 0;
+	   			$this->is_active = $this->request > 0 && $this->expires > time() && $this->suspended == 0;
 	   			return $this->is_active;
 	   		break;
 

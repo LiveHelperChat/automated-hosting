@@ -2,6 +2,8 @@ CREATE TABLE `lhc_instance_client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `request` int(11) NOT NULL,
   `expires` int(11) NOT NULL,
+  `suspended` int(11) NOT NULL,
+  `terminate` int(11) NOT NULL,
   `address` varchar(30) NOT NULL,
   `email` varchar(250) NOT NULL,
   `status` int(11) NOT NULL,
