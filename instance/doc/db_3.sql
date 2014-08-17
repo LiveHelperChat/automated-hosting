@@ -206,6 +206,7 @@ CREATE TABLE `lh_chat_online_user` (
         	   	  `first_visit` int(11) NOT NULL,
         	   	  `total_visits` int(11) NOT NULL,
         	   	  `pages_count` int(11) NOT NULL,
+        	   	  `last_check_time` int(11) NOT NULL,
         	   	  `tt_pages_count` int(11) NOT NULL,
         	   	  `invitation_count` int(11) NOT NULL,
         	   	  `dep_id` int(11) NOT NULL,
@@ -959,3 +960,4 @@ INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUE
 INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('omap_mtimeout', '', '');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('show_language_switcher','0',0,'Show users option to switch language at widget',0);
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('show_languages','eng,lit,hrv,esp,por,nld,ara,ger,pol,rus,ita,fre,chn,cse,nor,tur,vnm,idn,sve,per,ell,dnk,rou,bgr,tha,geo,fin,alb',0,'Between what languages user should be able to switch',0);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('track_is_online','0',0,'Track is user still on site, chat status checks also has to be enabled',0);
