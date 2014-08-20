@@ -77,7 +77,7 @@ if ( is_file( $updateViewLogPath ) )
 
 echo "Start line:\n" . $startLine;
 $lastLine = "";
-$logFilePath = '/var/log/nginx/access_chat_manager_client.log';
+$logFilePath = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'access_log_path');
 
 $partsHost = array();
 
@@ -113,7 +113,7 @@ if ( is_file( $logFilePath ) )
 
 
                     $parts = explode( ' ', $timeIPPart );
-					$address = str_replace('.livehelperchat.com', '', $parts[1]);
+					$address = str_replace('.'.erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain'), '', $parts[1]);
 
 					if (isset($partsHost[$address])){
 						$partsHost[$address]++;
