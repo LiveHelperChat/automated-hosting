@@ -9,8 +9,7 @@ Install
 'seller_mail' => 'info@livehelperchat.com', // Change mail
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
-'access_log_path' => '/var/log/nginx/access_chat_manager_client.log',
-
+      
 3. In db section add
 'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id
 
@@ -70,6 +69,29 @@ return array(
 'extensions' =>
       array (
       		'instancecustomer'
+),
+
+15. Change in settings
+ 'default_site_access' => 'eng',
+ to
+ 'default_site_access' => 'noneexist',
+
+16. Apppend in site_access_options one more array
+ 'noneexist' => 
+      array (
+        'locale' => 'en_EN',
+        'content_language' => 'en',
+        'dir_language' => 'ltr',
+        'default_url' => 
+        array (
+          'module' => 'chat',
+          'view' => 'startchat',
+        ),
+        'theme' => 
+        array (
+          0 => 'customtheme',
+          1 => 'defaulttheme',
+        ),
 ),
 
 That's it.

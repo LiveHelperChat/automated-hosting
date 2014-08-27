@@ -17,6 +17,8 @@ class erLhcoreClassModelInstance {
                'date_date_hour_format'  => $this->date_date_hour_format,
                'suspended'  	=> $this->suspended,
                'terminate'  	=> $this->terminate,
+       		   'locale'  		=> $this->locale,
+       		   'siteaccess'  	=> $this->siteaccess,
        );
    }
 
@@ -204,6 +206,8 @@ class erLhcoreClassModelInstance {
    public $date_date_hour_format = 'Y-m-d H:i:s';
    public $status = self::PENDING_CREATE;
    
+   public $locale = '';
+   public $siteaccess = 'eng';
 }
 
 ?>

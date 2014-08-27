@@ -1,18 +1,18 @@
-Hello,
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Hello');?>,
 
-Here is your chat instance data:<?php echo "\n";?>
-Address: http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/<?php echo "\n\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Here is your chat instance data');?>:<?php echo "\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Address');?>: http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/<?php echo "\n\n";?>
 
-Login: <?php echo $email,"\n";?>
-Password: <?php echo $password,"\n\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Login');?>: <?php echo $email,"\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Password');?>: <?php echo $password,"\n\n";?>
 
-Number of purchased request:
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Number of purchased request');?>:
 <?php echo $instance->request,"\n\n";?>
 
-Request expires:
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Valid untill');?>:
 <?php echo date('Y-m-d',$instance->expires),"\n\n";?>
 
-Recommended embed code:<?php echo "\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Recommended embed code');?>:<?php echo "\n";?>
 <?php echo '<script type="text/javascript">
 var LHCChatOptions = {};
 LHCChatOptions.opt = {widget_height:190,widget_width:300,popup_height:520,popup_width:500};
@@ -25,6 +25,5 @@ var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(
 })();
 </script>',"\n\n"; ?>
 
-
-Sincerely,<?php echo "\n";?>
-Live Helper Chat Team
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Sincerely');?>,<?php echo "\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Live Support Team');?>

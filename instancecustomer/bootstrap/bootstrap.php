@@ -41,7 +41,31 @@ class erLhcoreClassExtensionInstancecustomer {
 		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
 		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;
 		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
-		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;		
+		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;
+
+		
+		$cfgSite = erConfigClassLhConfig::getInstance();
+		$sysConfiguration = erLhcoreClassSystem::instance();
+		$defaultSiteAccess = $cfgSite->getSetting( 'site', 'default_site_access' );
+				
+		// Perhaps we need to change default siteaccess
+		if (
+			$sysConfiguration->SiteAccess != 'site_admin' && 		// Change only if it's not admin
+			$sysConfiguration->SiteAccess == $defaultSiteAccess &&  // Change only if current siteaccess is the default siteaccess we want to change
+			!isset($_POST['switchLang']) && 						// Change only if customer is not doing anything
+			$instanceCustomer->siteaccess != ''	&&					// Change only if it's filled
+			$instanceCustomer->siteaccess != $sysConfiguration->SiteAccess	// Change only if it's different
+		) {						
+			$optionsSiteAccessOverride = $cfgSite->getSetting('site_access_options',$instanceCustomer->siteaccess);
+			$sysConfiguration->Language = $optionsSiteAccessOverride['locale'];
+			$sysConfiguration->SiteAccess = $instanceCustomer->siteaccess;
+			$sysConfiguration->ContentLanguage = $optionsSiteAccessOverride['content_language'];
+			$sysConfiguration->ThemeSite = $optionsSiteAccessOverride['theme'];
+			
+			if ($defaultSiteAccess != $sysConfiguration->SiteAccess) {
+				$sysConfiguration->WWWDirLang = '/'.$sysConfiguration->SiteAccess;
+			}
+		}		
 	}
 	
 	public function changeTemplateSettings($params){

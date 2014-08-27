@@ -64,6 +64,22 @@ $def->properties['terminate']->columnName   = 'terminate';
 $def->properties['terminate']->propertyName = 'terminate';
 $def->properties['terminate']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+/**
+ * Default back office user language
+ * */
+$def->properties['locale'] = new ezcPersistentObjectProperty();
+$def->properties['locale']->columnName   = 'locale';
+$def->properties['locale']->propertyName = 'locale';
+$def->properties['locale']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+/**
+ * Default frontend site siteaccess
+ * */
+$def->properties['siteaccess'] = new ezcPersistentObjectProperty();
+$def->properties['siteaccess']->columnName   = 'siteaccess';
+$def->properties['siteaccess']->propertyName = 'siteaccess';
+$def->properties['siteaccess']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 return $def;
 
 ?>

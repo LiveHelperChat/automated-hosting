@@ -1,4 +1,4 @@
-<h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Edit instance');?> - <?php echo htmlspecialchars($instance->address)?></h1>
+<h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Edit instance');?> - <?php echo htmlspecialchars($instance->address)?></h1>
 
 <?php if (isset($errors)) : ?>
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/validation_error.tpl.php'));?>
@@ -11,7 +11,7 @@
 <div class="section-container auto" data-section="auto" id="tabs" data-options="deep_linking: true" ng-cloak>
 
   <section>
-    <p class="title" data-section-title><a href="#maindata" >Main data</a></p>
+    <p class="title" data-section-title><a href="#maindata" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></p>
     <div class="content" data-section-content data-slug="maindata">
       <div>
       
@@ -31,7 +31,7 @@
 			</div>
 			<div class="columns large-4">
 					<ul class="circle">
-						<li>Active: <?php echo $instance->is_active ? 'yes' : 'no'?></li>
+						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Active');?>: <?php if ($instance->is_active) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
 						<li><a target="_blank" href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin">http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin</a></li>
 					</ul>
 			</div>	
@@ -42,17 +42,34 @@
   </section>
 
   <section>
-    <p class="title" data-section-title><a href="#login" >Login information</a></p>
+    <p class="title" data-section-title><a href="#attributes" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></p>
+    <div class="content" data-section-content data-slug="attributes">
+      <div> 
+			<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#attributes" method="post" autocomplete="off">		
+				
+				<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_attributes.tpl.php'));?>
+        										
+				<ul class="button-group radius">
+			      <li><input type="submit" class="small button" name="UpdateAttributes" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update attributes');?>"/></li>				  
+			    </ul>	
+			    			    	
+			</form>		 	  	
+  	  </div>
+    </div>
+  </section>
+  
+  <section>
+    <p class="title" data-section-title><a href="#login" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></p>
     <div class="content" data-section-content data-slug="login">
       <div> 
 			<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#login" method="post" autocomplete="off">		
 				
 				<input style="display:none">
 								 
-				<label>Username</label>
+				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Username')?></label>
 				<input type="text" value="" name="InstanceUsername" autocomplete="off">
 				
-				<label>Password</label>
+				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Password')?></label>
 				<input type="password" value="" name="InstancePassword" autocomplete="off">
 								
 				<ul class="button-group radius">

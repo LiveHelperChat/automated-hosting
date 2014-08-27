@@ -24,7 +24,7 @@ try {
 	$Result['content'] = $tpl->fetch();
 
 	$Result['path'] = array(array('url' => erLhcoreClassDesign::baseurl('system/configuration'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','System configuration')),
-			array('title' => 'Instances')
+			array('title' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances'))
 	);
 } catch (Exception $e) {
 	print_r($e);

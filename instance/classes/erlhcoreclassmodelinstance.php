@@ -17,9 +17,11 @@ class erLhcoreClassModelInstance {
                'date_date_hour_format'  => $this->date_date_hour_format,
        		   'suspended'  	=> $this->suspended,
        		   'terminate'  	=> $this->terminate,
+       		   'locale'  		=> $this->locale,
+       		   'siteaccess'  	=> $this->siteaccess,
        );
    }
-
+   
    public function setState( array $properties )
    {
        foreach ( $properties as $key => $val )
@@ -40,23 +42,16 @@ class erLhcoreClassModelInstance {
    public function __toString() {
    		return $this->email;
    }
-
-  /*  public function removeThis() {
-   		$db = ezcDbInstance::get();
-   		$cfg = erConfigClassLhConfig::getInstance();
-   		$db->query('DROP DATABASE IF EXISTS '.$cfg->getSetting( 'db', 'database_user_prefix').$this->id.';');
-
-   		erLhcoreClassInstance::getSession()->delete($this);
-   } */
    
    public function removeThis() {   	 
 	   	try {
-	   		erLhcoreClassInstance::removeCustomer($this);
-	   	  
-	   		erLhcoreClassInstance::getSession()->delete($this);
-	   
-	   		return true;
-	   
+	   		// Instance was created so we have to remove customer data first
+	   		if ($this->status == 1) {
+	   			erLhcoreClassInstance::removeCustomer($this);	 
+	   		}  	  
+	   		
+	   		erLhcoreClassInstance::getSession()->delete($this);	   
+	   		return true;	   
 	   	} catch (Exception $e) {
 	   		return false;
 	   	}
@@ -217,6 +212,10 @@ class erLhcoreClassModelInstance {
    public $date_format = 'Y-m-d';
    public $date_hour_format = 'H:i:s';
    public $date_date_hour_format = 'Y-m-d H:i:s';
+   
+   public $locale = '';
+   public $siteaccess = 'eng';
+   
    public $status = self::PENDING_CREATE;
    
 }

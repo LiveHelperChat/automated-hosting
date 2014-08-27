@@ -26,6 +26,7 @@ $ViewList['isfree'] = array(
 
 $ViewList['registerinstance'] = array(
 		'params' => array('address','email','request','period','hash'),
+		'uparams' => array('dateformat','hourformat','datehourformat','timezone','frontsiteaccess','operatorlocale'),
 		'functions' => array( )
 );
 

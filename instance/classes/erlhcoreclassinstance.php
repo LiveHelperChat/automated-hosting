@@ -83,6 +83,11 @@ class erLhcoreClassInstance{
 
    public static function createCustomer($instance) {
 
+   		$originalSiteAccess = erLhcoreClassSystem::instance()->SiteAccess;
+   		if ($instance->locale != '') {
+   			erLhcoreClassSystem::instance()->setSiteAccessByLocale($instance->locale);
+   		}
+   		
    		$password = erLhcoreClassModelForgotPassword::randomPassword(10);
    		$chat_box_hash = erLhcoreClassModelForgotPassword::randomPassword(10);
    		$searchArray = array('{email_replace}','{password_hash}','{export_hash_chats}','{chat_box_hash}','{chat_box_hash_length}');
@@ -99,6 +104,13 @@ class erLhcoreClassInstance{
 	   	$sql = str_replace($searchArray, $replaceArray, $sql);
 	   	$db->query($sql);
 	   	
+	   	// Insert default user language
+	   	if ($instance->locale != ''){
+	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
+	   		$stm->bindValue(':value',$instance->locale);
+	   		$stm->execute();
+	   	}
+
 	   	$tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/email.tpl.php');
 	   	$tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'password' => $password));
 
@@ -120,6 +132,10 @@ class erLhcoreClassInstance{
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database'));
 	   	$instance->status = erLhcoreClassModelInstance::WORKING;
 	   	$instance->saveThis();
+	   	
+	   	if ($instance->locale != '') {
+	   		erLhcoreClassSystem::instance()->setSiteAccess($originalSiteAccess);
+	   	}
    }
 
    private static $persistentSession;

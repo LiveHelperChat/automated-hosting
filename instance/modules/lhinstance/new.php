@@ -3,6 +3,9 @@
 $tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/new.tpl.php');
 $Instance = new erLhcoreClassModelInstance();
 
+$cfgSite = erConfigClassLhConfig::getInstance();
+$tpl->set('locales',$cfgSite->getSetting('site', 'available_site_access' ));
+
 if ( isset($_POST['Cancel_departament']) ) {
     erLhcoreClassModule::redirect('instance/list');
     exit;
@@ -28,12 +31,63 @@ if (isset($_POST['Save_departament']))
         ),
         'Expires' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'string'
-        )
+        ),
+		'DateFormat' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'DateHourFormat' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'DateAndHourFormat' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'UserTimeZone' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'FrontSiteaccess' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'Language' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'UserTimeZone' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		)
     );
 
     $form = new ezcInputForm( INPUT_POST, $definition );
     $Errors = array();
-
+    
+    if ( $form->hasValidData( 'Language' ) )
+    {
+    	$Instance->locale = $form->Language;
+    }
+    
+    if ( $form->hasValidData( 'DateFormat' ) )
+    {
+    	$Instance->date_format = $form->DateFormat;
+    }
+    
+    if ( $form->hasValidData( 'DateHourFormat' ) )
+    {
+    	$Instance->date_hour_format = $form->DateHourFormat;
+    }
+    
+    if ( $form->hasValidData( 'DateAndHourFormat' ) )
+    {
+    	$Instance->date_date_hour_format = $form->DateAndHourFormat;
+    }
+    
+    if ( $form->hasValidData( 'UserTimeZone' ) )
+    {
+    	$Instance->time_zone = $form->UserTimeZone;
+    }
+    
+    if ( $form->hasValidData( 'FrontSiteaccess' ) )
+    {
+    	$Instance->siteaccess = $form->FrontSiteaccess;
+    }
+    
     if ( $form->hasValidData( 'Address' ) && erLhcoreClassInstance::instanceExists($form->Address) == false )
     {
         $Instance->address = $form->Address;
@@ -92,8 +146,8 @@ $Result['content'] = $tpl->fetch();
 
 $Result['path'] = array(
 array('url' => erLhcoreClassDesign::baseurl('system/configuration'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/new','System configuration')),
-array('url' => erLhcoreClassDesign::baseurl('instance/list'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/new','Instances')),
-array('title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/new','New instance')),
+array('url' => erLhcoreClassDesign::baseurl('instance/list'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances')),
+array('title' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','New instance')),
 );
 
 ?>
