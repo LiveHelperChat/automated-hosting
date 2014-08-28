@@ -114,6 +114,10 @@ class erLhcoreClassInstance{
 	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
 	   		$stm->bindValue(':value',$instance->locale);
 	   		$stm->execute();
+	   	} else {
+	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
+	   		$stm->bindValue(':value','en_EN');
+	   		$stm->execute();	   		
 	   	}
 
 	   	$tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/email.tpl.php');

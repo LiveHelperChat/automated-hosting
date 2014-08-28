@@ -1,4 +1,4 @@
-<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Hello');?>,
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Hello');?>,<?php echo "\n\n";?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Here is your chat instance data');?>:<?php echo "\n";?>
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Address');?>: http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/<?php echo "\n\n";?>

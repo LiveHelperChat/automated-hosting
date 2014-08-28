@@ -520,13 +520,12 @@ CREATE TABLE `lh_users_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `lh_users_setting` (`id`, `user_id`, `identifier`, `value`) VALUES
-(1,	1,	'user_language',	'en_EN'),
-(2,	1,	'enable_pending_list',	'1'),
-(3,	1,	'enable_active_list',	'1'),
-(4,	1,	'enable_close_list',	'0'),
-(5,	1,	'enable_unread_list',	'1'),
-(6,	1,	'new_chat_sound',	'1'),
-(7,	1,	'chat_message',	'1');
+(1,	1,	'enable_pending_list',	'1'),
+(2,	1,	'enable_active_list',	'1'),
+(3,	1,	'enable_close_list',	'0'),
+(4,	1,	'enable_unread_list',	'1'),
+(5,	1,	'new_chat_sound',	'1'),
+(6,	1,	'chat_message',	'1');
 
 DROP TABLE IF EXISTS `lh_users_setting_option`;
 CREATE TABLE `lh_users_setting_option` (

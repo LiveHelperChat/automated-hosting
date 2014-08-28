@@ -36,7 +36,8 @@ return array(
 		'erLhcoreClassModelInstance' => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
 		'erLhcoreClassInstance' => 'extension/instance/classes/erlhcoreclassinstance.php',
 		'erLhcoreClassInstanceDBMysql' 		=> 'extension/instance/classes/dbhandlers/mysql.php',
-		'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',
+		'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',		
+		'HTTPSocket' 				 => 'extension/instance/classes/dbhandlers/httpsocket.php'
 );
 Now you will see instance from top menu. There you can create manually new instances.
 
