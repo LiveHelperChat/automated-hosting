@@ -6,6 +6,6 @@ $db = ezcDbInstance::get(); // Needed to load correct data
 $tpl->set('instance',erLhcoreClassInstance::getInstance());
 
 $Result['content'] = $tpl->fetch();
-$Result['path'] = array(array('title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Billing')));
+$Result['path'] = array(array('title' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Billing')));
 
 ?>

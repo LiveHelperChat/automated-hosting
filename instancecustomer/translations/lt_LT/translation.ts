@@ -7,6 +7,21 @@
     </message>  
   </context>  
   <context>
+    <name>system/update</name>    
+    <message>
+      <source>About</source>
+      <translation>Apie</translation>
+    </message>  
+    <message>
+      <source>For any updates please contact your service provider...</source>
+      <translation>Dėl atnaujinimų kreipkitės į savo paslaugų tiekėja...</translation>
+    </message>  
+    <message>
+      <source>Update information</source>
+      <translation>Atnaujinimo informacija</translation>
+    </message>  
+  </context>  
+  <context>
     <name>instance/edit</name>    
     <message>
       <source>Billing</source>

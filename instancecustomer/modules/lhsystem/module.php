@@ -11,6 +11,12 @@ $ViewList['languages'] = array(
     'functions' => array( 'changelanguage' )
 );
 
+$ViewList['update'] = array(
+		'params' => array(),
+		'uparams' => array('action'),
+		'functions' => array( 'performupdate' )
+);
+
 $ViewList['timezone'] = array(
 		'params' => array(),
 		'functions' => array( 'timezone' )

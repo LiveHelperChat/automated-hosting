@@ -71,15 +71,7 @@ class erLhcoreClassModelInstance {
    public function __toString() {
    		return $this->email;
    }
-
-   public function removeThis() {
-   		$db = ezcDbInstance::get();
-   		$cfg = erConfigClassLhConfig::getInstance();
-   		$db->query('DROP DATABASE IF EXISTS '.$cfg->getSetting( 'db', 'database_user_prefix').$this->id.';');
-
-   		erLhcoreClassInstance::getSession()->delete($this);
-   }
-
+  
    public function __get($var) {
 	   	switch ($var) {
 	   		case 'is_active':

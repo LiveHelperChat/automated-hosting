@@ -49,19 +49,24 @@ class erLhcoreClassInstance{
 	   	$responseData = json_decode($response);
 	   	 
 	   	if (isset($responseData->error) && $responseData->error == false){
-	   		self::deleteDADatabase($instance->id);
+	   		self::deleteDatabase($instance->id);
 	   		return true;
 	   	} else {
 	   		throw new Exception('Instance removement failed');
 	   	}
    }
    
-   public static function deleteDADatabase($client_id){   		
-	   	$db = ezcDbInstance::get();
+   public static function deleteDatabase($client_id){
 	   	$cfg = erConfigClassLhConfig::getInstance();
-	   	$db->query('DROP DATABASE IF EXISTS '.$cfg->getSetting( 'db', 'database_user_prefix').$client_id.';');
+	   	$cfg->getSetting( 'site', 'instance_handler');
+	   	call_user_func($cfg->getSetting( 'site', 'instance_handler').'::deleteDB',$client_id);
    }
    
+   public static function createDatabase($client_id) {
+   		$cfg = erConfigClassLhConfig::getInstance();
+   		$cfg->getSetting( 'site', 'instance_handler');   		
+   		call_user_func($cfg->getSetting( 'site', 'instance_handler').'::createDB',$client_id);
+   }
    
    public static function getInstance() {
    		if (self::$instanceChat !== null) {
@@ -69,7 +74,6 @@ class erLhcoreClassInstance{
    		}
 
    		ezcDbInstance::get();
-
    		return self::$instanceChat;
    }
 
@@ -96,9 +100,10 @@ class erLhcoreClassInstance{
    		$replaceArray = array($instance->email,sha1($password. $cfg->getSetting( 'site', 'secrethash') .sha1($password)),erLhcoreClassModelForgotPassword::randomPassword(10),$chat_box_hash,strlen($chat_box_hash));
 
 	   	$db = ezcDbInstance::get();
-	   	self::deleteDADatabase($instance->id);
-	   	$db->query('CREATE DATABASE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id.';');
 	   		   	
+	   	self::deleteDatabase($instance->id);
+	   	self::createDatabase($instance->id);
+	      		   	
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id);
 	   	$sql = file_get_contents('extension/instance/doc/db_3.sql');
 	   	$sql = str_replace($searchArray, $replaceArray, $sql);

@@ -622,7 +622,7 @@ CREATE TABLE `lh_chat_accept` (
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `hash` (`hash`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`) VALUES
@@ -775,7 +775,7 @@ CREATE TABLE `lh_abstract_browse_offer_invitation` (
   PRIMARY KEY (`id`),
   KEY `active` (`active`),
   KEY `identifier` (`identifier`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `lh_departament`
 ADD `hidden` int(11) NOT NULL,

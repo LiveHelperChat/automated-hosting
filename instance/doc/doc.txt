@@ -9,7 +9,16 @@ Install
 'seller_mail' => 'info@livehelperchat.com', // Change mail
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
-      
+'instance_handler' => 'erLhcoreClassInstanceDBMysql', // erLhcoreClassInstanceDBMysql - mysql, erLhcoreClassInstanceDBDirectAdmin - direct admin
+
+If you are using direct admin, you will have to append these also
+'direct_admin_user' => '<direct_admin_user>',		
+'direct_admin_pass' => 'direct_admin_password>',
+'direct_admin_ip' => '<IP>',		
+'direct_admin_port' => '<port>',		
+'direct_admin_dbuser' => '<db_user>', // Under this DB is created	
+'direct_admin_dbpass' => '<db_pass>', // Under this DB user is created	
+
 3. In db section add
 'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id
 
@@ -25,7 +34,9 @@ Install
 And make it look like
 return array(
 		'erLhcoreClassModelInstance' => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
-		'erLhcoreClassInstance' => 'extension/instance/classes/erlhcoreclassinstance.php'
+		'erLhcoreClassInstance' => 'extension/instance/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassInstanceDBMysql' 		=> 'extension/instance/classes/dbhandlers/mysql.php',
+		'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',
 );
 Now you will see instance from top menu. There you can create manually new instances.
 
