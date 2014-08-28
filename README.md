@@ -1,4 +1,5 @@
-automated-hosting
+Automated hosting plugin
 =================
 
-Automated hosting extensions
+For more information see
+http://livehelperchat.com/automated-hosting-plugin-open-source-282a.html
