@@ -43,7 +43,7 @@ class erLhcoreClassInstance{
 	   
 	   	$hash = sha1($instance->id . date('Ym') . $secretHash);
 	   
-	   	$url = 'http://'.$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+	   	$url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
 	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
 	   
 	   	$responseData = json_decode($response);

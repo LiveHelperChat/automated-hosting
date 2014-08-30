@@ -9,7 +9,6 @@ Install
 'seller_mail' => 'info@livehelperchat.com', // Change mail
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
-'access_log_path' => '/var/log/nginx/access_chat_manager_client.log', // Provide path to access log
 'instance_handler' => 'erLhcoreClassInstanceDBMysql', // erLhcoreClassInstanceDBMysql - mysql, erLhcoreClassInstanceDBDirectAdmin - direct admin
 
 If you are using direct admin, you will have to append these also
@@ -61,7 +60,7 @@ log_format  main  '$remote_addr $http_host - [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
-Make sure you have provided correct path to access log in settings.ini.php
+You will need to make some changes in extension/instance/modules/lhcron/update_counter.php script. Provide correct log path and so on.
 
 10. Now make copy of installed lhc to another directory where all request for <lhc_name>.example.com will go.
 
