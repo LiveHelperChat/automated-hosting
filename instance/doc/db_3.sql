@@ -926,6 +926,9 @@ CREATE TABLE `lh_abstract_widget_theme` (
   `copyright_image` varchar(250) NOT NULL,
   `copyright_image_path` varchar(250) NOT NULL,
   `widget_copyright_url` varchar(250) NOT NULL,
+  `intro_operator_text` varchar(250) NOT NULL,
+  `operator_image` varchar(250) NOT NULL,
+  `operator_image_path` varchar(250) NOT NULL,
   `explain_text` text NOT NULL,
   `show_copyright` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
