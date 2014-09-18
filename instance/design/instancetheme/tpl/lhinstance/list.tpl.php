@@ -21,7 +21,7 @@
         <td><?php echo $departament->id?></td>
         <td><?php echo htmlspecialchars($departament->email)?></td>
         <td><?php echo htmlspecialchars($departament->address)?></td>
-        <td><?php if ($departament->status == 0) : ?>c<?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','created');?><?php endif;?></td>
+        <td><?php if ($departament->status == 0) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','pending initialization');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','created');?><?php endif;?></td>
         <td><?php echo htmlspecialchars($departament->request)?></td> 
         <td><?php echo htmlspecialchars(date('Y-m-d H:i:s',$departament->expires))?></td>
         <td>
