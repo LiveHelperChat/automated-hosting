@@ -24,6 +24,9 @@ $ViewList['isfree'] = array(
 		'functions' => array(  )
 );
 
+/**
+ * Standard reseller instance API functions
+ * */
 $ViewList['registerinstance'] = array(
 		'params' => array('address','email','request','period','hash'),
 		'uparams' => array('dateformat','hourformat','datehourformat','timezone','frontsiteaccess','operatorlocale'),
@@ -39,6 +42,26 @@ $ViewList['terminateinstance'] = array(
 		'params' => array('address','hash'),
 		'functions' => array( )
 );
+
+/**
+ * Reseller instance API functions
+ * */
+$ViewList['rslsuspendinstance'] = array(
+		'params' => array('id','address','status','hash'),
+		'functions' => array( )
+);
+
+$ViewList['rslterminateinstance'] = array(
+		'params' => array('id','address','hash'),
+		'functions' => array( )
+);
+
+$ViewList['rslregisterinstance'] = array(
+		'params' => array('id','address','email','request','period','hash'),
+		'uparams' => array('dateformat','hourformat','datehourformat','timezone','frontsiteaccess','operatorlocale'),
+		'functions' => array( )
+);
+
 
 $FunctionList['manageinstance'] = array('explain' => 'Access to instance management');
 

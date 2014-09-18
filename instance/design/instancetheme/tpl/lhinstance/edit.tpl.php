@@ -33,6 +33,8 @@
 					<ul class="circle">
 						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Active');?>: <?php if ($instance->is_active) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
 						<li><a target="_blank" href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin">http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin</a></li>
+						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Suspended by reseller');?> - <?php if ($instance->reseller_suspended) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
+						<?php if ($instance->is_reseller) : ?><li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li><?php endif;?>
 					</ul>
 			</div>	
 		</div> 
@@ -54,6 +56,28 @@
 			    </ul>	
 			    			    	
 			</form>		 	  	
+  	  </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="title" data-section-title><a href="#reseller" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></p>
+    <div class="content" data-section-content data-slug="reseller">
+      <div><div class="row">
+			<div class="columns large-8">
+				<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#reseller" method="post" autocomplete="off">		
+					<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>	        										
+					<ul class="button-group radius">
+				      <li><input type="submit" class="small button" name="UpdateReseller" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/></li>				  
+				    </ul>	
+				 </form>	
+			 </div>
+			<div class="columns large-4">
+					<ul class="circle">
+						<li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li>
+					</ul>
+			</div>	
+		</div> 	  	
   	  </div>
     </div>
   </section>

@@ -104,6 +104,66 @@ if (isset($_POST['UpdateAttributes']) )
 	$tpl->set('updated',true);	
 }
 
+if (isset($_POST['UpdateReseller']) )
+{
+	$definition = array(			
+			'ResellerTitle' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'string'
+			),
+			'ResellerMaxRequest' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'string'
+			),
+			'ResellerMaxInstance' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'string'
+			),
+			'ResellerSecretHash' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'string'
+			),
+			'ResellerRequest' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'string'
+			),
+			'Reseller' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			)			
+	);
+	
+	$form = new ezcInputForm( INPUT_POST, $definition );
+	$Errors = array();
+	
+	if ( $form->hasValidData( 'ResellerTitle' ) )
+	{
+		$Instance->reseller_tite = $form->ResellerTitle;
+	}
+	
+	if ( $form->hasValidData( 'ResellerMaxRequest' ) )
+	{
+		$Instance->reseller_max_instance_request = $form->ResellerMaxRequest;
+	}
+	
+	if ( $form->hasValidData( 'ResellerMaxInstance' ) )
+	{
+		$Instance->reseller_max_instances = $form->ResellerMaxInstance;
+	}
+	
+	if ( $form->hasValidData( 'ResellerSecretHash' ) )
+	{
+		$Instance->reseller_secret_hash = $form->ResellerSecretHash;
+	}
+	
+	if ( $form->hasValidData( 'ResellerRequest' ) )
+	{
+		$Instance->reseller_request = $form->ResellerRequest;
+	}
+	
+	if ( $form->hasValidData( 'Reseller' ) && $form->Reseller == true )
+	{
+		$Instance->is_reseller = $form->Reseller;
+	}
+		
+	$Instance->saveThis();	
+	$tpl->set('updated',true);	
+}
+
 
 if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
 {

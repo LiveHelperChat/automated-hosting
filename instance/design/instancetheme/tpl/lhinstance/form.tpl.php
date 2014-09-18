@@ -15,4 +15,3 @@
 
 <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Expires');?></label>
 <input type="text" name="Expires"  value="<?php echo htmlspecialchars($instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : date('Y-m-d H:i:s',time()+6*31*24*3600));?>" />
-

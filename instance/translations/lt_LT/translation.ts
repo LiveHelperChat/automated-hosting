@@ -56,6 +56,54 @@
       <translation>Redaguoti klientą</translation>
     </message>
     <message>
+      <source>Reseller ID</source>
+      <translation>Pardavėjo ID</translation>
+    </message>
+    <message>
+      <source>Is reseller</source>
+      <translation>Yra pardavėjas</translation>
+    </message>
+    <message>
+      <source>Reseller title</source>
+      <translation>Pardavėjo pavadinimas</translation>
+    </message>
+    <message>
+      <source>Max number of request per instance</source>
+      <translation>Maksimalus užklausų skaičius per pardavėjo klientą</translation>
+    </message>
+    <message>
+      <source>Max number of instances reseller can have</source>
+      <translation>Maksimalus klientų skaičius</translation>
+    </message>
+    <message>
+      <source>Suspended by reseller</source>
+      <translation>Sustabdytas del pardavėjo</translation>
+    </message>
+    <message>
+      <source>How many request reseller has to sell</source>
+      <translation>Kiek užklausų pardavėjas gali parduoti</translation>
+    </message>
+    <message>
+      <source>Owner</source>
+      <translation>Savininkas</translation>
+    </message>   
+    <message>
+      <source>Number of instances</source>
+      <translation>Klientų skaičius</translation>
+    </message> 
+    <message>
+      <source>Reseller</source>
+      <translation>Pardavėjas</translation>
+    </message> 
+    <message>
+      <source>Request left to sell</source>
+      <translation>Liko parduoti užklausų</translation>
+    </message> 
+    <message>
+      <source>Reseller secret hash. Used by API dedicated to reseller</source>
+      <translation>Pardavėjo slaptas raktas</translation>
+    </message>
+    <message>
       <source>Email</source>
       <translation>El-paštas</translation>
     </message>

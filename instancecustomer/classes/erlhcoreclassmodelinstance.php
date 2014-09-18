@@ -19,6 +19,14 @@ class erLhcoreClassModelInstance {
                'terminate'  	=> $this->terminate,
        		   'locale'  		=> $this->locale,
        		   'siteaccess'  	=> $this->siteaccess,
+       		   'is_reseller'  	=> $this->is_reseller,
+       		   'reseller_tite'  			=> $this->reseller_tite,
+       		   'reseller_max_instance_request'  => $this->reseller_max_instance_request,
+       		   'reseller_secret_hash'  		=> $this->reseller_secret_hash,
+       		   'reseller_max_instances'  	=> $this->reseller_max_instances,
+       		   'reseller_id'  				=> $this->reseller_id,
+       		   'reseller_request'  			=> $this->reseller_request,
+       		   'reseller_suspended'  		=> $this->reseller_suspended,
        );
    }
 
@@ -75,7 +83,7 @@ class erLhcoreClassModelInstance {
    public function __get($var) {
 	   	switch ($var) {
 	   		case 'is_active':
-	   			$this->is_active = $this->request > 0 && $this->expires > time() && $this->suspended == 0;
+	   			$this->is_active = $this->request > 0 && $this->expires > time() && $this->suspended == 0 && $this->reseller_suspended == 0;	   			
 	   			return $this->is_active;
 	   		break;
 
@@ -197,6 +205,17 @@ class erLhcoreClassModelInstance {
    public $date_hour_format = 'H:i:s';
    public $date_date_hour_format = 'Y-m-d H:i:s';
    public $status = self::PENDING_CREATE;
+   
+   public $is_reseller = 0;
+   public $reseller_tite = '';
+   public $reseller_max_instance_request = 0;
+   public $reseller_secret_hash = '';
+   public $reseller_max_instances = 0;
+   public $reseller_id = 0;
+   public $reseller_request = 0;
+   
+   // Then reseller get's suspended this attribute is set to 1, to avoid double fetching each time in instance part.
+   public $reseller_suspended = 0;
    
    public $locale = '';
    public $siteaccess = 'eng';

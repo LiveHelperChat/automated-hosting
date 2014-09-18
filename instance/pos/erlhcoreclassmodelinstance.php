@@ -80,6 +80,52 @@ $def->properties['siteaccess']->columnName   = 'siteaccess';
 $def->properties['siteaccess']->propertyName = 'siteaccess';
 $def->properties['siteaccess']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['is_reseller'] = new ezcPersistentObjectProperty();
+$def->properties['is_reseller']->columnName   = 'is_reseller';
+$def->properties['is_reseller']->propertyName = 'is_reseller';
+$def->properties['is_reseller']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['reseller_tite'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_tite']->columnName   = 'reseller_tite';
+$def->properties['reseller_tite']->propertyName = 'reseller_tite';
+$def->properties['reseller_tite']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+/**
+ * Max number of request instance can have at reseller
+ * */
+$def->properties['reseller_max_instance_request'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_max_instance_request']->columnName   = 'reseller_max_instance_request';
+$def->properties['reseller_max_instance_request']->propertyName = 'reseller_max_instance_request';
+$def->properties['reseller_max_instance_request']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+/**
+ * How many request reseller has to sell
+ * */
+$def->properties['reseller_request'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_request']->columnName   = 'reseller_request';
+$def->properties['reseller_request']->propertyName = 'reseller_request';
+$def->properties['reseller_request']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['reseller_secret_hash'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_secret_hash']->columnName   = 'reseller_secret_hash';
+$def->properties['reseller_secret_hash']->propertyName = 'reseller_secret_hash';
+$def->properties['reseller_secret_hash']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['reseller_max_instances'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_max_instances']->columnName   = 'reseller_max_instances';
+$def->properties['reseller_max_instances']->propertyName = 'reseller_max_instances';
+$def->properties['reseller_max_instances']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['reseller_id'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_id']->columnName   = 'reseller_id';
+$def->properties['reseller_id']->propertyName = 'reseller_id';
+$def->properties['reseller_id']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['reseller_suspended'] = new ezcPersistentObjectProperty();
+$def->properties['reseller_suspended']->columnName   = 'reseller_suspended';
+$def->properties['reseller_suspended']->propertyName = 'reseller_suspended';
+$def->properties['reseller_suspended']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

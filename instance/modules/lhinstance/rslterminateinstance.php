@@ -1,10 +1,26 @@
 <?php
 
 $cfg = erConfigClassLhConfig::getInstance();
-$secretHash = $cfg->getSetting('site','seller_secret_hash');
-$validateHash = sha1((string)$Params['user_parameters']['address'].$secretHash);
 
-// http://manager.livehelperchat.com/index.php/instance/terminateinstance/remdex/138d07f5c478cbd4d1fcbfcc6ccd49d5961273bd
+try {
+	$reseller = erLhcoreClassModelInstance::fetch($Params['user_parameters']['id']);
+} catch (Exception $e) {
+	echo json_encode(array('error' => 'true','reason' => 'Could not find a reseller'));
+	exit;
+}
+
+if ($reseller->is_reseller == 0) {
+	echo json_encode(array('error' => 'true','reason' => 'This instance is not a reseller'));
+	exit;
+}
+
+$secretHash = (string)$reseller->reseller_secret_hash;
+if ($secretHash == '') {
+	echo json_encode(array('error' => 'true','reason' => 'This instance does not have a secret hash'));
+	exit;
+}
+
+$validateHash = sha1((string)$Params['user_parameters']['address'].$secretHash);
 
 if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 	
@@ -12,6 +28,11 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 	if (!empty($list)){
 		$instance = array_shift($list);
 			
+		if ($instance->reseller_id != $reseller->id) {
+			echo json_encode(array('error' => 'false','msg' => 'You do not have permission to edit this instance'));
+			exit;
+		};
+		
 		// Instance is initialized
 		if ($instance->status == 1) {
 			$instance->terminate = 1;					
