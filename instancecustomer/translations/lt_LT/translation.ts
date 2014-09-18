@@ -24,6 +24,18 @@
   <context>
     <name>instance/edit</name>    
     <message>
+      <source>Max request per instance</source>
+      <translation>Maksimalus užklausų skaičius per klientą</translation>
+    </message>
+    <message>
+      <source>Request left to sell</source>
+      <translation>Neparduotų užklausų skaičius</translation>
+    </message>
+    <message>
+      <source>Instances</source>
+      <translation>Klientai</translation>
+    </message>
+    <message>
       <source>Billing</source>
       <translation>Apmokėjimas</translation>
     </message>

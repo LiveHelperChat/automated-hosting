@@ -86,7 +86,16 @@ class erLhcoreClassModelInstance {
 	   			$this->is_active = $this->request > 0 && $this->expires > time() && $this->suspended == 0 && $this->reseller_suspended == 0;	   			
 	   			return $this->is_active;
 	   		break;
-
+	   		
+	   		case 'reseller_instances_count':
+	   			$db = ezcDbInstance::get();
+	   			$cfg = erConfigClassLhConfig::getInstance();
+	   			$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
+	   			$this->reseller_instances_count = self::getCount(array('filter' => array('reseller_id' => $this->id)));
+	   			$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+	   			return $this->reseller_instances_count;
+	   		break;
+	   			
 	   		default:
 	   			;
 	   		break;
