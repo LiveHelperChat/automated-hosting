@@ -139,9 +139,11 @@ class erLhcoreClassInstance{
 	   	$mail->ClearAddresses();
 
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database'));
-	   	$instance->status = erLhcoreClassModelInstance::WORKING;
-	   	$instance->saveThis();
 	   	
+	   	// Activate instance
+	   	$sql = "UPDATE lhc_instance_client SET status = 1 WHERE id = {$instance->id}";
+	   	$db->query($sql);
+	   		   		   	
 	   	if ($instance->locale != '') {
 	   		erLhcoreClassSystem::instance()->setSiteAccess($originalSiteAccess);
 	   	}

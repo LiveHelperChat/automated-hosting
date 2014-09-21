@@ -1,4 +1,7 @@
+<a href="<?php echo erLhcoreClassDesign::baseurl('instance/invoices')?>" class="button right small radius"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoices')?></a>
+
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances');?></h1>
+
 
 <table class="twelve" cellpadding="0" cellspacing="0">
 <thead>

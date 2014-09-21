@@ -116,6 +116,14 @@ class erLhcoreClassModelInstance {
    
    public static function getCount($params = array())
    {
+   	
+   	if (isset($params['switch_db'])) {
+	   	$db = ezcDbInstance::get();
+	   		
+	   	$cfg = erConfigClassLhConfig::getInstance();
+	   	$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
+   	}
+	   	
        $session = erLhcoreClassDepartament::getSession();
        $q = $session->database->createSelectQuery();
        $q->select( "COUNT(id)" )->from( "lhc_instance_client" );
@@ -137,12 +145,21 @@ class erLhcoreClassModelInstance {
       $stmt = $q->prepare();
       $stmt->execute();
       $result = $stmt->fetchColumn();
-
+      
+   	if (isset($params['switch_db'])) {
+	   		$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+	   	}
       return $result;
    }
 
    public static function getList($paramsSearch = array())
    {
+   	if (isset($paramsSearch['switch_db'])) {
+   		$db = ezcDbInstance::get();
+   	
+   		$cfg = erConfigClassLhConfig::getInstance();
+   		$db->query('USE '.$cfg->getSetting( 'db', 'database' ));
+   	}
        $paramsDefault = array('limit' => 32, 'offset' => 0);
 
        $params = array_merge($paramsDefault,$paramsSearch);
@@ -197,7 +214,12 @@ class erLhcoreClassModelInstance {
 
 
        $objects = $session->find( $q );
+       
 
+       if (isset($paramsSearch['switch_db'])) {
+       	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+       }
+       
       return $objects;
    }
 

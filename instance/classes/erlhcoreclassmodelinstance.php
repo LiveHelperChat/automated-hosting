@@ -2,7 +2,7 @@
 
 class erLhcoreClassModelInstance {
 
-    public function getState()
+   public function getState()
    {
        return array (
                'id'       		=> $this->id,

@@ -56,6 +56,54 @@
       <translation>Redaguoti klientą</translation>
     </message>
     <message>
+      <source>Invoice list</source>
+      <translation>Sąskaitų sąrašas</translation>
+    </message>
+    <message>
+      <source>Amount</source>
+      <translation>Suma</translation>
+    </message>
+    <message>
+      <source>Currency</source>
+      <translation>Valiuta</translation>
+    </message>
+    <message>
+      <source>Item</source>
+      <translation>Paslauga</translation>
+    </message> 
+    <message>
+      <source>Date</source>
+      <translation>Data</translation>
+    </message>
+    <message>
+      <source>Date Issued</source>
+      <translation>Išrašymo Data</translation>
+    </message>
+    <message>
+      <source>Invoice number</source>
+      <translation>Sąskaitos numeris</translation>
+    </message>
+    <message>
+      <source>Desciption</source>
+      <translation>Aprašymas</translation>
+    </message>
+    <message>
+      <source>Price</source>
+      <translation>Kaina</translation>
+    </message>
+    <message>
+      <source>Total</source>
+      <translation>Viso</translation>
+    </message>
+    <message>
+      <source>Bill to</source>
+      <translation>Sąskaitą gavo</translation>
+    </message>
+    <message>
+      <source>Invoices</source>
+      <translation>Sąskaitos</translation>
+    </message>
+    <message>
       <source>Reseller ID</source>
       <translation>Pardavėjo ID</translation>
     </message>

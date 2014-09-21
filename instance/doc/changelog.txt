@@ -1,2 +1,5 @@
+1.2v
+Paypal integration
+
 1.1v
 Reseller layer on top of instances and API for reseller.

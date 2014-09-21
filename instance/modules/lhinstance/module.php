@@ -19,9 +19,23 @@ $ViewList['new'] = array(
 		'functions' => array( 'manageinstance' )
 );
 
+$ViewList['invoices'] = array(
+		'params' => array(),
+		'functions' => array( 'manageinstance' )
+);
+
 $ViewList['isfree'] = array(
 		'params' => array('address'),
 		'functions' => array(  )
+);
+
+$ViewList['paypalipn'] = array(
+		'params' => array()
+);
+
+$ViewList['billingpdf'] = array(
+		'params' => array('id'),
+		'functions' => array( 'manageinstance' )
 );
 
 /**

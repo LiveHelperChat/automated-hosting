@@ -25,3 +25,17 @@ CREATE TABLE `lhc_instance_client` (
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `lhc_instance_invoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `txn_id` varchar(50) NOT NULL,
+  `instance_id` int(11) NOT NULL,
+  `order_item` varchar(10) NOT NULL,
+  `odate` int(11) NOT NULL,
+  `log` text NOT NULL,
+  `currency` varchar(3) NOT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `txn_id` (`txn_id`),
+  KEY `instance_id` (`instance_id`)
+) ENGINE=InnoDB;

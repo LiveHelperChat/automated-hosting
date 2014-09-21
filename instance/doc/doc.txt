@@ -21,6 +21,20 @@ If you are using direct admin, you will have to append these also
 'direct_admin_dbuser' => '<db_user>', // Under this DB is created	
 'direct_admin_dbpass' => '<db_pass>', // Under this DB user is created	
 
+// If you are going to use paypal add these in settings
+'seller_paypal_mail' => 'remdex@gmail.com',
+// Left attribtues is button payment options right is options
+// p -> period in days, r -> request number to sell
+'seller_paypal_options' => array(
+    	 '250K'   => array('p' => 31,'r' => 25000000),
+    	 '1.5M'   => array('p' => 31,'r' => 150000000),
+    	 '3M' 	  => array('p' => 31,'r' => 300000000),
+    	 '1Month' => array('p' => 31,'r' => 0),
+),
+'seller_attributes' => "Remigijus Kiminas\nDarželio 31\nŠiauliai\nLithuania\nremdex@gmail.com\nTax ID: 591583",		
+'seller_paypal_enabled' => true,     
+
+
 3. In db section add
 'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id
 
@@ -35,11 +49,12 @@ If you are using direct admin, you will have to append these also
 7. Edit var/autolaods/lhextension_autoload.php
 And make it look like
 return array(
-		'erLhcoreClassModelInstance' => 'extension/instance/classes/erlhcoreclassmodelinstance.php',
-		'erLhcoreClassInstance' => 'extension/instance/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassModelInstance' 		=> 'extension/instance/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' 			=> 'extension/instance/classes/erlhcoreclassinstance.php',
 		'erLhcoreClassInstanceDBMysql' 		=> 'extension/instance/classes/dbhandlers/mysql.php',
 		'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',		
-		'HTTPSocket' 				 => 'extension/instance/classes/dbhandlers/httpsocket.php'
+		'HTTPSocket' 						=> 'extension/instance/classes/dbhandlers/httpsocket.php',
+		'erLhcoreClassModelInstanceInvoice' => 'extension/instance/classes/erlhcoreclassmodelinstanceinvoice.php',
 );
 Now you will see instance from top menu. There you can create manually new instances.
 
@@ -74,7 +89,8 @@ Make sure you have provided correct path to access log in settings.ini.php
 return array(
 		'erLhcoreClassModelInstance' 			 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
 		'erLhcoreClassInstance' 				 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
-		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',
+		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',,
+		'erLhcoreClassModelInstanceInvoice' 	 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php',
     );
     
 13. Put instancecustomer extension to extension folder
@@ -110,7 +126,14 @@ return array(
 
 That's it.
 
-15. Don't forget to clear cache
+17. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
+instancecustomer/design/instancecustomertheme/tpl/lhinstance/billing_paypal.tpl.php
+You should also set in your paypal button that it should send data in UTF8
+And notify url provide
+E.g
+http://manager.livehelperchat.com/instance/paypalipn
+
+18. Don't forget to clear cache
 
 /******************/
 Manager nginx example

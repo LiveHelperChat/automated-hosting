@@ -158,6 +158,8 @@ if (isset($_POST['UpdateReseller']) )
 	if ( $form->hasValidData( 'Reseller' ) && $form->Reseller == true )
 	{
 		$Instance->is_reseller = $form->Reseller;
+	} else {
+		$Instance->is_reseller = false;
 	}
 		
 	$Instance->saveThis();	
