@@ -10,10 +10,10 @@ Install
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
 'instance_handler' => 'erLhcoreClassInstanceDBMysql', // erLhcoreClassInstanceDBMysql - mysql, erLhcoreClassInstanceDBDirectAdmin - direct admin
-'access_log_path' => '/var/log/nginx/access_chat_manager_client.log',
+'access_log_path' => '/var/log/nginx/access_chat_manager_client.log',  //or '/var/log/apache2/access_chat_manager_client.log' use your site's log name
 'http_mode' => 'http://', // Set http:// or https://
 
-If you are using direct admin, you will have to append these also
+If you are using DirectAdmin (http://www.directadmin.com/), you will have to append these also
 'direct_admin_user' => '<direct_admin_user>',		
 'direct_admin_pass' => 'direct_admin_password>',
 'direct_admin_ip' => '<IP>',		
@@ -36,11 +36,11 @@ If you are using direct admin, you will have to append these also
 
 
 3. In db section add
-'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id
+'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id. Example: "lhc_manage_customer_23"
 
 4. Extract "instance" extension to extension folder 
 
-5. Execute in fresh installed database query from extension/instance/doc/install.sql
+5. Execute in fresh installed database query from extension/instance/doc/install.sql.  You can use the command line or a tool like phpmyadmin if installed.
 
 6. Active extension in fresh installed LHC
 'extensions' =>
@@ -50,63 +50,62 @@ If you are using direct admin, you will have to append these also
 And make it look like
 return array(
 		'erLhcoreClassModelInstance' 		=> 'extension/instance/classes/erlhcoreclassmodelinstance.php',
-		'erLhcoreClassInstance' 			=> 'extension/instance/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassInstance' 		=> 'extension/instance/classes/erlhcoreclassinstance.php',
 		'erLhcoreClassInstanceDBMysql' 		=> 'extension/instance/classes/dbhandlers/mysql.php',
-		'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',		
-		'HTTPSocket' 						=> 'extension/instance/classes/dbhandlers/httpsocket.php',
-		'erLhcoreClassModelInstanceInvoice' => 'extension/instance/classes/erlhcoreclassmodelinstanceinvoice.php',
+		'erLhcoreClassInstanceDBDirectAdmin'	=> 'extension/instance/classes/dbhandlers/directadmin.php',		
+		'HTTPSocket' 				=> 'extension/instance/classes/dbhandlers/httpsocket.php',
+		'erLhcoreClassModelInstanceInvoice'	=> 'extension/instance/classes/erlhcoreclassmodelinstanceinvoice.php',
 );
 Now you will see instance from top menu. There you can create manually new instances.
 
-8. Setup cronjon to run every minit. I have prepared also sh version of cronjob witch avoid runing script more than once at the same time.
+8. Setup cronjon to run every minute. I have also prepared an sh version of cronjob which avoids running script more than once at the same time.
 
-// Plain php version
+// Plain php version. cron.php is located in the installation folder.
 php cron.php -s site_admin -e instance -c cron/maintain
 
-// You main need to adjust paths here and in cron_lhc.sh script itself. sh script is located at 
-extension/instance/doc/cron_lhcs.sh
+// You main need to adjust paths here and in cron_lhc.sh script itself. sh script is located at extension/instance/doc/cron_lhcs.sh
 * * * * * cd /home/www/cronjobs && ./cron_lhc.sh > cron_lhc.log /dev/null 2>&1
 
 
 9. This plugins limits functionality purely by time and purchased request number.
-Setu this cronjob every 30 minits or so.
+Setup this cronjob every 30 minutes or so.
 php cron.php -s site_admin -e instance -c cron/update_counter
 
-Nginx log format for update view counter to work correctly.
-log_format  main  '$remote_addr $http_host - [$time_local] "$request" '
+If using Nginx change the log format for update view counter to work correctly.
+	log_format  main  '$remote_addr $http_host - [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
-Make sure you have provided correct path to access log in settings.ini.php
+Make sure you have provided correct path to access log in settings.ini.php in step 2
 
 10. Now make copy of installed lhc to another directory where all request for <lhc_name>.example.com will go.
 
 11. Delete from copied folder extension/instance
 
-11. All subdomains should be pointed to 9 directory.
+12. All subdomains should be pointed to new copied directory.  Update Apache virtual hosts or nginx as needed.  See nginx configuration below.
 
-12. Edit var/autolaods/lhextension_autoload.php in copied directory and make it look like
+13. Edit var/autoloads/lhextension_autoload.php in copied directory and make it look like
 return array(
-		'erLhcoreClassModelInstance' 			 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
-		'erLhcoreClassInstance' 				 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
-		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',,
-		'erLhcoreClassModelInstanceInvoice' 	 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php',
+		'erLhcoreClassModelInstance' 		 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
+		'erLhcoreClassInstance' 		 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
+		'erLhcoreClassLazyDatabaseConfiguration' => 'extension/instancecustomer/classes/lhdb.php',
+		'erLhcoreClassModelInstanceInvoice' 	 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php'
     );
     
-13. Put instancecustomer extension to extension folder
+14. Put instancecustomer extension to extension folder
 
-14. Activate extension. It should look like
+15. Activate extension. It should look like
 'extensions' =>
       array (
       		'instancecustomer'
 ),
 
-15. Change in settings
+16. Change in settings
  'default_site_access' => 'eng',
  to
  'default_site_access' => 'noneexist',
 
-16. Apppend in site_access_options one more array
+17. Apppend in site_access_options one more array
  'noneexist' => 
       array (
         'locale' => 'en_EN',
@@ -126,7 +125,7 @@ return array(
 
 That's it.
 
-17. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
+18. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
 instancecustomer/design/instancecustomertheme/tpl/lhinstance/billing_paypal.tpl.php
 You should also set in your paypal button that it should send data in UTF8
 And notify url provide
