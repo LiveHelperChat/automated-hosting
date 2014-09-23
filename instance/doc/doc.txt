@@ -83,9 +83,9 @@ Make sure you have provided correct path to access log in settings.ini.php
 
 11. Delete from copied folder extension/instance
 
-11. All subdomains should be pointed to 9 directory.
+12. All subdomains should be pointed to 10 directory.
 
-12. Edit var/autolaods/lhextension_autoload.php in copied directory and make it look like
+13. Edit var/autolaods/lhextension_autoload.php in copied directory and make it look like
 return array(
 		'erLhcoreClassModelInstance' 			 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
 		'erLhcoreClassInstance' 				 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
@@ -93,20 +93,20 @@ return array(
 		'erLhcoreClassModelInstanceInvoice' 	 => 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php',
     );
     
-13. Put instancecustomer extension to extension folder
+14. Put instancecustomer extension to extension folder
 
-14. Activate extension. It should look like
+15. Activate extension. It should look like
 'extensions' =>
       array (
       		'instancecustomer'
 ),
 
-15. Change in settings
+16. Change in settings
  'default_site_access' => 'eng',
  to
  'default_site_access' => 'noneexist',
 
-16. Apppend in site_access_options one more array
+17. Apppend in site_access_options one more array
  'noneexist' => 
       array (
         'locale' => 'en_EN',
@@ -126,14 +126,14 @@ return array(
 
 That's it.
 
-17. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
+18. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
 instancecustomer/design/instancecustomertheme/tpl/lhinstance/billing_paypal.tpl.php
 You should also set in your paypal button that it should send data in UTF8
 And notify url provide
 E.g
 http://manager.livehelperchat.com/instance/paypalipn
 
-18. Don't forget to clear cache
+19. Don't forget to clear cache
 
 /******************/
 Manager nginx example
