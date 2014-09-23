@@ -126,7 +126,7 @@ return array(
 
 That's it.
 
-18. Now if you are using paypal edit your paypal button template. I recommend just create custom theme and override it also.
+18. Now if you are using paypal edit your paypal button template. I recommend just create extension and override it also.
 instancecustomer/design/instancecustomertheme/tpl/lhinstance/billing_paypal.tpl.php
 You should also set in your paypal button that it should send data in UTF8
 And notify url provide
