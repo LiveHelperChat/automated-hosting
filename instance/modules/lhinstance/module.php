@@ -43,7 +43,22 @@ $ViewList['billingpdf'] = array(
  * */
 $ViewList['registerinstance'] = array(
 		'params' => array('address','email','request','period','hash'),
-		'uparams' => array('dateformat','hourformat','datehourformat','timezone','frontsiteaccess','operatorlocale'),
+		'uparams' => array(
+				'dateformat',
+				'hourformat',
+				'datehourformat',
+				'timezone',
+				'frontsiteaccess',
+				'operatorlocale',
+				// Reseller attributes
+				'is_reseller',
+				'reseller_tite',
+				'reseller_max_instance_request',
+				'reseller_secret_hash',
+				'reseller_max_instances',
+				'reseller_max_instance_request',
+				'reseller_request'				
+		),
 		'functions' => array( )
 );
 

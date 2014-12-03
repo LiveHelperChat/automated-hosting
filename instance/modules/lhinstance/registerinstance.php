@@ -51,7 +51,36 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 	} else{
 		$instance->expires += (int)$Params['user_parameters']['period']*24*3600;
 	}
-
+	
+	if ($Params['user_parameters_unordered']['is_reseller'] == 1) {
+		$instance->is_reseller = 1;
+		
+		if ($Params['user_parameters_unordered']['reseller_tite'] != '') {
+			$instance->reseller_tite = base64_decode(rawurldecode($Params['user_parameters_unordered']['reseller_tite']));
+		}
+		
+		if ($Params['user_parameters_unordered']['reseller_max_instance_request'] != '') {
+			$instance->reseller_max_instance_request = (int)$Params['user_parameters_unordered']['reseller_max_instance_request'];
+		}
+		
+		if ($Params['user_parameters_unordered']['reseller_secret_hash'] != '') {
+			$instance->reseller_secret_hash = base64_decode(rawurldecode($Params['user_parameters_unordered']['reseller_secret_hash']));
+		}
+		
+		// Generate reseller hash if it was not provided
+		if ($instance->reseller_secret_hash == ''){
+			$instance->reseller_secret_hash = erLhcoreClassModelForgotPassword::randomPassword(20);
+		}
+		
+		if ($Params['user_parameters_unordered']['reseller_max_instances'] != '') {
+			$instance->reseller_max_instances = (int)$Params['user_parameters_unordered']['reseller_max_instances'];
+		}
+		
+		if ($Params['user_parameters_unordered']['reseller_request'] != '') {
+			$instance->reseller_request = (int)$Params['user_parameters_unordered']['reseller_request'];
+		}	
+	}
+		
 	$instance->saveThis();
 	echo json_encode(array('error' => 'false','msg' => 'instance created','data' => get_object_vars($instance)));
 
