@@ -33,6 +33,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		// Disable database variables cache
 		$dispatcher->listen('tpl.new',array($this,'changeTemplateSettings'));
 		
+		// Forms module listener
+		$dispatcher->listen('form.fill.file_path',array($this,'formFillPath'));
+		
 		erLhcoreClassModule::$cacheDbVariables = false;
 		
 		// Disable cache expire for customers, only through command line possible
@@ -70,8 +73,12 @@ class erLhcoreClassExtensionInstancecustomer {
 		}		
 	}
 	
-	public function changeTemplateSettings($params){
+	public function changeTemplateSettings($params) {
 		$params['tpl']->cacheDbVariables = false;
+	}
+	
+	public function formFillPath($params) {			
+		$params['path'] = 'var/storageform/'.date('Y').'y/'.date('m').'/'.date('d').'/'.erLhcoreClassInstance::getInstance()->id . '/' . $params['storage_id'].'/';
 	}
 	
 	public function tempStoragePath($params){
