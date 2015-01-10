@@ -26,6 +26,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('theme.edit.online_image_path',array($this,'themeStoragePath'));
 		$dispatcher->listen('theme.edit.copyright_image_path',array($this,'themeStoragePath'));
 		$dispatcher->listen('theme.edit.operator_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.popup_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.close_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.restore_image_path',array($this,'themeStoragePath'));
+		$dispatcher->listen('theme.edit.minimize_image_path',array($this,'themeStoragePath'));
+		
 		
 		// temporary path
 		$dispatcher->listen('theme.temppath',array($this,'tempStoragePath'));
