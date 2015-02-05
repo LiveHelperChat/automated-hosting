@@ -1131,3 +1131,23 @@ INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lan
                 (62,	32,	'Lingua latīna',	'la');   
                 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('front_tabs', 'online_users,online_map,pending_chats,active_chats,unread_chats,closed_chats,online_operators', '0', 'Home page tabs order', '0');
+
+ALTER TABLE `lh_chat_online_user`
+ADD `notes` varchar(250) COLLATE 'utf8_general_ci' NOT NULL,
+COMMENT='';
+
+ALTER TABLE `lh_abstract_auto_responder`
+ADD `repeat_number` int(11) NOT NULL DEFAULT '1',
+COMMENT='';
+
+ALTER TABLE `lh_chat`
+ADD `wait_timeout_repeat` int(11) NOT NULL,
+COMMENT='';
+
+ALTER TABLE `lh_abstract_proactive_chat_invitation`
+ADD `repeat_number` int NOT NULL DEFAULT '1',
+COMMENT='';
+
+ALTER TABLE `lh_abstract_email_template`
+ADD `user_mail_as_sender` tinyint(4) NOT NULL,
+COMMENT='';
