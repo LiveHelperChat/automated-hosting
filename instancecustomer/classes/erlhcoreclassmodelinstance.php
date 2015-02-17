@@ -55,11 +55,7 @@ class erLhcoreClassModelInstance {
 	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000),'erLhcoreClassModelChatFile','lh_chat_file') as $item){
 	   		$item->removeThis();
 	   	}
-	   		
-	   	foreach (erLhcoreClassModelDocShare::getList(array('limit' => 1000000)) as $item){
-	   		$item->removeThis();
-	   	}
-	   
+	  	   
 	   	foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
 	   		$item->removeFile();
 	   	}
