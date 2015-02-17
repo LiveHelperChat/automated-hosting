@@ -1,8 +1,8 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Billing');?></h1>
 
 <div class="row">
-	<div class="columns large-6">
-		<table class="large-12">
+	<div class="col-sm-6">
+		<table class="table">
 			<?php if ($instance->is_reseller) : ?>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances');?></td>
@@ -31,18 +31,24 @@
 			</tr>
 		</table>
 	</div>
-	<div class="columns large-6">		
+	<div class="col-sm-6">		
 		<?php include(erLhcoreClassDesign::designtpl('lhinstance/billing_paypal.tpl.php'));?>
 	</div>
 </div>
 
-<div class="section-container auto" data-section="auto" id="tabs" data-options="deep_linking: true" ng-cloak>
+
 <?php if ($instance->is_reseller) : ?>
-<section>
-    <p class="title" data-section-title><a href="#clients" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Clients');?></a></p>
-    <div class="content" data-section-content data-slug="clients">
-        
-		<table class="twelve" cellpadding="0" cellspacing="0">
+<div role="tabpanel">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="clients" aria-controls="clients" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Clients');?></a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="clients">
+		  
+		<table class="table" cellpadding="0" cellspacing="0">
 		<thead>
 		<tr>
 		    <th width="1%">ID</th>
@@ -72,8 +78,8 @@
 		<?php if (isset($pagesInstance)) : $pages = $pagesInstance;?>
 		    <?php include(erLhcoreClassDesign::designtpl('lhkernel/paginator.tpl.php')); ?>
 		<?php endif;?>
+				
+		</div>
 	</div>
-</section>
-<?php endif; ?>
-</div>
-
+</div>		
+<?php endif;?>

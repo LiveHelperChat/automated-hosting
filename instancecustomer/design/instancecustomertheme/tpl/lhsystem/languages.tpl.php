@@ -7,32 +7,37 @@
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
 <?php endif; ?>
 
+<div role="tabpanel">
 
-<div class="section-container auto" data-section>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">	
+	    <?php if ($currentUser->hasAccessTo('lhsystem','changelanguage')) : ?>
+		<li role="presentation" <?php if ($tab == '') : ?> class="active" <?php endif;?>><a href="#yourlanguage" aria-controls="yourlanguage" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/languages','Your language');?></a></li>
+		<?php endif;?>					
+	</ul>
 
-  <?php if ($currentUser->hasAccessTo('lhsystem','changelanguage')) : ?>
-  <section <?php if ($tab == '') : ?>class="active"<?php endif;?>>
-	<p class="title" data-section-title><a href="#panel1"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/languages','Your language');?></a></p>
-	<div class="content" data-section-content>
-		<div>
+	<div class="tab-content">
+	  <?php if ($currentUser->hasAccessTo('lhsystem','changelanguage')) : ?>
+	  <div role="tabpanel" class="tab-pane active" id="yourlanguage">
 			<form action="<?php echo erLhcoreClassDesign::baseurl('system/languages')?>" method="post">
-				<?php include(erLhcoreClassDesign::designtpl('lhkernel/csfr_token.tpl.php'));?>
-				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/languages','Language')?></label>
-				<select name="language">
-					<?php
-					$userLanguage = erLhcoreClassModelUserSetting::getSetting('user_language',erLhcoreClassSystem::instance()->Language);
-					foreach (erLhcoreClassSiteaccessGenerator::getLanguages() as $language) : ?>
-						<option value="<?php echo $language['locale']?>" <?php $userLanguage == $language['locale'] ? print 'selected="selected"' : ''?>><?php echo $language['locale']?></option>
-					<?php endforeach;?>
-				</select>
-
-				<input type="hidden" name="StoreUserSettings" value="1" />
-				<input type="submit" class="button small round" name="StoreUserSettingsAction" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save'); ?>" />
+    				<?php include(erLhcoreClassDesign::designtpl('lhkernel/csfr_token.tpl.php'));?>
+    				
+    				<div class="form-group">
+        				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/languages','Language')?></label> 
+        				<select name="language" class="form-control">
+        					<?php
+                                $userLanguage = erLhcoreClassModelUserSetting::getSetting('user_language', erLhcoreClassSystem::instance()->Language);
+                                foreach (erLhcoreClassSiteaccessGenerator::getLanguages() as $language) :
+                            ?>
+        						<option value="<?php echo $language['locale']?>" <?php $userLanguage == $language['locale'] ? print 'selected="selected"' : ''?>><?php echo $language['locale']?></option>
+        					<?php endforeach;?>
+        				</select> 
+    				</div>
+    				
+    				<input type="hidden" name="StoreUserSettings" value="1" /> 
+    				<input type="submit" class="btn btn-default" name="StoreUserSettingsAction" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save'); ?>" />
 			</form>
 		</div>
+	  <?php endif;?>
 	</div>
-  </section>
-  <?php endif; ?>
-
 </div>
-

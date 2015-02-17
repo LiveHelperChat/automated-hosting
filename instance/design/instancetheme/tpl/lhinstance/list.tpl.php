@@ -1,9 +1,8 @@
-<a href="<?php echo erLhcoreClassDesign::baseurl('instance/invoices')?>" class="button right small radius"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoices')?></a>
+<a href="<?php echo erLhcoreClassDesign::baseurl('instance/invoices')?>" class="btn btn-default btn-sm pull-right"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoices')?></a>
 
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances');?></h1>
 
-
-<table class="twelve" cellpadding="0" cellspacing="0">
+<table class="table" cellpadding="0" cellspacing="0">
 <thead>
 <tr>
     <th width="1%">ID</th>
@@ -45,7 +44,7 @@
         <?php endif;?>
         </td>
         <td><?php echo $departament->reseller_request?></td>
-        <td nowrap><a class="small button round" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Edit');?></a></td>
+        <td nowrap><a class="btn btn-default btn-sm" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Edit');?></a></td>
     </tr>
 <?php endforeach; ?>
 </table>
@@ -54,4 +53,4 @@
     <?php include(erLhcoreClassDesign::designtpl('lhkernel/paginator.tpl.php')); ?>
 <?php endif;?>
 
-<a class="small button" href="<?php echo erLhcoreClassDesign::baseurl('instance/new')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','New instance');?></a>
+<a class="btn btn-default" href="<?php echo erLhcoreClassDesign::baseurl('instance/new')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','New instance');?></a>
