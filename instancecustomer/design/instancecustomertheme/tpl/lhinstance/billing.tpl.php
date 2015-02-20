@@ -36,19 +36,24 @@
 	</div>
 </div>
 
-<?php if ($pages->items_total > 0 || $instance->is_reseller > 0) : ?>
 <div role="tabpanel">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features');?></a></li>
+		    
     		<?php if ($pages->items_total > 0) : ?>
-    			<li role="presentation" class="active"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoice list');?></a></li>
+    			<li role="presentation"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoice list');?></a></li>
     		<?php endif;?>
+    		
     		<?php if ($instance->is_reseller) : ?>
     			<li role="presentation"><a href="#clients" aria-controls="clients" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Clients');?></a></li>
     		<?php endif; ?>
 		</ul>
 
 		<div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="maindata">
+		          <?php include(erLhcoreClassDesign::designtpl('lhinstance/instance_features.tpl.php'));?>
+		    </div>
 		    <?php if ($pages->items_total > 0) : ?>
 			<div role="tabpanel" class="tab-pane active" id="maindata">
 		        <table class="table" cellpadding="0" cellspacing="0">
@@ -116,4 +121,3 @@
 			<?php endif;?>	
 		</div>
 </div>
-<?php endif; ?>

@@ -1,0 +1,1 @@
+<?php $system_configuration_links_translation_enabled = erLhcoreClassInstance::getInstance()->atranslations_supported == 1;?>

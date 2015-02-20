@@ -90,8 +90,6 @@ CREATE TABLE `lh_chat` (
         	   	  `chat_variables` text NOT NULL,
         	   	  `remarks` text NOT NULL,
 				  `ip` varchar(100) NOT NULL,
-				  `chat_locale_to` varchar(10) NOT NULL,
-				  `chat_locale` varchar(10) NOT NULL,
 				  `dep_id` int(11) NOT NULL,
 				  `user_status` int(11) NOT NULL DEFAULT '0',
 				  `support_informed` int(11) NOT NULL DEFAULT '0',
@@ -1130,5 +1128,3 @@ COMMENT='';
 ALTER TABLE `lh_abstract_email_template`
 ADD `user_mail_as_sender` tinyint(4) NOT NULL,
 COMMENT='';
-
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('translation_data',	'a:6:{i:0;b:0;s:19:\"translation_handler\";s:4:\"bing\";s:19:\"enable_translations\";b:0;s:14:\"bing_client_id\";s:0:\"\";s:18:\"bing_client_secret\";s:0:\"\";s:14:\"google_api_key\";s:0:\"\";}',	0,	'Translation data',	1);

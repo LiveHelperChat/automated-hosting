@@ -1,18 +1,4 @@
 /******************/
-Tips
-/******************/
-1. During install I recommend disable cache.
-https://livehelperchat.com/article/view/40
-
-2. To clear clients instance. Change cd part to your requirements.
-cd /var/www/client/lhc_web && php cron.php -s site_admin -c cron/util/clear_cache
-
-3. To update clients databases. Change cd part to your requirements.
-cd /var/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/update_instances
-
-4. After you see that everything is working execute 2 command and enable cache.
-
-/******************/
 Install
 /******************/
 1. Install fresh version from https://github.com/LiveHelperChat/livehelperchat
@@ -148,11 +134,7 @@ And notify url provide
 E.g
 http://manager.livehelperchat.com/instance/paypalipn
 
-19. If you are going to provide in automatd hosting Co-Browsing support using NodeJS. I suggest edit
-These two templates and set static nodejs address. I suggest to have https in general, will avoid problems with sites which hash https enabled. 
-https://github.com/LiveHelperChat/automated-hosting/tree/master/instancecustomer/design/instancecustomertheme/tpl/lhcobrowse
-
-20. Don't forget to clear cache
+19. Don't forget to clear cache
 
 /******************/
 Manager nginx example

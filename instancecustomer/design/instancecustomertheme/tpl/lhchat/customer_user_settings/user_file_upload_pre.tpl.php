@@ -1,0 +1,1 @@
+<?php $user_file_upload_enabled = erLhcoreClassInstance::getInstance()->files_supported == 1;?>

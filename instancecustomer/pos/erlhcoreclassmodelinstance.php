@@ -126,6 +126,39 @@ $def->properties['reseller_suspended']->columnName   = 'reseller_suspended';
 $def->properties['reseller_suspended']->propertyName = 'reseller_suspended';
 $def->properties['reseller_suspended']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['files_supported'] = new ezcPersistentObjectProperty();
+$def->properties['files_supported']->columnName   = 'files_supported';
+$def->properties['files_supported']->propertyName = 'files_supported';
+$def->properties['files_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['atranslations_supported'] = new ezcPersistentObjectProperty();
+$def->properties['atranslations_supported']->columnName   = 'atranslations_supported';
+$def->properties['atranslations_supported']->propertyName = 'atranslations_supported';
+$def->properties['atranslations_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['cobrowse_supported'] = new ezcPersistentObjectProperty();
+$def->properties['cobrowse_supported']->columnName   = 'cobrowse_supported';
+$def->properties['cobrowse_supported']->propertyName = 'cobrowse_supported';
+$def->properties['cobrowse_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+/**
+ * For customer custom features
+ * */
+$def->properties['feature_1_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_1_supported']->columnName   = 'feature_1_supported';
+$def->properties['feature_1_supported']->propertyName = 'feature_1_supported';
+$def->properties['feature_1_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['feature_2_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_2_supported']->columnName   = 'feature_2_supported';
+$def->properties['feature_2_supported']->propertyName = 'feature_2_supported';
+$def->properties['feature_2_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['feature_3_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_3_supported']->columnName   = 'feature_3_supported';
+$def->properties['feature_3_supported']->propertyName = 'feature_3_supported';
+$def->properties['feature_3_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

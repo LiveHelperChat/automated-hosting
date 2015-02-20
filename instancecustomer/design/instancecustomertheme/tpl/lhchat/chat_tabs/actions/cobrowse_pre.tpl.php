@@ -1,0 +1,1 @@
+<?php $chat_chat_tabs_actions_cobrowse_enabled = erLhcoreClassInstance::getInstance()->cobrowse_supported == 1;?>

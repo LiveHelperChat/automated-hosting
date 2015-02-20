@@ -70,7 +70,25 @@ if (isset($_POST['Save_departament']))
 		),
 		'Reseller' => new ezcInputFormDefinitionElement(
 				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		)	
+		),
+	    'files_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'atranslations_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),
+		'cobrowse_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),			
+		'feature_1_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),			
+		'feature_2_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		),			
+		'feature_3_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+		)		
     );
 
     $form = new ezcInputForm( INPUT_POST, $definition );
@@ -84,6 +102,48 @@ if (isset($_POST['Save_departament']))
     if ( $form->hasValidData( 'ResellerMaxRequest' ) )
     {
     	$Instance->reseller_max_instance_request = $form->ResellerMaxRequest;
+    }
+    
+    if ( $form->hasValidData( 'files_supported' ) && $form->files_supported == true )
+    {
+        $Instance->files_supported = 1;
+    } else {
+        $Instance->files_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'atranslations_supported' ) && $form->atranslations_supported == true )
+    {
+        $Instance->atranslations_supported = 1;
+    } else {
+        $Instance->atranslations_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'cobrowse_supported' ) && $form->cobrowse_supported == true )
+    {
+        $Instance->cobrowse_supported = 1;
+    } else {
+        $Instance->cobrowse_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'feature_1_supported' ) && $form->feature_1_supported == true )
+    {
+        $Instance->feature_1_supported = 1;
+    } else {
+        $Instance->feature_1_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'feature_2_supported' ) && $form->feature_2_supported == true )
+    {
+        $Instance->feature_2_supported = 1;
+    } else {
+        $Instance->feature_2_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'feature_3_supported' ) && $form->feature_3_supported == true )
+    {
+        $Instance->feature_3_supported = 1;
+    } else {
+        $Instance->feature_3_supported = 0;
     }
     
     if ( $form->hasValidData( 'ResellerMaxInstance' ) )

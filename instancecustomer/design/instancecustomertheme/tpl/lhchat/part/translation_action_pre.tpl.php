@@ -1,0 +1,1 @@
+<?php $translation_action_enabled = erLhcoreClassInstance::getInstance()->atranslations_supported == 1;?>

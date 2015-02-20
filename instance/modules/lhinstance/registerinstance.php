@@ -36,6 +36,30 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 	if ($Params['user_parameters_unordered']['datehourformat'] != '') {
 		$instance->date_date_hour_format = base64_decode(rawurldecode($Params['user_parameters_unordered']['datehourformat']));		
 	}
+	
+	if ($Params['user_parameters_unordered']['files_supported'] != null) {
+		$instance->files_supported = (int)($Params['user_parameters_unordered']['files_supported']);		
+	}
+	
+	if ($Params['user_parameters_unordered']['atranslations_supported'] != null) {
+		$instance->atranslations_supported = (int)($Params['user_parameters_unordered']['atranslations_supported']);		
+	}
+	
+	if ($Params['user_parameters_unordered']['cobrowse_supported'] != null) {
+		$instance->cobrowse_supported = (int)($Params['user_parameters_unordered']['cobrowse_supported']);		
+	}
+	
+	if ($Params['user_parameters_unordered']['feature_1_supported'] != null) {
+		$instance->feature_1_supported = (int)($Params['user_parameters_unordered']['feature_1_supported']);		
+	}
+	
+	if ($Params['user_parameters_unordered']['feature_2_supported'] != null) {
+		$instance->feature_2_supported = (int)($Params['user_parameters_unordered']['feature_2_supported']);		
+	}
+	
+	if ($Params['user_parameters_unordered']['feature_3_supported'] != null) {
+		$instance->feature_3_supported = (int)($Params['user_parameters_unordered']['feature_3_supported']);		
+	}
 		
 	$instance->email = (string)$Params['user_parameters']['email'];
 	$instance->address = (string)$Params['user_parameters']['address'];

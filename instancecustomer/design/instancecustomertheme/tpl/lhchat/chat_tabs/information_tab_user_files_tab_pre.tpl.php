@@ -1,0 +1,1 @@
+<?php $information_tab_user_files_tab_enabled = erLhcoreClassInstance::getInstance()->files_supported == 1;?>

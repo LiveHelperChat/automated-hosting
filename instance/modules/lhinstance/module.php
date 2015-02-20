@@ -50,6 +50,14 @@ $ViewList['registerinstance'] = array(
 				'timezone',
 				'frontsiteaccess',
 				'operatorlocale',
+		    		    
+				'files_supported',
+				'atranslations_supported',
+				'cobrowse_supported',
+				'feature_1_supported',
+				'feature_2_supported',
+				'feature_3_supported',
+				    
 				// Reseller attributes
 				'is_reseller',
 				'reseller_tite',

@@ -12,6 +12,8 @@
 	
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>
 		
+	<?php include(erLhcoreClassDesign::designtpl('lhinstance/features.tpl.php'));?>
+		
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/csfr_token.tpl.php'));?>
 
 	<div class="btn-group" role="group" aria-label="...">

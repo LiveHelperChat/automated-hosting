@@ -45,9 +45,10 @@ class erLhcoreClassInstance{
 	   
 	   	$url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
 	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
-	   
+	   	   	
 	   	$responseData = json_decode($response);
-	   	 
+	   	   	
+	   	
 	   	if (isset($responseData->error) && $responseData->error == false){
 	   		self::deleteDatabase($instance->id);
 	   		return true;

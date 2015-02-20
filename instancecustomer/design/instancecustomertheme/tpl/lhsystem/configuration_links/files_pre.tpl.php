@@ -1,0 +1,1 @@
+<?php $system_configuration_links_files_enabled = erLhcoreClassInstance::getInstance()->files_supported == 1;?>

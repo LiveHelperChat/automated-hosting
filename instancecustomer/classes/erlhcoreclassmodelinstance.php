@@ -27,6 +27,12 @@ class erLhcoreClassModelInstance {
        		   'reseller_id'  				=> $this->reseller_id,
        		   'reseller_request'  			=> $this->reseller_request,
        		   'reseller_suspended'  		=> $this->reseller_suspended,
+               'files_supported' => $this->files_supported,
+               'atranslations_supported' => $this->atranslations_supported,
+               'cobrowse_supported' => $this->cobrowse_supported,
+               'feature_1_supported' => $this->feature_1_supported,
+               'feature_2_supported' => $this->feature_2_supported,
+               'feature_3_supported' => $this->feature_3_supported,
        );
    }
 
@@ -55,7 +61,7 @@ class erLhcoreClassModelInstance {
 	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000),'erLhcoreClassModelChatFile','lh_chat_file') as $item){
 	   		$item->removeThis();
 	   	}
-	  	   
+	   		   
 	   	foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
 	   		$item->removeFile();
 	   	}
@@ -232,6 +238,13 @@ class erLhcoreClassModelInstance {
    public $date_hour_format = 'H:i:s';
    public $date_date_hour_format = 'Y-m-d H:i:s';
    public $status = self::PENDING_CREATE;
+   
+   public $files_supported = 1;
+   public $atranslations_supported = 1;
+   public $cobrowse_supported = 1;
+   public $feature_1_supported = 1;
+   public $feature_2_supported = 1;
+   public $feature_3_supported = 1;
    
    public $is_reseller = 0;
    public $reseller_tite = '';

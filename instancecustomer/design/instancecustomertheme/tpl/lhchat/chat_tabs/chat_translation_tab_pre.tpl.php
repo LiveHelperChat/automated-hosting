@@ -1,0 +1,1 @@
+<?php $chat_translation_tab_enabled = erLhcoreClassInstance::getInstance()->atranslations_supported == 1;?>
