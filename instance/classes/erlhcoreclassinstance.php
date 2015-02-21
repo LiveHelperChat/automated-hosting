@@ -110,6 +110,11 @@ class erLhcoreClassInstance{
 	   	$sql = str_replace($searchArray, $replaceArray, $sql);
 	   	$db->query($sql);
 	   	
+	   	$dbPostUpdate = ltrim(erLhcoreClassDesign::design('db_post_update/db.sql'),'/');
+	   	if (file_exists($dbPostUpdate)){
+	   	    $db->query(file_get_contents($dbPostUpdate));
+	   	}
+	   	
 	   	// Insert default user language
 	   	if ($instance->locale != ''){
 	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
