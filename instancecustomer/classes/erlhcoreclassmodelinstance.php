@@ -30,9 +30,20 @@ class erLhcoreClassModelInstance {
                'files_supported' => $this->files_supported,
                'atranslations_supported' => $this->atranslations_supported,
                'cobrowse_supported' => $this->cobrowse_supported,
+               'forms_supported' => $this->forms_supported,
+               'faq_supported' => $this->faq_supported,
+               'cannedmsg_supported' => $this->cannedmsg_supported,
                'feature_1_supported' => $this->feature_1_supported,
                'feature_2_supported' => $this->feature_2_supported,
                'feature_3_supported' => $this->feature_3_supported,
+               'reporting_supported' => $this->reporting_supported,
+               'chatbox_supported' => $this->chatbox_supported,
+               'browseoffers_supported' => $this->browseoffers_supported,
+               'questionnaire_supported' => $this->questionnaire_supported,
+               'proactive_supported' => $this->proactive_supported,
+               'screenshot_supported' => $this->screenshot_supported,
+               'blocked_supported' => $this->blocked_supported,
+               'client_title' => $this->client_title,
        );
    }
 
@@ -242,11 +253,22 @@ class erLhcoreClassModelInstance {
    public $files_supported = 1;
    public $atranslations_supported = 1;
    public $cobrowse_supported = 1;
+   public $forms_supported = 1;
+   public $cannedmsg_supported = 1;
+   public $faq_supported = 1;
    public $feature_1_supported = 1;
    public $feature_2_supported = 1;
-   public $feature_3_supported = 1;
+   public $feature_3_supported = 1;   
+   public $reporting_supported = 1;
+   public $chatbox_supported = 1;
+   public $browseoffers_supported = 1;
+   public $questionnaire_supported = 1;
+   public $proactive_supported = 1;
+   public $screenshot_supported = 1;
+   public $blocked_supported = 1;
    
    public $is_reseller = 0;
+   public $client_title = '';
    public $reseller_tite = '';
    public $reseller_max_instance_request = 0;
    public $reseller_secret_hash = '';

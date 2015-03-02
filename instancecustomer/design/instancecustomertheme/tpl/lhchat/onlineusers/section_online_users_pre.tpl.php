@@ -1,0 +1,1 @@
+<?php $chat_onlineusers_section_online_users_enabled = erLhcoreClassInstance::getInstance()->proactive_supported == 1?>

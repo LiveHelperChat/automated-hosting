@@ -1,0 +1,1 @@
+<?php $pagelayouts_parts_modules_menu_chatbox_enabled = erLhcoreClassInstance::getInstance()->chatbox_supported == 1?>

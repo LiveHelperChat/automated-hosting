@@ -72,22 +72,52 @@ if (isset($_POST['Save_departament']))
 				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),
 	    'files_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),
 		'atranslations_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),
 		'cobrowse_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'forms_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'cannedmsg_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'faq_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),			
 		'feature_1_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),			
 		'feature_2_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		),			
 		'feature_3_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'string'
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'reporting_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'chatbox_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'browseoffers_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'questionnaire_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'proactive_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'screenshot_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+		),			
+		'blocked_supported' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 		)		
     );
 
@@ -104,47 +134,117 @@ if (isset($_POST['Save_departament']))
     	$Instance->reseller_max_instance_request = $form->ResellerMaxRequest;
     }
     
-    if ( $form->hasValidData( 'files_supported' ) && $form->files_supported == true )
-    {
-        $Instance->files_supported = 1;
-    } else {
-        $Instance->files_supported = 0;
-    }
-    
-    if ( $form->hasValidData( 'atranslations_supported' ) && $form->atranslations_supported == true )
-    {
-        $Instance->atranslations_supported = 1;
-    } else {
-        $Instance->atranslations_supported = 0;
-    }
-    
-    if ( $form->hasValidData( 'cobrowse_supported' ) && $form->cobrowse_supported == true )
-    {
-        $Instance->cobrowse_supported = 1;
-    } else {
-        $Instance->cobrowse_supported = 0;
-    }
-    
-    if ( $form->hasValidData( 'feature_1_supported' ) && $form->feature_1_supported == true )
-    {
-        $Instance->feature_1_supported = 1;
-    } else {
-        $Instance->feature_1_supported = 0;
-    }
-    
-    if ( $form->hasValidData( 'feature_2_supported' ) && $form->feature_2_supported == true )
-    {
-        $Instance->feature_2_supported = 1;
-    } else {
-        $Instance->feature_2_supported = 0;
-    }
-    
-    if ( $form->hasValidData( 'feature_3_supported' ) && $form->feature_3_supported == true )
-    {
-        $Instance->feature_3_supported = 1;
-    } else {
-        $Instance->feature_3_supported = 0;
-    }
+if ( $form->hasValidData( 'reporting_supported' ) && $form->reporting_supported == true )
+	{
+		$Instance->reporting_supported = 1;
+	} else {
+	    $Instance->reporting_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'chatbox_supported' ) && $form->chatbox_supported == true )
+	{
+		$Instance->chatbox_supported = 1;
+	} else {
+	    $Instance->chatbox_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'browseoffers_supported' ) && $form->browseoffers_supported == true )
+	{
+		$Instance->browseoffers_supported = 1;
+	} else {
+	    $Instance->browseoffers_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'questionnaire_supported' ) && $form->questionnaire_supported == true )
+	{
+		$Instance->questionnaire_supported = 1;
+	} else {
+	    $Instance->questionnaire_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'proactive_supported' ) && $form->proactive_supported == true )
+	{
+		$Instance->proactive_supported = 1;
+	} else {
+	    $Instance->proactive_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'blocked_supported' ) && $form->blocked_supported == true )
+	{
+		$Instance->blocked_supported = 1;
+	} else {
+	    $Instance->blocked_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'screenshot_supported' ) && $form->screenshot_supported == true )
+	{
+		$Instance->screenshot_supported = 1;
+	} else {
+	    $Instance->screenshot_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'files_supported' ) && $form->files_supported == true )
+	{
+		$Instance->files_supported = 1;
+	} else {
+	    $Instance->files_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'forms_supported' ) && $form->forms_supported == true )
+	{
+		$Instance->forms_supported = 1;
+	} else {
+	    $Instance->forms_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'atranslations_supported' ) && $form->atranslations_supported == true )
+	{
+		$Instance->atranslations_supported = 1;
+	} else {
+	    $Instance->atranslations_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'cannedmsg_supported' ) && $form->cannedmsg_supported == true )
+	{
+		$Instance->cannedmsg_supported = 1;
+	} else {
+	    $Instance->cannedmsg_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'faq_supported' ) && $form->faq_supported == true )
+	{
+		$Instance->faq_supported = 1;
+	} else {
+	    $Instance->faq_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'cobrowse_supported' ) && $form->cobrowse_supported == true )
+	{
+		$Instance->cobrowse_supported = 1;
+	} else {
+	    $Instance->cobrowse_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'feature_1_supported' ) && $form->feature_1_supported == true )
+	{
+		$Instance->feature_1_supported = 1;
+	} else {
+	    $Instance->feature_1_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'feature_2_supported' ) && $form->feature_2_supported == true )
+	{
+		$Instance->feature_2_supported = 1;
+	} else {
+	    $Instance->feature_2_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'feature_3_supported' ) && $form->feature_3_supported == true )
+	{
+		$Instance->feature_3_supported = 1;
+	} else {
+	    $Instance->feature_3_supported = 0;
+	}
     
     if ( $form->hasValidData( 'ResellerMaxInstance' ) )
     {

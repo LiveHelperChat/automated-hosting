@@ -4,6 +4,9 @@ Install
 1. Install fresh version from https://github.com/LiveHelperChat/livehelperchat
 
 2. Add these settings in settings/settings.ini.php file under site section
+
+'support_mail' => 'info@livehelperchat.com',
+'sender_mail' => 'info@livehelperchat.com',	  
 'seller_url' => 'http://livehelperchat.com',// Change to main site url
 'seller_domain' => 'livehelperchat.com',// Change to main site url
 'seller_mail' => 'info@livehelperchat.com', // Change mail

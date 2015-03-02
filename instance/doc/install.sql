@@ -21,10 +21,27 @@ CREATE TABLE `lhc_instance_client` (
   `reseller_id` int(11) NOT NULL,
   `reseller_request` int(11) NOT NULL,
   `reseller_suspended` int(11) NOT NULL,
+  `files_supported` int(11) NOT NULL DEFAULT '1',
+  `atranslations_supported` int(11) NOT NULL DEFAULT '1',
+  `cobrowse_supported` int(11) NOT NULL DEFAULT '1',
+  `forms_supported` int(11) NOT NULL DEFAULT '1',
+  `cannedmsg_supported` int(11) NOT NULL DEFAULT '1',
+  `faq_supported` int(11) NOT NULL DEFAULT '1',
+  `feature_1_supported` int(11) NOT NULL,
+  `feature_2_supported` int(11) NOT NULL,
+  `feature_3_supported` int(11) NOT NULL,
+  `reporting_supported` int(11) NOT NULL DEFAULT '1',
+  `chatbox_supported` int(11) NOT NULL DEFAULT '1',
+  `browseoffers_supported` int(11) NOT NULL DEFAULT '1',
+  `questionnaire_supported` int(11) NOT NULL DEFAULT '1',
+  `proactive_supported` int(11) NOT NULL DEFAULT '1',
+  `screenshot_supported` int(11) NOT NULL DEFAULT '1',
+  `blocked_supported` int(11) NOT NULL DEFAULT '1',
+  `client_title` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB
 
 CREATE TABLE `lhc_instance_invoice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

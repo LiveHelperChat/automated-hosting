@@ -73,12 +73,28 @@ class erLhcoreClassModelInstanceInvoice {
 	   				return $this->date_front;
 	   			break;
 	   			
+	   		case 'instance':
+	   		      try{
+    	   		      $this->instance = erLhcoreClassInstance::getInstance();    	   		     
+	   		      } catch (Exception $e) {
+	   		          $this->instance = false;
+	   		      }
+	   		      
+	   		      return $this->instance;
+	   		    break;	
+	   			
 	   		case 'customer_name':
-	   				$this->customer_name = isset($this->json_data['payer_email']) ? $this->json_data['payer_email'] : '';
-	   				if (isset($this->json_data['first_name'])){
-	   					$this->customer_name .= "<br/>".$this->json_data['first_name'].' '.$this->json_data['last_name']; 
-	   				}
-	   				return $this->customer_name;
+	   		    
+	   		    if ($this->instance !== false && $this->instance->client_title != '') {
+	   		        $this->customer_name = $this->instance->client_title;
+	   		        return $this->customer_name;
+	   		    } else {	   		    
+    	   			$this->customer_name = isset($this->json_data['payer_email']) ? $this->json_data['payer_email'] : '';
+    	   			if (isset($this->json_data['first_name'])){
+    	   				$this->customer_name .= "<br/>".$this->json_data['first_name'].' '.$this->json_data['last_name'];
+    	   			}
+    	   			return $this->customer_name;
+	   		    }
 	   			break;
 	   			   			
 	   		default:

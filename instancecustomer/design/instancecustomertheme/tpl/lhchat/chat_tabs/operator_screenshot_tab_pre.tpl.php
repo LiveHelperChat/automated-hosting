@@ -1,0 +1,1 @@
+<?php $operator_screenshot_tab_enabled = erLhcoreClassInstance::getInstance()->screenshot_supported == 1;?>

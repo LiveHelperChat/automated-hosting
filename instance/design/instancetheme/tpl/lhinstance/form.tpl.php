@@ -4,6 +4,11 @@
 </div>
 
 <div class="form-group">
+    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client title for invoices');?></label>
+    <input type="text" class="form-control" name="ClientTitle"  value="<?php echo htmlspecialchars($instance->client_title);?>" />
+</div>
+
+<div class="form-group">
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','E-mail');?></label>
     <input type="text" class="form-control" name="Email"  value="<?php echo htmlspecialchars($instance->email);?>" />
 </div>

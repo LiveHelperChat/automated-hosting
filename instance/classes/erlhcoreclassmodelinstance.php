@@ -4,36 +4,47 @@ class erLhcoreClassModelInstance {
 
    public function getState()
    {
-       return array (
-               'id'       		=> $this->id,
-               'request'     	=> $this->request,               
-               'expires'     	=> $this->expires,
-               'address' 		=> $this->address,
-               'email'    		=> $this->email,
-               'status'    		=> $this->status,
-               'time_zone'    	=> $this->time_zone,
-               'date_format'    		=> $this->date_format,
-               'date_hour_format'    	=> $this->date_hour_format,
-               'date_date_hour_format'  => $this->date_date_hour_format,
-       		   'suspended'  	=> $this->suspended,
-       		   'terminate'  	=> $this->terminate,
-       		   'locale'  		=> $this->locale,
-       		   'siteaccess'  	=> $this->siteaccess,
-       		   'is_reseller'  	=> $this->is_reseller,
-       		   'reseller_tite'  				=> $this->reseller_tite,
-       		   'reseller_max_instance_request'  => $this->reseller_max_instance_request,
-       		   'reseller_secret_hash'  			=> $this->reseller_secret_hash,
-       		   'reseller_max_instances'  		=> $this->reseller_max_instances,
-       		   'reseller_id'  		=> $this->reseller_id,
-       		   'reseller_request'  	=> $this->reseller_request,
-       		   'reseller_suspended' => $this->reseller_suspended,
-       		   'files_supported' => $this->files_supported,
-       		   'atranslations_supported' => $this->atranslations_supported,
-       		   'cobrowse_supported' => $this->cobrowse_supported,
-       		   'feature_1_supported' => $this->feature_1_supported,
-       		   'feature_2_supported' => $this->feature_2_supported,
-       		   'feature_3_supported' => $this->feature_3_supported,
-       );
+       return array(
+            'id' => $this->id,
+            'request' => $this->request,
+            'expires' => $this->expires,
+            'address' => $this->address,
+            'email' => $this->email,
+            'status' => $this->status,
+            'time_zone' => $this->time_zone,
+            'date_format' => $this->date_format,
+            'date_hour_format' => $this->date_hour_format,
+            'date_date_hour_format' => $this->date_date_hour_format,
+            'suspended' => $this->suspended,
+            'terminate' => $this->terminate,
+            'locale' => $this->locale,
+            'siteaccess' => $this->siteaccess,
+            'is_reseller' => $this->is_reseller,
+            'reseller_tite' => $this->reseller_tite,
+            'reseller_max_instance_request' => $this->reseller_max_instance_request,
+            'reseller_secret_hash' => $this->reseller_secret_hash,
+            'reseller_max_instances' => $this->reseller_max_instances,
+            'reseller_id' => $this->reseller_id,
+            'reseller_request' => $this->reseller_request,
+            'reseller_suspended' => $this->reseller_suspended,
+            'files_supported' => $this->files_supported,
+            'atranslations_supported' => $this->atranslations_supported,
+            'cobrowse_supported' => $this->cobrowse_supported,
+            'forms_supported' => $this->forms_supported,
+            'cannedmsg_supported' => $this->cannedmsg_supported,
+            'faq_supported' => $this->faq_supported,
+            'feature_1_supported' => $this->feature_1_supported,
+            'feature_2_supported' => $this->feature_2_supported,
+            'feature_3_supported' => $this->feature_3_supported,
+            'reporting_supported' => $this->reporting_supported,
+            'chatbox_supported' => $this->chatbox_supported,
+            'browseoffers_supported' => $this->browseoffers_supported,
+            'questionnaire_supported' => $this->questionnaire_supported,
+            'proactive_supported' => $this->proactive_supported,
+            'screenshot_supported' => $this->screenshot_supported,
+            'blocked_supported' => $this->blocked_supported,
+            'client_title' => $this->client_title
+        );
    }
    
    public function setState( array $properties )
@@ -256,10 +267,21 @@ class erLhcoreClassModelInstance {
    public $files_supported = 1;
    public $atranslations_supported = 1;
    public $cobrowse_supported = 1;
+   public $forms_supported = 1;
    public $feature_1_supported = 1;
    public $feature_2_supported = 1;
    public $feature_3_supported = 1;
+   public $cannedmsg_supported = 1;
+   public $faq_supported = 1;
+   public $reporting_supported = 1;
+   public $chatbox_supported = 1;
+   public $browseoffers_supported = 1;
+   public $questionnaire_supported = 1;
+   public $proactive_supported = 1;
+   public $screenshot_supported = 1;
+   public $blocked_supported = 1;
    
+   public $client_title = '';
    public $address = '';
    public $email = '';
    public $time_zone = '';

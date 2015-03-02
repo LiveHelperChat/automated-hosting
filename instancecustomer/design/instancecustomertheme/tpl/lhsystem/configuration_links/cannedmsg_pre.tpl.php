@@ -1,0 +1,1 @@
+<?php $system_configuration_links_cannedmsg_enabled = erLhcoreClassInstance::getInstance()->cannedmsg_supported == 1;?>

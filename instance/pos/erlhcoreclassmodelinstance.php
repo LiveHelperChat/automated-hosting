@@ -29,6 +29,11 @@ $def->properties['email']->columnName   = 'email';
 $def->properties['email']->propertyName = 'email';
 $def->properties['email']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['client_title'] = new ezcPersistentObjectProperty();
+$def->properties['client_title']->columnName   = 'client_title';
+$def->properties['client_title']->propertyName = 'client_title';
+$def->properties['client_title']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 $def->properties['status'] = new ezcPersistentObjectProperty();
 $def->properties['status']->columnName   = 'status';
 $def->properties['status']->propertyName = 'status';
@@ -141,6 +146,60 @@ $def->properties['cobrowse_supported']->columnName   = 'cobrowse_supported';
 $def->properties['cobrowse_supported']->propertyName = 'cobrowse_supported';
 $def->properties['cobrowse_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['forms_supported'] = new ezcPersistentObjectProperty();
+$def->properties['forms_supported']->columnName   = 'forms_supported';
+$def->properties['forms_supported']->propertyName = 'forms_supported';
+$def->properties['forms_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['forms_supported'] = new ezcPersistentObjectProperty();
+$def->properties['forms_supported']->columnName   = 'forms_supported';
+$def->properties['forms_supported']->propertyName = 'forms_supported';
+$def->properties['forms_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['cannedmsg_supported'] = new ezcPersistentObjectProperty();
+$def->properties['cannedmsg_supported']->columnName   = 'cannedmsg_supported';
+$def->properties['cannedmsg_supported']->propertyName = 'cannedmsg_supported';
+$def->properties['cannedmsg_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['faq_supported'] = new ezcPersistentObjectProperty();
+$def->properties['faq_supported']->columnName   = 'faq_supported';
+$def->properties['faq_supported']->propertyName = 'faq_supported';
+$def->properties['faq_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['screenshot_supported'] = new ezcPersistentObjectProperty();
+$def->properties['screenshot_supported']->columnName   = 'screenshot_supported';
+$def->properties['screenshot_supported']->propertyName = 'screenshot_supported';
+$def->properties['screenshot_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['proactive_supported'] = new ezcPersistentObjectProperty();
+$def->properties['proactive_supported']->columnName   = 'proactive_supported';
+$def->properties['proactive_supported']->propertyName = 'proactive_supported';
+$def->properties['proactive_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['questionnaire_supported'] = new ezcPersistentObjectProperty();
+$def->properties['questionnaire_supported']->columnName   = 'questionnaire_supported';
+$def->properties['questionnaire_supported']->propertyName = 'questionnaire_supported';
+$def->properties['questionnaire_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['browseoffers_supported'] = new ezcPersistentObjectProperty();
+$def->properties['browseoffers_supported']->columnName   = 'browseoffers_supported';
+$def->properties['browseoffers_supported']->propertyName = 'browseoffers_supported';
+$def->properties['browseoffers_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['chatbox_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chatbox_supported']->columnName   = 'chatbox_supported';
+$def->properties['chatbox_supported']->propertyName = 'chatbox_supported';
+$def->properties['chatbox_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['reporting_supported'] = new ezcPersistentObjectProperty();
+$def->properties['reporting_supported']->columnName   = 'reporting_supported';
+$def->properties['reporting_supported']->propertyName = 'reporting_supported';
+$def->properties['reporting_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['blocked_supported'] = new ezcPersistentObjectProperty();
+$def->properties['blocked_supported']->columnName   = 'blocked_supported';
+$def->properties['blocked_supported']->propertyName = 'blocked_supported';
+$def->properties['blocked_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 /**
  * For customer custom features
  * */
