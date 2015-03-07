@@ -1,4 +1,4 @@
-# Finished at 2015-03-02 20:00:01
+# Finished at 2015-03-07 09:30:01
 # Last updated entry:
-78.63.130.245 test2.livehelperchat.com - [02/Mar/2015:13:59:33 -0500] "GET /site_admin/chat/syncadmininterface HTTP/1.1" 200 410 "http://test2.livehelperchat.com/site_admin/instance/billing" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36" "-"
+78.63.130.245 test1.livehelperchat.com - [07/Mar/2015:03:29:56 -0500] "GET /site_admin/chat/onlineusers/(method)/ajax/(timeout)/3600/(maxrows)/50 HTTP/1.1" 200 33 "http://test1.livehelperchat.com/site_admin/chat/onlineusers" "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36" "-"
 

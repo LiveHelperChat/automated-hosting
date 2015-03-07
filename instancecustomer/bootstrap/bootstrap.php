@@ -64,6 +64,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		// Pro active
 		$dispatcher->listen('feature.can_use_proactive',array($this,'canUseProactive'));
 		
+		// Auto responder
+		$dispatcher->listen('feature.can_use_autoresponder',array($this,'canUseAutoresponder'));
+		
+		$dispatcher->listen('chat.geoadjustment',array($this,'canUseGeoAdjustment'));
+		
 		// Block users
 		$dispatcher->listen('chat.blockedusers',array($this,'canUseBlock'));
 
@@ -139,6 +144,14 @@ class erLhcoreClassExtensionInstancecustomer {
 	    }
 	}
 	
+	public function canUseAutoresponder()
+	{
+	    if (erLhcoreClassInstance::getInstance()->autoresponder_supported == 0) {
+	        // No permission to use statistic
+	        die('You do not have permission to use Autoresponder');
+	    }
+	}
+	
 	public function canUseForms()
 	{
 	    if (erLhcoreClassInstance::getInstance()->forms_supported == 0) {
@@ -168,6 +181,14 @@ class erLhcoreClassExtensionInstancecustomer {
 	    if (erLhcoreClassInstance::getInstance()->faq_supported == 0) {
 	        // No permission to use forms, just exist
 	        die('You do not have permission to use FAQ');
+	    }
+	}
+	
+	public function canUseGeoAdjustment()
+	{
+	    if (erLhcoreClassInstance::getInstance()->geoadjustment_supported == 0) {
+	        // No permission to use forms, just exist
+	        die('You do not have permission to use GEO adjustment');
 	    }
 	}
 	

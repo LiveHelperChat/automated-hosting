@@ -17,6 +17,7 @@
 		<li role="presentation"><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
 		<li role="presentation"><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
 		<li role="presentation"><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
+		<li role="presentation"><a href="#sms" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
 		<li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
 	</ul>
 
@@ -95,6 +96,11 @@
 		<div role="tabpanel" class="tab-pane" id="features">
 		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#features" method="post" autocomplete="off">		
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/features.tpl.php'));?>	
+			</form>			
+		</div>
+		<div role="tabpanel" class="tab-pane" id="sms">
+		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#sms" method="post" autocomplete="off">		
+		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/sms.tpl.php'));?>	
 			</form>			
 		</div>
 	</div>

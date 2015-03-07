@@ -196,6 +196,26 @@ $def->properties['blocked_supported']->columnName   = 'blocked_supported';
 $def->properties['blocked_supported']->propertyName = 'blocked_supported';
 $def->properties['blocked_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['chatremarks_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chatremarks_supported']->columnName   = 'chatremarks_supported';
+$def->properties['chatremarks_supported']->propertyName = 'chatremarks_supported';
+$def->properties['chatremarks_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['autoresponder_supported'] = new ezcPersistentObjectProperty();
+$def->properties['autoresponder_supported']->columnName   = 'autoresponder_supported';
+$def->properties['autoresponder_supported']->propertyName = 'autoresponder_supported';
+$def->properties['autoresponder_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['geoadjustment_supported'] = new ezcPersistentObjectProperty();
+$def->properties['geoadjustment_supported']->columnName   = 'geoadjustment_supported';
+$def->properties['geoadjustment_supported']->propertyName = 'geoadjustment_supported';
+$def->properties['geoadjustment_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['onlinevisitortrck_supported'] = new ezcPersistentObjectProperty();
+$def->properties['onlinevisitortrck_supported']->columnName   = 'onlinevisitortrck_supported';
+$def->properties['onlinevisitortrck_supported']->propertyName = 'onlinevisitortrck_supported';
+$def->properties['onlinevisitortrck_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 /**
  * For customer custom features
  * */
@@ -213,6 +233,77 @@ $def->properties['feature_3_supported'] = new ezcPersistentObjectProperty();
 $def->properties['feature_3_supported']->columnName   = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyName = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['footprint_supported'] = new ezcPersistentObjectProperty();
+$def->properties['footprint_supported']->columnName   = 'footprint_supported';
+$def->properties['footprint_supported']->propertyName = 'footprint_supported';
+$def->properties['footprint_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['previouschats_supported'] = new ezcPersistentObjectProperty();
+$def->properties['previouschats_supported']->columnName   = 'previouschats_supported';
+$def->properties['previouschats_supported']->propertyName = 'previouschats_supported';
+$def->properties['previouschats_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+// Phone attributes, can be used by SMS extension for automated hosting
+$def->properties['phone_number'] = new ezcPersistentObjectProperty();
+$def->properties['phone_number']->columnName   = 'phone_number';
+$def->properties['phone_number']->propertyName = 'phone_number';
+$def->properties['phone_number']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['sms_left'] = new ezcPersistentObjectProperty();
+$def->properties['sms_left']->columnName   = 'sms_left';
+$def->properties['sms_left']->propertyName = 'sms_left';
+$def->properties['sms_left']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['sms_plan'] = new ezcPersistentObjectProperty();
+$def->properties['sms_plan']->columnName   = 'sms_plan';
+$def->properties['sms_plan']->propertyName = 'sms_plan';
+$def->properties['sms_plan']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['soft_limit_type'] = new ezcPersistentObjectProperty();
+$def->properties['soft_limit_type']->columnName   = 'soft_limit_type';
+$def->properties['soft_limit_type']->propertyName = 'soft_limit_type';
+$def->properties['soft_limit_type']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['soft_limit'] = new ezcPersistentObjectProperty();
+$def->properties['soft_limit']->columnName   = 'soft_limit';
+$def->properties['soft_limit']->propertyName = 'soft_limit';
+$def->properties['soft_limit']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['hard_limit_type'] = new ezcPersistentObjectProperty();
+$def->properties['hard_limit_type']->columnName   = 'hard_limit_type';
+$def->properties['hard_limit_type']->propertyName = 'hard_limit_type';
+$def->properties['hard_limit_type']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['hard_limit'] = new ezcPersistentObjectProperty();
+$def->properties['hard_limit']->columnName   = 'hard_limit';
+$def->properties['hard_limit']->propertyName = 'hard_limit';
+$def->properties['hard_limit']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['sms_processed'] = new ezcPersistentObjectProperty();
+$def->properties['sms_processed']->columnName   = 'sms_processed';
+$def->properties['sms_processed']->propertyName = 'sms_processed';
+$def->properties['sms_processed']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['sms_supported'] = new ezcPersistentObjectProperty();
+$def->properties['sms_supported']->columnName   = 'sms_supported';
+$def->properties['sms_supported']->propertyName = 'sms_supported';
+$def->properties['sms_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['soft_warning_send'] = new ezcPersistentObjectProperty();
+$def->properties['soft_warning_send']->columnName   = 'soft_warning_send';
+$def->properties['soft_warning_send']->propertyName = 'soft_warning_send';
+$def->properties['soft_warning_send']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['hard_warning_send'] = new ezcPersistentObjectProperty();
+$def->properties['hard_warning_send']->columnName   = 'hard_warning_send';
+$def->properties['hard_warning_send']->propertyName = 'hard_warning_send';
+$def->properties['hard_warning_send']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['phone_default_department'] = new ezcPersistentObjectProperty();
+$def->properties['phone_default_department']->columnName   = 'phone_default_department';
+$def->properties['phone_default_department']->propertyName = 'phone_default_department';
+$def->properties['phone_default_department']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 return $def;
 

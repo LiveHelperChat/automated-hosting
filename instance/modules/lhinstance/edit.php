@@ -104,6 +104,92 @@ if (isset($_POST['UpdateAttributes']) )
 	$tpl->set('updated',true);	
 }
 
+if (isset($_POST['UpdateSMS']) )
+{
+    $definition = array(
+        'sms_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'phone_number' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+        ),
+        'add_sms_to_user' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1)
+        ),
+        'sms_plan' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1)
+        ),
+        'soft_limit_type' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1,'max_range' => 2)
+        ),
+        'hard_limit_type' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1,'max_range' => 2)
+        ),
+        'soft_limit' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int'
+        ),
+        'hard_limit' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int'
+        ),
+    );
+    
+    $form = new ezcInputForm( INPUT_POST, $definition );
+    $Errors = array();
+    
+    if ( $form->hasValidData( 'sms_supported' ) && $form->sms_supported == true )
+    {
+        $Instance->sms_supported = 1;
+    } else {
+        $Instance->sms_supported = 0;
+    }
+
+    if ( $form->hasValidData( 'phone_number' )) {
+        $Instance->phone_number = $form->phone_number;
+    } else {
+        $Instance->phone_number = '';
+    }
+
+    if ( $form->hasValidData( 'add_sms_to_user' ))
+    {
+        $Instance->sms_left += $form->add_sms_to_user;
+    }
+
+    if ( $form->hasValidData( 'sms_plan' ))
+    {
+        $Instance->sms_plan = $form->sms_plan;
+    }
+
+    if ( $form->hasValidData( 'soft_limit_type' ))
+    {
+        $Instance->soft_limit_type = $form->soft_limit_type;
+    }
+
+    if ( $form->hasValidData( 'hard_limit_type' ))
+    {
+        $Instance->hard_limit_type = $form->hard_limit_type;
+    }
+
+    if ( $form->hasValidData( 'soft_limit' ))
+    {
+        $Instance->soft_limit = $form->soft_limit;
+    }
+
+    if ( $form->hasValidData( 'hard_limit' ))
+    {
+        $Instance->hard_limit = $form->hard_limit;
+    }
+    
+    if ($Instance->soft_limit_in_effect == false) {
+        $Instance->soft_warning_send = false;
+    }
+    
+    if ($Instance->hard_limit_in_effect == false) {
+        $Instance->hard_warning_send = false;
+    }
+    
+    $Instance->saveThis();
+    $tpl->set('updated',true);
+}
 
 if (isset($_POST['UpdateFeatures']) )
 {
@@ -155,6 +241,24 @@ if (isset($_POST['UpdateFeatures']) )
 			),			
 			'blocked_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'footprint_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'previouschats_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'autoresponder_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'chatremarks_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'geoadjustment_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			)			
 	);
 
@@ -169,11 +273,53 @@ if (isset($_POST['UpdateFeatures']) )
 	    $Instance->reporting_supported = 0;
 	}
 	
+	if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true )
+	{
+		$Instance->previouschats_supported = 1;
+	} else {
+	    $Instance->previouschats_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'geoadjustment_supported' ) && $form->geoadjustment_supported == true )
+	{
+		$Instance->geoadjustment_supported = 1;
+	} else {
+	    $Instance->geoadjustment_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'onlinevisitortrck_supported' ) && $form->onlinevisitortrck_supported == true )
+	{
+		$Instance->onlinevisitortrck_supported = 1;
+	} else {
+	    $Instance->onlinevisitortrck_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'chatremarks_supported' ) && $form->chatremarks_supported == true )
+	{
+		$Instance->chatremarks_supported = 1;
+	} else {
+	    $Instance->chatremarks_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'autoresponder_supported' ) && $form->autoresponder_supported == true )
+	{
+		$Instance->autoresponder_supported = 1;
+	} else {
+	    $Instance->autoresponder_supported = 0;
+	}
+	
 	if ( $form->hasValidData( 'chatbox_supported' ) && $form->chatbox_supported == true )
 	{
 		$Instance->chatbox_supported = 1;
 	} else {
 	    $Instance->chatbox_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'footprint_supported' ) && $form->footprint_supported == true )
+	{
+		$Instance->footprint_supported = 1;
+	} else {
+	    $Instance->footprint_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'browseoffers_supported' ) && $form->browseoffers_supported == true )

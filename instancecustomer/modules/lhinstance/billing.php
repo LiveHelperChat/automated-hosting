@@ -6,6 +6,46 @@ $db = ezcDbInstance::get(); // Needed to load correct data
 $instance = erLhcoreClassInstance::getInstance();
 $tpl->set('instance',$instance);
 
+
+if (isset($_POST['SaveClientName'])) {
+    $definition = array(
+        'ClientTitle' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+        ));
+    
+    $form = new ezcInputForm( INPUT_POST, $definition );
+    
+    if ( $form->hasValidData( 'ClientTitle' ) ) {
+        $instance->client_title = $form->ClientTitle;
+    } else {
+        $instance->client_title = '';
+    }
+    
+    $instance->saveToInstanceThis();
+    
+    $tpl->set('client_title_updated',true);
+}
+
+if (isset($_POST['SaveDefaultDepartment'])) {
+    $definition = array(
+        'DepartmentID' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1)
+        ));
+    
+    $form = new ezcInputForm( INPUT_POST, $definition );
+    
+    if ( $form->hasValidData( 'DepartmentID' ) ) {
+        $instance->phone_default_department = $form->DepartmentID;
+    } else {
+        $instance->phone_default_department = 0;
+    }
+    
+    $instance->saveToInstanceThis();
+    
+    $tpl->set('sms_updated',true);
+    $tpl->set('tab','sms');
+}
+
 if (isset($_POST['RequestAction'])) {
     
     $definition = array(
@@ -56,6 +96,12 @@ if (isset($_POST['RequestAction'])) {
         ),
         'blocked_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'sms_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
     
@@ -77,14 +123,45 @@ if (isset($_POST['RequestAction'])) {
         'screenshot_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Screenshot supported'),
         'blocked_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported'),
         'files_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
+        'sms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS chat supported'),
+        'onlinevisitortrck_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported'),
+        'geoadjustment_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supporte'),
+        'chatremarks_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported'),
+        'autoresponder_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported'),
+        'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
+        'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
     );
     
     $requestedModules = array(
         
     );
     
+    if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true ) {
+        $requestedModules[] = $modules['previouschats_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'footprint_supported' ) && $form->footprint_supported == true ) {
+        $requestedModules[] = $modules['footprint_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'autoresponder_supported' ) && $form->autoresponder_supported == true ) {
+        $requestedModules[] = $modules['autoresponder_supported'];      
+    }
+    
     if ( $form->hasValidData( 'reporting_supported' ) && $form->reporting_supported == true ) {
         $requestedModules[] = $modules['reporting_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'chatremarks_supported' ) && $form->chatremarks_supported == true ) {
+        $requestedModules[] = $modules['chatremarks_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'geoadjustment_supported' ) && $form->geoadjustment_supported == true ) {
+        $requestedModules[] = $modules['geoadjustment_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'onlinevisitortrck_supported' ) && $form->onlinevisitortrck_supported == true ) {
+        $requestedModules[] = $modules['onlinevisitortrck_supported'];      
     }
     
     if ( $form->hasValidData( 'chatbox_supported' ) && $form->chatbox_supported == true ) {

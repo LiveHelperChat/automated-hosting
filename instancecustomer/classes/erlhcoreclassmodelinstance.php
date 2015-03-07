@@ -44,6 +44,24 @@ class erLhcoreClassModelInstance {
                'screenshot_supported' => $this->screenshot_supported,
                'blocked_supported' => $this->blocked_supported,
                'client_title' => $this->client_title,
+               'phone_number' => $this->phone_number,
+               'sms_left' => $this->sms_left,
+               'sms_plan' => $this->sms_plan,
+               'soft_limit_type' => $this->soft_limit_type,
+               'soft_limit' => $this->soft_limit,
+               'hard_limit_type' => $this->hard_limit_type,
+               'hard_limit' => $this->hard_limit,
+               'sms_processed' => $this->sms_processed,
+               'sms_supported' => $this->sms_supported,
+               'soft_warning_send' => $this->soft_warning_send,
+               'hard_warning_send' => $this->hard_warning_send,
+               'phone_default_department' => $this->phone_default_department,
+               'footprint_supported' => $this->footprint_supported,
+               'previouschats_supported' => $this->previouschats_supported,
+               'chatremarks_supported' => $this->chatremarks_supported,
+               'autoresponder_supported' => $this->autoresponder_supported,
+               'geoadjustment_supported' => $this->geoadjustment_supported,
+               'onlinevisitortrck_supported' => $this->onlinevisitortrck_supported,
        );
    }
 
@@ -100,6 +118,35 @@ class erLhcoreClassModelInstance {
 	   			return $this->is_active;
 	   		break;
 	   		
+	   		case 'sms_used_percentenge':
+	   		    return round(($this->sms_left / $this->sms_plan) * 100, 2);
+	   		    break;
+	   		
+	   		case 'soft_limit_in_effect':
+	   		    $soft_limit_in_effect = false;
+	   		    if ($this->soft_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->soft_limit) {
+	   		        $soft_limit_in_effect = true;
+	   		    } elseif ($this->soft_limit_type == 1 && $this->sms_left < $this->soft_limit) {
+	   		        $soft_limit_in_effect = true;
+	   		    }
+	   		    return $soft_limit_in_effect;
+	   		    break;
+	   		
+	   		case 'hard_limit_in_effect':
+	   		    $hard_limit_in_effect = false;
+	   		    if ($this->hard_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->hard_limit) {
+	   		        $hard_limit_in_effect = true;
+	   		    } elseif ($this->hard_limit_type == 1 && $this->sms_left < $this->hard_limit) {
+	   		        $hard_limit_in_effect = true;
+	   		    }
+	   		    return $hard_limit_in_effect;
+	   		    break;
+	   		
+	   		case 'can_send_sms':
+	   		    $this->can_send_sms = $this->sms_supported == true && $this->hard_limit_in_effect == false;
+	   		    return $this->can_send_sms;
+	   		    break;
+	   		    
 	   		case 'reseller_instances_count':
 	   			$db = ezcDbInstance::get();
 	   			$cfg = erConfigClassLhConfig::getInstance();
@@ -115,6 +162,144 @@ class erLhcoreClassModelInstance {
 	   	}
    }
 
+   public function getPhoneAttribute($attr) {
+       $cfg = erConfigClassLhConfig::getInstance();
+       $phoneAttributes = $cfg->getSetting('site','phoneattributes');
+       
+       if (isset($phoneAttributes[$attr])) {
+           return $phoneAttributes[$attr];
+       }
+             
+       return '';
+   }
+   
+   public function addSMSMessageSend($number) {
+       $this->sms_left-= $number;
+       $this->sms_processed += $number;
+       
+       if ($this->soft_limit_in_effect == true && $this->soft_warning_send == 0) {
+                               
+           $this->soft_warning_send = 1;
+
+           // Send mail to global administrator
+           $mail = new PHPMailer(true);
+           $mail->CharSet = "UTF-8";
+           $mail->Subject = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance has reached soft SMS limit').' - '.$this->id;
+           $mail->AddReplyTo($this->email,(string)$this->address);
+           
+           $tpl = new erLhcoreClassTemplate();
+           
+           $tpl->set('instance',$this);
+           
+           // Remove new line characters
+           $content = str_replace("\n", "", $tpl->fetch('lhinstance/mail/phone_soft_limit.tpl.php'));
+           // Replace br with new line characters
+           $content = str_replace("<br/>", "\n", $content);
+           
+           $mail->Body = $content;
+           $mail->AddAddress( erConfigClassLhConfig::getInstance()->getSetting('site','support_mail') );
+           
+           erLhcoreClassChatMail::setupSMTP($mail);
+           
+           try {
+               $mail->Send();
+           } catch (Exception $e) {
+                
+           }
+           
+           $mail->ClearAddresses();
+                    
+           // Send mail to instance admin
+           $mail = new PHPMailer(true);
+           $mail->CharSet = "UTF-8";
+           $mail->Subject = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You have reached soft SMS limit');
+           $mail->AddReplyTo($this->email,(string)$this->address);
+            
+           $tpl = new erLhcoreClassTemplate();
+            
+           $tpl->set('instance',$this);
+            
+           // Remove new line characters
+           $content = str_replace("\n", "", $tpl->fetch('lhinstance/mail/phone_soft_limit_user.tpl.php'));
+           // Replace br with new line characters
+           $content = str_replace("<br/>", "\n", $content);
+            
+           $mail->Body = $content;
+           $mail->AddAddress( $this->email );
+            
+           erLhcoreClassChatMail::setupSMTP($mail);
+           
+           try {
+               $mail->Send();
+           } catch (Exception $e) {           
+           }
+           
+           $mail->ClearAddresses();           
+       }
+       
+       if ($this->hard_limit_in_effect == true && $this->hard_warning_send == 0) {          
+           $this->hard_warning_send = 1;
+           
+           // Send mail to global administrator
+           $mail = new PHPMailer(true);
+           $mail->CharSet = "UTF-8";
+           $mail->Subject = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance has reached hard SMS limit').' - '.$this->id;
+           $mail->AddReplyTo($this->email,(string)$this->address);
+            
+           $tpl = new erLhcoreClassTemplate();
+            
+           $tpl->set('instance',$this);
+            
+           // Remove new line characters
+           $content = str_replace("\n", "", $tpl->fetch('lhinstance/mail/phone_hard_limit.tpl.php'));
+           // Replace br with new line characters
+           $content = str_replace("<br/>", "\n", $content);
+            
+           $mail->Body = $content;
+           $mail->AddAddress( erConfigClassLhConfig::getInstance()->getSetting('site','support_mail') );
+            
+           erLhcoreClassChatMail::setupSMTP($mail);
+            
+           try {
+               $mail->Send();
+           } catch (Exception $e) {
+           
+           }
+            
+           $mail->ClearAddresses();
+           
+           // Send mail to instance admin
+           $mail = new PHPMailer(true);
+           $mail->CharSet = "UTF-8";
+           $mail->Subject = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You have reached hard SMS limit');
+           $mail->AddReplyTo($this->email,(string)$this->address);
+           
+           $tpl = new erLhcoreClassTemplate();
+           
+           $tpl->set('instance',$this);
+           
+           // Remove new line characters
+           $content = str_replace("\n", "", $tpl->fetch('lhinstance/mail/phone_hard_limit_user.tpl.php'));
+           // Replace br with new line characters
+           $content = str_replace("<br/>", "\n", $content);
+           
+           $mail->Body = $content;
+           $mail->AddAddress( $this->email );
+           
+           erLhcoreClassChatMail::setupSMTP($mail);
+            
+           try {
+               $mail->Send();
+           } catch (Exception $e) {
+                
+           }
+            
+           $mail->ClearAddresses();
+       }
+            
+       $this->saveToInstanceThis();
+   }
+   
    public function saveThis(){
    		erLhcoreClassInstance::getSession()->saveOrUpdate($this);
    }
@@ -266,6 +451,24 @@ class erLhcoreClassModelInstance {
    public $proactive_supported = 1;
    public $screenshot_supported = 1;
    public $blocked_supported = 1;
+   public $footprint_supported = 1;
+   public $previouschats_supported = 1;
+   public $chatremarks_supported = 1;
+   public $autoresponder_supported = 1;
+   public $geoadjustment_supported = 1;
+   public $onlinevisitortrck_supported = 1;
+   
+   public $phone_number = '';   
+   public $sms_left = 0;   
+   public $sms_plan = 1000;   
+   public $soft_limit_type = 0;   
+   public $soft_limit = 15;   
+   public $hard_limit_type = 0;   
+   public $hard_limit = -15;   
+   public $sms_processed = 0;   
+   public $sms_supported = 0;   
+   public $soft_warning_send = 0;   
+   public $hard_warning_send = 0;   
    
    public $is_reseller = 0;
    public $client_title = '';
@@ -275,6 +478,7 @@ class erLhcoreClassModelInstance {
    public $reseller_max_instances = 0;
    public $reseller_id = 0;
    public $reseller_request = 0;
+   public $phone_default_department = 0;
    
    // Then reseller get's suspended this attribute is set to 1, to avoid double fetching each time in instance part.
    public $reseller_suspended = 0;

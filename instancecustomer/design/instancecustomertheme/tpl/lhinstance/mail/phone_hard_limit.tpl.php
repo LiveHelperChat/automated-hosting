@@ -1,0 +1,3 @@
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance has reached hard SMS limit')?>
+<br/><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance ID')?>: <?php echo $instance->id?>
+<br/><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance address')?>: <?php echo $instance->address?>

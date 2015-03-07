@@ -6,7 +6,7 @@
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
 <?php endif; ?>
 
-<form action="" method="post">
+<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" method="post">
     <div class="row">
         <div class="form-group col-xs-6">											 
         	<label><input <?php echo $instance->files_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="files_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported')?></label>
@@ -59,6 +59,35 @@
         <div class="form-group col-xs-6">											 
         	<label><input <?php echo $instance->blocked_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="blocked_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported')?></label>
         </div>
+		
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->sms_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="sms_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->footprint_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="footprint_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->previouschats_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="previouschats_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->autoresponder_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="autoresponder_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->chatremarks_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="chatremarks_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->geoadjustment_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="geoadjustment_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">
+        	<label><input <?php echo $instance->onlinevisitortrck_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="onlinevisitortrck_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported')?></label>
+        </div>
+        
     </div>
     <input class="btn btn-default" type="submit" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Request features')?>" name="RequestAction" />
 </form>

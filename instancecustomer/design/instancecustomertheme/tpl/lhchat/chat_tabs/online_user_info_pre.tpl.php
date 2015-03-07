@@ -1,0 +1,1 @@
+<?php $information_tab_online_user_info_enabled = erLhcoreClassInstance::getInstance()->onlinevisitortrck_supported == 1;?>

@@ -37,11 +37,29 @@ CREATE TABLE `lhc_instance_client` (
   `proactive_supported` int(11) NOT NULL DEFAULT '1',
   `screenshot_supported` int(11) NOT NULL DEFAULT '1',
   `blocked_supported` int(11) NOT NULL DEFAULT '1',
+  `footprint_supported` int(11) NOT NULL DEFAULT '1',
+  `previouschats_supported` int(11) NOT NULL DEFAULT '1',
+  `chatremarks_supported` int(11) NOT NULL DEFAULT '1',
+  `autoresponder_supported` int(11) NOT NULL DEFAULT '1',
+  `geoadjustment_supported` int(11) NOT NULL DEFAULT '1',
+  `onlinevisitortrck_supported` int(11) NOT NULL DEFAULT '1',
   `client_title` varchar(250) NOT NULL,
+  `phone_number` varchar(250) NOT NULL DEFAULT '',
+  `sms_left` int(11) NOT NULL DEFAULT '0',
+  `sms_plan` int(11) NOT NULL DEFAULT '0',
+  `soft_limit_type` int(11) NOT NULL DEFAULT '0',
+  `soft_limit` int(11) NOT NULL DEFAULT '0',
+  `hard_limit_type` int(11) NOT NULL DEFAULT '0',
+  `hard_limit` int(11) NOT NULL DEFAULT '0',
+  `sms_processed` int(11) NOT NULL DEFAULT '0',
+  `sms_supported` int(11) NOT NULL DEFAULT '0',
+  `hard_warning_send` int(11) NOT NULL DEFAULT '0',
+  `soft_warning_send` int(11) NOT NULL DEFAULT '0',
+  `phone_default_department` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
 
 CREATE TABLE `lhc_instance_invoice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

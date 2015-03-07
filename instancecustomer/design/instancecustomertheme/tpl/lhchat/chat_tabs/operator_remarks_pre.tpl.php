@@ -1,0 +1,1 @@
+<?php $operator_remarks_enabled = erLhcoreClassInstance::getInstance()->chatremarks_supported == 1;?>

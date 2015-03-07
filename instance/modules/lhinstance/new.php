@@ -73,52 +73,70 @@ if (isset($_POST['Save_departament']))
 		),
 	    'files_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),
-		'atranslations_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),
-		'cobrowse_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'forms_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'cannedmsg_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'faq_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'feature_1_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'feature_2_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'feature_3_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'reporting_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'chatbox_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'browseoffers_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'questionnaire_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'proactive_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'screenshot_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		),			
-		'blocked_supported' => new ezcInputFormDefinitionElement(
-				ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
-		)		
+			),
+			'atranslations_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),
+			'cobrowse_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'forms_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'cannedmsg_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'faq_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'feature_1_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'feature_2_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'feature_3_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'reporting_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'chatbox_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'browseoffers_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'questionnaire_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'proactive_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'screenshot_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'blocked_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'footprint_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'previouschats_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'autoresponder_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'chatremarks_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'geoadjustment_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			)		
     );
 
     $form = new ezcInputForm( INPUT_POST, $definition );
@@ -134,11 +152,46 @@ if (isset($_POST['Save_departament']))
     	$Instance->reseller_max_instance_request = $form->ResellerMaxRequest;
     }
     
-if ( $form->hasValidData( 'reporting_supported' ) && $form->reporting_supported == true )
+    if ( $form->hasValidData( 'reporting_supported' ) && $form->reporting_supported == true )
 	{
 		$Instance->reporting_supported = 1;
 	} else {
 	    $Instance->reporting_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true )
+	{
+		$Instance->previouschats_supported = 1;
+	} else {
+	    $Instance->previouschats_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'geoadjustment_supported' ) && $form->geoadjustment_supported == true )
+	{
+		$Instance->geoadjustment_supported = 1;
+	} else {
+	    $Instance->geoadjustment_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'onlinevisitortrck_supported' ) && $form->onlinevisitortrck_supported == true )
+	{
+		$Instance->onlinevisitortrck_supported = 1;
+	} else {
+	    $Instance->onlinevisitortrck_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'chatremarks_supported' ) && $form->chatremarks_supported == true )
+	{
+		$Instance->chatremarks_supported = 1;
+	} else {
+	    $Instance->chatremarks_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'autoresponder_supported' ) && $form->autoresponder_supported == true )
+	{
+		$Instance->autoresponder_supported = 1;
+	} else {
+	    $Instance->autoresponder_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'chatbox_supported' ) && $form->chatbox_supported == true )
@@ -146,6 +199,13 @@ if ( $form->hasValidData( 'reporting_supported' ) && $form->reporting_supported 
 		$Instance->chatbox_supported = 1;
 	} else {
 	    $Instance->chatbox_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'footprint_supported' ) && $form->footprint_supported == true )
+	{
+		$Instance->footprint_supported = 1;
+	} else {
+	    $Instance->footprint_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'browseoffers_supported' ) && $form->browseoffers_supported == true )
