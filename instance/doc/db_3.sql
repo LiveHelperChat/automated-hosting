@@ -927,6 +927,11 @@ CREATE TABLE `lh_abstract_widget_theme` (
                  `hide_close` int(11) NOT NULL,
                  `hide_popup` int(11) NOT NULL,
                  `header_height` int(11) NOT NULL,
+                 `support_joined` varchar(250) NOT NULL,
+                 `support_closed` varchar(250) NOT NULL,
+                 `pending_join` varchar(250) NOT NULL,
+                 `noonline_operators` varchar(250) NOT NULL,
+                 `noonline_operators_offline` varchar(250) NOT NULL,
                  `header_padding` int(11) NOT NULL,
                  `widget_border_width` int(11) NOT NULL,
                   PRIMARY KEY (`id`)
