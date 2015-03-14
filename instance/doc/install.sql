@@ -56,6 +56,9 @@ CREATE TABLE `lhc_instance_client` (
   `hard_warning_send` int(11) NOT NULL DEFAULT '0',
   `soft_warning_send` int(11) NOT NULL DEFAULT '0',
   `phone_default_department` int(11) NOT NULL,
+  `custom_fields_1` text NOT NULL,
+  `custom_fields_2` text NOT NULL,
+  `custom_fields_3` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)

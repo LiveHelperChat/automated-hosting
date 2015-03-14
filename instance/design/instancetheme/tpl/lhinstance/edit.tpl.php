@@ -19,6 +19,7 @@
 		<li role="presentation"><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
 		<li role="presentation"><a href="#sms" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
 		<li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
+		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/extension_tab_multiinclude.tpl.php'));?>
 	</ul>
 
 	<!-- Tab panes -->
@@ -103,5 +104,6 @@
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/sms.tpl.php'));?>	
 			</form>			
 		</div>
+		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs_content/extension_tab_multiinclude.tpl.php'));?>
 	</div>
 </div>

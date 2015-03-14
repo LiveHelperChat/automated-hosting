@@ -223,6 +223,8 @@ if (isset($_POST['RequestAction'])) {
     if ( $form->hasValidData( 'feature_3_supported' ) && $form->feature_3_supported == true ) {
         $requestedModules[] = $modules['feature_3_supported'];
     }
+            
+    erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.requestfeatures',array('requested' => & $requestedModules));
     
     if (!empty($requestedModules)) {
                

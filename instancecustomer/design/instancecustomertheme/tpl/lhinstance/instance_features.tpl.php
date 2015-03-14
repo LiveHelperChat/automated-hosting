@@ -88,6 +88,8 @@
         	<label><input <?php echo $instance->onlinevisitortrck_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="onlinevisitortrck_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported')?></label>
         </div>
         
+        <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
+        
     </div>
     <input class="btn btn-default" type="submit" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Request features')?>" name="RequestAction" />
 </form>
