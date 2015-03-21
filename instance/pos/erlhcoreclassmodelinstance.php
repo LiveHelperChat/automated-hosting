@@ -330,6 +330,11 @@ $def->properties['footprint_supported']->columnName   = 'footprint_supported';
 $def->properties['footprint_supported']->propertyName = 'footprint_supported';
 $def->properties['footprint_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['chat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chat_supported']->columnName   = 'chat_supported';
+$def->properties['chat_supported']->propertyName = 'chat_supported';
+$def->properties['chat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

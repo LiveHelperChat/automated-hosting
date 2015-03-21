@@ -62,6 +62,7 @@ class erLhcoreClassModelInstance {
                'autoresponder_supported' => $this->autoresponder_supported,
                'geoadjustment_supported' => $this->geoadjustment_supported,
                'onlinevisitortrck_supported' => $this->onlinevisitortrck_supported,
+               'chat_supported' => $this->chat_supported,
                'custom_fields_1' => $this->custom_fields_1,
                'custom_fields_2' => $this->custom_fields_2,
                'custom_fields_3' => $this->custom_fields_3,

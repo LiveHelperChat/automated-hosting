@@ -1,6 +1,11 @@
 <div class="row">
 	<div class="col-xs-6">
 		<div class="form-group">
+			<label><input <?php echo $instance->chat_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="chat_supported"> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported')?> </label>
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<div class="form-group">
 			<label><input <?php echo $instance->files_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="files_supported"> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported')?> </label>
 		</div>
 	</div>

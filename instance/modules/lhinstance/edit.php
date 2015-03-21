@@ -197,6 +197,9 @@ if (isset($_POST['UpdateFeatures']) )
 			'files_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),
+			'chat_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),
 			'atranslations_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),
@@ -271,6 +274,13 @@ if (isset($_POST['UpdateFeatures']) )
 		$Instance->reporting_supported = 1;
 	} else {
 	    $Instance->reporting_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'chat_supported' ) && $form->chat_supported == true )
+	{
+		$Instance->chat_supported = 1;
+	} else {
+	    $Instance->chat_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true )

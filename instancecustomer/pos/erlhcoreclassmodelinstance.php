@@ -305,6 +305,11 @@ $def->properties['phone_default_department']->columnName   = 'phone_default_depa
 $def->properties['phone_default_department']->propertyName = 'phone_default_department';
 $def->properties['phone_default_department']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['chat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chat_supported']->columnName   = 'chat_supported';
+$def->properties['chat_supported']->propertyName = 'chat_supported';
+$def->properties['chat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 /**
  * For customer custom extensions storage in instance
  * */

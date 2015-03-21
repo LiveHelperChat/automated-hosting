@@ -9,6 +9,10 @@
 <form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" method="post">
     <div class="row">
         <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->chat_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="chat_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported')?></label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
         	<label><input <?php echo $instance->files_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="files_supported" > <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported')?></label>
         </div>
         
