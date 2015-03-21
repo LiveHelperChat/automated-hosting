@@ -102,6 +102,9 @@ if (isset($_POST['RequestAction'])) {
         ),
         'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'chat_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
     
