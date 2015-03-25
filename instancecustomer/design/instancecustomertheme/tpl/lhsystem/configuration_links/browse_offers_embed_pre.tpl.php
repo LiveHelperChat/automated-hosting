@@ -1,1 +1,1 @@
-<?php $system_configuration_links_browse_offers_embed_enabled = true;?>
+<?php $system_configuration_links_browse_offers_embed_enabled = erLhcoreClassInstance::getInstance()->browseoffers_supported == 1;?>
