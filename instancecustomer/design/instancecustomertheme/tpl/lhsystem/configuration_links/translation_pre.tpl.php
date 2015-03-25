@@ -1,1 +1,1 @@
-<?php $system_configuration_links_translation_enabled = erLhcoreClassInstance::getInstance()->atranslations_supported == 1;?>
+<?php $system_configuration_links_translation_enabled = false; // Translations disable because it's enabled from manager interface;?>

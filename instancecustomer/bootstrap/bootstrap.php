@@ -83,6 +83,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		
 		// Forms module listener
 		$dispatcher->listen('form.fill.file_path',array($this,'formFillPath'));
+
+		// Translation config
+		$dispatcher->listen('translation.get_config',array($this,'getTranslationConfig'));
 		
 		erLhcoreClassModule::$cacheDbVariables = false;
 		
@@ -126,6 +129,13 @@ class erLhcoreClassExtensionInstancecustomer {
 	    $params['phpmailer']->From = erConfigClassLhConfig::getInstance()->getSetting('site','seller_mail');
 	    $params['phpmailer']->FromName =  erConfigClassLhConfig::getInstance()->getSetting('site','seller_title');
 	    return array('status' => erLhcoreClassChatEventDispatcher::STOP_WORKFLOW);
+	}
+	
+	public function getTranslationConfig() {
+	    $response = array();
+	    $response['status'] = erLhcoreClassChatEventDispatcher::STOP_WORKFLOW;	    
+	    $response['data'] = erLhcoreClassInstance::getInstance()->translation_config;	    
+	    return $response;
 	}
 	
 	public function canUseStatistic()
