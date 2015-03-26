@@ -151,12 +151,15 @@ class erLhcoreClassModelInstance
                 break;
             
             case 'sms_used_percentenge':
-                return round(($this->sms_left / $this->sms_plan) * 100, 2);
+                if ($this->sms_plan > 0) {
+                    return round(($this->sms_left / $this->sms_plan) * 100, 2);
+                }
+                return 0;
                 break;
             
             case 'soft_limit_in_effect':
-                $this->soft_limit_in_effect = false;
-                if ($this->soft_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->soft_limit) {
+                $this->soft_limit_in_effect = false;                
+                if ($this->soft_limit_type == 0 && $this->sms_plan > 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->soft_limit) {
                     $this->soft_limit_in_effect = true;
                 } elseif ($this->soft_limit_type == 1 && $this->sms_left < $this->soft_limit) {
                     $this->soft_limit_in_effect = true;
@@ -166,7 +169,7 @@ class erLhcoreClassModelInstance
             
             case 'hard_limit_in_effect':
                 $this->hard_limit_in_effect = false;
-                if ($this->hard_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->hard_limit) {
+                if ($this->hard_limit_type == 0 && $this->sms_plan > 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->hard_limit) {
                     $this->hard_limit_in_effect = true;
                 } elseif ($this->hard_limit_type == 1 && $this->sms_left < $this->hard_limit) {
                     $this->hard_limit_in_effect = true;
