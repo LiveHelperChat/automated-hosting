@@ -1,0 +1,4 @@
+<?php 
+/**
+ * Hide screen sharing
+ * */?>

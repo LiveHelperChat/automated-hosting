@@ -1,1 +1,1 @@
-<?php $system_configuration_links_chatbox_embed_enabled = true;?>
+<?php $system_configuration_links_chatbox_embed_enabled = erLhcoreClassInstance::getInstance()->chatbox_supported == 1;?>

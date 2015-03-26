@@ -155,6 +155,19 @@ class erLhcoreClassModelInstance {
 	   		    return $this->can_send_sms;
 	   		    break;
 	   		    
+	   		case 'translation_config':
+	   		    if (($this->translation_config = CSCacheAPC::getMem()->getSession('automatic_translations')) == false) {
+    	   		    $db = ezcDbInstance::get();
+    	   		    $cfg = erConfigClassLhConfig::getInstance();
+    	   		    $db->query('USE '.$cfg->getSetting( 'db', 'database' ));	
+    	   		    // Fetches from manager
+    	   		    $this->translation_config = erLhcoreClassModelChatConfig::fetch('translation_data')->data;
+    	   		    $db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+    	   		    CSCacheAPC::getMem()->setSession('automatic_translations', $this->translation_config);
+	   		    }
+	   		    return $this->translation_config;
+	   	    break;
+	   		        
 	   		case 'reseller_instances_count':
 	   			$db = ezcDbInstance::get();
 	   			$cfg = erConfigClassLhConfig::getInstance();
