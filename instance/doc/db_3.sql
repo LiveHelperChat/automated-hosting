@@ -1161,3 +1161,29 @@ INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_
 (10,	'Permission request',	'Live Helper Chat',	0,	'',	0,	'Hello,\r\n\r\nOperator {user} has requested these permissions\n\r\n{permissions}\r\n\r\nSincerely,\r\nLive Support Team',	'Permission request from {user}',	0,	'',	0,	'',	'',	0);
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('sharing_nodejs_path','',0,'socket.io path, optional',0);
+
+ALTER TABLE `lh_cobrowse`
+ADD `online_user_id` int(11) NOT NULL AFTER `chat_id`,
+COMMENT='';
+
+ALTER TABLE `lh_cobrowse`
+ADD INDEX `online_user_id` (`online_user_id`);
+
+ALTER TABLE `lh_chat_online_user`
+CHANGE `operation` `operation` text COLLATE 'utf8_general_ci' NOT NULL AFTER `reopen_chat`,
+COMMENT='';
+
+ALTER TABLE `lh_chat_online_user`
+ADD `online_attr_system` text COLLATE 'utf8_general_ci' NOT NULL,
+COMMENT='';
+
+ALTER TABLE `lh_chat_online_user`
+ADD `operation_chat` text COLLATE 'utf8_general_ci' NOT NULL,
+COMMENT='';
+
+ALTER TABLE `lh_chat_file`
+ADD `online_user_id` int(11) NOT NULL,
+COMMENT='';
+
+ALTER TABLE `lh_chat_file`
+ADD INDEX `online_user_id` (`online_user_id`);
