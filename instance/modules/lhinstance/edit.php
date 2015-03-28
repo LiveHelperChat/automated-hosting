@@ -12,6 +12,37 @@ if ( isset($_POST['Cancel_departament']) ) {
     exit;
 }
 
+$modules = array(
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Statistic supported'),
+    'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic translations supported'),
+    'cobrowse_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse supported'),
+    'forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Forms supported'),
+    'cannedmsg_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Canned messages supported'),
+    'faq_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','FAQ supported'),
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reporting supported'),
+    'chatbox_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chatbox supported'),
+    'browseoffers_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Browse offers supported'),
+    'questionnaire_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Questionnaire supported'),
+    'proactive_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Proactive supported'),
+    'screenshot_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Screenshot supported'),
+    'blocked_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported'),
+    'files_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
+    'sms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS chat supported'),
+    'onlinevisitortrck_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported'),
+    'geoadjustment_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supporte'),
+    'chatremarks_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported'),
+    'autoresponder_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported'),
+    'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
+    'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
+    'chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported'),
+);
+
+erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
+
+$tpl->set('modules_features',$modules);
+
+
+
 if (isset($_POST['ChangePassword']) )
 {
 	$definition = array(
@@ -197,6 +228,9 @@ if (isset($_POST['UpdateFeatures']) )
 			'files_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),
+			'chat_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),
 			'atranslations_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),
@@ -271,6 +305,13 @@ if (isset($_POST['UpdateFeatures']) )
 		$Instance->reporting_supported = 1;
 	} else {
 	    $Instance->reporting_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'chat_supported' ) && $form->chat_supported == true )
+	{
+		$Instance->chat_supported = 1;
+	} else {
+	    $Instance->chat_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true )
@@ -587,6 +628,8 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
         $tpl->set('errors',$Errors);
     }
 }
+
+erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.editinstance',array('instance' => & $Instance));
 
 $tpl->set('instance',$Instance);
 

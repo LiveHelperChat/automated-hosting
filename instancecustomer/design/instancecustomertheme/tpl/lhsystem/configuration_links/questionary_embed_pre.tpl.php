@@ -1,1 +1,1 @@
-<?php $system_configuration_links_questionary_embed_enabled = true;?>
+<?php $system_configuration_links_questionary_embed_enabled = erLhcoreClassInstance::getInstance()->questionnaire_supported == 1;?>

@@ -244,6 +244,26 @@ $def->properties['feature_3_supported']->columnName   = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyName = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+
+/**
+ * For customer custom extensions storage in instance
+ * */
+$def->properties['custom_fields_1'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_1']->columnName   = 'custom_fields_1';
+$def->properties['custom_fields_1']->propertyName = 'custom_fields_1';
+$def->properties['custom_fields_1']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_2'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_2']->columnName   = 'custom_fields_2';
+$def->properties['custom_fields_2']->propertyName = 'custom_fields_2';
+$def->properties['custom_fields_2']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_3'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_3']->columnName   = 'custom_fields_3';
+$def->properties['custom_fields_3']->propertyName = 'custom_fields_3';
+$def->properties['custom_fields_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+
 // Phone attributes, can be used by SMS extension for automated hosting
 $def->properties['phone_number'] = new ezcPersistentObjectProperty();
 $def->properties['phone_number']->columnName   = 'phone_number';
@@ -309,6 +329,11 @@ $def->properties['footprint_supported'] = new ezcPersistentObjectProperty();
 $def->properties['footprint_supported']->columnName   = 'footprint_supported';
 $def->properties['footprint_supported']->propertyName = 'footprint_supported';
 $def->properties['footprint_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['chat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chat_supported']->columnName   = 'chat_supported';
+$def->properties['chat_supported']->propertyName = 'chat_supported';
+$def->properties['chat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 return $def;
 

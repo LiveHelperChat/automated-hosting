@@ -6,6 +6,34 @@ $db = ezcDbInstance::get(); // Needed to load correct data
 $instance = erLhcoreClassInstance::getInstance();
 $tpl->set('instance',$instance);
 
+$modules = array(
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Statistic supported'),
+    'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic translations supported'),
+    'cobrowse_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse supported'),
+    'forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Forms supported'),
+    'cannedmsg_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Canned messages supported'),
+    'faq_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','FAQ supported'),
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reporting supported'),
+    'chatbox_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chatbox supported'),
+    'browseoffers_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Browse offers supported'),
+    'questionnaire_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Questionnaire supported'),
+    'proactive_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Proactive supported'),
+    'screenshot_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Screenshot supported'),
+    'blocked_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported'),
+    'files_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
+    'sms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS chat supported'),
+    'onlinevisitortrck_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported'),
+    'geoadjustment_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supporte'),
+    'chatremarks_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported'),
+    'autoresponder_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported'),
+    'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
+    'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
+    'chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported'),
+);
+
+erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
+
+$tpl->set('modules_features',$modules);
 
 if (isset($_POST['SaveClientName'])) {
     $definition = array(
@@ -102,35 +130,16 @@ if (isset($_POST['RequestAction'])) {
         ),
         'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'chat_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
     
     
     $form = new ezcInputForm( INPUT_POST, $definition );
     $Errors = array();
-    $modules = array(
-        'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
-        'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic translations supported'),
-        'cobrowse_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse supported'),
-        'forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Forms supported'),
-        'cannedmsg_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Canned messages supported'),
-        'faq_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','FAQ supported'),
-        'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reporting supported'),
-        'chatbox_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chatbox supported'),
-        'browseoffers_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Browse offers supported'),
-        'questionnaire_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Questionnaire supported'),
-        'proactive_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Proactive supported'),
-        'screenshot_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Screenshot supported'),
-        'blocked_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported'),
-        'files_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
-        'sms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS chat supported'),
-        'onlinevisitortrck_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported'),
-        'geoadjustment_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supporte'),
-        'chatremarks_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported'),
-        'autoresponder_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported'),
-        'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
-        'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
-    );
+   
     
     $requestedModules = array(
         
@@ -138,6 +147,10 @@ if (isset($_POST['RequestAction'])) {
     
     if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true ) {
         $requestedModules[] = $modules['previouschats_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'chat_supported' ) && $form->chat_supported == true ) {
+        $requestedModules[] = $modules['chat_supported'];      
     }
     
     if ( $form->hasValidData( 'footprint_supported' ) && $form->footprint_supported == true ) {
@@ -223,6 +236,8 @@ if (isset($_POST['RequestAction'])) {
     if ( $form->hasValidData( 'feature_3_supported' ) && $form->feature_3_supported == true ) {
         $requestedModules[] = $modules['feature_3_supported'];
     }
+            
+    erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.requestfeatures',array('requested' => & $requestedModules));
     
     if (!empty($requestedModules)) {
                

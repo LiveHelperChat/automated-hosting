@@ -62,6 +62,10 @@ class erLhcoreClassModelInstance {
                'autoresponder_supported' => $this->autoresponder_supported,
                'geoadjustment_supported' => $this->geoadjustment_supported,
                'onlinevisitortrck_supported' => $this->onlinevisitortrck_supported,
+               'chat_supported' => $this->chat_supported,
+               'custom_fields_1' => $this->custom_fields_1,
+               'custom_fields_2' => $this->custom_fields_2,
+               'custom_fields_3' => $this->custom_fields_3,
        );
    }
 
@@ -110,7 +114,11 @@ class erLhcoreClassModelInstance {
    public function __toString() {
    		return $this->email;
    }
-  
+   
+   public function getCustomFieldsData($fieldId) {
+       return unserialize($this->{'custom_fields_'.$fieldId});
+   }
+   
    public function __get($var) {
 	   	switch ($var) {
 	   		case 'is_active':
@@ -147,6 +155,19 @@ class erLhcoreClassModelInstance {
 	   		    return $this->can_send_sms;
 	   		    break;
 	   		    
+	   		case 'translation_config':
+	   		    if (($this->translation_config = CSCacheAPC::getMem()->getSession('automatic_translations')) == false) {
+    	   		    $db = ezcDbInstance::get();
+    	   		    $cfg = erConfigClassLhConfig::getInstance();
+    	   		    $db->query('USE '.$cfg->getSetting( 'db', 'database' ));	
+    	   		    // Fetches from manager
+    	   		    $this->translation_config = erLhcoreClassModelChatConfig::fetch('translation_data')->data;
+    	   		    $db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
+    	   		    CSCacheAPC::getMem()->setSession('automatic_translations', $this->translation_config);
+	   		    }
+	   		    return $this->translation_config;
+	   	    break;
+	   		        
 	   		case 'reseller_instances_count':
 	   			$db = ezcDbInstance::get();
 	   			$cfg = erConfigClassLhConfig::getInstance();
@@ -479,7 +500,11 @@ class erLhcoreClassModelInstance {
    public $reseller_id = 0;
    public $reseller_request = 0;
    public $phone_default_department = 0;
-   
+      
+   public $custom_fields_1 = '';
+   public $custom_fields_2 = '';
+   public $custom_fields_3 = '';
+      
    // Then reseller get's suspended this attribute is set to 1, to avoid double fetching each time in instance part.
    public $reseller_suspended = 0;
    

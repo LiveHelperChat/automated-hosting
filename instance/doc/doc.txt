@@ -49,7 +49,7 @@ If you are using DirectAdmin (http://www.directadmin.com/), you will have to app
 
 6. Active extension in fresh installed LHC
 'extensions' =>
-      array ('instance')
+      array ('instanceoverride','instance')
 
 7. Edit var/autolaods/lhextension_autoload.php
 And make it look like
@@ -103,7 +103,7 @@ return array(
 15. Activate extension. It should look like
 'extensions' =>
       array (
-      		'instancecustomer'
+      		'instancecustomeroverride','instancecustomer'
 ),
 
 16. Change in settings
@@ -141,6 +141,10 @@ http://manager.livehelperchat.com/instance/paypalipn
 
 19. Don't forget to clear cache
 
+20. All changes you want to apply to automated hosting extension should go to extension folder named <bin name><override>
+E.g
+instancecustomeroverride
+instanceoverride
 /******************/
 Manager nginx example
 /******************/

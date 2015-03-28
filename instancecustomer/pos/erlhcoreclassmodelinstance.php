@@ -305,6 +305,29 @@ $def->properties['phone_default_department']->columnName   = 'phone_default_depa
 $def->properties['phone_default_department']->propertyName = 'phone_default_department';
 $def->properties['phone_default_department']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['chat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['chat_supported']->columnName   = 'chat_supported';
+$def->properties['chat_supported']->propertyName = 'chat_supported';
+$def->properties['chat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+/**
+ * For customer custom extensions storage in instance
+ * */
+$def->properties['custom_fields_1'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_1']->columnName   = 'custom_fields_1';
+$def->properties['custom_fields_1']->propertyName = 'custom_fields_1';
+$def->properties['custom_fields_1']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_2'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_2']->columnName   = 'custom_fields_2';
+$def->properties['custom_fields_2']->propertyName = 'custom_fields_2';
+$def->properties['custom_fields_2']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_3'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_3']->columnName   = 'custom_fields_3';
+$def->properties['custom_fields_3']->propertyName = 'custom_fields_3';
+$def->properties['custom_fields_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 return $def;
 
 ?>

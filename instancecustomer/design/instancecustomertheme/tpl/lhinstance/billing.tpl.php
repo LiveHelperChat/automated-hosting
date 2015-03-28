@@ -58,9 +58,10 @@
 		    
 		    
 		    <?php if ($instance->sms_supported == 1) : ?>
-    			<li role="presentation" <?php if (isset($tab) && $tab == 'sms') : ?> class="active"<?php endif;?>><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS');?></a></li>
+    			<li role="presentation" <?php if (isset($tab) && $tab == 'sms') : ?> class="active"<?php endif;?>><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS Chat');?></a></li>
     		<?php endif;?>
     		
+    		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/feature_tab_multiinclude.tpl.php'));?>
     		
     		<?php if ($pages->items_total > 0) : ?>
     			<li role="presentation"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoice list');?></a></li>
@@ -145,7 +146,10 @@
 			<div role="tabpanel" class="tab-pane<?php if (isset($tab) && $tab == 'sms') : ?> active<?php endif;?>" id="sms">
 			      <?php include(erLhcoreClassDesign::designtpl('lhinstance/sms.tpl.php')); ?> 		
 			</div>
-			<?php endif;?>	
+			<?php endif;?>
+			
+			<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs_content/feature_tab_multiinclude.tpl.php'));?>
+				
 		</div>
 </div>
 

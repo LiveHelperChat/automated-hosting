@@ -1,1 +1,1 @@
-<?php $system_configuration_links_faq_embed_enabled = true;?>
+<?php $system_configuration_links_faq_embed_enabled = erLhcoreClassInstance::getInstance()->faq_supported == 1;?>

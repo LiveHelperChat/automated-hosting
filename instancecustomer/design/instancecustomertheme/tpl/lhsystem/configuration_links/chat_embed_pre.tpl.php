@@ -1,0 +1,1 @@
+<?php $system_configuration_links_chat_embed_enabled = erLhcoreClassInstance::getInstance()->chat_supported == 1;?>

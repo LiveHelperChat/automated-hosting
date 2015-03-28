@@ -1,3 +1,17 @@
+1.4v
+
+1. Most of the parts were splited into turnable features. So it can be used with more flexible pricing. But all that will have to be done by you
+2. Instance now also contains all the fields required to implementet third party SMS plugin. This kinda plugin was implemented for one of the clients. So sorry - no source code this time. But you have all the required info in instance itself.
+3. Now you can have custom update queries after main database creation script in 
+instanceoverride/design/instanceoverridetheme/db_post_update/db.default.sql
+Just rename this file to db.sql
+And SQL queries for this file will be after main install.
+4. From now all changes you want to do should go directly to
+instanceoverride
+instancecustomeroverride
+
+Yes, instances can override each other files based on extensions order in settings.ini.php file
+
 1.3v
 Rewrite for 2.23v compatibility.
 Removed doc sharer module and related stuff.

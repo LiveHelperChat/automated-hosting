@@ -62,7 +62,11 @@ class erLhcoreClassModelInstance
             'chatremarks_supported' => $this->chatremarks_supported,
             'autoresponder_supported' => $this->autoresponder_supported,
             'geoadjustment_supported' => $this->geoadjustment_supported,
-            'onlinevisitortrck_supported' => $this->onlinevisitortrck_supported
+            'onlinevisitortrck_supported' => $this->onlinevisitortrck_supported,
+            'chat_supported' => $this->chat_supported,
+            'custom_fields_1' => $this->custom_fields_1,
+            'custom_fields_2' => $this->custom_fields_2,
+            'custom_fields_3' => $this->custom_fields_3,
         );
     }
 
@@ -73,7 +77,7 @@ class erLhcoreClassModelInstance
         }
     }
 
-    public function fetch($dep_id, $useCache = false)
+    public static function fetch($dep_id, $useCache = false)
     {
         if ($useCache == true && isset($GLOBALS['erLhcoreClassModelInstance' . $dep_id]))
             return $GLOBALS['erLhcoreClassModelInstance' . $dep_id];
@@ -88,6 +92,16 @@ class erLhcoreClassModelInstance
         return $this->email;
     }
 
+    public function setCustomFields($fieldId, $params)
+    {
+        $this->{'custom_fields_'.$fieldId} = serialize($params);
+        $this->saveThis();
+    }
+    
+    public function getCustomFieldsData($fieldId) {
+        return unserialize($this->{'custom_fields_'.$fieldId});
+    }
+    
     public function removeThis()
     {
         try {
@@ -137,12 +151,15 @@ class erLhcoreClassModelInstance
                 break;
             
             case 'sms_used_percentenge':
-                return round(($this->sms_left / $this->sms_plan) * 100, 2);
+                if ($this->sms_plan > 0) {
+                    return round(($this->sms_left / $this->sms_plan) * 100, 2);
+                }
+                return 0;
                 break;
             
             case 'soft_limit_in_effect':
-                $this->soft_limit_in_effect = false;
-                if ($this->soft_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->soft_limit) {
+                $this->soft_limit_in_effect = false;                
+                if ($this->soft_limit_type == 0 && $this->sms_plan > 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->soft_limit) {
                     $this->soft_limit_in_effect = true;
                 } elseif ($this->soft_limit_type == 1 && $this->sms_left < $this->soft_limit) {
                     $this->soft_limit_in_effect = true;
@@ -152,7 +169,7 @@ class erLhcoreClassModelInstance
             
             case 'hard_limit_in_effect':
                 $this->hard_limit_in_effect = false;
-                if ($this->hard_limit_type == 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->hard_limit) {
+                if ($this->hard_limit_type == 0 && $this->sms_plan > 0 && (($this->sms_left / $this->sms_plan) * 100) < $this->hard_limit) {
                     $this->hard_limit_in_effect = true;
                 } elseif ($this->hard_limit_type == 1 && $this->sms_left < $this->hard_limit) {
                     $this->hard_limit_in_effect = true;
@@ -405,6 +422,12 @@ class erLhcoreClassModelInstance
     public $reseller_max_instance_request = 0;
 
     public $reseller_secret_hash = '';
+    
+    public $custom_fields_1 = '';
+    
+    public $custom_fields_2 = '';
+    
+    public $custom_fields_3 = '';
 
     public $reseller_max_instances = 0;
 
@@ -418,6 +441,8 @@ class erLhcoreClassModelInstance
     public $phone_default_department = 0;
 
     public $footprint_supported = 1;
+    
+    public $chat_supported = 1;
 
     public $locale = '';
 

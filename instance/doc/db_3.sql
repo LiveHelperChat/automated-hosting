@@ -1187,3 +1187,6 @@ COMMENT='';
 
 ALTER TABLE `lh_chat_file`
 ADD INDEX `online_user_id` (`online_user_id`);
+
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
+('autologin_data',	'a:3:{i:0;b:0;s:11:\"secret_hash\";s:16:\"please_change_me\";s:7:\"enabled\";i:0;}',	0,	'Autologin configuration data',	1);
