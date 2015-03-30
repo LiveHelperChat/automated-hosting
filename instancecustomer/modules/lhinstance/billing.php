@@ -29,6 +29,9 @@ $modules = array(
     'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
     'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
     'chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported'),
+    'speech_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Speech supported'),
+    'transfer_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat transfer supported'),
+    'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
@@ -133,10 +136,18 @@ if (isset($_POST['RequestAction'])) {
         ),
         'chat_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'speech_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'transfer_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'operatorschat_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
-    
-    
+
     $form = new ezcInputForm( INPUT_POST, $definition );
     $Errors = array();
    
@@ -147,6 +158,18 @@ if (isset($_POST['RequestAction'])) {
     
     if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true ) {
         $requestedModules[] = $modules['previouschats_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'speech_supported' ) && $form->speech_supported == true ) {
+        $requestedModules[] = $modules['speech_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'transfer_supported' ) && $form->transfer_supported == true ) {
+        $requestedModules[] = $modules['transfer_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'operatorschat_supported' ) && $form->operatorschat_supported == true ) {
+        $requestedModules[] = $modules['operatorschat_supported'];      
     }
     
     if ( $form->hasValidData( 'chat_supported' ) && $form->chat_supported == true ) {
