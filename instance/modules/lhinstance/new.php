@@ -136,11 +136,41 @@ if (isset($_POST['Save_departament']))
 			),			
 			'onlinevisitortrck_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'speech_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'transfer_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'operatorschat_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			)		
     );
 
     $form = new ezcInputForm( INPUT_POST, $definition );
     $Errors = array();
+    
+    if ( $form->hasValidData( 'speech_supported' ) && $form->speech_supported == true )
+    {
+        $Instance->speech_supported = 1;
+    } else {
+        $Instance->speech_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'transfer_supported' ) && $form->transfer_supported == true )
+    {
+        $Instance->transfer_supported = 1;
+    } else {
+        $Instance->transfer_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'operatorschat_supported' ) && $form->operatorschat_supported == true )
+    {
+        $Instance->operatorschat_supported = 1;
+    } else {
+        $Instance->operatorschat_supported = 0;
+    }
     
     if ( $form->hasValidData( 'ResellerTitle' ) )
     {

@@ -328,6 +328,20 @@ $def->properties['custom_fields_3']->columnName   = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyName = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['speech_supported'] = new ezcPersistentObjectProperty();
+$def->properties['speech_supported']->columnName   = 'speech_supported';
+$def->properties['speech_supported']->propertyName = 'speech_supported';
+$def->properties['speech_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['transfer_supported'] = new ezcPersistentObjectProperty();
+$def->properties['transfer_supported']->columnName   = 'transfer_supported';
+$def->properties['transfer_supported']->propertyName = 'transfer_supported';
+$def->properties['transfer_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['operatorschat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['operatorschat_supported']->columnName   = 'operatorschat_supported';
+$def->properties['operatorschat_supported']->propertyName = 'operatorschat_supported';
+$def->properties['operatorschat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 return $def;
 
 ?>

@@ -1,0 +1,1 @@
+<?php $chat_chat_tabs_actions_transfer_enabled = erLhcoreClassInstance::getInstance()->transfer_supported == 1;?>

@@ -1,0 +1,1 @@
+<?php $speech_action_enabled = erLhcoreClassInstance::getInstance()->speech_supported == 1;?>

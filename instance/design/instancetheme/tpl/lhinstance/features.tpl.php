@@ -106,6 +106,24 @@
 			<label><input <?php echo $instance->onlinevisitortrck_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="onlinevisitortrck_supported"> <?php echo $modules_features['onlinevisitortrck_supported']?></label>
 		</div>
 	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->speech_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="speech_supported"> <?php echo $modules_features['speech_supported']?></label>
+		</div>
+	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->transfer_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="transfer_supported"> <?php echo $modules_features['transfer_supported']?></label>
+		</div>
+	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->operatorschat_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="operatorschat_supported"> <?php echo $modules_features['operatorschat_supported']?></label>
+		</div>
+	</div>
 
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
 </div>

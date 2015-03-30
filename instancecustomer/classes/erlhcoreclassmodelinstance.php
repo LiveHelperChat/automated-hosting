@@ -66,6 +66,9 @@ class erLhcoreClassModelInstance {
                'custom_fields_1' => $this->custom_fields_1,
                'custom_fields_2' => $this->custom_fields_2,
                'custom_fields_3' => $this->custom_fields_3,
+               'speech_supported' => $this->speech_supported,
+               'transfer_supported' => $this->transfer_supported,
+               'operatorschat_supported' => $this->operatorschat_supported,
        );
    }
 
@@ -478,6 +481,9 @@ class erLhcoreClassModelInstance {
    public $autoresponder_supported = 1;
    public $geoadjustment_supported = 1;
    public $onlinevisitortrck_supported = 1;
+   public $speech_supported = 1;   
+   public $transfer_supported = 1;   
+   public $operatorschat_supported = 1;
    
    public $phone_number = '';   
    public $sms_left = 0;   

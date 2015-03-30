@@ -1,0 +1,1 @@
+<?php $system_configuration_tabs_speech_enabled = erLhcoreClassInstance::getInstance()->speech_supported == 1;?>
