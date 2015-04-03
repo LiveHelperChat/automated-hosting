@@ -2,45 +2,69 @@
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
 <?php endif; ?>
 
-<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>#sms" method="post">
-	<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default department for incomming SMS chat');?></label>
-	<div class="row">
-		<div class="col-xs-4">
-			<div class="form-group">       		
-        <?php
-        $params = array(
-            'input_name' => 'DepartmentID',
-            'display_name' => 'name',
-            'css_class' => 'form-control',
-            'selected_id' => $instance->phone_default_department,
-            'list_function' => 'erLhcoreClassModelDepartament::getList',
-            'list_function_params' => array_merge(array(
-                'limit' => '1000000'
-            ), $limitDepartments)
-        );
-        
-        if (empty($limitDepartments)) {
-            $params['optional_field'] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Automatically select first department');
-        }
-        
-        echo erLhcoreClassRenderHelper::renderCombobox($params);
-        ?>
-        </div>
-		</div>
-		<div class="col-xs-8">
-			<input type="submit" class="btn btn-default" value="Save" name="SaveDefaultDepartment" />
-		</div>
-	</div>
-
-</form>
 
 
-<hr>
+
+
 <div class="row">
 	<div class="columns col-xs-8">
-		<div class="form-group">
-			<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Phone number')?></label> <input class="form-control" type="text" value="<?php echo htmlspecialchars($instance->phone_number)?>" readonly="readonly" name="phone_number" autocomplete="off">
+
+		<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>#sms" method="post">
+			<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default department for incomming SMS chat');?></label>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">       		
+                    <?php
+                    $params = array(
+                        'input_name' => 'DepartmentID',
+                        'display_name' => 'name',
+                        'css_class' => 'form-control',
+                        'selected_id' => $instance->phone_default_department,
+                        'list_function' => 'erLhcoreClassModelDepartament::getList',
+                        'list_function_params' => array('limit' => '1000000')
+                    );
+                    
+                    if (empty($limitDepartments)) {
+                        $params['optional_field'] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Automatically select first department');
+                    }
+                    
+                    echo erLhcoreClassRenderHelper::renderCombobox($params);
+                    ?>
+                    </div>
+				</div>				
+			</div>
+
+			<div class="row">		 
+		   <?php $numberRow = 0; foreach ($instance->phone_number as $key => $phoneNumber) : if ($phoneNumber['phone'] != '') : $numberRow++; ?>
+		   <div class="columns col-xs-4">
+					<div class="form-group">
+						<label><?php echo $numberRow?>. <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Phone')?> - <?php echo htmlspecialchars($phoneNumber['phone'])?></label>         			 
+                      <?php
+            $params = array(
+                'input_name' => 'PhoneDepartment[' . $key . ']',
+                'display_name' => 'name',
+                'css_class' => 'form-control',
+                'selected_id' => $phoneNumber['department'],
+                'list_function' => 'erLhcoreClassModelDepartament::getList',
+                'list_function_params' => array('limit' => '1000000')
+            );
+            
+            if (empty($limitDepartments)) {
+                $params['optional_field'] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Use default department');
+            }
+            
+            echo erLhcoreClassRenderHelper::renderCombobox($params);
+            ?>                   
+        		</div>
+				</div>
+		  <?php endif; endforeach;?>
 		</div>
+
+		<input type="submit" class="btn btn-primary" value="Save" name="SaveDefaultDepartment" />
+
+		</form>
+
+		<hr>
 
 		<div class="row">
 			<div class="columns col-xs-6">

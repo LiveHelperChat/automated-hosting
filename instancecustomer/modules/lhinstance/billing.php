@@ -61,6 +61,9 @@ if (isset($_POST['SaveDefaultDepartment'])) {
     $definition = array(
         'DepartmentID' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1)
+        ),
+        'PhoneDepartment' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 0), FILTER_REQUIRE_ARRAY
         ));
     
     $form = new ezcInputForm( INPUT_POST, $definition );
@@ -69,6 +72,18 @@ if (isset($_POST['SaveDefaultDepartment'])) {
         $instance->phone_default_department = $form->DepartmentID;
     } else {
         $instance->phone_default_department = 0;
+    }
+        
+    if ( $form->hasValidData( 'PhoneDepartment' ) ) {
+        $phoneDepartments = $form->PhoneDepartment;
+        
+        $phoneData = $instance->phone_number;        
+        foreach ($phoneDepartments as $key => $phoneDepartment) {
+            $phoneData[$key]['department'] = $phoneDepartment;
+        }
+        
+        $instance->phone_number = $phoneData;
+        $instance->phone_number_data = json_encode($instance->phone_number);        
     }
     
     $instance->saveToInstanceThis();

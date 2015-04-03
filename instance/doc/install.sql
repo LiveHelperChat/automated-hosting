@@ -47,7 +47,7 @@ CREATE TABLE `lhc_instance_client` (
   `transfer_supported` int(11) NOT NULL DEFAULT '1',
   `operatorschat_supported` int(11) NOT NULL DEFAULT '1',
   `client_title` varchar(250) NOT NULL,
-  `phone_number` varchar(250) NOT NULL DEFAULT '',
+  `phone_number_data` text NOT NULL DEFAULT '',
   `sms_left` int(11) NOT NULL DEFAULT '0',
   `sms_plan` int(11) NOT NULL DEFAULT '0',
   `soft_limit_type` int(11) NOT NULL DEFAULT '0',

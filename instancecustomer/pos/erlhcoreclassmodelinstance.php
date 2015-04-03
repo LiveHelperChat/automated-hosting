@@ -245,10 +245,10 @@ $def->properties['previouschats_supported']->propertyName = 'previouschats_suppo
 $def->properties['previouschats_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 // Phone attributes, can be used by SMS extension for automated hosting
-$def->properties['phone_number'] = new ezcPersistentObjectProperty();
-$def->properties['phone_number']->columnName   = 'phone_number';
-$def->properties['phone_number']->propertyName = 'phone_number';
-$def->properties['phone_number']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+$def->properties['phone_number_data'] = new ezcPersistentObjectProperty();
+$def->properties['phone_number_data']->columnName   = 'phone_number_data';
+$def->properties['phone_number_data']->propertyName = 'phone_number_data';
+$def->properties['phone_number_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
 $def->properties['sms_left'] = new ezcPersistentObjectProperty();
 $def->properties['sms_left']->columnName   = 'sms_left';

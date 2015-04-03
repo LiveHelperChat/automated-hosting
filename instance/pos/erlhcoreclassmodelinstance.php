@@ -263,12 +263,16 @@ $def->properties['custom_fields_3']->columnName   = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyName = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
-
 // Phone attributes, can be used by SMS extension for automated hosting
-$def->properties['phone_number'] = new ezcPersistentObjectProperty();
-$def->properties['phone_number']->columnName   = 'phone_number';
-$def->properties['phone_number']->propertyName = 'phone_number';
-$def->properties['phone_number']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+$def->properties['phone_number_data'] = new ezcPersistentObjectProperty();
+$def->properties['phone_number_data']->columnName   = 'phone_number_data';
+$def->properties['phone_number_data']->propertyName = 'phone_number_data';
+$def->properties['phone_number_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['phone_default_department'] = new ezcPersistentObjectProperty();
+$def->properties['phone_default_department']->columnName   = 'phone_default_department';
+$def->properties['phone_default_department']->propertyName = 'phone_default_department';
+$def->properties['phone_default_department']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 $def->properties['sms_left'] = new ezcPersistentObjectProperty();
 $def->properties['sms_left']->columnName   = 'sms_left';
@@ -320,10 +324,7 @@ $def->properties['hard_warning_send']->columnName   = 'hard_warning_send';
 $def->properties['hard_warning_send']->propertyName = 'hard_warning_send';
 $def->properties['hard_warning_send']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
-$def->properties['phone_default_department'] = new ezcPersistentObjectProperty();
-$def->properties['phone_default_department']->columnName   = 'phone_default_department';
-$def->properties['phone_default_department']->propertyName = 'phone_default_department';
-$def->properties['phone_default_department']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 
 $def->properties['footprint_supported'] = new ezcPersistentObjectProperty();
 $def->properties['footprint_supported']->columnName   = 'footprint_supported';

@@ -4,11 +4,21 @@
 		<div class="form-group">
 			<label><input <?php echo $instance->sms_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="sms_supported"> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS supported')?></label>
 		</div>
-
-		<div class="form-group">
-			<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Phone number')?></label> <input class="form-control" type="text" value="<?php echo htmlspecialchars($instance->phone_number)?>" name="phone_number" autocomplete="off">
+		
+		<div class="row">		 
+		   <?php foreach ($instance->phone_number as $key => $phoneNumber) : $numberRow = $key + 1;?>
+		   <div class="columns col-xs-4">
+        		<div class="form-group">
+        			<label><?php echo $numberRow?>. <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Phone and department')?></label>         			 
+        			<div class="input-group">     
+                      <input class="form-control" type="text" value="<?php echo htmlspecialchars($phoneNumber['phone'])?>" name="phone_number[<?php echo $key?>]" autocomplete="off">
+                      <div class="input-group-addon"><?php echo htmlspecialchars($phoneNumber['department'])?></div>
+                    </div>        
+        		</div>
+    	  </div>
+		  <?php endforeach;?>
 		</div>
-
+		
 		<div class="form-group">
 			<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Add SMS to user, Enter how many sms you want to add to user')?></label> <input placeholder="Number" class="form-control" type="text" value="" name="add_sms_to_user" autocomplete="off">
 		</div>

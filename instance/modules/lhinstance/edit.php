@@ -145,7 +145,10 @@ if (isset($_POST['UpdateSMS']) )
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         ),
         'phone_number' => new ezcInputFormDefinitionElement(
-            ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+            ezcInputFormDefinitionElement::OPTIONAL, 
+            'unsafe_raw',
+            null,
+        	FILTER_REQUIRE_ARRAY
         ),
         'add_sms_to_user' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 1)
@@ -178,9 +181,13 @@ if (isset($_POST['UpdateSMS']) )
     }
 
     if ( $form->hasValidData( 'phone_number' )) {
-        $Instance->phone_number = $form->phone_number;
-    } else {
-        $Instance->phone_number = '';
+        $phoneNumbers = $Instance->phone_number;
+        foreach ($phoneNumbers as $key => & $phoneNumberClient) {
+            $phoneNumberClient['phone'] = $form->phone_number[$key];
+        }
+        
+        $Instance->phone_number = $phoneNumbers;
+        $Instance->phone_number_data = json_encode($phoneNumbers);
     }
 
     if ( $form->hasValidData( 'add_sms_to_user' ))

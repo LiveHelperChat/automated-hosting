@@ -45,7 +45,7 @@ class erLhcoreClassModelInstance
             'screenshot_supported' => $this->screenshot_supported,
             'blocked_supported' => $this->blocked_supported,
             'client_title' => $this->client_title,
-            'phone_number' => $this->phone_number,
+            'phone_number_data' => $this->phone_number_data,
             'sms_left' => $this->sms_left,
             'sms_plan' => $this->sms_plan,
             'soft_limit_type' => $this->soft_limit_type,
@@ -184,7 +184,22 @@ class erLhcoreClassModelInstance
                 $this->can_send_sms = $this->sms_supported == true && $this->hard_limit_in_effect == false;
                 return $this->can_send_sms;
                 break;
+
+            case 'phone_number':
+                $phoneNumber = json_decode($this->phone_number_data,true);
+                if ($phoneNumber !== false) {
+                    $this->phone_number = $phoneNumber;
+                } else {
+                    $this->phone_number = array(array('phone' => $this->phone_number_data, 'department' => 0));
+                }
             
+                for ($i = count($this->phone_number); $i < 15; $i++) {
+                    $this->phone_number[] = array('phone' => '', 'department' => 0);
+                }
+            
+                return $this->phone_number;
+                break;
+                    
             case 'reseller_instances_count':
                 $this->reseller_instances_count = self::getCount(array(
                     'filter' => array(
@@ -388,7 +403,7 @@ class erLhcoreClassModelInstance
     
     public $operatorschat_supported = 1;
         
-    public $phone_number = '';
+    public $phone_number_data = '';
 
     public $sms_left = 0;
 

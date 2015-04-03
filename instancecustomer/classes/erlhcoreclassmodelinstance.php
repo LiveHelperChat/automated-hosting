@@ -44,7 +44,7 @@ class erLhcoreClassModelInstance {
                'screenshot_supported' => $this->screenshot_supported,
                'blocked_supported' => $this->blocked_supported,
                'client_title' => $this->client_title,
-               'phone_number' => $this->phone_number,
+               'phone_number_data' => $this->phone_number_data,
                'sms_left' => $this->sms_left,
                'sms_plan' => $this->sms_plan,
                'soft_limit_type' => $this->soft_limit_type,
@@ -157,7 +157,33 @@ class erLhcoreClassModelInstance {
 	   		    $this->can_send_sms = $this->sms_supported == true && $this->hard_limit_in_effect == false;
 	   		    return $this->can_send_sms;
 	   		    break;
+
+	   		case 'phone_number_departments':
+	   		          $this->phone_number_departments = array();
+	   		          foreach ($this->phone_number as $phoneData) {
+	   		              if ($phoneData['phone'] != '') {
+	   		                  $this->phone_number_departments[$phoneData['phone']] = $phoneData['department'];
+	   		              }
+	   		          }
+	   		          
+	   		          return $this->phone_number_departments;
+	   		    break;    
 	   		    
+	   		case 'phone_number':
+	   		      $phoneNumber = json_decode($this->phone_number_data,true);
+	   		      if ($phoneNumber !== false) {
+	   		          $this->phone_number = $phoneNumber;
+	   		      } else {
+	   		          $this->phone_number = array(array('phone' => $this->phone_number_data, 'department' => 0));	   		         
+	   		      }
+	   		      
+	   		      for ($i = count($this->phone_number); $i < 15; $i++) {
+	   		          $this->phone_number = array(array('phone' => '', 'department' => 0));
+	   		      }
+	   		      
+	   		      return $this->phone_number;
+	   		    break;
+	   		        
 	   		case 'translation_config':
 	   		    if (($this->translation_config = CSCacheAPC::getMem()->getSession('automatic_translations')) == false) {
     	   		    $db = ezcDbInstance::get();
@@ -485,7 +511,7 @@ class erLhcoreClassModelInstance {
    public $transfer_supported = 1;   
    public $operatorschat_supported = 1;
    
-   public $phone_number = '';   
+   public $phone_number_data = '';   
    public $sms_left = 0;   
    public $sms_plan = 1000;   
    public $soft_limit_type = 0;   
