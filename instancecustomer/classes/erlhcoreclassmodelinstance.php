@@ -168,6 +168,17 @@ class erLhcoreClassModelInstance {
 	   		          
 	   		          return $this->phone_number_departments;
 	   		    break;    
+
+	   		case 'phone_number_first':
+	   		      $this->phone_number_first = '';	   		      
+	   		      foreach ($this->phone_number as $phone) {
+	   		          if ($phone['phone'] != '') {
+	   		              $this->phone_number_first = $phone['phone'];
+	   		              return $this->phone_number_first;
+	   		          }
+	   		      }	   		      
+	   		      return $this->phone_number_first;
+	   		    break;    
 	   		    
 	   		case 'phone_number':
 	   		      $phoneNumber = json_decode($this->phone_number_data,true);
