@@ -64,10 +64,28 @@ if (isset($_POST['SaveDefaultDepartment'])) {
         ),
         'PhoneDepartment' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'int',array('min_range' => 0), FILTER_REQUIRE_ARRAY
+        ),
+        'SMSMessageToUser' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+        ),
+        'SMSMessageToUserTimeout' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'int'
         ));
-    
+
     $form = new ezcInputForm( INPUT_POST, $definition );
-    
+
+    if ( $form->hasValidData( 'SMSMessageToUserTimeout' ) ) {
+        $instance->phone_response_timeout_data = $form->SMSMessageToUserTimeout;
+    } else {
+        $instance->phone_response_timeout_data = 0;
+    }
+
+    if ( $form->hasValidData( 'SMSMessageToUser' ) ) {
+        $instance->phone_response_data = $form->SMSMessageToUser;
+    } else {
+        $instance->phone_response_data = '';
+    }
+
     if ( $form->hasValidData( 'DepartmentID' ) ) {
         $instance->phone_default_department = $form->DepartmentID;
     } else {

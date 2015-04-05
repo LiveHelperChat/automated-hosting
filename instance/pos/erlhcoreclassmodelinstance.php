@@ -269,6 +269,18 @@ $def->properties['phone_number_data']->columnName   = 'phone_number_data';
 $def->properties['phone_number_data']->propertyName = 'phone_number_data';
 $def->properties['phone_number_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+// If sms chat is not accepted for some time send back user defined message
+$def->properties['phone_response_data'] = new ezcPersistentObjectProperty();
+$def->properties['phone_response_data']->columnName   = 'phone_response_data';
+$def->properties['phone_response_data']->propertyName = 'phone_response_data';
+$def->properties['phone_response_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+// How long chat has to be not accepted before
+$def->properties['phone_response_timeout_data'] = new ezcPersistentObjectProperty();
+$def->properties['phone_response_timeout_data']->columnName   = 'phone_response_timeout_data';
+$def->properties['phone_response_timeout_data']->propertyName = 'phone_response_timeout_data';
+$def->properties['phone_response_timeout_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 $def->properties['phone_default_department'] = new ezcPersistentObjectProperty();
 $def->properties['phone_default_department']->columnName   = 'phone_default_department';
 $def->properties['phone_default_department']->propertyName = 'phone_default_department';

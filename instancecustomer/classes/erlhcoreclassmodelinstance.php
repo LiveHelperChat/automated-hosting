@@ -56,6 +56,8 @@ class erLhcoreClassModelInstance {
                'soft_warning_send' => $this->soft_warning_send,
                'hard_warning_send' => $this->hard_warning_send,
                'phone_default_department' => $this->phone_default_department,
+               'phone_response_data' => $this->phone_response_data,
+               'phone_response_timeout_data' => $this->phone_response_timeout_data,
                'footprint_supported' => $this->footprint_supported,
                'previouschats_supported' => $this->previouschats_supported,
                'chatremarks_supported' => $this->chatremarks_supported,
@@ -158,6 +160,16 @@ class erLhcoreClassModelInstance {
 	   		    return $this->can_send_sms;
 	   		    break;
 
+   		    case 'phone_response':
+   		        $this->phone_response = $this->phone_response_data;
+   		        return $this->phone_response;
+   		        break;
+   		    
+   		    case 'phone_response_timeout':
+   		        $this->phone_response_timeout = $this->phone_response_timeout_data;
+   		        return $this->phone_response_timeout;
+   		        break;
+	   		    
 	   		case 'phone_number_departments':
 	   		          $this->phone_number_departments = array();
 	   		          foreach ($this->phone_number as $phoneData) {
@@ -543,7 +555,9 @@ class erLhcoreClassModelInstance {
    public $reseller_id = 0;
    public $reseller_request = 0;
    public $phone_default_department = 0;
-      
+   public $phone_response_data = '';   
+   public $phone_response_timeout_data = '';
+   
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';
    public $custom_fields_3 = '';

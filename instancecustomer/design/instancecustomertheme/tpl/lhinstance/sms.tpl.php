@@ -60,6 +60,21 @@
 		  <?php endif; endforeach;?>
 		</div>
 
+				
+		<div class="row">
+			<div class="columns col-xs-6">
+				<div class="form-group">
+					<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS message send to the user')?></label> <input name="SMSMessageToUser" class="form-control" type="text"  title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS text which should receive user')?>" value="<?php echo htmlspecialchars($instance->phone_response)?>" autocomplete="off">
+				</div>
+			</div>
+			<div class="columns col-xs-6">
+				<div class="form-group">
+					<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic SMS responder timeout in minits, zero means disabled')?></label> <input class="form-control" name="SMSMessageToUserTimeout" type="text" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','After how many minits system should send SMS to user, changeable by user')?>" value="<?php echo htmlspecialchars($instance->phone_response_timeout)?>" autocomplete="off">
+				</div>
+			</div>
+		</div>
+
+		
 		<input type="submit" class="btn btn-primary" value="Save" name="SaveDefaultDepartment" />
 
 		</form>

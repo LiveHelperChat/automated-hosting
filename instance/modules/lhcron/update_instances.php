@@ -1,4 +1,7 @@
 <?php 
+
+// php cron.php -s site_admin -e instance -c cron/update_instances
+
 echo "Updating instances\n";
 
 $contentData = erLhcoreClassModelChatOnlineUser::executeRequest('https://raw.githubusercontent.com/LiveHelperChat/livehelperchat/master/lhc_web/doc/update_db/structure.json');

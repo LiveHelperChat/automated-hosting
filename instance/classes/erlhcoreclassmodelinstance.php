@@ -46,6 +46,8 @@ class erLhcoreClassModelInstance
             'blocked_supported' => $this->blocked_supported,
             'client_title' => $this->client_title,
             'phone_number_data' => $this->phone_number_data,
+            'phone_response_data' => $this->phone_response_data,
+            'phone_response_timeout_data' => $this->phone_response_timeout_data,
             'sms_left' => $this->sms_left,
             'sms_plan' => $this->sms_plan,
             'soft_limit_type' => $this->soft_limit_type,
@@ -185,6 +187,16 @@ class erLhcoreClassModelInstance
                 return $this->can_send_sms;
                 break;
 
+            case 'phone_response':                
+                    $this->phone_response = $this->phone_response_data;
+                    return $this->phone_response;
+                break;
+            
+            case 'phone_response_timeout':
+                    $this->phone_response_timeout = $this->phone_response_timeout_data;
+                    return $this->phone_response_timeout;
+                break;                           
+                
             case 'phone_number':
                 $phoneNumber = json_decode($this->phone_number_data,true);
                 if ($phoneNumber !== false) {
@@ -452,7 +464,11 @@ class erLhcoreClassModelInstance
     public $custom_fields_2 = '';
     
     public $custom_fields_3 = '';
-
+    
+    public $phone_response_data = '';
+    
+    public $phone_response_timeout_data = '';
+   
     public $reseller_max_instances = 0;
 
     public $reseller_id = 0;
