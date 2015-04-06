@@ -146,6 +146,11 @@ $def->properties['cobrowse_supported']->columnName   = 'cobrowse_supported';
 $def->properties['cobrowse_supported']->propertyName = 'cobrowse_supported';
 $def->properties['cobrowse_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['cobrowse_forms_supported'] = new ezcPersistentObjectProperty();
+$def->properties['cobrowse_forms_supported']->columnName   = 'cobrowse_forms_supported';
+$def->properties['cobrowse_forms_supported']->propertyName = 'cobrowse_forms_supported';
+$def->properties['cobrowse_forms_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['forms_supported'] = new ezcPersistentObjectProperty();
 $def->properties['forms_supported']->columnName   = 'forms_supported';
 $def->properties['forms_supported']->propertyName = 'forms_supported';

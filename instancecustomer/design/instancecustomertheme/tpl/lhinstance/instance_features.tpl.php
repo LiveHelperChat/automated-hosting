@@ -28,6 +28,10 @@
         </div>
         
         <div class="form-group col-xs-6">											 
+        	<label><input <?php echo $instance->cobrowse_forms_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="cobrowse_forms_supported" > <?php echo $modules_features['cobrowse_forms_supported']?> </label>
+        </div>
+        
+        <div class="form-group col-xs-6">											 
         	<label><input <?php echo $instance->forms_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="forms_supported" > <?php echo $modules_features['forms_supported']?></label>
         </div>
         

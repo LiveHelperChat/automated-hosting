@@ -18,7 +18,11 @@
 		<div class="form-group">
 			<label><input <?php echo $instance->cobrowse_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="cobrowse_supported"> <?php echo $modules_features['cobrowse_supported']?></label>
 		</div>
-
+	</div>
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->cobrowse_forms_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="cobrowse_forms_supported"> <?php echo $modules_features['cobrowse_forms_supported']?></label>
+		</div>
 	</div>
 	<div class="col-xs-6">
 		<div class="form-group">

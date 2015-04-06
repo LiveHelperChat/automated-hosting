@@ -24,6 +24,7 @@ CREATE TABLE `lhc_instance_client` (
   `files_supported` int(11) NOT NULL DEFAULT '1',
   `atranslations_supported` int(11) NOT NULL DEFAULT '1',
   `cobrowse_supported` int(11) NOT NULL DEFAULT '1',
+  `cobrowse_forms_supported` int(11) NOT NULL DEFAULT '1',
   `forms_supported` int(11) NOT NULL DEFAULT '1',
   `cannedmsg_supported` int(11) NOT NULL DEFAULT '1',
   `faq_supported` int(11) NOT NULL DEFAULT '1',

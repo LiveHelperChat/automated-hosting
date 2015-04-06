@@ -16,6 +16,7 @@ $modules = array(
     'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Statistic supported'),
     'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic translations supported'),
     'cobrowse_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse supported'),
+    'cobrowse_forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse forms filling supported'),
     'forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Forms supported'),
     'cannedmsg_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Canned messages supported'),
     'faq_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','FAQ supported'),
@@ -247,6 +248,9 @@ if (isset($_POST['UpdateFeatures']) )
 			'cobrowse_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),			
+			'cobrowse_forms_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
 			'forms_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			),			
@@ -457,6 +461,13 @@ if (isset($_POST['UpdateFeatures']) )
 		$Instance->atranslations_supported = 1;
 	} else {
 	    $Instance->atranslations_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'cobrowse_forms_supported' ) && $form->cobrowse_forms_supported == true )
+	{
+		$Instance->cobrowse_forms_supported = 1;
+	} else {
+	    $Instance->cobrowse_forms_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'cannedmsg_supported' ) && $form->cannedmsg_supported == true )

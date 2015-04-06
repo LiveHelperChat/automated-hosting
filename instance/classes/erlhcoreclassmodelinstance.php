@@ -31,6 +31,7 @@ class erLhcoreClassModelInstance
             'files_supported' => $this->files_supported,
             'atranslations_supported' => $this->atranslations_supported,
             'cobrowse_supported' => $this->cobrowse_supported,
+            'cobrowse_forms_supported' => $this->cobrowse_forms_supported,
             'forms_supported' => $this->forms_supported,
             'cannedmsg_supported' => $this->cannedmsg_supported,
             'faq_supported' => $this->faq_supported,
@@ -374,6 +375,8 @@ class erLhcoreClassModelInstance
     public $cobrowse_supported = 1;
 
     public $forms_supported = 1;
+    
+    public $cobrowse_forms_supported = 1;
 
     public $feature_1_supported = 1;
 
