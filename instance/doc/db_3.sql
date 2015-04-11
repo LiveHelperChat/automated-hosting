@@ -1190,3 +1190,14 @@ ADD INDEX `online_user_id` (`online_user_id`);
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
 ('autologin_data',	'a:3:{i:0;b:0;s:11:\"secret_hash\";s:16:\"please_change_me\";s:7:\"enabled\";i:0;}',	0,	'Autologin configuration data',	1);
+
+ALTER TABLE `lh_departament`
+ADD `attr_int_1` int(11) NOT NULL DEFAULT '0',
+ADD `attr_int_2` int(11) NOT NULL DEFAULT '0' AFTER `attr_int_1`,
+ADD `attr_int_3` int(11) NOT NULL DEFAULT '0' AFTER `attr_int_2`,
+COMMENT='';
+
+ALTER TABLE `lh_departament`
+ADD INDEX `attr_int_1` (`attr_int_1`),
+ADD INDEX `attr_int_2` (`attr_int_2`),
+ADD INDEX `attr_int_3` (`attr_int_3`);
