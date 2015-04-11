@@ -27,6 +27,11 @@ $ViewList['billinginstance'] = array(
 		'functions' => array( 'billing' )
 );
 
+$ViewList['logmein'] = array(
+		'params' => array('ts','hash'),
+		'functions' => array( )
+);
+
 $FunctionList['billing'] = array('explain' => 'Access to billing');
 
 ?>
