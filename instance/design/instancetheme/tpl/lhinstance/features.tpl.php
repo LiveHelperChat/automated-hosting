@@ -128,6 +128,18 @@
 			<label><input <?php echo $instance->operatorschat_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="operatorschat_supported"> <?php echo $modules_features['operatorschat_supported']?></label>
 		</div>
 	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->xmpp_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="xmpp_supported"> <?php echo $modules_features['xmpp_supported']?></label>
+		</div>
+	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->offline_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="offline_supported"> <?php echo $modules_features['offline_supported']?></label>
+		</div>
+	</div>
 
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
 </div>

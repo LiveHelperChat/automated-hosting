@@ -39,6 +39,8 @@ $modules = array(
     'speech_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Speech supported'),
     'transfer_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat transfer supported'),
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
+    'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
+    'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
@@ -316,10 +318,15 @@ if (isset($_POST['UpdateFeatures']) )
 			),			
 			'operatorschat_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'xmpp_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'offline_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			)			
 	);
-
-	
+		
 	$form = new ezcInputForm( INPUT_POST, $definition );
 	$Errors = array();
 	
@@ -328,6 +335,20 @@ if (isset($_POST['UpdateFeatures']) )
 		$Instance->speech_supported = 1;
 	} else {
 	    $Instance->speech_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'xmpp_supported' ) && $form->xmpp_supported == true )
+	{
+		$Instance->xmpp_supported = 1;
+	} else {
+	    $Instance->xmpp_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'offline_supported' ) && $form->offline_supported == true )
+	{
+		$Instance->offline_supported = 1;
+	} else {
+	    $Instance->offline_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'transfer_supported' ) && $form->transfer_supported == true )

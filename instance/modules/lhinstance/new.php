@@ -11,6 +11,42 @@ if ( isset($_POST['Cancel_departament']) ) {
     exit;
 }
 
+
+$modules = array(
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Statistic supported'),
+    'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Automatic translations supported'),
+    'cobrowse_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse supported'),
+    'cobrowse_forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Co-Browse forms filling supported'),
+    'forms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Forms supported'),
+    'cannedmsg_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Canned messages supported'),
+    'faq_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','FAQ supported'),
+    'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reporting supported'),
+    'chatbox_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chatbox supported'),
+    'browseoffers_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Browse offers supported'),
+    'questionnaire_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Questionnaire supported'),
+    'proactive_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Proactive supported'),
+    'screenshot_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Screenshot supported'),
+    'blocked_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','User blocking supported'),
+    'files_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Files supported'),
+    'sms_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS chat supported'),
+    'onlinevisitortrck_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Online visitors list supported'),
+    'geoadjustment_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','GEO adjustment supporte'),
+    'chatremarks_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat notes supported'),
+    'autoresponder_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Autoresponder supported'),
+    'previouschats_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Previous chats supported'),
+    'footprint_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Footprint supported'),
+    'chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat supported'),
+    'speech_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Speech supported'),
+    'transfer_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat transfer supported'),
+    'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
+    'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
+    'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
+);
+
+erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
+
+$tpl->set('modules_features',$modules);
+
 if (isset($_POST['Save_departament']))
 {
 	$definition = array(
@@ -145,6 +181,12 @@ if (isset($_POST['Save_departament']))
 			),			
 			'operatorschat_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'xmpp_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'offline_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			)		
     );
 
@@ -156,6 +198,20 @@ if (isset($_POST['Save_departament']))
         $Instance->speech_supported = 1;
     } else {
         $Instance->speech_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'xmpp_supported' ) && $form->xmpp_supported == true )
+    {
+        $Instance->xmpp_supported = 1;
+    } else {
+        $Instance->xmpp_supported = 0;
+    }
+    
+    if ( $form->hasValidData( 'offline_supported' ) && $form->offline_supported == true )
+    {
+        $Instance->offline_supported = 1;
+    } else {
+        $Instance->offline_supported = 0;
     }
     
     if ( $form->hasValidData( 'transfer_supported' ) && $form->transfer_supported == true )

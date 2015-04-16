@@ -73,6 +73,8 @@ class erLhcoreClassModelInstance
             'speech_supported' => $this->speech_supported,
             'transfer_supported' => $this->transfer_supported,
             'operatorschat_supported' => $this->operatorschat_supported,
+            'xmpp_supported' => $this->xmpp_supported,
+            'offline_supported' => $this->offline_supported,
         );
     }
 
@@ -486,7 +488,11 @@ class erLhcoreClassModelInstance
     public $footprint_supported = 1;
     
     public $chat_supported = 1;
-
+    
+    public $xmpp_supported = 1;
+    
+    public $offline_supported = 1;
+    
     public $locale = '';
 
     public $siteaccess = 'eng';

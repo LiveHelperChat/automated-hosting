@@ -1,0 +1,1 @@
+<?php $system_configuration_links_xmpp_enabled = erLhcoreClassInstance::getInstance()->xmpp_supported == 1;?>

@@ -71,6 +71,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		
 		// Block users
 		$dispatcher->listen('chat.blockedusers',array($this,'canUseBlock'));
+		
+		// XMPP send message action
+		$dispatcher->listen('xml.send_xmp_message',array($this,'xmppSendMessage'));
 
 		// Automated hosting overrides mail sending parameters
 		$dispatcher->listen('chatmail.setup_smtp',array($this,'setupSMTP'));
@@ -83,6 +86,8 @@ class erLhcoreClassExtensionInstancecustomer {
 		
 		// Forms module listener
 		$dispatcher->listen('form.fill.file_path',array($this,'formFillPath'));
+		
+		$dispatcher->listen('xmp.configuration',array($this,'canUseXMPP'));
 
 		// Translation config
 		$dispatcher->listen('translation.get_config',array($this,'getTranslationConfig'));
@@ -122,6 +127,18 @@ class erLhcoreClassExtensionInstancecustomer {
 				$sysConfiguration->WWWDirLang = '/'.$sysConfiguration->SiteAccess;
 			}
 		}		
+	}
+	
+	public function canUseXMPP($params) {
+	    if (erLhcoreClassInstance::getInstance()->xmpp_supported == 0) {
+	        die('XMPP modules is disabled for you!');
+	    }
+	}
+	
+	public function xmppSendMessage($params) {
+	    if (erLhcoreClassInstance::getInstance()->xmpp_supported == 0) {
+	        $params['params']['use_xmp'] = 0; // Disable message sending if XMPP is disabled
+	    }
 	}
 	
 	public function setupSMTP($params) {

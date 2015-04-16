@@ -33,6 +33,8 @@ $modules = array(
     'speech_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Speech supported'),
     'transfer_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat transfer supported'),
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
+    'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
+    'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
@@ -182,6 +184,12 @@ if (isset($_POST['RequestAction'])) {
         ),
         'cobrowse_forms_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'xmpp_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'offline_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
 
@@ -194,6 +202,14 @@ if (isset($_POST['RequestAction'])) {
     
     if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true ) {
         $requestedModules[] = $modules['previouschats_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'xmpp_supported' ) && $form->xmpp_supported == true ) {
+        $requestedModules[] = $modules['xmpp_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'offline_supported' ) && $form->offline_supported == true ) {
+        $requestedModules[] = $modules['offline_supported'];      
     }
     
     if ( $form->hasValidData( 'cobrowse_forms_supported' ) && $form->cobrowse_forms_supported == true ) {

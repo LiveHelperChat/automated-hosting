@@ -359,6 +359,17 @@ $def->properties['operatorschat_supported'] = new ezcPersistentObjectProperty();
 $def->properties['operatorschat_supported']->columnName   = 'operatorschat_supported';
 $def->properties['operatorschat_supported']->propertyName = 'operatorschat_supported';
 $def->properties['operatorschat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['xmpp_supported'] = new ezcPersistentObjectProperty();
+$def->properties['xmpp_supported']->columnName   = 'xmpp_supported';
+$def->properties['xmpp_supported']->propertyName = 'xmpp_supported';
+$def->properties['xmpp_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['offline_supported'] = new ezcPersistentObjectProperty();
+$def->properties['offline_supported']->columnName   = 'offline_supported';
+$def->properties['offline_supported']->propertyName = 'offline_supported';
+$def->properties['offline_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

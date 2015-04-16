@@ -1,0 +1,1 @@
+<?php $department_xmpp_enabled = erLhcoreClassInstance::getInstance()->xmpp_supported == 1; ?>

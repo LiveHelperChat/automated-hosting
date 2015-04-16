@@ -47,6 +47,8 @@ CREATE TABLE `lhc_instance_client` (
   `speech_supported` int(11) NOT NULL DEFAULT '1',
   `transfer_supported` int(11) NOT NULL DEFAULT '1',
   `operatorschat_supported` int(11) NOT NULL DEFAULT '1',
+  `xmpp_supported` int(11) NOT NULL DEFAULT '1',
+  `offline_supported` int(11) NOT NULL DEFAULT '1',
   `client_title` varchar(250) NOT NULL,
   `phone_number_data` text NOT NULL DEFAULT '',
   `phone_response_data` text NOT NULL DEFAULT '',

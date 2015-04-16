@@ -72,6 +72,8 @@ class erLhcoreClassModelInstance {
                'speech_supported' => $this->speech_supported,
                'transfer_supported' => $this->transfer_supported,
                'operatorschat_supported' => $this->operatorschat_supported,
+               'xmpp_supported' => $this->xmpp_supported,
+               'offline_supported' => $this->offline_supported,
        );
    }
 
@@ -535,6 +537,8 @@ class erLhcoreClassModelInstance {
    public $speech_supported = 1;   
    public $transfer_supported = 1;   
    public $operatorschat_supported = 1;
+   public $xmpp_supported = 1;
+   public $offline_supported = 1;
    
    public $phone_number_data = '';   
    public $sms_left = 0;   
