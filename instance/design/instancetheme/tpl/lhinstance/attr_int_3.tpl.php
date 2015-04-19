@@ -1,0 +1,4 @@
+<div class="form-group">
+    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Integer attribute 3');?></label>
+    <input type="text" class="form-control" name="AttrInt3"  value="<?php echo htmlspecialchars($instance->attr_int_3);?>" />
+</div>

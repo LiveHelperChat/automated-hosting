@@ -626,7 +626,16 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
         ),      
         'Expires' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'string'
-        )       
+        ),
+		'AttrInt1' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'int'
+		),
+		'AttrInt2' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'int'
+		),
+		'AttrInt3' => new ezcInputFormDefinitionElement(
+				ezcInputFormDefinitionElement::OPTIONAL, 'int'
+		)       
     );
 
     $form = new ezcInputForm( INPUT_POST, $definition );
@@ -680,11 +689,26 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])  )
     	$Errors[] = 'Please enter valid date';
     }
 
+    if ( $form->hasValidData( 'AttrInt1' ) )
+    {
+        $Instance->attr_int_1 = $form->AttrInt1;
+    }
+    
+    if ( $form->hasValidData( 'AttrInt2' ) )
+    {
+        $Instance->attr_int_2 = $form->AttrInt2;
+    }
+    
+    if ( $form->hasValidData( 'AttrInt3' ) )
+    {
+        $Instance->attr_int_3 = $form->AttrInt3;
+    }
+    
     if (!isset($_POST['csfr_token']) || !$currentUser->validateCSFRToken($_POST['csfr_token'])) {
      	erLhcoreClassModule::redirect('instance/list');
     	exit;
     }
-
+    
     if (count($Errors) == 0)
     {
         $Instance->saveThis();

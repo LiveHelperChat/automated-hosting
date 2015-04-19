@@ -68,6 +68,9 @@ CREATE TABLE `lhc_instance_client` (
   `custom_fields_1` text NOT NULL,
   `custom_fields_2` text NOT NULL,
   `custom_fields_3` text NOT NULL,
+  `attr_int_1` int(11) NOT NULL DEFAULT '0',
+  `attr_int_2` int(11) NOT NULL DEFAULT '0',
+  `attr_int_3` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)
