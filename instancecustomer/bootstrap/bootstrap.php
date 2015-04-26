@@ -44,6 +44,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('faq.list',array($this,'canUseFAQ'));
 		$dispatcher->listen('faq.view',array($this,'canUseFAQ'));
 		
+		// SugarCRM
+		$dispatcher->listen('sugarcrm.createorupdatelead',array($this,'canUseSugarCRM'));
+		
 		// Browse offers
 		$dispatcher->listen('browseoffer.index',array($this,'canUseBO'));
 		$dispatcher->listen('browseoffer.htmlcode',array($this,'canUseBO'));
@@ -160,6 +163,14 @@ class erLhcoreClassExtensionInstancecustomer {
 	    if (erLhcoreClassInstance::getInstance()->reporting_supported == 0) {
 	        // No permission to use statistic
 	        die('You do not have permission to use statistic');
+	    }
+	}
+	
+	public function canUseSugarCRM()
+	{
+	    if (erLhcoreClassInstance::getInstance()->sugarcrm_supported == 0) {
+	        // No permission to use statistic
+	        die('You do not have permission to use SugarCRM extension');
 	    }
 	}
 	

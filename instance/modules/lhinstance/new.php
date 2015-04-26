@@ -38,7 +38,8 @@ $modules = array(
     'transfer_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Chat transfer supported'),
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Chat between operators supported'),
     'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'XMPP supported'),
-    'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Offline supported')
+    'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Offline supported'),
+    'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'SugarCRM supported')
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles', array(
@@ -97,6 +98,7 @@ if (isset($_POST['Save_departament'])) {
         'operatorschat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'xmpp_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'offline_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'sugarcrm_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'AttrInt1' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt2' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int')
@@ -109,6 +111,12 @@ if (isset($_POST['Save_departament'])) {
         $Instance->speech_supported = 1;
     } else {
         $Instance->speech_supported = 0;
+    }
+    
+    if ($form->hasValidData('sugarcrm_supported') && $form->sugarcrm_supported == true) {
+        $Instance->sugarcrm_supported = 1;
+    } else {
+        $Instance->sugarcrm_supported = 0;
     }
     
     if ($form->hasValidData('AttrInt1')) {

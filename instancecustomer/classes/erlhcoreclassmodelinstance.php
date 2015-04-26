@@ -74,6 +74,7 @@ class erLhcoreClassModelInstance {
                'operatorschat_supported' => $this->operatorschat_supported,
                'xmpp_supported' => $this->xmpp_supported,
                'offline_supported' => $this->offline_supported,
+               'sugarcrm_supported' => $this->sugarcrm_supported,
                'attr_int_1' => $this->attr_int_1,
                'attr_int_2' => $this->attr_int_2,
                'attr_int_3' => $this->attr_int_3,
@@ -542,6 +543,7 @@ class erLhcoreClassModelInstance {
    public $operatorschat_supported = 1;
    public $xmpp_supported = 1;
    public $offline_supported = 1;
+   public $sugarcrm_supported = 1;
    
    public $phone_number_data = '';   
    public $sms_left = 0;   

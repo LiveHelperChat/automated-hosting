@@ -45,6 +45,7 @@ CREATE TABLE `lhc_instance_client` (
   `geoadjustment_supported` int(11) NOT NULL DEFAULT '1',
   `onlinevisitortrck_supported` int(11) NOT NULL DEFAULT '1',
   `speech_supported` int(11) NOT NULL DEFAULT '1',
+  `sugarcrm_supported` int(11) NOT NULL DEFAULT '1',
   `transfer_supported` int(11) NOT NULL DEFAULT '1',
   `operatorschat_supported` int(11) NOT NULL DEFAULT '1',
   `xmpp_supported` int(11) NOT NULL DEFAULT '1',

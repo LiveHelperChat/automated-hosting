@@ -140,6 +140,12 @@
 			<label><input <?php echo $instance->offline_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="offline_supported"> <?php echo $modules_features['offline_supported']?></label>
 		</div>
 	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->sugarcrm_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="sugarcrm_supported"> <?php echo $modules_features['sugarcrm_supported']?></label>
+		</div>
+	</div>
 
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
 </div>

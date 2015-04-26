@@ -41,6 +41,7 @@ $modules = array(
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
     'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
     'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
+    'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SugarCRM supported'),
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
@@ -324,6 +325,9 @@ if (isset($_POST['UpdateFeatures']) )
 			),			
 			'offline_supported' => new ezcInputFormDefinitionElement(
 					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+			),			
+			'sugarcrm_supported' => new ezcInputFormDefinitionElement(
+					ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
 			)			
 	);
 		
@@ -335,6 +339,13 @@ if (isset($_POST['UpdateFeatures']) )
 		$Instance->speech_supported = 1;
 	} else {
 	    $Instance->speech_supported = 0;
+	}
+	
+	if ( $form->hasValidData( 'sugarcrm_supported' ) && $form->sugarcrm_supported == true )
+	{
+		$Instance->sugarcrm_supported = 1;
+	} else {
+	    $Instance->sugarcrm_supported = 0;
 	}
 	
 	if ( $form->hasValidData( 'xmpp_supported' ) && $form->xmpp_supported == true )

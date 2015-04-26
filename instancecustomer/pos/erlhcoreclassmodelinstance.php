@@ -385,6 +385,10 @@ $def->properties['attr_int_3']->columnName   = 'attr_int_3';
 $def->properties['attr_int_3']->propertyName = 'attr_int_3';
 $def->properties['attr_int_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['sugarcrm_supported'] = new ezcPersistentObjectProperty();
+$def->properties['sugarcrm_supported']->columnName   = 'sugarcrm_supported';
+$def->properties['sugarcrm_supported']->propertyName = 'sugarcrm_supported';
+$def->properties['sugarcrm_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 return $def;
 
 ?>
