@@ -96,9 +96,11 @@ if (isset($_POST['Save_departament'])) {
         'speech_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'transfer_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'operatorschat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'chat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'xmpp_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'offline_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'sugarcrm_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'cobrowse_forms_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'AttrInt1' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt2' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int')
@@ -113,10 +115,22 @@ if (isset($_POST['Save_departament'])) {
         $Instance->speech_supported = 0;
     }
     
+    if ($form->hasValidData('cobrowse_forms_supported') && $form->cobrowse_forms_supported == true) {
+        $Instance->cobrowse_forms_supported = 1;
+    } else {
+        $Instance->cobrowse_forms_supported = 0;
+    }
+    
     if ($form->hasValidData('sugarcrm_supported') && $form->sugarcrm_supported == true) {
         $Instance->sugarcrm_supported = 1;
     } else {
         $Instance->sugarcrm_supported = 0;
+    }
+    
+    if ($form->hasValidData('chat_supported') && $form->chat_supported == true) {
+        $Instance->chat_supported = 1;
+    } else {
+        $Instance->chat_supported = 0;
     }
     
     if ($form->hasValidData('AttrInt1')) {
