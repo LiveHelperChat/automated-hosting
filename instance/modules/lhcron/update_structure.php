@@ -16,6 +16,7 @@ if (empty($queries)){
     echo "No queries to execute found\n";
 } else {
     echo "The following queries will be executed\nYou have 10 seconds to stop executing these quries\n";
+    echo implode("\n", $queries)."\n";
     sleep(10);
     
     erLhcoreClassUpdate::doTablesUpdate(json_decode($contentData,true));

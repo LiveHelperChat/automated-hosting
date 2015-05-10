@@ -389,6 +389,17 @@ $def->properties['sugarcrm_supported'] = new ezcPersistentObjectProperty();
 $def->properties['sugarcrm_supported']->columnName   = 'sugarcrm_supported';
 $def->properties['sugarcrm_supported']->propertyName = 'sugarcrm_supported';
 $def->properties['sugarcrm_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['one_per_account'] = new ezcPersistentObjectProperty();
+$def->properties['one_per_account']->columnName   = 'one_per_account';
+$def->properties['one_per_account']->propertyName = 'one_per_account';
+$def->properties['one_per_account']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['max_operators'] = new ezcPersistentObjectProperty();
+$def->properties['max_operators']->columnName   = 'max_operators';
+$def->properties['max_operators']->propertyName = 'max_operators';
+$def->properties['max_operators']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

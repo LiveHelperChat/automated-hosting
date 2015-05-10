@@ -103,7 +103,9 @@ if (isset($_POST['Save_departament'])) {
         'cobrowse_forms_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'AttrInt1' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt2' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
-        'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int')
+        'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
+        'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
+        'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -113,6 +115,18 @@ if (isset($_POST['Save_departament'])) {
         $Instance->speech_supported = 1;
     } else {
         $Instance->speech_supported = 0;
+    }
+    
+    if ($form->hasValidData('one_per_account') && $form->one_per_account == true) {
+        $Instance->one_per_account = 1;
+    } else {
+        $Instance->one_per_account = 0;
+    }
+    
+    if ($form->hasValidData('max_operators')) {
+        $Instance->max_operators = $form->max_operators;
+    } else {
+        $Instance->max_operators = 0;
     }
     
     if ($form->hasValidData('cobrowse_forms_supported') && $form->cobrowse_forms_supported == true) {

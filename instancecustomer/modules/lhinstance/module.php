@@ -13,6 +13,10 @@ $ViewList['remove'] = array(
 		'params' => array('id','date','hash')
 );
 
+$ViewList['setoperatorslimits'] = array(
+		'params' => array('id','date','operators','hash')
+);
+
 $ViewList['workflow'] = array(
 		'params' => array('id','date','hash')
 );

@@ -1218,3 +1218,7 @@ ADD `title` varchar(250) COLLATE 'utf8_general_ci' NOT NULL AFTER `id`,
 ADD `explain` varchar(250) COLLATE 'utf8_general_ci' NOT NULL AFTER `title`,
 ADD `fallback_msg` text COLLATE 'utf8_general_ci' NOT NULL AFTER `msg`,
 COMMENT='';
+
+ALTER TABLE `lh_users`
+ADD `session_id` varchar(40) COLLATE 'utf8_general_ci' NOT NULL,
+COMMENT='';

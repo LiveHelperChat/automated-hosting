@@ -79,6 +79,8 @@ class erLhcoreClassModelInstance
             'attr_int_1' => $this->attr_int_1,
             'attr_int_2' => $this->attr_int_2,
             'attr_int_3' => $this->attr_int_3,
+            'max_operators' => $this->max_operators,
+            'one_per_account' => $this->one_per_account,
         );
     }
 
@@ -504,7 +506,11 @@ class erLhcoreClassModelInstance
     public $attr_int_2 = 0;
     
     public $attr_int_3 = 0;
-        
+    
+    public $max_operators = 0;
+
+    public $one_per_account = 0;
+    
     public $locale = '';
 
     public $siteaccess = 'eng';

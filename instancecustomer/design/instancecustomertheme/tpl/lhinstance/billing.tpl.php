@@ -30,6 +30,14 @@
 				<td><?php echo date('Y-m-d H:i:s',$instance->expires)?></td>
 			</tr>
 			<tr>
+				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Maximum operators');?></td>
+				<td><?php if ($instance->max_operators == 0) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Unlimited')?><?php else : ?><?php echo $instance->max_operators?><?php endif;?></td>
+			</tr>
+			<tr>
+				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','How many operators can work from same account?');?></td>
+				<td><?php if ($instance->one_per_account == 1) : ?>1<?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Unlimited')?><?php endif;?></td>
+			</tr>
+			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','E-mail');?></td>
 				<td><?php echo $instance->email?></td>
 			</tr>	

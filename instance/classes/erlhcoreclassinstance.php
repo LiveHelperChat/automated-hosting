@@ -35,7 +35,24 @@ class erLhcoreClassInstance{
    			exit;
    		}
    }
-
+   
+   // Takes actions on instance database based on applied operators limits
+   public static function performOperatorsLimit($instance) {
+       $cfg = erConfigClassLhConfig::getInstance();
+       $secretHash = $cfg->getSetting('site','seller_secret_hash');
+       
+       $hash = sha1($instance->id . date('Ym') . $secretHash . '_' . $instance->max_operators);
+       
+       $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/setoperatorslimits/' . $instance->id . '/' . date('Ym') . '/' . $instance->max_operators . '/' . $hash;
+       $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
+             
+       if ($response == 'ok') {       
+           return true;
+       } else {
+           throw new Exception('Could not apply a limits');
+       }
+   }
+   
    public static function removeCustomer($instance) {
    
 	   	$cfg = erConfigClassLhConfig::getInstance();
