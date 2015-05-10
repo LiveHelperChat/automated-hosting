@@ -1,4 +1,4 @@
-# Finished at 2015-05-10 15:30:01
+# Finished at 2015-05-10 17:00:01
 # Last updated entry:
-78.63.130.245 test1.livehelperchat.com - [10/May/2015:09:29:53 -0400] "GET /site_admin/chat/onlineusers/(method)/ajax/(timeout)/2678400/(maxrows)/50 HTTP/1.1" 200 33 "http://test1.livehelperchat.com/site_admin" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36" "-"
+66.249.78.164 test1.livehelperchat.com - [10/May/2015:09:49:28 -0400] "GET / HTTP/1.1" 200 5695 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "-"
 
