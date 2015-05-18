@@ -1114,7 +1114,7 @@ INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lan
                 (61,	31,	'日本語',	'ja-JP'),
                 (62,	32,	'Lingua latīna',	'la');   
                 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('front_tabs', 'online_users,online_map,pending_chats,active_chats,unread_chats,closed_chats,online_operators', '0', 'Home page tabs order', '0');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('front_tabs', 'dashboard,online_users,online_map', '0', 'Home page tabs order', '0');
 
 ALTER TABLE `lh_chat_online_user`
 ADD `notes` varchar(250) COLLATE 'utf8_general_ci' NOT NULL,

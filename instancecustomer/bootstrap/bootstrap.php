@@ -100,6 +100,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		
 		$dispatcher->listen('user.edit_user',array($this,'canUserBeSaved'));
 		
+		$dispatcher->listen('chat.sendnotice',array($this,'canSendNotice'));
+		
+		$dispatcher->listen('chat.chatcheckoperatormessage',array($this,'proactiveIsEnabled'));
+			
+		
 		erLhcoreClassModule::$cacheDbVariables = false;
 		
 		// Disable cache expire for customers, only through command line possible
@@ -146,6 +151,18 @@ class erLhcoreClassExtensionInstancecustomer {
 	public function canNewUserCanBeCreated($params) {
 	    if (erLhcoreClassInstance::getInstance()->max_operators > 0 && erLhcoreClassModelUser::getUserCount()+1 > erLhcoreClassInstance::getInstance()->max_operators) {
 	       $params['errors'][] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You have exceeded maximum number of allowed operators!');
+	    }
+	}
+	
+	public function canSendNotice($params) {
+	    if (erLhcoreClassInstance::getInstance()->proactive_supported == 0) {
+	       $params['errors'][] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Proactive module is disabled for you!');
+	    }
+	}
+	
+	public function proactiveIsEnabled($params) {
+	    if (erLhcoreClassInstance::getInstance()->proactive_supported == 0) {
+	       $params['proactive_active'] = false;
 	    }
 	}
 	
