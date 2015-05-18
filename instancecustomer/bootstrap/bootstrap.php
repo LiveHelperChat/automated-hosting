@@ -44,6 +44,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('faq.list',array($this,'canUseFAQ'));
 		$dispatcher->listen('faq.view',array($this,'canUseFAQ'));
 		
+		// SugarCRM
+		$dispatcher->listen('sugarcrm.createorupdatelead',array($this,'canUseSugarCRM'));
+		
 		// Browse offers
 		$dispatcher->listen('browseoffer.index',array($this,'canUseBO'));
 		$dispatcher->listen('browseoffer.htmlcode',array($this,'canUseBO'));
@@ -92,6 +95,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		// Translation config
 		$dispatcher->listen('translation.get_config',array($this,'getTranslationConfig'));
 		
+		// Check can user create a new operators
+		$dispatcher->listen('user.new_user',array($this,'canNewUserCanBeCreated'));
+		
+		$dispatcher->listen('user.edit_user',array($this,'canUserBeSaved'));
+		
 		erLhcoreClassModule::$cacheDbVariables = false;
 		
 		// Disable cache expire for customers, only through command line possible
@@ -103,7 +111,13 @@ class erLhcoreClassExtensionInstancecustomer {
 		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;
 		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
 		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;
-
+			
+		// Check one logged user per account
+		if ($instanceCustomer->one_per_account == 1) {				    
+		    // Set instance policy regarding how many operators can be looged under same account
+		    erLhcoreClassUser::$oneLoginPerAccount = $instanceCustomer->one_per_account == 1;		   
+		}
+		
 		
 		$cfgSite = erConfigClassLhConfig::getInstance();
 		$sysConfiguration = erLhcoreClassSystem::instance();
@@ -127,6 +141,25 @@ class erLhcoreClassExtensionInstancecustomer {
 				$sysConfiguration->WWWDirLang = '/'.$sysConfiguration->SiteAccess;
 			}
 		}		
+	}
+	
+	public function canNewUserCanBeCreated($params) {
+	    if (erLhcoreClassInstance::getInstance()->max_operators > 0 && erLhcoreClassModelUser::getUserCount()+1 > erLhcoreClassInstance::getInstance()->max_operators) {
+	       $params['errors'][] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You have exceeded maximum number of allowed operators!');
+	    }
+	}
+	
+	public function canUserBeSaved($params) {
+	    if (erLhcoreClassInstance::getInstance()->max_operators > 0 && $params['userData']->disabled == 0) {
+	        
+	        $isEditingUserDisabled = erLhcoreClassModelUser::getUserCount(array('filter' => array('disabled' => 1,'id' => $params['userData']->id))) > 0;
+	        
+	        // User is enabling one of disabled users
+	        if ($isEditingUserDisabled == true && erLhcoreClassModelUser::getUserCount(array('filter' => array('disabled' => 0)))+1 > erLhcoreClassInstance::getInstance()->max_operators)
+	        {
+	                $params['errors'][] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You cannot enable user, because you have exceeded maximum number of allowed operators!');
+	        }
+	    }
 	}
 	
 	public function canUseXMPP($params) {
@@ -160,6 +193,14 @@ class erLhcoreClassExtensionInstancecustomer {
 	    if (erLhcoreClassInstance::getInstance()->reporting_supported == 0) {
 	        // No permission to use statistic
 	        die('You do not have permission to use statistic');
+	    }
+	}
+	
+	public function canUseSugarCRM()
+	{
+	    if (erLhcoreClassInstance::getInstance()->sugarcrm_supported == 0) {
+	        // No permission to use statistic
+	        die('You do not have permission to use SugarCRM extension');
 	    }
 	}
 	

@@ -45,6 +45,7 @@ CREATE TABLE `lhc_instance_client` (
   `geoadjustment_supported` int(11) NOT NULL DEFAULT '1',
   `onlinevisitortrck_supported` int(11) NOT NULL DEFAULT '1',
   `speech_supported` int(11) NOT NULL DEFAULT '1',
+  `sugarcrm_supported` int(11) NOT NULL DEFAULT '1',
   `transfer_supported` int(11) NOT NULL DEFAULT '1',
   `operatorschat_supported` int(11) NOT NULL DEFAULT '1',
   `xmpp_supported` int(11) NOT NULL DEFAULT '1',
@@ -68,6 +69,9 @@ CREATE TABLE `lhc_instance_client` (
   `custom_fields_1` text NOT NULL,
   `custom_fields_2` text NOT NULL,
   `custom_fields_3` text NOT NULL,
+  `attr_int_1` int(11) NOT NULL DEFAULT '0',
+  `attr_int_2` int(11) NOT NULL DEFAULT '0',
+  `attr_int_3` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)

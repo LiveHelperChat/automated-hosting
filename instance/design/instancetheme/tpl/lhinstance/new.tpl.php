@@ -10,6 +10,8 @@
 
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_attributes.tpl.php'));?>
 	
+	<?php include(erLhcoreClassDesign::designtpl('lhinstance/users_attributes.tpl.php'));?>
+	
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>
 		
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/features.tpl.php'));?>

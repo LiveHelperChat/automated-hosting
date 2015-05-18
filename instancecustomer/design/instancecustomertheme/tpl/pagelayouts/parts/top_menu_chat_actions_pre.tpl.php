@@ -1,0 +1,1 @@
+<?php $parts_top_menu_chat_actions_enabled = erLhcoreClassInstance::getInstance()->chat_supported == 1;?>

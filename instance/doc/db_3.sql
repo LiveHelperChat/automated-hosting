@@ -1219,6 +1219,9 @@ ADD `explain` varchar(250) COLLATE 'utf8_general_ci' NOT NULL AFTER `title`,
 ADD `fallback_msg` text COLLATE 'utf8_general_ci' NOT NULL AFTER `msg`,
 COMMENT='';
 
+ALTER TABLE `lh_users` ADD `session_id` varchar(40) COLLATE 'utf8_general_ci' NOT NULL,
+COMMENT='';
+
 ALTER TABLE `lh_users`
 ADD `active_chats_counter` int NOT NULL,
 ADD `closed_chats_counter` int NOT NULL AFTER `active_chats_counter`,

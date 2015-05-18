@@ -74,6 +74,12 @@ class erLhcoreClassModelInstance {
                'operatorschat_supported' => $this->operatorschat_supported,
                'xmpp_supported' => $this->xmpp_supported,
                'offline_supported' => $this->offline_supported,
+               'sugarcrm_supported' => $this->sugarcrm_supported,
+               'attr_int_1' => $this->attr_int_1,
+               'attr_int_2' => $this->attr_int_2,
+               'attr_int_3' => $this->attr_int_3,
+               'max_operators' => $this->max_operators,
+               'one_per_account' => $this->one_per_account,
        );
    }
 
@@ -537,8 +543,10 @@ class erLhcoreClassModelInstance {
    public $speech_supported = 1;   
    public $transfer_supported = 1;   
    public $operatorschat_supported = 1;
+   public $chat_supported = 1;
    public $xmpp_supported = 1;
    public $offline_supported = 1;
+   public $sugarcrm_supported = 1;
    
    public $phone_number_data = '';   
    public $sms_left = 0;   
@@ -550,7 +558,14 @@ class erLhcoreClassModelInstance {
    public $sms_processed = 0;   
    public $sms_supported = 0;   
    public $soft_warning_send = 0;   
-   public $hard_warning_send = 0;   
+   public $hard_warning_send = 0;
+      
+   public $attr_int_1 = 0;   
+   public $attr_int_2 = 0;   
+   public $attr_int_3 = 0;   
+
+   public $max_operators = 0;
+   public $one_per_account = 0;
    
    public $is_reseller = 0;
    public $client_title = '';

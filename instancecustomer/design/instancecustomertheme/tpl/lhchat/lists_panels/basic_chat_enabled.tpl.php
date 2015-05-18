@@ -1,0 +1,1 @@
+<?php $basicChatEnabled = erLhcoreClassInstance::getInstance()->chat_supported == 1?>

@@ -1,0 +1,612 @@
+{
+    "tables": {        
+        "lhc_instance_client": [
+            {
+                "field": "id",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "PRI",
+                "default": null,
+                "extra": "auto_increment"
+            },
+            {
+                "field": "request",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "expires",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "suspended",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "terminate",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "address",
+                "type": "varchar(30)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "email",
+                "type": "varchar(250)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "status",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "time_zone",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "date_format",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "date_hour_format",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "date_date_hour_format",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "locale",
+                "type": "varchar(10)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "siteaccess",
+                "type": "varchar(3)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "is_reseller",
+                "type": "tinyint(1)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reseller_tite",
+                "type": "varchar(50)",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "reseller_max_instance_request",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reseller_secret_hash",
+                "type": "varchar(20)",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "reseller_max_instances",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reseller_id",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reseller_request",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reseller_suspended",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "files_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "atranslations_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "cobrowse_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "cobrowse_forms_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "forms_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "cannedmsg_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "faq_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "feature_1_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "feature_2_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "feature_3_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "reporting_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "chatbox_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "browseoffers_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "questionnaire_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "proactive_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "screenshot_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "blocked_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "footprint_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "previouschats_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "chatremarks_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "autoresponder_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "geoadjustment_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "onlinevisitortrck_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "speech_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "transfer_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "operatorschat_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "one_per_account",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "max_operators",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "xmpp_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "offline_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "client_title",
+                "type": "varchar(250)",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "phone_number_data",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "phone_response_data",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "phone_response_timeout_data",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "sms_left",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "sms_plan",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "soft_limit_type",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "soft_limit",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "hard_limit_type",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "hard_limit",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "sms_processed",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "sms_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "hard_warning_send",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "soft_warning_send",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "phone_default_department",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "chat_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            },
+            {
+                "field": "custom_fields_1",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "custom_fields_2",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "custom_fields_3",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "attr_int_1",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "attr_int_2",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "attr_int_3",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "sugarcrm_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 1,
+                "extra": ""
+            }
+        ]
+    },  
+    "tables_data": {    },
+    "tables_data_identifier": {    },
+    "tables_indexes" : {    },
+    "tables_create": {
+    	
+    }
+}

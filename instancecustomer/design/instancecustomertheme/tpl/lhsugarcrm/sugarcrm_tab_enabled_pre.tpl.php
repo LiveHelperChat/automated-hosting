@@ -1,0 +1,1 @@
+<?php $sugarcrm_tab_enabled_pre = erLhcoreClassInstance::getInstance()->sugarcrm_supported == 1;?>
