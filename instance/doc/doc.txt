@@ -13,6 +13,7 @@ Install
 'manager_subdomain' => 'manage',// Change to subdomain where manager itself is located
 'seller_title' => 'Live Helper Chat',	    // Change to your company title
 'seller_secret_hash' => 'sdflkjsdfk_sjdf',  // Change to any random string
+'expire_disabled' => false,  // Should instances be checked against expire date
 'instance_handler' => 'erLhcoreClassInstanceDBMysql', // erLhcoreClassInstanceDBMysql - mysql, erLhcoreClassInstanceDBDirectAdmin - direct admin
 'access_log_path' => '/var/log/nginx/access_chat_manager_client.log',  //or '/var/log/apache2/access_chat_manager_client.log' use your site's log name
 'http_mode' => 'http://', // Set http:// or https://
