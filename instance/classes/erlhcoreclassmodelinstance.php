@@ -503,9 +503,9 @@ class erLhcoreClassModelInstance
     
     public $sugarcrm_supported = 1;
     
-    public $full_xmpp_chat_supported = 0;
+    public $full_xmpp_chat_supported = 1;
     
-    public $full_xmpp_visitors_tracking = 0;
+    public $full_xmpp_visitors_tracking = 1;
         
     public $attr_int_1 = 0;
     

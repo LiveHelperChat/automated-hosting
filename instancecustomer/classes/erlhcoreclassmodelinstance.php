@@ -586,8 +586,8 @@ class erLhcoreClassModelInstance {
    public $phone_response_data = '';   
    public $phone_response_timeout_data = '';
    
-   public $full_xmpp_chat_supported = 0;
-   public $full_xmpp_visitors_tracking = 0;
+   public $full_xmpp_chat_supported = 1;
+   public $full_xmpp_visitors_tracking = 1;
    
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';
