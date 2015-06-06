@@ -80,9 +80,11 @@ class erLhcoreClassModelInstance {
                'attr_int_3' => $this->attr_int_3,
                'max_operators' => $this->max_operators,
                'one_per_account' => $this->one_per_account,
+               'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
+               'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
        );
    }
-
+   
    public function setState( array $properties )
    {
        foreach ( $properties as $key => $val )
@@ -112,7 +114,12 @@ class erLhcoreClassModelInstance {
 	   	foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
 	   		$item->removeFile();
 	   	}
-	   	 
+
+	   	// Dispatch event for extensions
+	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.destroyed', array(
+	   	    'instance' => $this
+	   	));
+	   	
 	   	return true;
    }
    
@@ -578,6 +585,9 @@ class erLhcoreClassModelInstance {
    public $phone_default_department = 0;
    public $phone_response_data = '';   
    public $phone_response_timeout_data = '';
+   
+   public $full_xmpp_chat_supported = 0;
+   public $full_xmpp_visitors_tracking = 0;
    
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';

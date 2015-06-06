@@ -36,6 +36,8 @@ $modules = array(
     'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
     'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
     'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SugarCRM supported'),
+    'full_xmpp_chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Full XMPP chat supported'),
+    'full_xmpp_visitors_tracking' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Track online visitors in XMPP')
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
@@ -194,15 +196,31 @@ if (isset($_POST['RequestAction'])) {
         ),
         'sugarcrm_supported' => new ezcInputFormDefinitionElement(
             ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'full_xmpp_chat_supported' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
+        ),
+        'full_xmpp_visitors_tracking' => new ezcInputFormDefinitionElement(
+            ezcInputFormDefinitionElement::OPTIONAL, 'boolean'
         )
     );
 
+    
+    
     $form = new ezcInputForm( INPUT_POST, $definition );
     $Errors = array();
     
     $requestedModules = array(
         
     );
+    
+    if ( $form->hasValidData( 'full_xmpp_chat_supported' ) && $form->full_xmpp_chat_supported == true ) {
+        $requestedModules[] = $modules['full_xmpp_chat_supported'];      
+    }
+    
+    if ( $form->hasValidData( 'full_xmpp_visitors_tracking' ) && $form->full_xmpp_visitors_tracking == true ) {
+        $requestedModules[] = $modules['full_xmpp_visitors_tracking'];      
+    }
     
     if ( $form->hasValidData( 'previouschats_supported' ) && $form->previouschats_supported == true ) {
         $requestedModules[] = $modules['previouschats_supported'];      

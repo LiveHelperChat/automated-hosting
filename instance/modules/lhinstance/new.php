@@ -39,7 +39,9 @@ $modules = array(
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Chat between operators supported'),
     'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'XMPP supported'),
     'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Offline supported'),
-    'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'SugarCRM supported')
+    'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'SugarCRM supported'),
+    'full_xmpp_chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Full XMPP chat supported'),
+    'full_xmpp_visitors_tracking' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Track online visitors in XMPP')
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles', array(
@@ -106,6 +108,8 @@ if (isset($_POST['Save_departament'])) {
         'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'full_xmpp_chat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'full_xmpp_visitors_tracking' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -121,6 +125,18 @@ if (isset($_POST['Save_departament'])) {
         $Instance->one_per_account = 1;
     } else {
         $Instance->one_per_account = 0;
+    }
+    
+    if ($form->hasValidData('full_xmpp_chat_supported') && $form->full_xmpp_chat_supported == true) {
+        $Instance->full_xmpp_chat_supported = 1;
+    } else {
+        $Instance->full_xmpp_chat_supported = 0;
+    }
+    
+    if ($form->hasValidData('full_xmpp_visitors_tracking') && $form->full_xmpp_visitors_tracking == true) {
+        $Instance->full_xmpp_visitors_tracking = 1;
+    } else {
+        $Instance->full_xmpp_visitors_tracking = 0;
     }
     
     if ($form->hasValidData('max_operators')) {

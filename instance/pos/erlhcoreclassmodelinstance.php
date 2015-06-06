@@ -406,6 +406,16 @@ $def->properties['max_operators']->columnName   = 'max_operators';
 $def->properties['max_operators']->propertyName = 'max_operators';
 $def->properties['max_operators']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['full_xmpp_chat_supported'] = new ezcPersistentObjectProperty();
+$def->properties['full_xmpp_chat_supported']->columnName   = 'full_xmpp_chat_supported';
+$def->properties['full_xmpp_chat_supported']->propertyName = 'full_xmpp_chat_supported';
+$def->properties['full_xmpp_chat_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['full_xmpp_visitors_tracking'] = new ezcPersistentObjectProperty();
+$def->properties['full_xmpp_visitors_tracking']->columnName   = 'full_xmpp_visitors_tracking';
+$def->properties['full_xmpp_visitors_tracking']->propertyName = 'full_xmpp_visitors_tracking';
+$def->properties['full_xmpp_visitors_tracking']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

@@ -600,6 +600,22 @@
                 "key": "",
                 "default": 1,
                 "extra": ""
+            },
+            {
+                "field": "full_xmpp_chat_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "full_xmpp_visitors_tracking",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
             }
         ]
     },  

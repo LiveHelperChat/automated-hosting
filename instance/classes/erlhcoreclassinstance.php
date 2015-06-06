@@ -170,6 +170,11 @@ class erLhcoreClassInstance{
 	   	if ($instance->locale != '') {
 	   		erLhcoreClassSystem::instance()->setSiteAccess($originalSiteAccess);
 	   	}
+	   		   	
+	   	// Dispatch event for listeners
+	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.registered.created', array(
+	   	    'instance' => $instance
+	   	));
    }
 
    private static $persistentSession;

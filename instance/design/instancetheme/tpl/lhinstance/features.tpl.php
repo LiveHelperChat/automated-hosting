@@ -146,6 +146,18 @@
 			<label><input <?php echo $instance->sugarcrm_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="sugarcrm_supported"> <?php echo $modules_features['sugarcrm_supported']?></label>
 		</div>
 	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->full_xmpp_chat_supported == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="full_xmpp_chat_supported"> <?php echo $modules_features['full_xmpp_chat_supported']?></label>
+		</div>
+	</div>
+	
+	<div class="col-xs-6">
+		<div class="form-group">
+			<label><input <?php echo $instance->full_xmpp_visitors_tracking == 1 ? 'checked="checked"' : ''?> type="checkbox" value="on" name="full_xmpp_visitors_tracking"> <?php echo $modules_features['full_xmpp_visitors_tracking']?></label>
+		</div>
+	</div>
 
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
 </div>

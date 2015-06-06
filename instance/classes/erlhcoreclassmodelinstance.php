@@ -81,6 +81,8 @@ class erLhcoreClassModelInstance
             'attr_int_3' => $this->attr_int_3,
             'max_operators' => $this->max_operators,
             'one_per_account' => $this->one_per_account,
+            'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
+            'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
         );
     }
 
@@ -501,6 +503,10 @@ class erLhcoreClassModelInstance
     
     public $sugarcrm_supported = 1;
     
+    public $full_xmpp_chat_supported = 0;
+    
+    public $full_xmpp_visitors_tracking = 0;
+        
     public $attr_int_1 = 0;
     
     public $attr_int_2 = 0;
