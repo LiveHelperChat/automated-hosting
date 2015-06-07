@@ -147,6 +147,16 @@ http://manager.livehelperchat.com/instance/paypalipn
 E.g
 instancecustomeroverride
 instanceoverride
+
+/******************/
+Updating
+/******************/
+Just run this it will update automated hosting table structure
+php cron.php -s site_admin -e instance -c cron/update_structure
+
+To update extensions tables
+php cron.php -s site_admin -e instance -c cron/extensions_update
+
 /******************/
 Manager nginx example
 /******************/

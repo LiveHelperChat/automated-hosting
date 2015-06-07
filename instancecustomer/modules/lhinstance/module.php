@@ -21,6 +21,10 @@ $ViewList['workflow'] = array(
 		'params' => array('id','date','hash')
 );
 
+$ViewList['extensionsstructure'] = array(
+		'params' => array('id','date','hash')
+);
+
 $ViewList['billingpdf'] = array(
 		'params' => array('id'),
 		'functions' => array( 'billing' )
