@@ -21,16 +21,15 @@ class erLhcoreClassInstance{
 
    public static function setupInstance($db)
    {
-   		$parts = explode('.', $_SERVER['HTTP_HOST']);
-   		$subdomain = array_shift($parts);
+        $cfg = erConfigClassLhConfig::getInstance();
+       
+   		$subdomain = str_replace('.'.$cfg->getSetting( 'site', 'seller_domain'), '', $_SERVER['HTTP_HOST']);   		
    		$items = erLhcoreClassModelInstance::getList(array('filter' => array('address' => $subdomain)));
-
+   		
    		if ( !empty($items) ) {
    			erLhcoreClassInstance::$instanceChat = array_shift($items);
-   			$cfg = erConfigClassLhConfig::getInstance();
    			$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
    		} else {
-   			$cfg = erConfigClassLhConfig::getInstance();
    			header('Location: '.$cfg->getSetting( 'site', 'seller_url'));
    			exit;
    		}
