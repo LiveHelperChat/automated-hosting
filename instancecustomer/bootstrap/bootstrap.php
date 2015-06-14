@@ -103,17 +103,16 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('chat.sendnotice',array($this,'canSendNotice'));
 		
 		$dispatcher->listen('chat.chatcheckoperatormessage',array($this,'proactiveIsEnabled'));
-			
-		
-		erLhcoreClassModule::$cacheDbVariables = false;
-		
-		// Disable cache expire for customers, only through command line possible
-		erConfigClassLhCacheConfig::getInstance()->setExpiredInRuntime(true);
 		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
 		if (is_object($instanceCustomer))
 		{
+		    erLhcoreClassModule::$cacheDbVariables = false;
+		    
+		    // Disable cache expire for customers, only through command line possible
+		    erConfigClassLhCacheConfig::getInstance()->setExpiredInRuntime(true);
+		    
     		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
     		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;
     		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
