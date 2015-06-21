@@ -35,9 +35,9 @@ $modules = array(
     'operatorschat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Chat between operators supported'),
     'xmpp_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','XMPP supported'),
     'offline_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Offline supported'),
+    'full_xmpp_chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Full XMPP chat supported'),
     'sugarcrm_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SugarCRM supported'),
-    'full_xmpp_chat_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Full XMPP chat supported'),
-    'full_xmpp_visitors_tracking' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Track online visitors in XMPP')
+    'full_xmpp_visitors_tracking' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Track online visitors in XMPP')
 );
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_titles',array('features' => & $modules));
