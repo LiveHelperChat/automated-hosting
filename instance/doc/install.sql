@@ -50,6 +50,8 @@ CREATE TABLE `lhc_instance_client` (
   `operatorschat_supported` int(11) NOT NULL DEFAULT '1',
   `xmpp_supported` int(11) NOT NULL DEFAULT '1',
   `offline_supported` int(11) NOT NULL DEFAULT '1',
+  `one_per_account` int(11) NOT NULL DEFAULT '0',
+  `max_operators` int(11) NOT NULL DEFAULT '0',
   `client_title` varchar(250) NOT NULL,
   `phone_number_data` text NOT NULL DEFAULT '',
   `phone_response_data` text NOT NULL DEFAULT '',
