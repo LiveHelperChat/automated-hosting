@@ -1,4 +1,4 @@
-CREATE TABLE `lhc_instance_client` (
+CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `request` int(11) NOT NULL,
   `expires` int(11) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `lhc_instance_client` (
   KEY `reseller_id` (`reseller_id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `lhc_instance_invoice` (
+CREATE TABLE IF NOT EXISTS `lhc_instance_invoice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `txn_id` varchar(50) NOT NULL,
   `instance_id` int(11) NOT NULL,
