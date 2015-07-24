@@ -1,4 +1,4 @@
-CREATE TABLE `lhc_instance_client` (
+CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `request` int(11) NOT NULL,
   `expires` int(11) NOT NULL,
@@ -53,9 +53,9 @@ CREATE TABLE `lhc_instance_client` (
   `one_per_account` int(11) NOT NULL DEFAULT '0',
   `max_operators` int(11) NOT NULL DEFAULT '0',
   `client_title` varchar(250) NOT NULL,
-  `phone_number_data` text NOT NULL DEFAULT '',
-  `phone_response_data` text NOT NULL DEFAULT '',
-  `phone_response_timeout_data` text NOT NULL DEFAULT '',
+  `phone_number_data` text NOT NULL,
+  `phone_response_data` text NOT NULL,
+  `phone_response_timeout_data` text NOT NULL,
   `sms_left` int(11) NOT NULL DEFAULT '0',
   `sms_plan` int(11) NOT NULL DEFAULT '0',
   `soft_limit_type` int(11) NOT NULL DEFAULT '0',
@@ -81,7 +81,7 @@ CREATE TABLE `lhc_instance_client` (
   KEY `reseller_id` (`reseller_id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `lhc_instance_invoice` (
+CREATE TABLE IF NOT EXISTS `lhc_instance_invoice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `txn_id` varchar(50) NOT NULL,
   `instance_id` int(11) NOT NULL,
