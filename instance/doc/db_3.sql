@@ -1240,3 +1240,25 @@ COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', 'online_operators,departments_stats|pending_chats,unread_chats,transfered_chats|active_chats,closed_chats', '0', 'Home page dashboard widgets order', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('hide_right_column_frontpage', '0', '0', 'Hide right column in frontpage', '0');
+
+CREATE TABLE `lh_abstract_survey_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL,
+  `stars` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ftime` int(11) NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `survey_id` (`survey_id`),
+  KEY `chat_id` (`chat_id`),
+  KEY `user_id` (`user_id`),
+  KEY `dep_id` (`dep_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `lh_abstract_survey` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  `max_stars` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
