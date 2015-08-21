@@ -1253,7 +1253,8 @@ CREATE TABLE `lh_abstract_survey_item` (
   KEY `survey_id` (`survey_id`),
   KEY `chat_id` (`chat_id`),
   KEY `user_id` (`user_id`),
-  KEY `dep_id` (`dep_id`)
+  KEY `dep_id` (`dep_id`),
+  KEY `ftime` (`ftime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `lh_abstract_survey` (
