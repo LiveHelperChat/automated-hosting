@@ -2,6 +2,10 @@
 
 $cfg = erConfigClassLhConfig::getInstance();
 $secretHash = $cfg->getSetting('site','seller_secret_hash');
+
+// Just cleanup if argument is domain with dots. We just remove dots.
+$Params['user_parameters']['address'] = str_replace('.', '', (string)$Params['user_parameters']['address']);
+
 $validateHash = sha1((string)$Params['user_parameters']['address'].(string)$Params['user_parameters']['email'].(string)$Params['user_parameters']['request'].(string)$Params['user_parameters']['period'].$secretHash);
 
 if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
@@ -74,6 +78,30 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 		$instance->expires = time()+(int)$Params['user_parameters']['period']*24*3600;
 	} else{
 		$instance->expires += (int)$Params['user_parameters']['period']*24*3600;
+	}
+	
+	if (isset($_POST['custom_fields_1'])) {
+	    $instance->custom_fields_1 = $_POST['custom_fields_1'];
+	}
+	
+	if (isset($_POST['custom_fields_2'])) {
+	    $instance->custom_fields_2 = $_POST['custom_fields_2'];
+	}
+	
+	if (isset($_POST['custom_fields_3'])) {
+	    $instance->custom_fields_3 = $_POST['custom_fields_3'];
+	}
+	
+	if (isset($_POST['attr_int_1'])) {
+	    $instance->attr_int_1 = $_POST['attr_int_1'];
+	}
+	
+	if (isset($_POST['attr_int_2'])) {
+	    $instance->attr_int_2 = $_POST['attr_int_2'];
+	}
+	
+	if (isset($_POST['attr_int_3'])) {
+	    $instance->attr_int_3 = $_POST['attr_int_3'];
 	}
 	
 	if ($Params['user_parameters_unordered']['is_reseller'] == 1) {

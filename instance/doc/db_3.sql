@@ -1269,3 +1269,6 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('track_activity','0','0','Track users activity on site?','0');
 
 ALTER TABLE `lh_chat_online_user` ADD `user_active` int(11) NOT NULL DEFAULT 0, COMMENT='';
+
+INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('dwo',	'',	'');
+ALTER TABLE `lh_canned_msg` ADD INDEX `position_title` (`position`, `title`);
