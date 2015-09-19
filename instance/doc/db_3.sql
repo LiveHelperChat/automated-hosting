@@ -996,7 +996,7 @@ CREATE TABLE IF NOT EXISTS `lh_speech_language` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
                   `name` varchar(100) NOT NULL,
                   PRIMARY KEY (`id`)
-               ) DEFAULT CHARSET=utf8;
+               )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
                
 CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1005,7 +1005,7 @@ CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
                   `lang_code` varchar(100) NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `language_id` (`language_id`)
-               ) DEFAULT CHARSET=utf8;
+               )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
                               
 CREATE TABLE IF NOT EXISTS `lh_speech_chat_language` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1262,7 +1262,7 @@ CREATE TABLE `lh_abstract_survey` (
   `name` varchar(250) NOT NULL,
   `max_stars` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('online_if','0','0','','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('track_mouse_activity','0','0','Should mouse movement be tracked as activity measure, if not checked only basic events would be tracked','0');
