@@ -593,7 +593,8 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
 }
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.editinstance', array(
-    'instance' => & $Instance
+    'instance' => & $Instance,
+    'tpl' => & $tpl,
 ));
 
 $tpl->set('instance', $Instance);
