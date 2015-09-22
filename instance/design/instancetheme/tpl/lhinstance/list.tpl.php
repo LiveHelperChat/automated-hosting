@@ -25,7 +25,13 @@
         <td><?php echo htmlspecialchars($departament->address)?></td>
         <td><?php if ($departament->status == 0) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','pending initialization');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','created');?><?php endif;?></td>
         <td><?php echo htmlspecialchars($departament->request)?></td> 
-        <td><?php echo htmlspecialchars(date('Y-m-d H:i:s',$departament->expires))?></td>
+        <td>
+        <?php if ($departament->expires > 0) : ?>
+        <?php echo htmlspecialchars(date('Y-m-d H:i:s',$departament->expires))?>
+        <?php else : ?>
+        -
+        <?php endif;?>
+        </td>
         <td>
         <?php if ($departament->reseller !== false) : ?>
         	<?php echo htmlspecialchars($departament->reseller->reseller_tite)?>        	
