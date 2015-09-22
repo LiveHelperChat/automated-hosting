@@ -2,6 +2,11 @@
 $tpl = erLhcoreClassTemplate::getInstance('lhinstance/new.tpl.php');
 $Instance = new erLhcoreClassModelInstance();
 
+// Allow extensions to setup default attributes
+erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.new_instance', array(
+    'instance' => & $Instance
+));
+
 $cfgSite = erConfigClassLhConfig::getInstance();
 $tpl->set('locales', $cfgSite->getSetting('site', 'available_site_access'));
 
