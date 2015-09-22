@@ -162,7 +162,7 @@
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/features_multiinclude.tpl.php'));?>
 </div>
 
-
-
+<?php if (!isset($hideFeaturesButton)) : ?>
 <input type="submit" class="btn btn-default" name="UpdateFeatures" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>" />
+<?php endif;?>
 

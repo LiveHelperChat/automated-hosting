@@ -418,8 +418,14 @@ if (isset($_POST['Save_departament'])) {
     } elseif ($form->hasValidData('Expires') && $form->Expires == 0) {
         $Instance->expires = 0;
     } else {
-        $Errors[] = 'Please enter valid date';
+        $Errors[] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Please enter valid date');
     }
+        
+    erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.new_instance', array(
+        'instance' => & $Instance,
+        'tpl' => & $tpl,
+        'errors' => & $Errors,
+    ));
     
     if (count($Errors) == 0) {
         $Instance->saveThis();
