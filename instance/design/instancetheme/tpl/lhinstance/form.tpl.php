@@ -31,8 +31,8 @@
 </div>
 
 <div class="form-group">
-    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Expires');?></label>
-    <input type="text" class="form-control" name="Expires"  value="<?php echo htmlspecialchars($instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : date('Y-m-d H:i:s',time()+6*31*24*3600));?>" />
+    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Expires, 0 - not expirable');?></label>
+    <input type="text" class="form-control" name="Expires"  value="<?php echo htmlspecialchars($instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : 0);?>" />
 </div>
 
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/attr_int_1.tpl.php'));?>

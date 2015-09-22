@@ -557,8 +557,10 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
     
     if ($form->hasValidData('Expires') && ($time = strtotime($form->Expires)) !== false) {
         $Instance->expires = $time;
+    } elseif ($form->hasValidData('Expires') && $form->Expires == 0) {
+        $Instance->expires = 0;
     } else {
-        $Errors[] = 'Please enter valid date';
+        $Errors[] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Please enter valid date');
     }
     
     if ($form->hasValidData('AttrInt1')) {
