@@ -616,6 +616,14 @@
                 "key": "",
                 "default": 1,
                 "extra": ""
+            },
+            {
+                "field": "client_attributes",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
             }
         ]
     },  

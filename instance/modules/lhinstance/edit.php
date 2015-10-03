@@ -105,6 +105,33 @@ if (isset($_POST['UpdateUsers'])) {
     $tpl->set('updated', true);
 }
 
+
+if (isset($_POST['UpdateClientData'])) {
+    $definition = array(
+        'ClientData' => new ezcInputFormDefinitionElement(
+        		ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw',
+        		null,
+        		FILTER_REQUIRE_ARRAY
+        )
+    );
+    
+    $form = new ezcInputForm(INPUT_POST, $definition);
+    $Errors = array();
+    
+    if ($form->hasValidData('ClientData')) {
+        $Instance->client_attributes_array = $form->ClientData;
+        $Instance->client_attributes = json_encode($Instance->client_attributes_array);
+    } else {
+        $Instance->client_attributes_array = array();
+        $Instance->client_attributes = json_encode(array());
+    }
+    
+    $Instance->saveThis();
+    $tpl->set('updated', true);
+}
+
+
+
 if (isset($_POST['UpdateAttributes'])) {
     $definition = array(
         'DateFormat' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),

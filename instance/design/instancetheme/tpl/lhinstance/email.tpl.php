@@ -1,4 +1,4 @@
-<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Hello');?>,<?php echo "\n\n";?>
+<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Hello');?><?php if (isset($client_attributes_array['name'])) {echo ' ',$client_attributes_array['name'];};if (isset($client_attributes_array['surname'])) {echo ' ',$client_attributes_array['surname'];}; echo ",\n\n";?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Here is your chat instance data');?>:<?php echo "\n";?>
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Address');?>: <?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode')?><?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/<?php echo "\n\n";?>

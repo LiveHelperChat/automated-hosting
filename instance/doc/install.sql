@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `custom_fields_1` text NOT NULL,
   `custom_fields_2` text NOT NULL,
   `custom_fields_3` text NOT NULL,
+  `client_attributes` text NOT NULL,
   `attr_int_1` int(11) NOT NULL DEFAULT '0',
   `attr_int_2` int(11) NOT NULL DEFAULT '0',
   `attr_int_3` int(11) NOT NULL DEFAULT '0',

@@ -7,6 +7,8 @@
 <form action="<?php echo erLhcoreClassDesign::baseurl('instance/new')?>" method="post">
 
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/form.tpl.php'));?>
+    
+    <?php include(erLhcoreClassDesign::designtpl('lhinstance/client_data.tpl.php'));?>
 
 	<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_attributes.tpl.php'));?>
 	

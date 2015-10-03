@@ -114,7 +114,7 @@ if (isset($_POST['Save_departament'])) {
         'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'full_xmpp_chat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
-        'full_xmpp_visitors_tracking' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
+        'ClientData' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw',null,FILTER_REQUIRE_ARRAY)
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -407,12 +407,12 @@ if (isset($_POST['Save_departament'])) {
     if ($form->hasValidData('Status')) {
         $Instance->status = $form->Status;
     }
-    
+
     if (! isset($_POST['csfr_token']) || ! $currentUser->validateCSFRToken($_POST['csfr_token'])) {
         erLhcoreClassModule::redirect('instance/list');
         exit();
     }
-    
+
     if ($form->hasValidData('Expires') && ($time = strtotime($form->Expires)) !== false) {
         $Instance->expires = $time;
     } elseif ($form->hasValidData('Expires') && $form->Expires == 0) {
@@ -420,7 +420,15 @@ if (isset($_POST['Save_departament'])) {
     } else {
         $Errors[] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Please enter valid date');
     }
-        
+
+    if ($form->hasValidData('ClientData')) {
+        $Instance->client_attributes_array = $form->ClientData;
+        $Instance->client_attributes = json_encode($Instance->client_attributes_array);
+    } else {
+        $Instance->client_attributes_array = array();
+        $Instance->client_attributes = json_encode(array());
+    }
+
     erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.new_instance', array(
         'instance' => & $Instance,
         'tpl' => & $tpl,

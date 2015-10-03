@@ -64,7 +64,6 @@ class erLhcoreClassInstance{
 	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
 	   	   	
 	   	$responseData = json_decode($response);
-	   	   	
 	   	
 	   	if (isset($responseData->error) && $responseData->error == false){
 	   		self::deleteDatabase($instance->id);
@@ -152,6 +151,8 @@ class erLhcoreClassInstance{
 	   	$mail->FromName = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->Subject = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
+ 
+	   	$tpl->set('client_attributes_array',$instance->client_attributes_array);
 
 	   	$mail->Body = $tpl->fetch();
 	   	$mail->AddAddress( $instance->email );

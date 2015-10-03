@@ -83,6 +83,7 @@ class erLhcoreClassModelInstance
             'one_per_account' => $this->one_per_account,
             'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
             'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
+            'client_attributes' => $this->client_attributes,
         );
     }
 
@@ -206,6 +207,14 @@ class erLhcoreClassModelInstance
             case 'phone_response_timeout':
                     $this->phone_response_timeout = $this->phone_response_timeout_data;
                     return $this->phone_response_timeout;
+                break;                           
+            
+            case 'client_attributes_array':
+                    $this->client_attributes_array = json_decode($this->client_attributes,true);
+                    if (!is_array($this->client_attributes_array)) {
+                        $this->client_attributes_array = array();
+                    }
+                    return $this->client_attributes_array;
                 break;                           
                 
             case 'phone_number':
@@ -477,6 +486,8 @@ class erLhcoreClassModelInstance
     public $custom_fields_2 = '';
     
     public $custom_fields_3 = '';
+    
+    public $client_attributes = '';
     
     public $phone_response_data = '';
     

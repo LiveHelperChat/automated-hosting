@@ -410,6 +410,11 @@ $def->properties['full_xmpp_visitors_tracking']->columnName   = 'full_xmpp_visit
 $def->properties['full_xmpp_visitors_tracking']->propertyName = 'full_xmpp_visitors_tracking';
 $def->properties['full_xmpp_visitors_tracking']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['client_attributes'] = new ezcPersistentObjectProperty();
+$def->properties['client_attributes']->columnName   = 'client_attributes';
+$def->properties['client_attributes']->propertyName = 'client_attributes';
+$def->properties['client_attributes']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 return $def;
 
 ?>

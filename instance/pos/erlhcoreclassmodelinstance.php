@@ -295,6 +295,12 @@ $def->properties['phone_response_data']->columnName   = 'phone_response_data';
 $def->properties['phone_response_data']->propertyName = 'phone_response_data';
 $def->properties['phone_response_data']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+// Client attributes
+$def->properties['client_attributes'] = new ezcPersistentObjectProperty();
+$def->properties['client_attributes']->columnName   = 'client_attributes';
+$def->properties['client_attributes']->propertyName = 'client_attributes';
+$def->properties['client_attributes']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 // How long chat has to be not accepted before
 $def->properties['phone_response_timeout_data'] = new ezcPersistentObjectProperty();
 $def->properties['phone_response_timeout_data']->columnName   = 'phone_response_timeout_data';

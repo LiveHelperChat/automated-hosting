@@ -82,6 +82,7 @@ class erLhcoreClassModelInstance {
                'one_per_account' => $this->one_per_account,
                'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
                'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
+               'client_attributes' => $this->client_attributes,
        );
    }
    
@@ -244,7 +245,15 @@ class erLhcoreClassModelInstance {
 	   			$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);
 	   			return $this->reseller_instances_count;
 	   		break;
-	   			
+	   		
+	   		case 'client_attributes_array':
+	   		    $this->client_attributes_array = json_decode($this->client_attributes,true);
+	   		    if (!is_array($this->client_attributes_array)) {
+	   		        $this->client_attributes_array = array();
+	   		    }
+	   		    return $this->client_attributes_array;
+	   		    break;
+	   		    
 	   		default:
 	   			;
 	   		break;
@@ -585,6 +594,7 @@ class erLhcoreClassModelInstance {
    public $phone_default_department = 0;
    public $phone_response_data = '';   
    public $phone_response_timeout_data = '';
+   public $client_attributes = '';
    
    public $full_xmpp_chat_supported = 1;
    public $full_xmpp_visitors_tracking = 1;

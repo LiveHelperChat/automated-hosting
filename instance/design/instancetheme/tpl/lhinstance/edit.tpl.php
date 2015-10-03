@@ -14,6 +14,7 @@
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></li>
+		<li role="presentation"><a href="#clientdata" aria-controls="clientdata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client data');?></a></li>
 		<li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Users')?></a></li>
 		<li role="presentation"><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
 		<li role="presentation"><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
@@ -49,8 +50,16 @@
 						<?php if ($instance->is_reseller) : ?><li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li><?php endif;?>
 					</ul>
 			</div>	
-		</div> 
+		  </div> 
 		</div>
+		
+		<div role="tabpanel" class="tab-pane" id="clientdata">
+		   <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#clientdata" method="post" autocomplete="off">		
+				<?php include(erLhcoreClassDesign::designtpl('lhinstance/client_data.tpl.php'));?>
+			    <input type="submit" class="btn btn-default" name="UpdateClientData" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
+			</form>
+		</div>
+		
 		<div role="tabpanel" class="tab-pane" id="users">
 		     <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#users" method="post" autocomplete="off">		
 				
