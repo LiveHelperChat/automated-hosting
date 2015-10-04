@@ -121,7 +121,10 @@ if (strcmp ($res, "VERIFIED") == 0) {
 		    	}
 	
 		    	$instance->saveThis();
-		    		    	    		
+
+		    	// Set expire inform status
+		    	$instance->setExpireInformStatus();
+		    	
 	    		$db->commit();
 	    	} catch (Exception $e) {
 	    		$db->rollback();

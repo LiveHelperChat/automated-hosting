@@ -608,7 +608,10 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
     }
     
     if (count($Errors) == 0) {
+        
         $Instance->saveThis();
+        
+        $Instance->setExpireInformStatus();
         
         if (isset($_POST['Save_departament'])) {
             erLhcoreClassModule::redirect('instance/list');

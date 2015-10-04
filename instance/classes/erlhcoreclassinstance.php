@@ -143,7 +143,7 @@ class erLhcoreClassInstance{
 	   	}
 
 	   	$tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/email.tpl.php');
-	   	$tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'password' => $password));
+	   	$tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'password' => $password, 'client_attributes_array' => $instance->client_attributes_array));
 
 	   	$mail = new PHPMailer();
 	   	$mail->CharSet = 'UTF-8';
@@ -151,8 +151,6 @@ class erLhcoreClassInstance{
 	   	$mail->FromName = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->Subject = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
- 
-	   	$tpl->set('client_attributes_array',$instance->client_attributes_array);
 
 	   	$mail->Body = $tpl->fetch();
 	   	$mail->AddAddress( $instance->email );
@@ -179,6 +177,86 @@ class erLhcoreClassInstance{
 	   	
    }
 
+   /**
+    * Sends expire mail
+    */
+   public static function sendExpireMail(erLhcoreClassModelInstance $instance, $expireOption)
+   {
+       $cfg = erConfigClassLhConfig::getInstance();
+       
+       $originalSiteAccess = erLhcoreClassSystem::instance()->SiteAccess;
+       
+       if ($instance->locale != '') {
+           erLhcoreClassSystem::instance()->setSiteAccessByLocale($instance->locale);
+       }
+       
+       $tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/expire_options_mails/' . $expireOption['template']);
+       $tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'client_attributes_array' => $instance->client_attributes_array));
+       
+       $mail = new PHPMailer();
+       $mail->CharSet = 'UTF-8';
+       $mail->Sender = $mail->From = $cfg->getSetting( 'site', 'seller_mail');
+       $mail->FromName = $cfg->getSetting( 'site', 'seller_title');
+       $mail->Subject = $expireOption['mail']['subject'];
+       $mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
+       
+       $mail->Body = $tpl->fetch();
+       $mail->AddAddress( $instance->email );
+       
+       erLhcoreClassChatMail::setupSMTP($mail);
+       
+       $mail->Send();
+       $mail->ClearAddresses();
+   }
+   
+   /**
+    * @desc returns expire options
+    * 
+    * @return array()
+    */
+   public static function getExpireOptions()
+   {
+       $expireOptionsFile = ltrim(erLhcoreClassDesign::design('expire_options/expire_options.php'),'/');
+        
+       if (file_exists($expireOptionsFile)) {
+           return include $expireOptionsFile;
+       }
+       
+       return array();
+   }
+   
+   /**
+    * Processes all informing actions about expiring instances.
+    * Sponsored :)
+    * 
+    * */
+   public static function informAboutExpiration(){
+       
+       $status = array();
+       
+       foreach (self::getExpireOptions() as $expireOption) {
+
+           foreach (erLhcoreClassModelInstance::getList($expireOption['filter']) as $item) {
+
+               $status[] = "Expire option - ".$expireOption['template'].'-'.$item->id;
+
+               foreach ($expireOption['set'] as $attr => $attrValue) {
+                   $item->$attr = $attrValue;                       
+               }
+               
+               $item->saveThis();
+               
+               // Send e-mail only if enabled
+               if ($expireOption['enabled'] == true) {
+                    self::sendExpireMail($item, $expireOption);
+                    $status[] = "Informing about expiration...";
+               }
+           }
+       }
+       
+       return $status;
+   }
+   
    private static $persistentSession;
 
    public static $instanceChat = null;

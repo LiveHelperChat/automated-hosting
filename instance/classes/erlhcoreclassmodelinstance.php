@@ -84,6 +84,7 @@ class erLhcoreClassModelInstance
             'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
             'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
             'client_attributes' => $this->client_attributes,
+            'expire_inform_status' => $this->expire_inform_status,
         );
     }
 
@@ -373,6 +374,39 @@ class erLhcoreClassModelInstance
         return $objects;
     }
 
+    /**
+     * Adjust inform workflow attributes based on expire data
+     * */
+    public function setExpireInformStatus() {
+        
+        $expireOptions = erLhcoreClassInstance::getExpireOptions();
+        
+        $informStatusSet = false;
+        
+        foreach ($expireOptions as $expireOption) {            
+            $expireOption['filter']['filter']['id'] = $this->id;      
+            
+            // We ignore status at this stage
+            unset($expireOption['filter']['filter']['expire_inform_status']);
+                  
+            foreach (erLhcoreClassModelInstance::getList($expireOption['filter']) as $item) {
+                foreach ($expireOption['set'] as $attr => $attrValue) {
+                    
+                    $this->$attr = $attrValue;
+                    $this->saveThis();
+                    
+                    $informStatusSet = true;
+                }
+            }
+        }
+        
+        // None of above filters matched, so we can set default value
+        if ($informStatusSet == false) {
+            $this->expire_inform_status = 0;
+            $this->saveThis();
+        }
+    }
+    
     const PENDING_CREATE = 0;
 
     const WORKING = 1;
@@ -527,6 +561,8 @@ class erLhcoreClassModelInstance
     public $max_operators = 0;
 
     public $one_per_account = 0;
+    
+    public $expire_inform_status = 0;
     
     public $locale = '';
 

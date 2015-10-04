@@ -12,6 +12,9 @@ if ($cfgSite->getSetting( 'site', 'expire_disabled', false ) == false)
     }
 }
 
+echo "Expire status:\n";
+print_r(erLhcoreClassInstance::informAboutExpiration());
+
 foreach (erLhcoreClassModelInstance::getList(array('filter' => array('terminate' => 1))) as $item) {
 	$item->removeThis();
 }

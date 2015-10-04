@@ -83,6 +83,7 @@ class erLhcoreClassModelInstance {
                'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
                'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
                'client_attributes' => $this->client_attributes,
+               'expire_inform_status' => $this->expire_inform_status,
        );
    }
    
@@ -598,6 +599,8 @@ class erLhcoreClassModelInstance {
    
    public $full_xmpp_chat_supported = 1;
    public $full_xmpp_visitors_tracking = 1;
+   
+   public $expire_inform_status = 0;
    
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';

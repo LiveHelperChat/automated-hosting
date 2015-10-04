@@ -618,6 +618,14 @@
                 "extra": ""
             },
             {
+                "field": "expire_inform_status",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
                 "field": "client_attributes",
                 "type": "text",
                 "null": "NO",

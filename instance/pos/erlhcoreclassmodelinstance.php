@@ -422,6 +422,11 @@ $def->properties['full_xmpp_visitors_tracking']->columnName   = 'full_xmpp_visit
 $def->properties['full_xmpp_visitors_tracking']->propertyName = 'full_xmpp_visitors_tracking';
 $def->properties['full_xmpp_visitors_tracking']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['expire_inform_status'] = new ezcPersistentObjectProperty();
+$def->properties['expire_inform_status']->columnName   = 'expire_inform_status';
+$def->properties['expire_inform_status']->propertyName = 'expire_inform_status';
+$def->properties['expire_inform_status']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>
