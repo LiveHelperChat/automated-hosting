@@ -152,18 +152,20 @@ class erLhcoreClassInstance{
 	   	$mail->Subject = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
 
-	   	$mail->Body = $tpl->fetch();
+	   	
 	   	$mail->AddAddress( $instance->email );
 
 	   	erLhcoreClassChatMail::setupSMTP($mail);
-
-	   	$mail->Send();
-	   	$mail->ClearAddresses();
 	   	
 	   	// Dispatch event for listeners
 	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.registered.created', array(
-	   	    'instance' => $instance
+	   	    'instance' => & $instance,
+	   	    'tpl' => & $tpl
 	   	));
+	   	
+	   	$mail->Body = $tpl->fetch();
+	   	$mail->Send();
+	   	$mail->ClearAddresses();
 	   	
 	   	$db->query('USE '.$cfg->getSetting( 'db', 'database'));
 	   	
