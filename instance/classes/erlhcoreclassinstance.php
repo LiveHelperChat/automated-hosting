@@ -160,7 +160,8 @@ class erLhcoreClassInstance{
 	   	// Dispatch event for listeners
 	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.registered.created', array(
 	   	    'instance' => & $instance,
-	   	    'tpl' => & $tpl
+	   	    'tpl' => & $tpl,
+	   	    'mail' => & $mail,
 	   	));
 	   	
 	   	$mail->Body = $tpl->fetch();
