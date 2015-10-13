@@ -10,7 +10,7 @@
 <?php echo $instance->request,"\n\n";?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Valid untill');?>:
-<?php echo date('Y-m-d',$instance->expires),"\n\n";?>
+<?php echo $instance->expires > 0 ? date('Y-m-d',$instance->expires) : '-',"\n\n";?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Recommended embed code');?>:<?php echo "\n";?>
 <?php echo '<script type="text/javascript">
