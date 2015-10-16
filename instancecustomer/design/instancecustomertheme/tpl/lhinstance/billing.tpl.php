@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Expires');?></td>
-				<td><?php echo date('Y-m-d H:i:s',$instance->expires)?></td>
+				<td><?php echo $instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : '-'?></td>
 			</tr>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Maximum operators');?></td>
