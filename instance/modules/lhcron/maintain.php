@@ -2,12 +2,11 @@
 
 // php cron.php -s site_admin -e instance -c cron/maintain
 
-
 $cfgSite = erConfigClassLhConfig::getInstance();
 
 if ($cfgSite->getSetting( 'site', 'expire_disabled', false ) == false)
 {
-    foreach (erLhcoreClassModelInstance::getList(array('filtergt' => array('expires' => 0),'filterlt' => array('expires' => time()-(14*24*3600)))) as $item) {
+    foreach (erLhcoreClassModelInstance::getList(array('filtergt' => array('expires' => 0),'filterlt' => array('expires' => time()-($cfgSite->getSetting( 'site', 'terminate_period', 14 )*24*3600)))) as $item) {
     	$item->removeThis();
     }
 }
