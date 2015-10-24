@@ -1291,3 +1291,6 @@ ALTER TABLE `lh_chat_online_user` ADD `user_active` int(11) NOT NULL DEFAULT 0, 
 
 INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('dwo',	'',	'');
 ALTER TABLE `lh_canned_msg` ADD INDEX `position_title` (`position`, `title`);
+
+ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help` int(11) NOT NULL DEFAULT '1', COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help_timeout` int(11) NOT NULL DEFAULT '24', COMMENT='';
