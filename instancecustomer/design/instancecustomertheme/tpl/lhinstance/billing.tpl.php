@@ -1,4 +1,4 @@
-<h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Billing');?></h1>
+<h1><?php include(erLhcoreClassDesign::designtpl('lhinstance/instance_titles/billing.tpl.php'));?></h1>
 
 <?php if (isset($client_title_updated)) : $msg = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Updated'); ?>
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
