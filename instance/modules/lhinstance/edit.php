@@ -78,6 +78,31 @@ if (isset($_POST['ChangePassword'])) {
     }
 }
 
+/**
+ * Update extension
+ * */
+if (isset($_GET['update_extension'])) {
+    $cfg = erConfigClassLhConfig::getInstance();
+    $secretHash = $cfg->getSetting('site','seller_secret_hash');
+    $hash = sha1($Instance->id .'extensions'. date('Ym') . $secretHash);
+    $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $Instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/extensionsstructure/' . $Instance->id . '/' . date('Ym') . '/' . $hash;
+    $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
+    $tpl->set('instance_maintain_message', $response == '' ? erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Instance extension updated') : htmlspecialchars($response));
+}
+
+/**
+ * Update official
+ * */
+if (isset($_GET['update_official'])) {
+    $db = ezcDbInstance::get();
+    $cfg = erConfigClassLhConfig::getInstance();
+    $contentData = erLhcoreClassModelChatOnlineUser::executeRequest('https://raw.githubusercontent.com/LiveHelperChat/livehelperchat/master/lhc_web/doc/update_db/structure.json');
+    $db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$Instance->id);
+    erLhcoreClassUpdate::doTablesUpdate(json_decode($contentData,true));
+    $db->query('USE '.$cfg->getSetting( 'db', 'database'));
+    $tpl->set('instance_maintain_message', erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Instances updated'));
+}
+
 if (isset($_POST['UpdateUsers'])) {
     $definition = array(
         'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),

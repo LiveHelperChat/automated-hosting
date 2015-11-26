@@ -39,7 +39,7 @@
 				      <input type="submit" class="btn btn-default" name="Update_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>"/>
 				      <input type="submit" class="btn btn-default" name="Cancel_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Cancel');?>"/>
 				    </div>
-				    	
+
 				</form>
 			</div>
 			<div class="col-sm-4">
@@ -49,6 +49,23 @@
 						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Suspended by reseller');?> - <?php if ($instance->reseller_suspended) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
 						<?php if ($instance->is_reseller) : ?><li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li><?php endif;?>
 					</ul>
+
+					<div class="panel panel-default">
+                      <div class="panel-heading"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Quick maintain');?></div>
+                      <div class="panel-body">
+                      
+                          <?php if (isset($instance_maintain_message)) : ?>
+                            <div class="alert alert-info" role="alert">
+                              <?php echo $instance_maintain_message; // No need to escape beacause escaped in module?>
+                            </div>
+                          <?php endif;?>
+                          
+                          <a href="?update_official=1" class="btn btn-default"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update instance stucture with official structure')?></a>
+                          <br/>
+                          <br/>
+                          <a href="?update_extension=1" class="btn btn-default"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update extensions structure')?></a>
+                      </div>
+                    </div>
 			</div>	
 		  </div> 
 		</div>
