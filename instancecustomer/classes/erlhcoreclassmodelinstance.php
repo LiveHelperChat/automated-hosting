@@ -12,6 +12,7 @@ class erLhcoreClassModelInstance {
                'email'    		=> $this->email,
                'status'    		=> $this->status,
                'time_zone'    	=> $this->time_zone,
+               'full_domain'    	=> $this->full_domain,
                'date_format'    		=> $this->date_format,
                'date_hour_format'    	=> $this->date_hour_format,
                'date_date_hour_format'  => $this->date_date_hour_format,
@@ -527,13 +528,13 @@ class erLhcoreClassModelInstance {
    public $request = 0;   
    public $expires = 0;
    public $address = '';
+   public $full_domain = 0;
    public $email = '';
    public $time_zone = '';
    public $date_format = 'Y-m-d';
    public $date_hour_format = 'H:i:s';
    public $date_date_hour_format = 'Y-m-d H:i:s';
    public $status = self::PENDING_CREATE;
-   
    public $files_supported = 1;
    public $atranslations_supported = 1;
    public $cobrowse_supported = 1;

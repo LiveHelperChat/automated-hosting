@@ -10,6 +10,7 @@ class erLhcoreClassModelInstance
             'request' => $this->request,
             'expires' => $this->expires,
             'address' => $this->address,
+            'full_domain' => $this->full_domain,
             'email' => $this->email,
             'status' => $this->status,
             'time_zone' => $this->time_zone,
@@ -246,6 +247,22 @@ class erLhcoreClassModelInstance
                 ;
                 break;
         }
+    }
+
+    /**
+     * Top
+     * */
+    public static function findOne($params = array())
+    {
+        $params['limit'] = 1;
+
+        $items = self::getList($params);
+
+        if (!empty($items)) {
+            return array_shift($items);
+        }
+
+        return false;
     }
 
     public function saveThis()
@@ -551,6 +568,8 @@ class erLhcoreClassModelInstance
     public $full_xmpp_chat_supported = 1;
     
     public $full_xmpp_visitors_tracking = 1;
+    
+    public $full_domain = 0;
         
     public $attr_int_1 = 0;
     

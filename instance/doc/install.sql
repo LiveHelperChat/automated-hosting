@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `address` varchar(30) NOT NULL,
   `email` varchar(250) NOT NULL,
   `status` int(11) NOT NULL,
+  `full_domain` int(11) NOT NULL,
   `time_zone` varchar(200) NOT NULL,
   `date_format` varchar(200) NOT NULL DEFAULT 'Y-m-d',
   `date_hour_format` varchar(200) NOT NULL DEFAULT 'H:i:s',

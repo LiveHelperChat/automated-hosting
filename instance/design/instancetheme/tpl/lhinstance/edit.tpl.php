@@ -96,23 +96,22 @@
 			</form>	
 		</div>
 		<div role="tabpanel" class="tab-pane" id="reseller">
-		
-		<div class="row">
-			<div class="col-sm-8">
-				<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#reseller" method="post" autocomplete="off">		
-					<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>	        										
-				
-				    <input type="submit" class="btn btn-default" name="UpdateReseller" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
-				    	
-				 </form>	
-			 </div>
-			<div class="col-sm-4">
-					<ul class="circle">
-						<li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li>
-					</ul>
-			</div>	
-		</div>
-		
+
+    		<div class="row">
+    			<div class="col-sm-8">
+    				<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#reseller" method="post" autocomplete="off">
+    					<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>
+    				    <input type="submit" class="btn btn-default" name="UpdateReseller" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>" />
+    				</form>
+    			 </div>
+    			<div class="col-sm-4">
+    				 <ul class="circle">
+    					<li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li>
+    				 </ul>
+    				 <?php include(erLhcoreClassDesign::designtpl('lhinstance/assigned/widget.tpl.php'));?>
+    			</div>
+    		</div>
+
 		</div>
 		<div role="tabpanel" class="tab-pane" id="login">
 		
@@ -123,7 +122,6 @@
         				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Username')?></label>
         				<input class="form-control" type="text" value="" name="InstanceUsername" autocomplete="off">
     				</div>
-    				
     				<div class="form-group">	
     				    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Password')?></label>
     				    <input class="form-control" type="password" value="" name="InstancePassword" autocomplete="off">
@@ -135,9 +133,6 @@
 		          <a href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
 		      </div>
 		  </div>
-		
-		  
-			
 					
 		</div>
 		<div role="tabpanel" class="tab-pane" id="features">

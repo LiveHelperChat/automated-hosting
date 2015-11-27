@@ -14,6 +14,12 @@ $ViewList['edit'] = array(
     'functions' => array( 'manageinstance' )
 );
 
+$ViewList['assign'] = array(
+    'params' => array('instance_id'),
+    'uparams' => array('unasign'),
+    'functions' => array( 'manageinstance' )
+);
+
 $ViewList['new'] = array(
 		'params' => array(),
 		'functions' => array( 'manageinstance' )

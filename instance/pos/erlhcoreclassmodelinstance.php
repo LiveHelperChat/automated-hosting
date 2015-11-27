@@ -69,6 +69,11 @@ $def->properties['terminate']->columnName   = 'terminate';
 $def->properties['terminate']->propertyName = 'terminate';
 $def->properties['terminate']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['full_domain'] = new ezcPersistentObjectProperty();
+$def->properties['full_domain']->columnName   = 'full_domain';
+$def->properties['full_domain']->propertyName = 'full_domain';
+$def->properties['full_domain']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['attr_int_1'] = new ezcPersistentObjectProperty();
 $def->properties['attr_int_1']->columnName   = 'attr_int_1';
 $def->properties['attr_int_1']->propertyName = 'attr_int_1';

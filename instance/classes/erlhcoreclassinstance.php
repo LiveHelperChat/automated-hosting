@@ -23,6 +23,7 @@ class erLhcoreClassInstance{
    {
    		$parts = explode('.', $_SERVER['HTTP_HOST']);
    		$subdomain = array_shift($parts);
+
    		$items = erLhcoreClassModelInstance::getList(array('filter' => array('address' => $subdomain)));
 
    		if ( !empty($items) ) {
@@ -35,7 +36,7 @@ class erLhcoreClassInstance{
    			exit;
    		}
    }
-   
+
    // Takes actions on instance database based on applied operators limits
    public static function performOperatorsLimit($instance) {
        $cfg = erConfigClassLhConfig::getInstance();
@@ -46,7 +47,7 @@ class erLhcoreClassInstance{
        $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/setoperatorslimits/' . $instance->id . '/' . date('Ym') . '/' . $instance->max_operators . '/' . $hash;
        $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
              
-       if ($response == 'ok') {       
+       if ($response == 'ok') {
            return true;
        } else {
            throw new Exception('Could not apply a limits');
@@ -62,9 +63,9 @@ class erLhcoreClassInstance{
 	   
 	   	$url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
 	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
-	   	   	
+
 	   	$responseData = json_decode($response);
-	   	
+
 	   	if (isset($responseData->error) && $responseData->error == false){
 	   		self::deleteDatabase($instance->id);
 	   		return true;

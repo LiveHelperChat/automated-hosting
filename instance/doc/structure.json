@@ -18,6 +18,14 @@
                 "extra": ""
             },
             {
+                "field": "full_domain",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
                 "field": "expires",
                 "type": "int(11)",
                 "null": "NO",

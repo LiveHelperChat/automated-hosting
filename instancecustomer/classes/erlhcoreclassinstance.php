@@ -24,10 +24,14 @@ class erLhcoreClassInstance{
         if (isset($_SERVER['HTTP_HOST']))
         {
             $cfg = erConfigClassLhConfig::getInstance();
-           
-       		$subdomain = str_replace('.'.$cfg->getSetting( 'site', 'seller_domain'), '', $_SERVER['HTTP_HOST']);   		
-       		$items = erLhcoreClassModelInstance::getList(array('filter' => array('address' => $subdomain)));
-       		
+
+       		$subdomain = str_replace('.'.$cfg->getSetting( 'site', 'seller_domain'), '', $_SERVER['HTTP_HOST']);
+
+       		$session = erLhcoreClassInstance::getSession();
+       		$q = $session->createFindQuery('erLhcoreClassModelInstance');
+       		$q->where( $q->expr->eq( 'address', $q->bindValue( $subdomain ) ) . ' OR (full_domain = 1 AND ' . $q->expr->eq( 'address', $q->bindValue( $_SERVER['HTTP_HOST'] ) ). ')' );
+       		$items = $session->find($q);
+
        		if ( !empty($items) ) {
        			erLhcoreClassInstance::$instanceChat = array_shift($items);
        			$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').erLhcoreClassInstance::$instanceChat->id);

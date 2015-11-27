@@ -113,6 +113,7 @@ if (isset($_POST['Save_departament'])) {
         'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'fullAddress' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'full_xmpp_chat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'ClientData' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw',null,FILTER_REQUIRE_ARRAY)
     );
@@ -130,6 +131,12 @@ if (isset($_POST['Save_departament'])) {
         $Instance->one_per_account = 1;
     } else {
         $Instance->one_per_account = 0;
+    }
+    
+    if ($form->hasValidData('fullAddress') && $form->fullAddress == true) {
+        $Instance->full_domain = 1;
+    } else {
+        $Instance->full_domain = 0;
     }
     
     if ($form->hasValidData('full_xmpp_chat_supported') && $form->full_xmpp_chat_supported == true) {

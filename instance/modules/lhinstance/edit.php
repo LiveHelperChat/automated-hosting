@@ -52,10 +52,12 @@ erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.features_tit
 $tpl->set('modules_features', $modules);
 
 if (isset($_POST['ChangePassword'])) {
+
     $definition = array(
         'InstancePassword' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'),
         'InstanceUsername' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw')
     );
+    
     $form = new ezcInputForm(INPUT_POST, $definition);
     $Errors = array();
     
@@ -567,7 +569,8 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
         'Expires' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'AttrInt1' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt2' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
-        'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int')
+        'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
+        'fullAddress' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -595,6 +598,12 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
         $Instance->suspended = 1;
     } else {
         $Instance->suspended = 0;
+    }
+    
+    if ($form->hasValidData('fullAddress') && $form->fullAddress == true) {      
+        $Instance->full_domain = 1;
+    } else {
+        $Instance->full_domain = 0;
     }
     
     if ($form->hasValidData('Terminate') && $form->Terminate == true) {
