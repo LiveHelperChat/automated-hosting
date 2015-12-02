@@ -152,7 +152,6 @@ class erLhcoreClassInstance{
 	   	$mail->FromName = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->Subject = $cfg->getSetting( 'site', 'seller_title');
 	   	$mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
-
 	   	
 	   	$mail->AddAddress( $instance->email );
 

@@ -17,7 +17,13 @@ foreach (erLhcoreClassModelInstance::getList(array('limit' => 1000000,'filter' =
        
     $secretHash = $cfg->getSetting('site','seller_secret_hash');    
     $hash = sha1($instance->id .'extensions'. date('Ym') . $secretHash);        
-    $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/extensionsstructure/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+
+    if ($instance->full_domain == 1) {
+        $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $instance->address .'/index.php/instance/extensionsstructure/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+    } else {
+        $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/extensionsstructure/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+    }
+
     $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
     echo "Response:\n";
     print_r($response);

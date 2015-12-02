@@ -87,8 +87,15 @@ if (isset($_GET['update_extension'])) {
     $cfg = erConfigClassLhConfig::getInstance();
     $secretHash = $cfg->getSetting('site','seller_secret_hash');
     $hash = sha1($Instance->id .'extensions'. date('Ym') . $secretHash);
-    $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $Instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/extensionsstructure/' . $Instance->id . '/' . date('Ym') . '/' . $hash;
+
+    if ($Instance->full_domain == 1) {
+        $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $Instance->address . '/index.php/instance/extensionsstructure/' . $Instance->id . '/' . date('Ym') . '/' . $hash;
+    } else {
+        $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode') . $Instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/extensionsstructure/' . $Instance->id . '/' . date('Ym') . '/' . $hash;
+    }
+
     $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
+
     $tpl->set('instance_maintain_message', $response == '' ? erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Instance extension updated') : htmlspecialchars($response));
 }
 
