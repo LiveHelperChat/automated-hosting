@@ -112,8 +112,11 @@ class erLhcoreClassExtensionInstancecustomer {
 		    
 		    // Disable cache expire for customers, only through command line possible
 		    erConfigClassLhCacheConfig::getInstance()->setExpiredInRuntime(true);
-		    
-    		erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
+
+            if ($instanceCustomer->time_zone != '') {
+                erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
+            }
+
     		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;
     		erLhcoreClassModule::$dateHourFormat = $instanceCustomer->date_hour_format;
     		erLhcoreClassModule::$dateDateHourFormat = $instanceCustomer->date_date_hour_format;
