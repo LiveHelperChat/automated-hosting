@@ -162,6 +162,7 @@ class erLhcoreClassInstance{
 	   	    'instance' => & $instance,
 	   	    'tpl' => & $tpl,
 	   	    'mail' => & $mail,
+	   	    'password' => $password
 	   	));
 	   	
 	   	$mail->Body = $tpl->fetch();
