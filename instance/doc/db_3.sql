@@ -1326,3 +1326,13 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 
 ALTER TABLE `lh_users` ADD `chat_nickname` varchar(100) NOT NULL, COMMENT='';
 ALTER TABLE `lh_chat` ADD INDEX `product_id` (`product_id`);
+
+CREATE TABLE `lh_abstract_rest_api_key` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `api_key` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `active` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `api_key` (`api_key`),
+  KEY `user_id` (`user_id`)
+) DEFAULT CHARSET=utf8;
