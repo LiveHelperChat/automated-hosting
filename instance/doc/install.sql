@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `expires` int(11) NOT NULL,
   `suspended` int(11) NOT NULL,
   `terminate` int(11) NOT NULL,
-  `address` varchar(30) NOT NULL,
+  `address` varchar(60) NOT NULL,
   `email` varchar(250) NOT NULL,
   `status` int(11) NOT NULL,
   `full_domain` int(11) NOT NULL,

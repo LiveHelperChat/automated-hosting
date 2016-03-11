@@ -51,7 +51,7 @@
             },
             {
                 "field": "address",
-                "type": "varchar(30)",
+                "type": "varchar(60)",
                 "null": "NO",
                 "key": "",
                 "default": null,
