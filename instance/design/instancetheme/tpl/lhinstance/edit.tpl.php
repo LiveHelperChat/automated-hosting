@@ -45,7 +45,12 @@
 			<div class="col-sm-4">
 					<ul>
 						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Active');?>: <?php if ($instance->is_active) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
-						<li><a target="_blank" href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin">http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin</a></li>
+						<li>
+						<?php if ($instance->full_domain == 0) : ?>
+    		              <a href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin" target="_blank">http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin</a>
+    		            <?php else : ?>
+    		              <a href="http://<?php echo $instance->address?>/site_admin" target="_blank">http://<?php echo $instance->address?>/site_admin</a>
+    		            <?php endif;?>
 						<li><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Suspended by reseller');?> - <?php if ($instance->reseller_suspended) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','yes');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','no');?><?php endif;?></li>
 						<?php if ($instance->is_reseller) : ?><li><?php echo $instance->reseller_instances_count?>/<?php echo $instance->reseller_max_instances?></li><?php endif;?>
 					</ul>
