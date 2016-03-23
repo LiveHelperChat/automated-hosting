@@ -19,6 +19,11 @@ $def->properties['expires']->columnName   = 'expires';
 $def->properties['expires']->propertyName = 'expires';
 $def->properties['expires']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['full_domain'] = new ezcPersistentObjectProperty();
+$def->properties['full_domain']->columnName   = 'full_domain';
+$def->properties['full_domain']->propertyName = 'full_domain';
+$def->properties['full_domain']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['address'] = new ezcPersistentObjectProperty();
 $def->properties['address']->columnName   = 'address';
 $def->properties['address']->propertyName = 'address';
