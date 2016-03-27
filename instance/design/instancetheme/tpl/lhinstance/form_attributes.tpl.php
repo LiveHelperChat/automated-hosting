@@ -41,3 +41,8 @@
     	<?php endforeach;?>
     </select>
 </div>
+
+<div class="form-group">
+    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default URL')?></label>
+    <input class="form-control" type="text" value="<?php echo htmlspecialchars($instance->default_url)?>" name="DefaultURL">	
+</div>

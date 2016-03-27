@@ -425,6 +425,11 @@ $def->properties['client_attributes']->columnName   = 'client_attributes';
 $def->properties['client_attributes']->propertyName = 'client_attributes';
 $def->properties['client_attributes']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['default_url'] = new ezcPersistentObjectProperty();
+$def->properties['default_url']->columnName   = 'default_url';
+$def->properties['default_url']->propertyName = 'default_url';
+$def->properties['default_url']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 return $def;
 
 ?>

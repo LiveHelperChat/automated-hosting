@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `siteaccess` varchar(3) NOT NULL,
   `is_reseller` tinyint(1) NOT NULL DEFAULT '0',
   `reseller_tite` varchar(50) NOT NULL,
+  `default_url` varchar(200) NOT NULL,
   `reseller_max_instance_request` int(11) NOT NULL,
   `reseller_secret_hash` varchar(20) NOT NULL,
   `reseller_max_instances` int(11) NOT NULL,

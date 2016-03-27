@@ -29,6 +29,7 @@ class erLhcoreClassModelInstance
             'reseller_id' => $this->reseller_id,
             'reseller_request' => $this->reseller_request,
             'reseller_suspended' => $this->reseller_suspended,
+            'default_url' => $this->default_url,
             'files_supported' => $this->files_supported,
             'atranslations_supported' => $this->atranslations_supported,
             'cobrowse_supported' => $this->cobrowse_supported,

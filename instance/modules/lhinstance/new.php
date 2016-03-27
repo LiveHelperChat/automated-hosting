@@ -69,6 +69,7 @@ if (isset($_POST['Save_departament'])) {
         'DateHourFormat' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'DateAndHourFormat' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'UserTimeZone' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
+        'DefaultURL' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'FrontSiteaccess' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'Language' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'UserTimeZone' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
@@ -149,6 +150,10 @@ if (isset($_POST['Save_departament'])) {
         $Instance->full_xmpp_visitors_tracking = 1;
     } else {
         $Instance->full_xmpp_visitors_tracking = 0;
+    }
+    
+    if ($form->hasValidData('DefaultURL')) {
+        $Instance->default_url = $form->DefaultURL;
     }
     
     if ($form->hasValidData('max_operators')) {

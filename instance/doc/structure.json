@@ -82,6 +82,14 @@
                 "extra": ""
             },
             {
+                "field": "default_url",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
                 "field": "date_format",
                 "type": "varchar(200)",
                 "null": "NO",

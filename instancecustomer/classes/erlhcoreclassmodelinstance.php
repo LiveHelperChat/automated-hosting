@@ -29,6 +29,7 @@ class erLhcoreClassModelInstance {
        		   'reseller_request'  			=> $this->reseller_request,
        		   'reseller_suspended'  		=> $this->reseller_suspended,
                'files_supported' => $this->files_supported,
+               'default_url' => $this->default_url,
                'atranslations_supported' => $this->atranslations_supported,
                'cobrowse_supported' => $this->cobrowse_supported,
                'cobrowse_forms_supported' => $this->cobrowse_forms_supported,
@@ -597,6 +598,7 @@ class erLhcoreClassModelInstance {
    public $phone_response_data = '';   
    public $phone_response_timeout_data = '';
    public $client_attributes = '';
+   public $default_url = '';
    
    public $full_xmpp_chat_supported = 1;
    public $full_xmpp_visitors_tracking = 1;

@@ -174,7 +174,8 @@ if (isset($_POST['UpdateAttributes'])) {
         'UserTimeZone' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'FrontSiteaccess' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
         'Language' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
-        'UserTimeZone' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string')
+        'UserTimeZone' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
+        'DefaultURL' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string')
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -202,6 +203,10 @@ if (isset($_POST['UpdateAttributes'])) {
     
     if ($form->hasValidData('FrontSiteaccess')) {
         $Instance->siteaccess = $form->FrontSiteaccess;
+    }
+    
+    if ($form->hasValidData('DefaultURL')) {
+        $Instance->default_url = $form->DefaultURL;
     }
     
     $Instance->saveThis();

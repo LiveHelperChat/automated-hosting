@@ -106,6 +106,8 @@ class erLhcoreClassExtensionInstancecustomer {
 		
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
+		$dispatcher->listen('chat.core.default_url',array($this,'defaultURL'));
+		
 		if (is_object($instanceCustomer))
 		{
 		    erLhcoreClassModule::$cacheDbVariables = false;
@@ -150,9 +152,29 @@ class erLhcoreClassExtensionInstancecustomer {
     				$sysConfiguration->WWWDirLang = '/'.$sysConfiguration->SiteAccess;
     			}
     		}	
-		}	
+		}
 	}
-	
+
+    /**
+     * Overrides default URL
+     * */
+	public function defaultURL($params) {
+	    $defaultURL = ltrim(erLhcoreClassInstance::getInstance()->default_url,'/');
+
+	    if ($defaultURL != '') {
+	        
+	        $paramsURL = explode('/', $defaultURL);
+	        
+	        if (count($paramsURL) > 1) {
+	                     
+	            erLhcoreClassModule::setModule($paramsURL[0]);
+	            erLhcoreClassModule::setView($paramsURL[1]);
+	            
+    	        $params['url']->setCoreURL($defaultURL);
+	        }
+	    }
+	}
+
 	public function canNewUserCanBeCreated($params) {
 	    if (erLhcoreClassInstance::getInstance()->max_operators > 0 && erLhcoreClassModelUser::getUserCount()+1 > erLhcoreClassInstance::getInstance()->max_operators) {
 	       $params['errors'][] = erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','You have exceeded maximum number of allowed operators!');
