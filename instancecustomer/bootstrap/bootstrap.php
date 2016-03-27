@@ -159,20 +159,28 @@ class erLhcoreClassExtensionInstancecustomer {
      * Overrides default URL
      * */
 	public function defaultURL($params) {
-	    $defaultURL = ltrim(erLhcoreClassInstance::getInstance()->default_url,'/');
+	    		        
+	    $possibleLoginSiteAccess = array();
+        erLhcoreClassChatEventDispatcher::getInstance()->dispatch('user.login_site_access', array('loginSiteAccess' => & $possibleLoginSiteAccess));
+        $possibleLoginSiteAccess[] = 'site_admin'; 
 
-	    if ($defaultURL != '') {
-	        
-	        $paramsURL = explode('/', $defaultURL);
-	        
-	        if (count($paramsURL) > 1) {
-	                     
-	            erLhcoreClassModule::setModule($paramsURL[0]);
-	            erLhcoreClassModule::setView($paramsURL[1]);
-	            
-    	        $params['url']->setCoreURL($defaultURL);
-	        }
-	    }
+        // Do not override site admin
+        if (!in_array(erLhcoreClassSystem::instance()->SiteAccess, $possibleLoginSiteAccess)) {    
+    	    $defaultURL = ltrim(erLhcoreClassInstance::getInstance()->default_url,'/');
+    
+    	    if ($defaultURL != '') {
+    	        
+    	        $paramsURL = explode('/', $defaultURL);
+    	        
+    	        if (count($paramsURL) > 1) {
+    	                     
+    	            erLhcoreClassModule::setModule($paramsURL[0]);
+    	            erLhcoreClassModule::setView($paramsURL[1]);
+    	            
+        	        $params['url']->setCoreURL($defaultURL);
+    	        }
+    	    }
+        }
 	}
 
 	public function canNewUserCanBeCreated($params) {
