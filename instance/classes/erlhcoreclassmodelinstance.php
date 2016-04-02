@@ -87,6 +87,7 @@ class erLhcoreClassModelInstance
             'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
             'client_attributes' => $this->client_attributes,
             'expire_inform_status' => $this->expire_inform_status,
+            'login_ip_security' => $this->login_ip_security
         );
     }
 
@@ -589,6 +590,9 @@ class erLhcoreClassModelInstance
     public $siteaccess = 'eng';
 
     public $status = self::PENDING_CREATE;
+    
+    public $login_ip_security = '';
+    
 }
 
 ?>

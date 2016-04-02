@@ -115,8 +115,10 @@ if (isset($_GET['update_official'])) {
 if (isset($_POST['UpdateUsers'])) {
     $definition = array(
         'max_operators' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
-        'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
+        'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'login_ip_security' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw')
     );
+    
     $form = new ezcInputForm(INPUT_POST, $definition);
     $Errors = array();
     
@@ -130,6 +132,10 @@ if (isset($_POST['UpdateUsers'])) {
         $Instance->max_operators = $form->max_operators;
     } else {
         $Instance->max_operators = 0;
+    }
+    
+    if ($form->hasValidData('login_ip_security')) {
+        $Instance->login_ip_security = $form->login_ip_security;
     }
     
     $Instance->saveThis();

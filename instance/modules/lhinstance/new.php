@@ -116,7 +116,8 @@ if (isset($_POST['Save_departament'])) {
         'one_per_account' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'fullAddress' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
         'full_xmpp_chat_supported' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
-        'ClientData' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw',null,FILTER_REQUIRE_ARRAY)
+        'ClientData' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw',null,FILTER_REQUIRE_ARRAY),
+        'login_ip_security' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw')
     );
     
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -418,6 +419,10 @@ if (isset($_POST['Save_departament'])) {
     
     if ($form->hasValidData('Status')) {
         $Instance->status = $form->Status;
+    }
+    
+    if ($form->hasValidData('login_ip_security')) {
+        $Instance->login_ip_security = $form->login_ip_security;
     }
 
     if (! isset($_POST['csfr_token']) || ! $currentUser->validateCSFRToken($_POST['csfr_token'])) {
