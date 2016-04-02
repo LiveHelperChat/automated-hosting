@@ -648,7 +648,15 @@
                 "key": "",
                 "default": "",
                 "extra": ""
-            }
+            },
+            {
+				"field": "login_ip_security",
+				"type": "text",
+				"null": "NO",
+				"key": "",
+				"default": "",
+				"extra": ""
+			}
         ]
     },  
     "tables_data": {    },

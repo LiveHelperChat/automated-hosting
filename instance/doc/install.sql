@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `full_xmpp_chat_supported` int(11) NOT NULL DEFAULT '1',
   `full_xmpp_visitors_tracking` int(11) NOT NULL DEFAULT '1',
   `expire_inform_status` int(11) NOT NULL DEFAULT '0',
+  `login_ip_security` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`),
   KEY `reseller_id` (`reseller_id`)
