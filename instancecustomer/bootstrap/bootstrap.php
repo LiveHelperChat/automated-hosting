@@ -31,6 +31,10 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('theme.edit.restore_image_path',array($this,'themeStoragePath'));
 		$dispatcher->listen('theme.edit.minimize_image_path',array($this,'themeStoragePath'));
 		
+		// Admin theme listeners
+		$dispatcher->listen('admintheme.filedir',array($this,'adminThemeStoragePath'));
+		
+		
 		// Permissions
 		$dispatcher->listen('feature.can_use_forms',array($this,'canUseForms'));
 		$dispatcher->listen('form.index',array($this,'canUseForms'));
@@ -347,7 +351,12 @@ class erLhcoreClassExtensionInstancecustomer {
 	public function tempStoragePath($params){
 		$params['dir'] = 'var/tmpfiles/'.erLhcoreClassInstance::getInstance()->id.'/';
 	}
-	
+
+	public function adminThemeStoragePath($params)
+	{
+	    $params['dir'] = 'var/storageadmintheme/'.date('Y').'y/'.date('m').'/'.date('d').'/'.erLhcoreClassInstance::getInstance()->id.'/'.$params['storage_id'].'/';
+	}
+
 	public function themeStoragePath($params){
 		$params['dir'] = 'var/storagetheme/'.date('Y').'y/'.date('m').'/'.date('d').'/'.erLhcoreClassInstance::getInstance()->id.'/'.$params['storage_id'].'/';
 	}
