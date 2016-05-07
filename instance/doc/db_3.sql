@@ -1349,3 +1349,4 @@ CREATE TABLE `lh_admin_theme` (
 ) DEFAULT CHARSET=utf8;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('default_admin_theme_id',	'0',	0,	'Default admin theme',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('disable_iframe_sharing',	'1',	0,	'Disable iframes in sharing mode',	0);
