@@ -244,6 +244,21 @@ $def->properties['feature_3_supported']->columnName   = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyName = 'feature_3_supported';
 $def->properties['feature_3_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['feature_4_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_4_supported']->columnName   = 'feature_4_supported';
+$def->properties['feature_4_supported']->propertyName = 'feature_4_supported';
+$def->properties['feature_4_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['feature_5_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_5_supported']->columnName   = 'feature_5_supported';
+$def->properties['feature_5_supported']->propertyName = 'feature_5_supported';
+$def->properties['feature_5_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['feature_6_supported'] = new ezcPersistentObjectProperty();
+$def->properties['feature_6_supported']->columnName   = 'feature_6_supported';
+$def->properties['feature_6_supported']->propertyName = 'feature_6_supported';
+$def->properties['feature_6_supported']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['footprint_supported'] = new ezcPersistentObjectProperty();
 $def->properties['footprint_supported']->columnName   = 'footprint_supported';
 $def->properties['footprint_supported']->propertyName = 'footprint_supported';
@@ -350,6 +365,21 @@ $def->properties['custom_fields_3']->columnName   = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyName = 'custom_fields_3';
 $def->properties['custom_fields_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
 
+$def->properties['custom_fields_4'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_4']->columnName   = 'custom_fields_4';
+$def->properties['custom_fields_4']->propertyName = 'custom_fields_4';
+$def->properties['custom_fields_4']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_5'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_5']->columnName   = 'custom_fields_5';
+$def->properties['custom_fields_5']->propertyName = 'custom_fields_5';
+$def->properties['custom_fields_5']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
+$def->properties['custom_fields_6'] = new ezcPersistentObjectProperty();
+$def->properties['custom_fields_6']->columnName   = 'custom_fields_6';
+$def->properties['custom_fields_6']->propertyName = 'custom_fields_6';
+$def->properties['custom_fields_6']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_STRING;
+
 $def->properties['speech_supported'] = new ezcPersistentObjectProperty();
 $def->properties['speech_supported']->columnName   = 'speech_supported';
 $def->properties['speech_supported']->propertyName = 'speech_supported';
@@ -389,6 +419,21 @@ $def->properties['attr_int_3'] = new ezcPersistentObjectProperty();
 $def->properties['attr_int_3']->columnName   = 'attr_int_3';
 $def->properties['attr_int_3']->propertyName = 'attr_int_3';
 $def->properties['attr_int_3']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['attr_int_4'] = new ezcPersistentObjectProperty();
+$def->properties['attr_int_4']->columnName   = 'attr_int_4';
+$def->properties['attr_int_4']->propertyName = 'attr_int_4';
+$def->properties['attr_int_4']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['attr_int_5'] = new ezcPersistentObjectProperty();
+$def->properties['attr_int_5']->columnName   = 'attr_int_5';
+$def->properties['attr_int_5']->propertyName = 'attr_int_5';
+$def->properties['attr_int_5']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
+$def->properties['attr_int_6'] = new ezcPersistentObjectProperty();
+$def->properties['attr_int_6']->columnName   = 'attr_int_6';
+$def->properties['attr_int_6']->propertyName = 'attr_int_6';
+$def->properties['attr_int_6']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
 $def->properties['sugarcrm_supported'] = new ezcPersistentObjectProperty();
 $def->properties['sugarcrm_supported']->columnName   = 'sugarcrm_supported';

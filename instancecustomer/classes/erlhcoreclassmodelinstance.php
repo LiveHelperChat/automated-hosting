@@ -39,6 +39,9 @@ class erLhcoreClassModelInstance {
                'feature_1_supported' => $this->feature_1_supported,
                'feature_2_supported' => $this->feature_2_supported,
                'feature_3_supported' => $this->feature_3_supported,
+               'feature_4_supported' => $this->feature_4_supported,
+               'feature_5_supported' => $this->feature_5_supported,
+               'feature_6_supported' => $this->feature_6_supported,
                'reporting_supported' => $this->reporting_supported,
                'chatbox_supported' => $this->chatbox_supported,
                'browseoffers_supported' => $this->browseoffers_supported,
@@ -71,6 +74,9 @@ class erLhcoreClassModelInstance {
                'custom_fields_1' => $this->custom_fields_1,
                'custom_fields_2' => $this->custom_fields_2,
                'custom_fields_3' => $this->custom_fields_3,
+               'custom_fields_4' => $this->custom_fields_4,
+               'custom_fields_5' => $this->custom_fields_5,
+               'custom_fields_6' => $this->custom_fields_6,
                'speech_supported' => $this->speech_supported,
                'transfer_supported' => $this->transfer_supported,
                'operatorschat_supported' => $this->operatorschat_supported,
@@ -80,6 +86,9 @@ class erLhcoreClassModelInstance {
                'attr_int_1' => $this->attr_int_1,
                'attr_int_2' => $this->attr_int_2,
                'attr_int_3' => $this->attr_int_3,
+               'attr_int_4' => $this->attr_int_4,
+               'attr_int_5' => $this->attr_int_5,
+               'attr_int_6' => $this->attr_int_6,
                'max_operators' => $this->max_operators,
                'one_per_account' => $this->one_per_account,
                'full_xmpp_chat_supported' => $this->full_xmpp_chat_supported,
@@ -547,6 +556,9 @@ class erLhcoreClassModelInstance {
    public $feature_1_supported = 1;
    public $feature_2_supported = 1;
    public $feature_3_supported = 1;   
+   public $feature_4_supported = 1;   
+   public $feature_5_supported = 1;   
+   public $feature_6_supported = 1;   
    public $reporting_supported = 1;
    public $chatbox_supported = 1;
    public $browseoffers_supported = 1;
@@ -583,6 +595,9 @@ class erLhcoreClassModelInstance {
    public $attr_int_1 = 0;   
    public $attr_int_2 = 0;   
    public $attr_int_3 = 0;   
+   public $attr_int_4 = 0;   
+   public $attr_int_5 = 0;   
+   public $attr_int_6 = 0;   
 
    public $max_operators = 0;
    public $one_per_account = 0;
@@ -609,6 +624,9 @@ class erLhcoreClassModelInstance {
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';
    public $custom_fields_3 = '';
+   public $custom_fields_4 = '';
+   public $custom_fields_5 = '';
+   public $custom_fields_6 = '';
       
    // Then reseller get's suspended this attribute is set to 1, to avoid double fetching each time in instance part.
    public $reseller_suspended = 0;

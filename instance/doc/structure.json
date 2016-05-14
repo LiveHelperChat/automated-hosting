@@ -274,6 +274,30 @@
                 "extra": ""
             },
             {
+                "field": "feature_4_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "feature_5_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "feature_6_supported",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
                 "field": "reporting_supported",
                 "type": "int(11)",
                 "null": "NO",
@@ -586,6 +610,30 @@
                 "extra": ""
             },
             {
+                "field": "custom_fields_4",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "custom_fields_5",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
+                "field": "custom_fields_6",
+                "type": "text",
+                "null": "NO",
+                "key": "",
+                "default": "",
+                "extra": ""
+            },
+            {
                 "field": "attr_int_1",
                 "type": "int(11)",
                 "null": "NO",
@@ -603,6 +651,30 @@
             },
             {
                 "field": "attr_int_3",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "attr_int_4",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "attr_int_5",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "attr_int_6",
                 "type": "int(11)",
                 "null": "NO",
                 "key": "",
