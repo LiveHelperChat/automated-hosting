@@ -451,6 +451,7 @@ if (isset($_POST['Save_departament'])) {
         'instance' => & $Instance,
         'tpl' => & $tpl,
         'errors' => & $Errors,
+        'features' => $modules
     ));
     
     if (count($Errors) == 0) {
