@@ -613,7 +613,9 @@ class erLhcoreClassModelInstance
     public $expire_inform_status = 0;
     
     public $locale = '';
-
+    
+    public $default_url = '';
+    
     public $siteaccess = 'eng';
 
     public $status = self::PENDING_CREATE;
