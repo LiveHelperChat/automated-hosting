@@ -1349,6 +1349,7 @@ CREATE TABLE `lh_admin_theme` (
 ) DEFAULT CHARSET=utf8;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('default_admin_theme_id',	'0',	0,	'Default admin theme',	1);
+
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('disable_iframe_sharing',	'1',	0,	'Disable iframes in sharing mode',	0);
 ALTER TABLE `lh_users` ADD `operation_admin` text NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `tag` varchar(50) NOT NULL, COMMENT='';
