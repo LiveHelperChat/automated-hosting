@@ -1527,3 +1527,6 @@ CREATE TABLE `lh_departament_group` (
 
 ALTER TABLE `lh_abstract_survey_item` ADD `status` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_survey` ADD `feedback_text` text NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_chat` ADD `status_sub_arg` varchar(200) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD `status_sub_sub` int(11) NOT NULL DEFAULT '0', COMMENT='';
