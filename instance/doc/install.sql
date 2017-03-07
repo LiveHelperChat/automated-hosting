@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_client` (
   `soft_warning_send` int(11) NOT NULL DEFAULT '0',
   `phone_default_department` int(11) NOT NULL,
   `chat_supported` int(11) NOT NULL DEFAULT '1',
+  `is_remote` int(11) NOT NULL DEFAULT '0',
   `custom_fields_1` text NOT NULL,
   `custom_fields_2` text NOT NULL,
   `custom_fields_3` text NOT NULL,
@@ -108,3 +109,5 @@ CREATE TABLE IF NOT EXISTS `lhc_instance_invoice` (
   KEY `txn_id` (`txn_id`),
   KEY `instance_id` (`instance_id`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `lhc_instance_client_alias` (  `id` bigint(20) NOT NULL AUTO_INCREMENT,  `address` varchar(60) NOT NULL,  `url` varchar(200) NOT NULL,  `instance_id` int(11) NOT NULL,  PRIMARY KEY (`id`),  KEY `address` (`address`),  KEY `instance_id` (`instance_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;

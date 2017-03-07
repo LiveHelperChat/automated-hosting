@@ -11,6 +11,12 @@ if (isset($_POST['Cancel_departament'])) {
     exit();
 }
 
+if (isset($_GET['deleteAlias'])) {
+    erLhcoreClassModelInstanceAlias::fetch($_GET['deleteAlias'])->removeThis();
+    erLhcoreClassModule::redirect('instance/edit','/'.$Instance->id . '/#/aliases');
+    exit();
+}
+
 $modules = array(
     'reporting_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Statistic supported'),
     'atranslations_supported' => erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit', 'Automatic translations supported'),
@@ -168,6 +174,38 @@ if (isset($_POST['UpdateClientData'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+}
+
+if (isset($_POST['AddAlias'])) {
+    $definition = array(
+        'address' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'string'),
+        'url' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'),       
+    );
+
+    $form = new ezcInputForm(INPUT_POST, $definition);
+    $Errors = array();
+
+    $alias = new erLhcoreClassModelInstanceAlias();
+    
+    $alias->instance_id = $Instance->id;
+    
+    if ($form->hasValidData('address') && $form->address !== '') {
+        $alias->address = $form->address;
+    } else {
+        $Errors[] = 'Please enter address';
+    }
+    
+    if ($form->hasValidData('url') && $form->url !== '') {
+        $alias->url = $form->url;
+    }
+    
+    if (empty($Errors)) {
+        
+        $alias->saveThis();
+        
+    } else {
+        $tpl->set('errors',$Errors);
+    }  
 }
 
 
@@ -592,7 +630,8 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
         'AttrInt1' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt2' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
         'AttrInt3' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'int'),
-        'fullAddress' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
+        'fullAddress' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean'),
+        'isRemote' => new ezcInputFormDefinitionElement(ezcInputFormDefinitionElement::OPTIONAL, 'boolean')
     );
 
     $form = new ezcInputForm(INPUT_POST, $definition);
@@ -620,6 +659,12 @@ if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {
         $Instance->suspended = 1;
     } else {
         $Instance->suspended = 0;
+    }
+
+    if ($form->hasValidData('isRemote') && $form->isRemote == true) {
+        $Instance->is_remote = 1;
+    } else {
+        $Instance->is_remote = 0;
     }
 
     if ($form->hasValidData('fullAddress') && $form->fullAddress == true) {

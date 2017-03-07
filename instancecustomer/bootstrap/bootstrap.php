@@ -7,7 +7,9 @@ class erLhcoreClassExtensionInstancecustomer {
 	}
 	
 	public function run(){		
-		
+	    
+	    $this->registerAutoload();
+	    
 		$dispatcher = erLhcoreClassChatEventDispatcher::getInstance();
 		
 		// Attatch event listeners
@@ -158,7 +160,26 @@ class erLhcoreClassExtensionInstancecustomer {
     		}	
 		}
 	}
-
+	
+	public function registerAutoload()
+	{
+	    spl_autoload_register(array(
+	        $this,
+	        'autoload'
+	    ), true, false);
+	}
+	
+	public function autoload($className)
+	{
+	    $classesAutoload = array(
+	        'erLhcoreClassModelInstanceAlias' => 'extension/instancecustomer/classes/erlhcoreclassmodelinstancealias.php',
+	    );
+	
+	    if (key_exists($className, $classesAutoload)) {
+	        include_once $classesAutoload[$className];
+	    }
+	}
+	
     /**
      * Overrides default URL
      * */
