@@ -11,6 +11,7 @@ $ViewList['list'] = array(
 
 $ViewList['edit'] = array(
     'params' => array('instance_id'),
+    'uparams' => array('deletealias','csfr'),
     'functions' => array( 'manageinstance' )
 );
 

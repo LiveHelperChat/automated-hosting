@@ -38,7 +38,7 @@
     <tr>
         <td><?php echo htmlspecialchars($alias->address)?></td>
         <td><?php echo htmlspecialchars($alias->url)?></td>
-        <td><a onclick="return confirm('<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('kernel/messages','Are you sure?');?>')" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>?deleteAlias=<?php echo $alias->id?>" class="btn btn-danger btn-xs csfr-required"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Delete')?></a></td>
+        <td><a onclick="return confirm('<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('kernel/messages','Are you sure?');?>')" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>/(deletealias)/<?php echo $alias->id?>" class="btn btn-danger btn-xs csfr-required"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Delete')?></a></td>
     </tr>
 <?php endforeach; ?>
 </table>

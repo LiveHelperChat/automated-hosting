@@ -11,8 +11,14 @@ if (isset($_POST['Cancel_departament'])) {
     exit();
 }
 
-if (isset($_GET['deleteAlias'])) {
-    erLhcoreClassModelInstanceAlias::fetch($_GET['deleteAlias'])->removeThis();
+if (isset($Params['user_parameters_unordered']['deletealias']) && is_numeric($Params['user_parameters_unordered']['deletealias'])) {
+    
+    if (!$currentUser->validateCSFRToken($Params['user_parameters_unordered']['csfr'])) {
+        die('Invalid CSFR Token');
+        exit;
+    }
+    
+    erLhcoreClassModelInstanceAlias::fetch($Params['user_parameters_unordered']['deletealias'])->removeThis();
     erLhcoreClassModule::redirect('instance/edit','/'.$Instance->id . '/#/aliases');
     exit();
 }

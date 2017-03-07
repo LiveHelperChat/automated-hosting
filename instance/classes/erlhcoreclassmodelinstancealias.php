@@ -31,11 +31,7 @@ class erLhcoreClassModelInstanceAlias
     public function __get($var)
     {
         switch ($var) {
-            case 'is_active':
-                $this->is_active = $this->request > 0 && ($this->expires == 0 || $this->expires > time()) && $this->suspended == 0 && $this->reseller_suspended == 0;
-                return $this->is_active;
-                break;
-            
+                      
             default:
                 ;
                 break;
