@@ -1543,3 +1543,20 @@ CREATE TABLE `lh_abstract_product_departament` (
   PRIMARY KEY (`id`),
   KEY `departament_id` (`departament_id`)
 ) DEFAULT CHARSET=utf8;
+
+ALTER TABLE `lh_chat` ADD `uagent` varchar(250) NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat` ADD `device_type` int(11) NOT NULL DEFAULT '0', COMMENT='';
+
+CREATE TABLE `lh_users_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(40) NOT NULL,
+  `device_type` int(11) NOT NULL,
+  `device_token` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_on` int(11) NOT NULL,
+  `updated_on` int(11) NOT NULL,
+  `expires_on` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `device_token_device_type` (`device_token`,`device_type`),
+  KEY `token` (`token`)
+) DEFAULT CHARSET=utf8;
