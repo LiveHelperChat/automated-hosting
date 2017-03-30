@@ -2,7 +2,7 @@
 
 class erLhcoreClassModelInstance {
 
-    public function getState()
+   public function getState()
    {
        return array (
                'id'       		=> $this->id,
@@ -95,7 +95,8 @@ class erLhcoreClassModelInstance {
                'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
                'client_attributes' => $this->client_attributes,
                'expire_inform_status' => $this->expire_inform_status,
-               'login_ip_security' => $this->login_ip_security
+               'login_ip_security' => $this->login_ip_security,
+               'is_remote' => $this->is_remote
        );
    }
    
@@ -137,7 +138,7 @@ class erLhcoreClassModelInstance {
 	   	return true;
    }
    
-   public function fetch($dep_id, $useCache = false) {
+   public static function fetch($dep_id, $useCache = false) {
 
    		if ($useCache == true && isset($GLOBALS['erLhcoreClassModelInstance'.$dep_id])) return $GLOBALS['erLhcoreClassModelInstance'.$dep_id];
 
@@ -620,6 +621,7 @@ class erLhcoreClassModelInstance {
    public $full_xmpp_visitors_tracking = 1;
    
    public $expire_inform_status = 0;
+   public $is_remote = 0;
    
    public $custom_fields_1 = '';
    public $custom_fields_2 = '';

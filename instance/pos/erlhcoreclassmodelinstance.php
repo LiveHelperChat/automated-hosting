@@ -482,6 +482,11 @@ $def->properties['expire_inform_status']->columnName   = 'expire_inform_status';
 $def->properties['expire_inform_status']->propertyName = 'expire_inform_status';
 $def->properties['expire_inform_status']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
 
+$def->properties['is_remote'] = new ezcPersistentObjectProperty();
+$def->properties['is_remote']->columnName   = 'is_remote';
+$def->properties['is_remote']->propertyName = 'is_remote';
+$def->properties['is_remote']->propertyType = ezcPersistentObjectProperty::PHP_TYPE_INT;
+
 $def->properties['login_ip_security'] = new ezcPersistentObjectProperty();
 $def->properties['login_ip_security']->columnName   = 'login_ip_security';
 $def->properties['login_ip_security']->propertyName = 'login_ip_security';

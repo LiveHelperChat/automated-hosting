@@ -11,6 +11,7 @@ $ViewList['list'] = array(
 
 $ViewList['edit'] = array(
     'params' => array('instance_id'),
+    'uparams' => array('deletealias','csfr'),
     'functions' => array( 'manageinstance' )
 );
 
@@ -105,6 +106,13 @@ $ViewList['rslregisterinstance'] = array(
 		'functions' => array( )
 );
 
+/**
+ * Remote instances API
+ * */
+$ViewList['apigetinstance'] = array(
+    'params' => array(),
+    'functions' => array( )
+);
 
 $FunctionList['manageinstance'] = array('explain' => 'Access to instance management');
 

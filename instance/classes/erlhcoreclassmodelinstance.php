@@ -96,7 +96,8 @@ class erLhcoreClassModelInstance
             'full_xmpp_visitors_tracking' => $this->full_xmpp_visitors_tracking,
             'client_attributes' => $this->client_attributes,
             'expire_inform_status' => $this->expire_inform_status,
-            'login_ip_security' => $this->login_ip_security
+            'login_ip_security' => $this->login_ip_security,
+            'is_remote' => $this->is_remote
         );
     }
 
@@ -611,6 +612,8 @@ class erLhcoreClassModelInstance
     public $one_per_account = 0;
     
     public $expire_inform_status = 0;
+    
+    public $is_remote = 0;
     
     public $locale = '';
     

@@ -1,5 +1,39 @@
 {
-    "tables": {        
+    "tables": {   
+    	"lhc_instance_client_alias": [
+            {
+                "field": "id",
+                "type": "bigint(20)",
+                "null": "NO",
+                "key": "PRI",
+                "default": null,
+                "extra": "auto_increment"
+            },
+            {
+                "field": "address",
+                "type": "varchar(60)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "url",
+                "type": "varchar(200)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            },
+            {
+                "field": "instance_id",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": null,
+                "extra": ""
+            }
+        ],    
         "lhc_instance_client": [
             {
                 "field": "id",
@@ -171,6 +205,14 @@
             },
             {
                 "field": "reseller_id",
+                "type": "int(11)",
+                "null": "NO",
+                "key": "",
+                "default": 0,
+                "extra": ""
+            },
+            {
+                "field": "is_remote",
                 "type": "int(11)",
                 "null": "NO",
                 "key": "",
@@ -735,6 +777,6 @@
     "tables_data_identifier": {    },
     "tables_indexes" : {    },
     "tables_create": {
-    	
+    	"lhc_instance_client_alias" : "CREATE TABLE `lhc_instance_client_alias` (  `id` bigint(20) NOT NULL AUTO_INCREMENT,  `address` varchar(60) NOT NULL,  `url` varchar(200) NOT NULL,  `instance_id` int(11) NOT NULL,  PRIMARY KEY (`id`),  KEY `address` (`address`),  KEY `instance_id` (`instance_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
     }
 }

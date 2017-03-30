@@ -19,8 +19,9 @@
 		<li role="presentation"><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
 		<li role="presentation"><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
 		<li role="presentation"><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
-		<li role="presentation"><a href="#sms" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
+		<li role="presentation"><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
 		<li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
+		<li role="presentation"><a href="#aliases" aria-controls="aliases" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Aliases')?></a></li>
 		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/extension_tab_multiinclude.tpl.php'));?>
 	</ul>
 
@@ -152,6 +153,12 @@
 		<div role="tabpanel" class="tab-pane" id="sms">
 		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#sms" method="post" autocomplete="off">		
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/sms.tpl.php'));?>	
+			</form>			
+		</div>
+		
+		<div role="tabpanel" class="tab-pane" id="aliases">
+		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#aliases" method="post" autocomplete="off">		
+		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/aliases.tpl.php'));?>	
 			</form>			
 		</div>
 		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs_content/extension_tab_multiinclude.tpl.php'));?>

@@ -55,6 +55,7 @@ class erLhcoreClassLazyDatabaseConfiguration implements ezcBaseConfigurationInit
                     erLhcoreClassInstance::setupInstance(self::$connectionMaster);
                     return $db;
                 } catch (Exception $e) {
+                    
                 	// Are we installed?
                 	if ($cfg->getSetting( 'site', 'installed' ) == false) {
                 		header('Location: ' .erLhcoreClassDesign::baseurldirect('site_admin/install/install') );

@@ -8,6 +8,10 @@
 </div>
 
 <div class="form-group">
+    <label><input type="checkbox" name="isRemote" value="on" <?php echo $instance->is_remote ? 'checked="checked"' : '';?> /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','is it remote instance?');?></label>    
+</div>
+
+<div class="form-group">
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client title for invoices');?></label>
     <input type="text" class="form-control" name="ClientTitle"  value="<?php echo htmlspecialchars($instance->client_title);?>" />
 </div>
