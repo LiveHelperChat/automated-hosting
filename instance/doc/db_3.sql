@@ -821,7 +821,7 @@ ADD INDEX `identifier` (`identifier`),
 ADD INDEX `dep_id` (`dep_id`);
 
 ALTER TABLE `lh_departament`
-ADD `inform_unread` tinyint(11) NOT NULL,
+ADD `inform_unread` tinyint(1) NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_departament`
