@@ -55,7 +55,7 @@ CREATE TABLE `lh_abstract_proactive_chat_invitation` (
   `timeout_message` text NOT NULL,
   `wait_timeout` int(11) NOT NULL,
   `operator_name` varchar(100) NOT NULL,
-  `message_returning_nick` varchar(100) NOT NULL,
+  `message_returning_nick` varchar(250) NOT NULL,
   `position` int(11) NOT NULL,
   `identifier` varchar(50) NOT NULL,
   `requires_email` int(11) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE `lh_chat` (
 				  `fbst` tinyint(1) NOT NULL,
 				  `online_user_id` int(11) NOT NULL,
 				  `last_msg_id` int(11) NOT NULL,
-				  `additional_data` varchar(250) NOT NULL,
+				  `additional_data` text NOT NULL,
 				  `timeout_message` varchar(250) NOT NULL,
 				  `lat` varchar(10) NOT NULL,
 				  `lon` varchar(10) NOT NULL,
@@ -238,7 +238,7 @@ CREATE TABLE `lh_chat_online_user` (
         	   	  `screenshot_id` int(11) NOT NULL,
         	   	  `identifier` varchar(50) NOT NULL,
         	   	  `operation` varchar(200) NOT NULL,
-        	   	  `online_attr` varchar(250) NOT NULL,
+        	   	  `online_attr` text NOT NULL,
                   PRIMARY KEY (`id`),
                   KEY `vid` (`vid`),
 				  KEY `dep_id` (`dep_id`),
@@ -333,6 +333,8 @@ CREATE TABLE `lh_grouprole` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`role_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `lh_grouprole` ADD INDEX `group_id_primary` (`group_id`);
 
 INSERT INTO `lh_grouprole` (`id`, `group_id`, `role_id`) VALUES
 (1,	1,	1),
@@ -540,7 +542,7 @@ CREATE TABLE `lh_users_setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `identifier` varchar(50) NOT NULL,
-  `value` varchar(50) NOT NULL,
+  `value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -668,15 +670,15 @@ ADD `wused` int(11) NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_departament`
-ADD `xmpp_recipients` varchar(250) COLLATE 'utf8_general_ci' NOT NULL,
+ADD `xmpp_recipients` text COLLATE 'utf8_general_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_departament`
-ADD `xmpp_group_recipients` varchar(250) COLLATE 'utf8_general_ci' NOT NULL,
+ADD `xmpp_group_recipients` text COLLATE 'utf8_general_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_users`
-ADD `xmpp_username` varchar(100) COLLATE 'utf8_general_ci' NOT NULL,
+ADD `xmpp_username` varchar(200) COLLATE 'utf8_general_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_users`
@@ -819,7 +821,7 @@ ADD INDEX `identifier` (`identifier`),
 ADD INDEX `dep_id` (`dep_id`);
 
 ALTER TABLE `lh_departament`
-ADD `inform_unread` int(11) NOT NULL,
+ADD `inform_unread` tinyint(11) NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_departament`
@@ -872,7 +874,7 @@ COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('disable_html5_storage','1',0,'Disable HMTL5 storage, check it if your site is switching between http and https', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('automatically_reopen_chat','0',0,'Automatically reopen chat on widget open', '0');
 ALTER TABLE `lh_abstract_browse_offer_invitation`
-ADD `callback_content` text COLLATE 'utf8_general_ci' NOT NULL,
+ADD `callback_content` longtext COLLATE 'utf8_general_ci' NOT NULL,
 COMMENT='';
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`) VALUES
 (9,	'Chat was accepted',	'Live support',	0,	'',	0,	'Hello,\r\n\r\nOperator {user_name} has accepted a chat [{chat_id}]\r\n\r\nUser request data:\r\nName: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\nDepartment: {department}\r\nCountry: {country}\r\nCity: {city}\r\nIP: {ip}\r\n\r\nMessage:\r\n{message}\r\n\r\nURL of page from which user has send request:\r\n{url_request}\r\n\r\nClick to accept chat automatically\r\n{url_accept}\r\n\r\nSincerely,\r\nLive Support Team',	'Chat was accepted [{chat_id}]',	0,	'',	0,	'',	'');
@@ -1556,10 +1558,12 @@ CREATE TABLE `lh_users_session` (
   `created_on` int(11) NOT NULL,
   `updated_on` int(11) NOT NULL,
   `expires_on` int(11) NOT NULL,
+  `notifications_status` int(11) NOT NULL DEFAULT '1',
+  `is_background` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `device_token_device_type` (`device_token`,`device_type`),
   KEY `token` (`token`)
-) DEFAULT CHARSET=utf8;
+)  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `lh_msg` ADD INDEX `user_id` (`user_id`);
 
@@ -1569,3 +1573,10 @@ CREATE TABLE `lh_canned_msg_tag` ( `id` int(11) NOT NULL AUTO_INCREMENT, `tag` v
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('activity_timeout','5','0','How long operator should go offline automatically because of inactivity. Value in minutes','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('activity_track_all','0','0','Track all logged operators activity and ignore their individual settings.','0');
 ALTER TABLE `lh_users` ADD `inactive_mode` tinyint(1) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_group_work` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `group_id` int(11) NOT NULL, `group_work_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `group_id` (`group_id`)) DEFAULT CHARSET=utf8;
+
+ALTER TABLE `lh_chat` ADD `sender_user_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD INDEX `user_id_sender_user_id` (`user_id`, `sender_user_id`);
+ALTER TABLE `lh_chat` ADD INDEX `sender_user_id` (`sender_user_id`);
+ALTER TABLE `lh_chat` DROP INDEX `user_id`;
