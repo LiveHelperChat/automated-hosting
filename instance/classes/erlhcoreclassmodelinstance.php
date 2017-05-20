@@ -334,14 +334,38 @@ class erLhcoreClassModelInstance
         $session = erLhcoreClassDepartament::getSession();
         $q = $session->database->createSelectQuery();
         $q->select("COUNT(id)")->from("lhc_instance_client");
-        
+               
         if (isset($params['filter']) && count($params['filter']) > 0) {
-            $conditions = array();
-            
             foreach ($params['filter'] as $field => $fieldValue) {
                 $conditions[] = $q->expr->eq($field, $q->bindValue($fieldValue));
             }
-            
+        }
+        
+        if (isset($params['filterin']) && count($params['filterin']) > 0) {
+            foreach ($params['filterin'] as $field => $fieldValue) {
+                $conditions[] = $q->expr->in($field, $fieldValue);
+            }
+        }
+        
+        if (isset($params['filterlt']) && count($params['filterlt']) > 0) {
+            foreach ($params['filterlt'] as $field => $fieldValue) {
+                $conditions[] = $q->expr->lt($field, $q->bindValue($fieldValue));
+            }
+        }
+        
+        if (isset($params['filtergt']) && count($params['filtergt']) > 0) {
+            foreach ($params['filtergt'] as $field => $fieldValue) {
+                $conditions[] = $q->expr->gt($field, $q->bindValue($fieldValue));
+            }
+        }
+        
+        if (isset($params['filterlike']) && count($params['filterlike']) > 0) {
+            foreach ($params['filterlike'] as $field => $fieldValue) {
+                $conditions[] = $q->expr->like($field, $q->bindValue('%' . $fieldValue . '%'));
+            }
+        }
+        
+        if (count($conditions) > 0) {
             $q->where($conditions);
         }
         
@@ -387,6 +411,12 @@ class erLhcoreClassModelInstance
         if (isset($params['filtergt']) && count($params['filtergt']) > 0) {
             foreach ($params['filtergt'] as $field => $fieldValue) {
                 $conditions[] = $q->expr->gt($field, $q->bindValue($fieldValue));
+            }
+        }
+        
+        if (isset($params['filterlike']) && count($params['filterlike']) > 0) {
+            foreach ($params['filterlike'] as $field => $fieldValue) {
+                $conditions[] = $q->expr->like($field, $q->bindValue('%' . $fieldValue . '%'));
             }
         }
         

@@ -6,6 +6,7 @@ $ViewList = array();
 
 $ViewList['list'] = array(
     'params' => array(),
+    'uparams' => array('address'),
     'functions' => array( 'manageinstance' )
 );
 

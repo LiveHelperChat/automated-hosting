@@ -2,6 +2,8 @@
 
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances');?></h1>
 
+<?php include(erLhcoreClassDesign::designtpl('lhinstance/list/search_panel.tpl.php')); ?>
+
 <?php include(erLhcoreClassDesign::designtpl('lhinstance/list_body.tpl.php')); ?>
 
 <?php if (isset($pages)) : ?>
