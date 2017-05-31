@@ -254,7 +254,43 @@ class erLhcoreClassExtensionInstancecustomer {
 	public function setupSMTP($params) {
 	    $params['phpmailer']->Sender = erConfigClassLhConfig::getInstance()->getSetting('site','sender_mail');
 	    $params['phpmailer']->From = erConfigClassLhConfig::getInstance()->getSetting('site','seller_mail');
-	    $params['phpmailer']->FromName =  erConfigClassLhConfig::getInstance()->getSetting('site','seller_title');
+	    $params['phpmailer']->FromName = erConfigClassLhConfig::getInstance()->getSetting('site','seller_title');
+	    
+	    $smtpData = erConfigClassLhConfig::getInstance()->getSetting('site','seller_smtp',false);
+	    
+	    if (is_array($smtpData) && $smtpData['enabled']) {
+	        
+	        $params['phpmailer']->SMTPDebug = 2;
+	        //Ask for HTML-friendly debug output
+	        $params['phpmailer']->Debugoutput = 'html';
+	        
+	        $params['phpmailer']->isSMTP();
+	     
+	        //Set the hostname of the mail server
+	        $params['phpmailer']->Host = $smtpData['host'];
+	        
+	        // use
+	        // $mail->Host = gethostbyname('smtp.gmail.com');
+	        // if your network does not support SMTP over IPv6
+	        //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+	        $params['phpmailer']->Port = $smtpData['port'];
+	        
+	        //Set the encryption system to use - ssl (deprecated) or tls
+	        $params['phpmailer']->SMTPSecure = $smtpData['smtp_secure'];
+	        
+	        //Whether to use SMTP authentication
+	        $params['phpmailer']->SMTPAuth = $smtpData['smtp_auth'];
+	        
+	        //Username to use for SMTP authentication - use full email address for gmail
+	        $params['phpmailer']->Username = $smtpData['username'];
+	        
+	        //Password to use for SMTP authentication
+	        $params['phpmailer']->Password = $smtpData['password'];
+	        
+	        // Set hostname, *.example.com is not valid domain for Google Mail, so we cannot rely on detection
+	        $params['phpmailer']->Hostname = $smtpData['hostname'];
+	    }
+	    
 	    return array('status' => erLhcoreClassChatEventDispatcher::STOP_WORKFLOW);
 	}
 	

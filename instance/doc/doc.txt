@@ -44,6 +44,16 @@ If you are using DirectAdmin (http://www.directadmin.com/), you will have to app
 'seller_attributes' => "Remigijus Kiminas\nDarželio 31\nŠiauliai\nLithuania\nremdex@gmail.com\nTax ID: 591583",		
 'seller_paypal_enabled' => true,     
 
+'seller_smtp' => array(
+           'enabled' => true,
+           'host' => 'smtp.gmail.com',
+           'port' => 587,
+           'smtp_secure' => 'tls',
+           'smtp_auth' => true,
+           'username' => 'admin@example.com',
+           'password' => 'password', // You may need to create an application password if you are suing google smtp
+           'hostname' => 'example.com',
+),
 
 3. In db section add
 'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id. Example: "lhc_manage_customer_23"
