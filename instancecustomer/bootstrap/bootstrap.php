@@ -260,9 +260,10 @@ class erLhcoreClassExtensionInstancecustomer {
 	    
 	    if (is_array($smtpData) && $smtpData['enabled']) {
 	        
-	        $params['phpmailer']->SMTPDebug = 2;
+	        //$params['phpmailer']->SMTPDebug = 2;
+	        
 	        //Ask for HTML-friendly debug output
-	        $params['phpmailer']->Debugoutput = 'html';
+	        //$params['phpmailer']->Debugoutput = 'html';
 	        
 	        $params['phpmailer']->isSMTP();
 	     
