@@ -1654,3 +1654,16 @@ ALTER TABLE `lh_chat` ADD `usaccept` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_userdep` ADD `hide_online_ts` int(11) NOT NULL DEFAULT '0', COMMENT='';
 
 ALTER TABLE `lh_abstract_widget_theme` ADD `custom_popup_css` text NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_chat_start_settings` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `data` longtext NOT NULL, `department_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `department_id` (`department_id`)) DEFAULT CHARSET=utf8;
+
+ALTER TABLE `lh_departament` ADD INDEX `active_chats_counter` (`active_chats_counter`);
+ALTER TABLE `lh_departament` ADD INDEX `pending_chats_counter` (`pending_chats_counter`);
+ALTER TABLE `lh_departament` ADD INDEX `closed_chats_counter` (`closed_chats_counter`);
+
+ALTER TABLE `lh_chat` ADD `transfer_uid` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_transfer` ADD `ctime` int(11) NOT NULL, COMMENT='';
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('transfer_configuration','0','0','Transfer configuration','1');
+
+ALTER TABLE `lh_abstract_auto_responder` ADD `survey_timeout` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `survey_id` int(11) NOT NULL, COMMENT='';
