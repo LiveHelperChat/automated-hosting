@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS `lh_abstract_auto_responder`;
 CREATE TABLE `lh_abstract_auto_responder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `siteaccess` varchar(3) NOT NULL,
-  `wait_message` varchar(250) NOT NULL,
+  `wait_message` text NOT NULL,
   `wait_timeout` int(11) NOT NULL,
   `dep_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE `lh_chat` (
 				  `country_name` varchar(100) NOT NULL,
 				  `user_tz_identifier` varchar(50) NOT NULL,
 				  `user_typing` int(11) NOT NULL,
-				  `user_typing_txt` varchar(50) NOT NULL,
+				  `user_typing_txt` varchar(200) NOT NULL,
 				  `operator_typing` int(11) NOT NULL,
         	   	  `operator_typing_id` int(11) NOT NULL,
 				  `phone` varchar(100) NOT NULL,
@@ -659,10 +659,8 @@ ALTER TABLE `lh_departament`
 ADD `inform_close` int(11) NOT NULL,
 COMMENT='';
 
-
-
 ALTER TABLE `lh_users`
-ADD `skype` varchar(100) COLLATE 'utf8_general_ci' NOT NULL,
+ADD `skype` varchar(50) COLLATE 'utf8_general_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_chat_accept`
@@ -1018,7 +1016,7 @@ CREATE TABLE IF NOT EXISTS `lh_speech_language` (
                   `name` varchar(100) NOT NULL,
                   PRIMARY KEY (`id`)
                )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
-               
+
 CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
                   `language_id` int(11) NOT NULL,
@@ -1027,7 +1025,7 @@ CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
                   PRIMARY KEY (`id`),
                   KEY `language_id` (`language_id`)
                )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
-                              
+
 CREATE TABLE IF NOT EXISTS `lh_speech_chat_language` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
                   `chat_id` int(11) NOT NULL,
@@ -1036,7 +1034,7 @@ CREATE TABLE IF NOT EXISTS `lh_speech_chat_language` (
                   PRIMARY KEY (`id`),
                   KEY `chat_id` (`chat_id`)
                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-               
+
 INSERT INTO `lh_speech_language` (`id`, `name`) VALUES
         	   (1,	'Afrikaans'),
         	   (2,	'Bahasa Indonesia'),
@@ -1070,7 +1068,7 @@ INSERT INTO `lh_speech_language` (`id`, `name`) VALUES
         	   (30,	'中文'),
         	   (31,	'日本語'),
         	   (32,	'Lingua latīna');
-        	   
+
 INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lang_code`) VALUES
                 (1,	1,	'Afrikaans',	'af-ZA'),
                 (2,	2,	'Bahasa Indonesia',	'id-ID'),
@@ -1133,8 +1131,8 @@ INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lan
                 (59,	30,	'中文 (台灣)',	'cmn-Hant-TW'),
                 (60,	30,	'粵語 (香港)',	'yue-Hant-HK'),
                 (61,	31,	'日本語',	'ja-JP'),
-                (62,	32,	'Lingua latīna',	'la');   
-                
+                (62,	32,	'Lingua latīna',	'la');
+
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('front_tabs', 'dashboard,online_users,online_map', '0', 'Home page tabs order', '0');
 
 ALTER TABLE `lh_chat_online_user`
@@ -1594,20 +1592,20 @@ ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `event_invitation` int(1
 ALTER TABLE `lh_departament` ADD `pending_max` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `pending_group_max` int(11) NOT NULL, COMMENT='';
 
-CREATE TABLE `lh_departament_limit_group_member` (  
-   `id` int(11) NOT NULL AUTO_INCREMENT,  
-   `dep_id` int(11) NOT NULL,  
-   `dep_limit_group_id` int(11) NOT NULL,  
-   PRIMARY KEY (`id`),  
-   KEY `dep_limit_group_id` (`dep_limit_group_id`)) 
+CREATE TABLE `lh_departament_limit_group_member` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `dep_id` int(11) NOT NULL,
+   `dep_limit_group_id` int(11) NOT NULL,
+   PRIMARY KEY (`id`),
+   KEY `dep_limit_group_id` (`dep_limit_group_id`))
 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `lh_departament_limit_group` (  
-   `id` int(11) NOT NULL AUTO_INCREMENT,  
+CREATE TABLE `lh_departament_limit_group` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
    `name` varchar(50) NOT NULL,
-   `pending_max` int(11) NOT NULL,  
-   PRIMARY KEY (`id`)) 
-DEFAULT CHARSET=utf8;  
+   `pending_max` int(11) NOT NULL,
+   PRIMARY KEY (`id`))
+DEFAULT CHARSET=utf8;
 
 ALTER TABLE `lh_chat` ADD `auto_responder_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
 
@@ -1622,25 +1620,26 @@ CREATE TABLE `lh_abstract_auto_responder_chat` (
                   KEY `chat_id` (`chat_id`)
                 ) DEFAULT CHARSET=utf8;
 
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_1` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_1` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_5` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_2` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_2` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_3` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_3` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_4` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_4` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_5` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_5` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_1` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_1` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_2` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_2` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_3` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_3` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_4` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_4` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_5` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_5` text NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_auto_responder` ADD `ignore_pa_chat` int(11) NOT NULL, COMMENT='';
+
 
 ALTER TABLE `lh_chat` DROP `wait_timeout`,COMMENT='';
 ALTER TABLE `lh_chat` DROP `wait_timeout_send`,COMMENT='';
@@ -1667,3 +1666,59 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 
 ALTER TABLE `lh_abstract_auto_responder` ADD `survey_timeout` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_auto_responder` ADD `survey_id` int(11) NOT NULL, COMMENT='';
+
+
+
+ALTER TABLE `lh_abstract_auto_responder` ADD `only_proactive` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `name` varchar(50) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `autoresponder_id` int(11) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `wait_message`,COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `wait_timeout`,COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `timeout_message`,COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `repeat_number`,COMMENT='';
+
+
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_1` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_2` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_3` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_4` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_5` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_1` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_2` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_3` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_4` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_5` text NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('assign_workflow_timeout','0','0','Chats waiting in pending queue more than n seconds should be auto-assigned first. Time in seconds','0');
+
+ALTER TABLE `lh_rolefunction` ADD `limitation` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD `hide_ts` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD `widget_response_width` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `show_on_mobile` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_users` ADD `auto_accept` tinyint(1) NOT NULL, COMMENT='';
+ALTER TABLE `lh_users` ADD `max_active_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_users` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_userdep` ADD `pending_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_userdep` ADD `inactive_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_userdep` ADD `max_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_userdep` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_departament` ADD `exclude_inactive_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_departament` ADD `max_ac_dep_chats` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_departament` ADD `delay_before_assign` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_archive_range` ADD `year_month` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_archive_range` ADD `older_than` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_archive_range` ADD `last_id` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_archive_range` ADD `first_id` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `languages` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_speech_language_dialect` ADD `short_code` varchar(4) NOT NULL, COMMENT='';
+ALTER TABLE `lh_speech_language_dialect` ADD INDEX `short_code` (`short_code`);
+ALTER TABLE `lh_speech_language_dialect` ADD INDEX `lang_code` (`lang_code`);
+ALTER TABLE `lh_abstract_auto_responder` ADD `languages` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `delay_init` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `delay` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `show_instant` int(11) NOT NULL, COMMENT='';
