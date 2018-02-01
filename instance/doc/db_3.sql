@@ -13,7 +13,7 @@ CREATE TABLE `lh_abstract_auto_responder` (
   `wait_timeout` int(11) NOT NULL,
   `dep_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  `timeout_message` varchar(250) NOT NULL,
+  `timeout_message` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `siteaccess_position` (`siteaccess`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -78,7 +78,7 @@ CREATE TABLE `lh_canned_msg` (
 DROP TABLE IF EXISTS `lh_chat`;
 CREATE TABLE `lh_chat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-				  `nick` varchar(50) NOT NULL,
+				  `nick` varchar(100) NOT NULL,
 				  `status` int(11) NOT NULL DEFAULT '0',
 				  `status_sub` int(11) NOT NULL DEFAULT '0',
 				  `time` int(11) NOT NULL,
