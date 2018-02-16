@@ -252,9 +252,9 @@ CREATE TABLE `lh_chat_online_user_footprint` (
   `chat_id` int(11) NOT NULL,
   `online_user_id` int(11) NOT NULL,
   `page` varchar(250) NOT NULL,
-  `vtime` varchar(250) NOT NULL,
+  `vtime` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `chat_id_vtime` (`chat_id`,`vtime`),
+  KEY `chat_id` (`chat_id`),
   KEY `online_user_id` (`online_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1729,3 +1729,14 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 ALTER TABLE `lh_abstract_auto_responder` ADD `operator` varchar(50) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help_delay` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` ADD `show_status_delay` int(11) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_userdep` ADD `ro` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+CREATE TABLE `lh_abstract_subject` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_abstract_subject_dep` ( `id` int(11) NOT NULL AUTO_INCREMENT, `dep_id` int(11) NOT NULL, `subject_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `subject_id` (`subject_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_abstract_subject_chat` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `subject_id` int(11) NOT NULL, `chat_id` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_chat` ADD `pnd_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD `cls_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_user','4','0','How long operator can wait for message from visitor before time between messages are ignored. Values in minutes.','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_operator','10','0','How long visitor can wait for message from operator before time between messages are ignored. Values in minutes.','0');
