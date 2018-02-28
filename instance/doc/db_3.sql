@@ -1740,3 +1740,5 @@ ALTER TABLE `lh_chat` ADD `pnd_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_chat` ADD `cls_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_user','4','0','How long operator can wait for message from visitor before time between messages are ignored. Values in minutes.','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_operator','10','0','How long visitor can wait for message from operator before time between messages are ignored. Values in minutes.','0');
+ALTER TABLE `lh_chat_file` ADD `persistent` int(11) NOT NULL DEFAULT '0', COMMENT='';
+CREATE TABLE `lh_group_object` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `object_id` bigint(20) NOT NULL, `group_id` bigint(20) NOT NULL, `type` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `object_id_type` (`object_id`,`type`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
