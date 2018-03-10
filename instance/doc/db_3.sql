@@ -1159,7 +1159,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 
 
 ALTER TABLE `lh_group`
-ADD `disabled` int NOT NULL,
+ADD `disabled` tinyint(1) NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_group`
@@ -1742,3 +1742,6 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_operator','10','0','How long visitor can wait for message from operator before time between messages are ignored. Values in minutes.','0');
 ALTER TABLE `lh_chat_file` ADD `persistent` int(11) NOT NULL DEFAULT '0', COMMENT='';
 CREATE TABLE `lh_group_object` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `object_id` bigint(20) NOT NULL, `group_id` bigint(20) NOT NULL, `type` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `object_id_type` (`object_id`,`type`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_group` ADD `required` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD `modern_look` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
