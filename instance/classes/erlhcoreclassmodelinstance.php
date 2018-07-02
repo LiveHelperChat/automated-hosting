@@ -2,6 +2,15 @@
 
 class erLhcoreClassModelInstance
 {
+    use erLhcoreClassDBTrait;
+
+    public static $dbTable = 'lhc_instance_client';
+
+    public static $dbTableId = 'id';
+
+    public static $dbSessionHandler = 'erLhcoreClassInstance::getSession';
+
+    public static $dbSortOrder = 'DESC';
 
     public function getState()
     {
@@ -99,23 +108,6 @@ class erLhcoreClassModelInstance
             'login_ip_security' => $this->login_ip_security,
             'is_remote' => $this->is_remote
         );
-    }
-
-    public function setState(array $properties)
-    {
-        foreach ($properties as $key => $val) {
-            $this->$key = $val;
-        }
-    }
-
-    public static function fetch($dep_id, $useCache = false)
-    {
-        if ($useCache == true && isset($GLOBALS['erLhcoreClassModelInstance' . $dep_id]))
-            return $GLOBALS['erLhcoreClassModelInstance' . $dep_id];
-        
-        $GLOBALS['erLhcoreClassModelInstance' . $dep_id] = erLhcoreClassInstance::getSession()->load('erLhcoreClassModelInstance', (int) $dep_id);
-        
-        return $GLOBALS['erLhcoreClassModelInstance' . $dep_id];
     }
 
     public function __toString()
@@ -261,22 +253,6 @@ class erLhcoreClassModelInstance
         }
     }
 
-    /**
-     * Top
-     * */
-    public static function findOne($params = array())
-    {
-        $params['limit'] = 1;
-
-        $items = self::getList($params);
-
-        if (!empty($items)) {
-            return array_shift($items);
-        }
-
-        return false;
-    }
-
     public function saveThis()
     {
         erLhcoreClassInstance::getSession()->saveOrUpdate($this);
@@ -329,110 +305,6 @@ class erLhcoreClassModelInstance
         $db->query('USE ' . $cfg->getSetting('db', 'database'));
     }
 
-    public static function getCount($params = array())
-    {
-        $session = erLhcoreClassDepartament::getSession();
-        $q = $session->database->createSelectQuery();
-        $q->select("COUNT(id)")->from("lhc_instance_client");
-               
-        if (isset($params['filter']) && count($params['filter']) > 0) {
-            foreach ($params['filter'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->eq($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filterin']) && count($params['filterin']) > 0) {
-            foreach ($params['filterin'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->in($field, $fieldValue);
-            }
-        }
-        
-        if (isset($params['filterlt']) && count($params['filterlt']) > 0) {
-            foreach ($params['filterlt'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->lt($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filtergt']) && count($params['filtergt']) > 0) {
-            foreach ($params['filtergt'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->gt($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filterlike']) && count($params['filterlike']) > 0) {
-            foreach ($params['filterlike'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->like($field, $q->bindValue('%' . $fieldValue . '%'));
-            }
-        }
-        
-        if (count($conditions) > 0) {
-            $q->where($conditions);
-        }
-        
-        $stmt = $q->prepare();
-        $stmt->execute();
-        $result = $stmt->fetchColumn();
-        
-        return $result;
-    }
-
-    public static function getList($paramsSearch = array())
-    {
-        $paramsDefault = array(
-            'limit' => 32,
-            'offset' => 0
-        );
-        
-        $params = array_merge($paramsDefault, $paramsSearch);
-        
-        $session = erLhcoreClassInstance::getSession();
-        $q = $session->createFindQuery('erLhcoreClassModelInstance');
-        
-        $conditions = array();
-        
-        if (isset($params['filter']) && count($params['filter']) > 0) {
-            foreach ($params['filter'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->eq($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filterin']) && count($params['filterin']) > 0) {
-            foreach ($params['filterin'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->in($field, $fieldValue);
-            }
-        }
-        
-        if (isset($params['filterlt']) && count($params['filterlt']) > 0) {
-            foreach ($params['filterlt'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->lt($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filtergt']) && count($params['filtergt']) > 0) {
-            foreach ($params['filtergt'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->gt($field, $q->bindValue($fieldValue));
-            }
-        }
-        
-        if (isset($params['filterlike']) && count($params['filterlike']) > 0) {
-            foreach ($params['filterlike'] as $field => $fieldValue) {
-                $conditions[] = $q->expr->like($field, $q->bindValue('%' . $fieldValue . '%'));
-            }
-        }
-        
-        if (count($conditions) > 0) {
-            $q->where($conditions);
-        }
-        
-        $q->limit($params['limit'], $params['offset']);
-        
-        $q->orderBy(isset($params['sort']) ? $params['sort'] : 'id ASC');
-        
-        $objects = $session->find($q);
-        
-        return $objects;
-    }
-
     /**
      * Adjust inform workflow attributes based on expire data
      * */
@@ -469,6 +341,8 @@ class erLhcoreClassModelInstance
     const PENDING_CREATE = 0;
 
     const WORKING = 1;
+
+    const IN_PROGRESS = 2;
 
     public $id = null;
 

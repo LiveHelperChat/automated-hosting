@@ -19,7 +19,16 @@
         <td><?php echo $departament->id?></td>
         <td><?php echo htmlspecialchars($departament->email)?></td>
         <td><?php echo htmlspecialchars($departament->address)?></td>
-        <td><?php if ($departament->status == 0) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','pending initialization');?><?php else : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','created');?><?php endif;?></td>
+        <td>
+            <?php if ($departament->status == 0) : ?>
+                <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','pending initialization');?>
+            <?php elseif ($departament->status == 2) : ?>
+                <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','In progress...');?>
+            <?php else : ?>
+                <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','created');?>
+            <?php endif;?>
+
+        </td>
         <td><?php echo htmlspecialchars($departament->request)?></td> 
         <td>
         <?php if ($departament->expires > 0) : ?>
