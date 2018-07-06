@@ -8,16 +8,53 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 DROP TABLE IF EXISTS `lh_abstract_auto_responder`;
 CREATE TABLE `lh_abstract_auto_responder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `siteaccess` varchar(3) NOT NULL,
-  `wait_message` text NOT NULL,
+  `siteaccess` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `wait_timeout` int(11) NOT NULL,
-  `dep_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  `timeout_message` text NOT NULL,
+  `timeout_message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  `repeat_number` int(11) NOT NULL DEFAULT 1,
+  `wait_timeout_2` int(11) NOT NULL,
+  `timeout_message_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_3` int(11) NOT NULL,
+  `timeout_message_3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_4` int(11) NOT NULL,
+  `timeout_message_4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_5` int(11) NOT NULL,
+  `timeout_message_5` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_reply_1` int(11) NOT NULL,
+  `timeout_reply_message_1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_reply_2` int(11) NOT NULL,
+  `timeout_reply_message_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_reply_3` int(11) NOT NULL,
+  `timeout_reply_message_3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_reply_4` int(11) NOT NULL,
+  `timeout_reply_message_4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_reply_5` int(11) NOT NULL,
+  `timeout_reply_message_5` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ignore_pa_chat` int(11) NOT NULL,
+  `survey_timeout` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `only_proactive` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_hold_1` int(11) NOT NULL,
+  `wait_timeout_hold_2` int(11) NOT NULL,
+  `wait_timeout_hold_3` int(11) NOT NULL,
+  `wait_timeout_hold_4` int(11) NOT NULL,
+  `wait_timeout_hold_5` int(11) NOT NULL,
+  `timeout_hold_message_1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timeout_hold_message_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timeout_hold_message_3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timeout_hold_message_4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timeout_hold_message_5` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_timeout_hold` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `languages` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `operator` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bot_configuration` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `siteaccess_position` (`siteaccess`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 DROP TABLE IF EXISTS `lh_abstract_email_template`;
 CREATE TABLE `lh_abstract_email_template` (
@@ -44,103 +81,157 @@ INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_
 DROP TABLE IF EXISTS `lh_abstract_proactive_chat_invitation`;
 CREATE TABLE `lh_abstract_proactive_chat_invitation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `siteaccess` varchar(10) NOT NULL,
+  `siteaccess` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `time_on_site` int(11) NOT NULL,
   `pageviews` int(11) NOT NULL,
-  `message` text NOT NULL,
-  `message_returning` text NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `executed_times` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `wait_message` text NOT NULL,
-  `timeout_message` text NOT NULL,
-  `wait_timeout` int(11) NOT NULL,
-  `operator_name` varchar(100) NOT NULL,
-  `message_returning_nick` varchar(250) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` int(11) NOT NULL,
-  `identifier` varchar(50) NOT NULL,
+  `identifier` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `operator_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `requires_email` int(11) NOT NULL,
+  `show_random_operator` int(11) NOT NULL,
+  `hide_after_ntimes` int(11) NOT NULL,
+  `referrer` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `operator_ids` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  `requires_username` int(11) NOT NULL,
   `requires_phone` int(11) NOT NULL,
+  `message_returning` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message_returning_nick` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dynamic_invitation` int(11) NOT NULL,
+  `iddle_for` int(11) NOT NULL,
+  `event_type` int(11) NOT NULL,
+  `event_invitation` int(11) NOT NULL,
+  `autoresponder_id` int(11) NOT NULL,
+  `show_on_mobile` int(11) NOT NULL,
+  `delay` int(11) NOT NULL,
+  `delay_init` int(11) NOT NULL,
+  `show_instant` int(11) NOT NULL,
+  `bot_id` int(11) NOT NULL,
+  `trigger_id` int(11) NOT NULL,
+  `bot_offline` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `time_on_site_pageviews_siteaccess_position` (`time_on_site`,`pageviews`,`siteaccess`,`identifier`,`position`)
+  KEY `time_on_site_pageviews_siteaccess_position` (`time_on_site`,`pageviews`,`siteaccess`,`position`),
+  KEY `identifier` (`identifier`),
+  KEY `dep_id` (`dep_id`),
+  KEY `tag` (`tag`),
+  KEY `dynamic_invitation` (`dynamic_invitation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 DROP TABLE IF EXISTS `lh_canned_msg`;
 CREATE TABLE `lh_canned_msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `msg` text NOT NULL,
+  `title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `explain` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fallback_msg` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` int(11) NOT NULL,
   `delay` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `department_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `auto_send` tinyint(1) NOT NULL,
+  `attr_int_1` int(11) NOT NULL,
+  `attr_int_2` int(11) NOT NULL,
+  `attr_int_3` int(11) NOT NULL,
+  `languages` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `additional_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `department_id` (`department_id`),
+  KEY `user_id` (`user_id`),
+  KEY `attr_int_1` (`attr_int_1`),
+  KEY `attr_int_2` (`attr_int_2`),
+  KEY `attr_int_3` (`attr_int_3`),
+  KEY `position_title_v2` (`position`,`title`(191))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `lh_chat`;
 CREATE TABLE `lh_chat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-				  `nick` varchar(100) NOT NULL,
-				  `status` int(11) NOT NULL DEFAULT '0',
-				  `status_sub` int(11) NOT NULL DEFAULT '0',
-				  `time` int(11) NOT NULL,
-				  `user_id` int(11) NOT NULL,
-				  `user_closed_ts` int(11) NOT NULL,
-				  `hash` varchar(40) NOT NULL,
-				  `referrer` text NOT NULL,
-        	   	  `session_referrer` text NOT NULL,
-        	   	  `chat_variables` text NOT NULL,
-        	   	  `remarks` text NOT NULL,
-				  `ip` varchar(100) NOT NULL,
-				  `chat_locale_to` varchar(10) NOT NULL,
-				  `chat_locale` varchar(10) NOT NULL,
-				  `dep_id` int(11) NOT NULL,
-				  `user_status` int(11) NOT NULL DEFAULT '0',
-				  `support_informed` int(11) NOT NULL DEFAULT '0',
-				  `unread_messages_informed` int(11) NOT NULL DEFAULT '0',
-				  `reinform_timeout` int(11) NOT NULL DEFAULT '0',
-				  `email` varchar(100) NOT NULL,
-				  `country_code` varchar(100) NOT NULL,
-				  `country_name` varchar(100) NOT NULL,
-				  `user_tz_identifier` varchar(50) NOT NULL,
-				  `user_typing` int(11) NOT NULL,
-				  `user_typing_txt` varchar(200) NOT NULL,
-				  `operator_typing` int(11) NOT NULL,
-        	   	  `operator_typing_id` int(11) NOT NULL,
-				  `phone` varchar(100) NOT NULL,
-				  `has_unread_messages` int(11) NOT NULL,
-				  `last_user_msg_time` int(11) NOT NULL,
-				  `fbst` tinyint(1) NOT NULL,
-				  `online_user_id` int(11) NOT NULL,
-				  `last_msg_id` int(11) NOT NULL,
-				  `additional_data` text NOT NULL,
-				  `timeout_message` varchar(250) NOT NULL,
-				  `lat` varchar(10) NOT NULL,
-				  `lon` varchar(10) NOT NULL,
-				  `city` varchar(100) NOT NULL,
-				  `operation` text NOT NULL,
-				  `operation_admin` varchar(200) NOT NULL,
-				  `mail_send` int(11) NOT NULL,
-        	   	  `screenshot_id` int(11) NOT NULL,
-        	   	  `wait_time` int(11) NOT NULL,
-        	   	  `wait_timeout` int(11) NOT NULL,
-        	   	  `wait_timeout_send` int(11) NOT NULL,
-  				  `chat_duration` int(11) NOT NULL,
-  				  `tslasign` int(11) NOT NULL,
-        	   	  `priority` int(11) NOT NULL,
-        	   	  `chat_initiator` int(11) NOT NULL,
-        	   	  `transfer_timeout_ts` int(11) NOT NULL,
-        	   	  `transfer_timeout_ac` int(11) NOT NULL,
-        	   	  `transfer_if_na` int(11) NOT NULL,
-        	   	  `na_cb_executed` int(11) NOT NULL,
-        	   	  `nc_cb_executed` tinyint(1) NOT NULL,
-				  PRIMARY KEY (`id`),
-				  KEY `status_user_id` (`status`,`user_id`),
-				  KEY `user_id` (`user_id`),
-				  KEY `online_user_id` (`online_user_id`),
-				  KEY `dep_id` (`dep_id`),
-				  KEY `has_unread_messages_dep_id_id` (`has_unread_messages`,`dep_id`,`id`),
-				  KEY `status_dep_id_id` (`status`,`dep_id`,`id`),
-        	   	  KEY `status_dep_id_priority_id` (`status`,`dep_id`,`priority`,`id`),
-        	   	  KEY `status_priority_id` (`status`,`priority`,`id`)
+  `nick` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `time` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `hash` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `referrer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  `user_status` int(11) NOT NULL DEFAULT 0,
+  `support_informed` int(11) NOT NULL DEFAULT 0,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_typing` int(11) NOT NULL,
+  `operator_typing` int(11) NOT NULL,
+  `phone` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `has_unread_messages` int(11) NOT NULL,
+  `last_user_msg_time` int(11) NOT NULL,
+  `last_msg_id` int(11) NOT NULL,
+  `additional_data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_send` int(11) NOT NULL,
+  `lat` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lon` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_referrer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wait_time` int(11) NOT NULL,
+  `chat_duration` int(11) NOT NULL,
+  `chat_variables` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `priority` int(11) NOT NULL,
+  `user_typing_txt` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `chat_initiator` int(11) NOT NULL,
+  `online_user_id` int(11) NOT NULL,
+  `transfer_timeout_ts` int(11) NOT NULL,
+  `transfer_timeout_ac` int(11) NOT NULL,
+  `transfer_if_na` int(11) NOT NULL,
+  `na_cb_executed` int(11) NOT NULL,
+  `fbst` tinyint(1) NOT NULL,
+  `nc_cb_executed` tinyint(1) NOT NULL,
+  `operator_typing_id` int(11) NOT NULL,
+  `remarks` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status_sub` int(11) NOT NULL,
+  `operation` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `screenshot_id` int(11) NOT NULL,
+  `operation_admin` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `unread_messages_informed` int(11) NOT NULL,
+  `reinform_timeout` int(11) NOT NULL,
+  `tslasign` int(11) NOT NULL,
+  `user_tz_identifier` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_closed_ts` int(11) NOT NULL,
+  `chat_locale` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `chat_locale_to` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `unanswered_chat` int(11) NOT NULL DEFAULT 0,
+  `product_id` int(11) NOT NULL,
+  `last_op_msg_time` int(11) NOT NULL DEFAULT 0,
+  `has_unread_op_messages` int(11) NOT NULL DEFAULT 0,
+  `unread_op_messages_informed` int(11) NOT NULL DEFAULT 0,
+  `status_sub_sub` int(11) NOT NULL DEFAULT 0,
+  `status_sub_arg` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uagent` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `device_type` int(11) NOT NULL DEFAULT 0,
+  `sender_user_id` int(11) NOT NULL DEFAULT 0,
+  `auto_responder_id` int(11) NOT NULL DEFAULT 0,
+  `lsync` int(11) NOT NULL DEFAULT 0,
+  `usaccept` int(11) NOT NULL DEFAULT 0,
+  `transfer_uid` int(11) NOT NULL,
+  `pnd_time` int(11) NOT NULL DEFAULT 0,
+  `cls_time` int(11) NOT NULL DEFAULT 0,
+  `anonymized` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `dep_id` (`dep_id`),
+  KEY `online_user_id` (`online_user_id`),
+  KEY `status_user_id` (`status`,`user_id`),
+  KEY `unanswered_chat` (`unanswered_chat`),
+  KEY `product_id` (`product_id`),
+  KEY `unread_operator` (`has_unread_op_messages`,`unread_op_messages_informed`),
+  KEY `user_id_sender_user_id` (`user_id`,`sender_user_id`),
+  KEY `sender_user_id` (`sender_user_id`),
+  KEY `status` (`status`),
+  KEY `dep_id_status` (`dep_id`,`status`),
+  KEY `anonymized` (`anonymized`),
+  KEY `has_unread_messages` (`has_unread_messages`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `lh_chat_archive_range`;
@@ -148,6 +239,10 @@ CREATE TABLE `lh_chat_archive_range` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `range_from` int(11) NOT NULL,
   `range_to` int(11) NOT NULL,
+  `older_than` int(11) NOT NULL,
+  `last_id` int(11) NOT NULL,
+  `first_id` int(11) NOT NULL,
+  `year_month` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -357,13 +452,15 @@ INSERT INTO `lh_groupuser` (`id`, `group_id`, `user_id`) VALUES
 DROP TABLE IF EXISTS `lh_msg`;
 CREATE TABLE `lh_msg` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `msg` text NOT NULL,
+  `msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` int(11) NOT NULL,
-  `chat_id` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `name_support` varchar(100) NOT NULL,
+  `chat_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `name_support` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `chat_id_id` (`chat_id`,`id`)
+  KEY `chat_id_id` (`chat_id`,`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -602,15 +699,7 @@ ADD `filepath` varchar(200) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
 ADD `filename` varchar(200) COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `filepath`,
 COMMENT='';
 
-
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `show_random_operator` int(11) NOT NULL,
-COMMENT='';
-
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('ignorable_ip',	'',	0,	'Which ip should be ignored in online users list, separate by comma',0);
-
-
 
 ALTER TABLE `lh_departament`
 ADD `mod` tinyint(1) NOT NULL,
@@ -714,28 +803,13 @@ ALTER TABLE `lh_departament`
 ADD `delay_lm` int(11) NOT NULL,
 COMMENT='';
 
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `hide_after_ntimes` int(11) NOT NULL,
-COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `referrer` varchar(250) NOT NULL,
-COMMENT='';ALTER TABLE `lh_users`
+ALTER TABLE `lh_users`
 ADD `time_zone` varchar(100) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_chat_file`
 ADD INDEX `user_id` (`user_id`);ALTER TABLE `lh_question` ADD `revote` INT( 11 ) NOT NULL DEFAULT '0';
-ALTER TABLE `lh_question_option_answer` ADD `ctime` int NOT NULL;ALTER TABLE `lh_canned_msg`
-ADD `department_id` int(11) NOT NULL,
-ADD `user_id` int(11) NOT NULL AFTER `department_id`,
-COMMENT='';
-
-ALTER TABLE `lh_canned_msg`
-ADD INDEX `department_id` (`department_id`),
-ADD INDEX `user_id` (`user_id`);
-
-
+ALTER TABLE `lh_question_option_answer` ADD `ctime` int NOT NULL;
 
 ALTER TABLE `lh_abstract_email_template`
 ADD `bcc_recipients` varchar(200) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
@@ -763,10 +837,6 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 
 ALTER TABLE `lh_users`
 ADD `job_title` varchar(100) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
-COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `operator_ids` varchar(100) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
 COMMENT='';
 
 ALTER TABLE `lh_users`
@@ -810,14 +880,6 @@ ALTER TABLE `lh_departament`
 ADD INDEX `disabled_hidden` (`disabled`, `hidden`),
 DROP INDEX `disabled`;
 
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `dep_id` int NOT NULL,
-COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD INDEX `identifier` (`identifier`),
-ADD INDEX `dep_id` (`dep_id`);
-
 ALTER TABLE `lh_departament`
 ADD `inform_unread` tinyint(1) NOT NULL,
 COMMENT='';
@@ -828,10 +890,6 @@ COMMENT='';
 
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`) VALUES
 (7,	'New unread message',	'Live support',	0,	'',	0,	'Hello,\r\n\r\nUser request data:\r\nName: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\nDepartment: {department}\r\nCountry: {country}\r\nCity: {city}\r\nIP: {ip}\r\n\r\nMessage:\r\n{message}\r\n\r\nURL of page from which user has send request:\r\n{url_request}\r\n\r\nClick to accept chat automatically\r\n{url_accept}\r\n\r\nSincerely,\r\nLive Support Team',	'New unread message',	0,	'',	0,	'',	'');
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `requires_username` int(11) NOT NULL,
-COMMENT='';
 
 CREATE TABLE `lh_abstract_form` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -894,73 +952,87 @@ ALTER TABLE `lh_userdep`
 ADD `active_chats` int(11) NOT NULL,
 COMMENT='';
 
-ALTER TABLE `lh_canned_msg`
-ADD `auto_send` tinyint(1) NOT NULL,
-COMMENT='';
-
 CREATE TABLE `lh_abstract_widget_theme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-                 `name` varchar(250) NOT NULL,
-                 `onl_bcolor` varchar(10) NOT NULL,
-                 `bor_bcolor` varchar(10) NOT NULL DEFAULT 'e3e3e3',
-                 `text_color` varchar(10) NOT NULL,
-                 `online_image` varchar(250) NOT NULL,
-                 `online_image_path` varchar(250) NOT NULL,
-                 `offline_image` varchar(250) NOT NULL,
-                 `offline_image_path` varchar(250) NOT NULL,
-                 `logo_image` varchar(250) NOT NULL,
-                 `logo_image_path` varchar(250) NOT NULL,
-                 `need_help_image` varchar(250) NOT NULL,
-                 `header_background` varchar(10) NOT NULL,
-                 `need_help_tcolor` varchar(10) NOT NULL,
-                 `need_help_bcolor` varchar(10) NOT NULL,
-                 `need_help_border` varchar(10) NOT NULL,
-                 `need_help_close_bg` varchar(10) NOT NULL,
-                 `need_help_hover_bg` varchar(10) NOT NULL,
-                 `need_help_close_hover_bg` varchar(10) NOT NULL,
-                 `need_help_image_path` varchar(250) NOT NULL,
-                 `custom_status_css` text NOT NULL,
-                 `custom_container_css` text NOT NULL,
-                 `custom_widget_css` text NOT NULL,
-                 `need_help_header` varchar(250) NOT NULL,
-                 `need_help_text` varchar(250) NOT NULL,
-                 `online_text` varchar(250) NOT NULL,
-                 `offline_text` varchar(250) NOT NULL,
-                 `widget_border_color` varchar(10) NOT NULL,
-                 `copyright_image` varchar(250) NOT NULL,
-                 `copyright_image_path` varchar(250) NOT NULL,
-                 `widget_copyright_url` varchar(250) NOT NULL,
-                 `show_copyright` int(11) NOT NULL DEFAULT '1',
-                 `explain_text` text NOT NULL,
-                 `intro_operator_text` varchar(250) NOT NULL,
-                 `operator_image` varchar(250) NOT NULL,
-                 `operator_image_path` varchar(250) NOT NULL,
-                 `minimize_image` varchar(250) NOT NULL,
-                 `minimize_image_path` varchar(250) NOT NULL,
-                 `restore_image` varchar(250) NOT NULL,
-                 `restore_image_path` varchar(250) NOT NULL,
-                 `close_image` varchar(250) NOT NULL,
-                 `close_image_path` varchar(250) NOT NULL,
-                 `popup_image` varchar(250) NOT NULL,
-                 `popup_image_path` varchar(250) NOT NULL,
-                 `hide_close` int(11) NOT NULL,
-                 `hide_popup` int(11) NOT NULL,
-                 `header_height` int(11) NOT NULL,
-                 `support_joined` varchar(250) NOT NULL,
-                 `support_closed` varchar(250) NOT NULL,
-                 `pending_join` varchar(250) NOT NULL,
-                 `noonline_operators` varchar(250) NOT NULL,
-                 `noonline_operators_offline` varchar(250) NOT NULL,
-                 `header_padding` int(11) NOT NULL,
-                 `widget_border_width` int(11) NOT NULL,
-                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_company` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `onl_bcolor` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bor_bcolor` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text_color` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `online_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `online_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `offline_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `offline_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `header_background` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_tcolor` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_bcolor` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_border` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_close_bg` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_hover_bg` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_close_hover_bg` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_status_css` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_container_css` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_widget_css` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_header` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `need_help_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `online_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `offline_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `widget_border_color` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `copyright_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `copyright_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `widget_copyright_url` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `show_copyright` int(11) NOT NULL DEFAULT 1,
+  `explain_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intro_operator_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `operator_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `operator_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `minimize_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `minimize_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `restore_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `restore_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `close_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `close_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `popup_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `popup_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hide_close` int(11) NOT NULL,
+  `hide_popup` int(11) NOT NULL,
+  `header_height` int(11) NOT NULL,
+  `header_padding` int(11) NOT NULL,
+  `widget_border_width` int(11) NOT NULL,
+  `support_joined` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `support_closed` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pending_join` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noonline_operators` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noonline_operators_offline` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `show_need_help` int(11) NOT NULL DEFAULT 1,
+  `show_need_help_timeout` int(11) NOT NULL DEFAULT 24,
+  `show_voting` tinyint(1) NOT NULL,
+  `department_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `department_select` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_visitor_background` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_visitor_title_color` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_visitor_text_color` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_operator_background` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_operator_title_color` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buble_operator_text_color` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_popup_css` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hide_ts` int(11) NOT NULL,
+  `widget_response_width` int(11) NOT NULL,
+  `show_need_help_delay` int(11) NOT NULL,
+  `show_status_delay` int(11) NOT NULL,
+  `modern_look` tinyint(1) NOT NULL DEFAULT 0,
+  `bot_status_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bot_configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notification_configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`)
-VALUES ('new_user_bn', '', '');
-
-INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`)
-VALUES ('new_user_sound', '', '');
+INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('new_user_bn', '', '');
+INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('new_user_sound', '', '');
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('allow_reopen_closed','1', 0, 'Allow user to reopen closed chats?', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('reopen_as_new','1', 0, 'Reopen closed chat as new? Otherwise it will be reopened as active.', '0');
@@ -1139,18 +1211,6 @@ ALTER TABLE `lh_chat_online_user`
 ADD `notes` varchar(250) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
 COMMENT='';
 
-ALTER TABLE `lh_abstract_auto_responder`
-ADD `repeat_number` int(11) NOT NULL DEFAULT '1',
-COMMENT='';
-
-ALTER TABLE `lh_chat`
-ADD `wait_timeout_repeat` int(11) NOT NULL,
-COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation`
-ADD `repeat_number` int NOT NULL DEFAULT '1',
-COMMENT='';
-
 ALTER TABLE `lh_abstract_email_template`
 ADD `user_mail_as_sender` tinyint(4) NOT NULL,
 COMMENT='';
@@ -1164,10 +1224,6 @@ COMMENT='';
 
 ALTER TABLE `lh_group`
 ADD INDEX `disabled` (`disabled`);
-
-ALTER TABLE `lh_abstract_widget_theme`
-ADD `name_company` varchar(250) COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `name`,
-COMMENT='';
 
 ALTER TABLE `lh_users`
 ADD `rec_per_req` tinyint(1) NOT NULL,
@@ -1221,23 +1277,6 @@ ADD INDEX `attr_int_1` (`attr_int_1`),
 ADD INDEX `attr_int_2` (`attr_int_2`),
 ADD INDEX `attr_int_3` (`attr_int_3`);
 
-ALTER TABLE `lh_canned_msg`
-ADD `attr_int_1` int NOT NULL,
-ADD `attr_int_2` int NOT NULL AFTER `attr_int_1`,
-ADD `attr_int_3` int NOT NULL AFTER `attr_int_2`,
-COMMENT='';
-
-ALTER TABLE `lh_canned_msg`
-ADD INDEX `attr_int_1` (`attr_int_1`),
-ADD INDEX `attr_int_2` (`attr_int_2`),
-ADD INDEX `attr_int_3` (`attr_int_3`);
-
-ALTER TABLE `lh_canned_msg`
-ADD `title` varchar(250) COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `id`,
-ADD `explain` varchar(250) COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `title`,
-ADD `fallback_msg` text COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `msg`,
-COMMENT='';
-
 ALTER TABLE `lh_users` ADD `session_id` varchar(40) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
 COMMENT='';
 
@@ -1264,24 +1303,120 @@ CREATE TABLE `lh_abstract_survey_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `survey_id` int(11) NOT NULL,
   `chat_id` int(11) NOT NULL,
-  `stars` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `ftime` int(11) NOT NULL,
   `dep_id` int(11) NOT NULL,
+  `max_stars_1` int(11) NOT NULL,
+  `max_stars_2` int(11) NOT NULL,
+  `max_stars_3` int(11) NOT NULL,
+  `max_stars_4` int(11) NOT NULL,
+  `max_stars_5` int(11) NOT NULL,
+  `question_options_1` int(11) NOT NULL,
+  `question_options_2` int(11) NOT NULL,
+  `question_options_3` int(11) NOT NULL,
+  `question_options_4` int(11) NOT NULL,
+  `question_options_5` int(11) NOT NULL,
+  `question_plain_1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_5` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `survey_id` (`survey_id`),
   KEY `chat_id` (`chat_id`),
   KEY `user_id` (`user_id`),
   KEY `dep_id` (`dep_id`),
-  KEY `ftime` (`ftime`)
+  KEY `ftime` (`ftime`),
+  KEY `max_stars_1` (`max_stars_1`),
+  KEY `max_stars_2` (`max_stars_2`),
+  KEY `max_stars_3` (`max_stars_3`),
+  KEY `max_stars_4` (`max_stars_4`),
+  KEY `max_stars_5` (`max_stars_5`),
+  KEY `question_options_1` (`question_options_1`),
+  KEY `question_options_2` (`question_options_2`),
+  KEY `question_options_3` (`question_options_3`),
+  KEY `question_options_4` (`question_options_4`),
+  KEY `question_options_5` (`question_options_5`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_abstract_survey` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) NOT NULL,
-  `max_stars` int(11) NOT NULL,
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_1` int(11) NOT NULL,
+  `max_stars_1_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_1_pos` int(11) NOT NULL,
+  `max_stars_1_req` int(11) NOT NULL,
+  `max_stars_1_enabled` int(11) NOT NULL,
+  `max_stars_2_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_2_pos` int(11) NOT NULL,
+  `max_stars_2` int(11) NOT NULL,
+  `max_stars_2_enabled` int(11) NOT NULL,
+  `max_stars_2_req` int(11) NOT NULL,
+  `max_stars_3_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_3_pos` int(11) NOT NULL,
+  `max_stars_3` int(11) NOT NULL,
+  `max_stars_3_enabled` int(11) NOT NULL,
+  `max_stars_3_req` int(11) NOT NULL,
+  `max_stars_4_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_4_pos` int(11) NOT NULL,
+  `max_stars_4_req` int(11) NOT NULL,
+  `max_stars_4` int(11) NOT NULL,
+  `max_stars_4_enabled` int(11) NOT NULL,
+  `max_stars_5_title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_stars_5_pos` int(11) NOT NULL,
+  `max_stars_5_req` int(11) NOT NULL,
+  `max_stars_5` int(11) NOT NULL,
+  `max_stars_5_enabled` int(11) NOT NULL,
+  `question_options_1` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_1_items` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_1_pos` int(11) NOT NULL,
+  `question_options_1_req` int(11) NOT NULL,
+  `question_options_1_enabled` int(11) NOT NULL,
+  `question_options_2` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_2_items` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_2_pos` int(11) NOT NULL,
+  `question_options_2_req` int(11) NOT NULL,
+  `question_options_2_enabled` int(11) NOT NULL,
+  `question_options_3` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_3_items` text CHARACTER SET utf8 NOT NULL,
+  `question_options_3_pos` int(11) NOT NULL,
+  `question_options_3_req` int(11) NOT NULL,
+  `question_options_3_enabled` int(11) NOT NULL,
+  `question_options_4` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_4_enabled` int(11) NOT NULL,
+  `question_options_4_req` int(11) NOT NULL,
+  `question_options_4_items` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_4_pos` int(11) NOT NULL,
+  `question_options_5` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_5_items` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_options_5_pos` int(11) NOT NULL,
+  `question_options_5_req` int(11) NOT NULL,
+  `question_options_5_enabled` int(11) NOT NULL,
+  `question_plain_1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_1_pos` int(11) NOT NULL,
+  `question_plain_1_enabled` int(11) NOT NULL,
+  `question_plain_1_req` int(11) NOT NULL,
+  `question_plain_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_2_pos` int(11) NOT NULL,
+  `question_plain_2_enabled` int(11) NOT NULL,
+  `question_plain_2_req` int(11) NOT NULL,
+  `question_plain_3` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_3_pos` int(11) NOT NULL,
+  `question_plain_3_req` int(11) NOT NULL,
+  `question_plain_3_enabled` int(11) NOT NULL,
+  `question_plain_4` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_4_pos` int(11) NOT NULL,
+  `question_plain_4_enabled` int(11) NOT NULL,
+  `question_plain_4_req` int(11) NOT NULL,
+  `question_plain_5` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_plain_5_pos` int(11) NOT NULL,
+  `question_plain_5_enabled` int(11) NOT NULL,
+  `question_plain_5_req` int(11) NOT NULL,
+  `feedback_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('online_if','0','0','','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('track_mouse_activity','0','0','Should mouse movement be tracked as activity measure, if not checked only basic events would be tracked','0');
@@ -1290,42 +1425,29 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 ALTER TABLE `lh_chat_online_user` ADD `user_active` int(11) NOT NULL DEFAULT 0, COMMENT='';
 
 INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('dwo',	'',	'');
-ALTER TABLE `lh_canned_msg` ADD INDEX `position_title_v2` (`position`, `title`(191));
 
-ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help` int(11) NOT NULL DEFAULT '1', COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help_timeout` int(11) NOT NULL DEFAULT '24', COMMENT='';
 
 ALTER TABLE `lh_departament` ADD `visible_if_online` tinyint(1) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `show_voting` tinyint(1) NOT NULL DEFAULT '1', COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `department_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `department_select` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_visitor_background` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_visitor_title_color` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_visitor_text_color` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_operator_background` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_operator_title_color` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `buble_operator_text_color` varchar(250) NOT NULL, COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('hide_button_dropdown','0','0','Hide close button in dropdown','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('on_close_exit_chat','0','0','On chat close exit chat','0');
 ALTER TABLE `lh_departament` ADD `sort_priority` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD INDEX `sort_priority_name` (`sort_priority`,`name`);
 
-ALTER TABLE `lh_chat` ADD `unanswered_chat` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD INDEX `unanswered_chat` (`unanswered_chat`);
+
 ALTER TABLE `lh_users` ADD `attr_int_1` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `attr_int_2` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `attr_int_3` int(11) NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_abstract_product` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(250) NOT NULL, `disabled` int(11) NOT NULL, `priority` int(11) NOT NULL, `departament_id` int(11) NOT NULL, KEY `departament_id` (`departament_id`), PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('product_enabled_module','0','0','Product module is enabled','1');
-ALTER TABLE `lh_chat` ADD `product_id` int(11) NOT NULL, COMMENT='';
+
 ALTER TABLE `lh_users` CHANGE `password` `password` varchar(200) NOT NULL;
 CREATE TABLE `lh_chat_paid` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `hash` varchar(250) NOT NULL, `chat_id` int(11) NOT NULL,  PRIMARY KEY (`id`),  KEY `hash` (`hash`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('paidchat_data','','0','Paid chat configuration','1');
 
 ALTER TABLE `lh_users` ADD `chat_nickname` varchar(100) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat` ADD INDEX `product_id` (`product_id`);
+
 
 CREATE TABLE `lh_abstract_rest_api_key` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1352,117 +1474,10 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('disable_iframe_sharing',	'1',	0,	'Disable iframes in sharing mode',	0);
 ALTER TABLE `lh_users` ADD `operation_admin` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `tag` varchar(50) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD INDEX `tag` (`tag`);
-
-ALTER TABLE `lh_abstract_survey` CHANGE `max_stars` `max_stars_1` int(11) NOT NULL;
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_1_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_1_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_1_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_2_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_2_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_2_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_3_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_3_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_3_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_4_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_4_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_4_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_5_title` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_5_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_5_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_1` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_1_items` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_1_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_1_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_2` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_2_items` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_2_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_2_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_3` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_3_items` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_3_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_3_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_4` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_4_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_4_items` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_4_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_5` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_5_items` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_5_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_5_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_1` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_1_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_1_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_2_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_2_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_3_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_3_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_4_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_4_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_5_pos` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_5_enabled` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` CHANGE `stars` `max_stars_1` int(11) NOT NULL;
-ALTER TABLE `lh_abstract_survey_item` ADD `max_stars_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `max_stars_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `max_stars_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `max_stars_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_options_1` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_options_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_options_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_options_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_options_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_plain_1` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_plain_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_plain_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_plain_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD `question_plain_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `max_stars_1` (`max_stars_1`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `max_stars_2` (`max_stars_2`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `max_stars_3` (`max_stars_3`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `max_stars_4` (`max_stars_4`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `max_stars_5` (`max_stars_5`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `question_options_1` (`question_options_1`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `question_options_2` (`question_options_2`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `question_options_3` (`question_options_3`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `question_options_4` (`question_options_4`);
-ALTER TABLE `lh_abstract_survey_item` ADD INDEX `question_options_5` (`question_options_5`);
-
-ALTER TABLE `lh_canned_msg` CHANGE `msg` `msg` longtext NOT NULL;
-ALTER TABLE `lh_msg` CHANGE `msg` `msg` longtext NOT NULL;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('inform_unread_message',	'0',	0,	'Inform visitor about unread messages from operator, value in minutes. 0 - disabled',	0);
 
-ALTER TABLE `lh_chat` ADD `last_op_msg_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD `has_unread_op_messages` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD `unread_op_messages_informed` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD INDEX `unread_operator` (`has_unread_op_messages`, `unread_op_messages_informed`);
-
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`, `user_mail_as_sender`) VALUES (11,	'You have unread messages',	'Live Helper Chat',	0,	'',	0,	'Hello,\r\n\r\nOperator {operator} has answered to you\r\n\r\n{messages}\r\n\r\nSincerely,\r\nLive Support Team',	'Operator has answered to your request',	0,	'',	0,	'',	'',	0);
-
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_1_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_2_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_3_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_4_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `max_stars_5_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_1_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_2_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_3_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_4_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_options_5_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_1_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_2_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_3_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_4_req` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `question_plain_5_req` int(11) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_departament` DROP `mod`,COMMENT='';
 ALTER TABLE `lh_departament` DROP `tud`,COMMENT='';
@@ -1525,12 +1540,6 @@ CREATE TABLE `lh_departament_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_abstract_survey_item` ADD `status` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_abstract_survey` ADD `feedback_text` text NOT NULL, COMMENT='';
-
-ALTER TABLE `lh_chat` ADD `status_sub_arg` varchar(200) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD `status_sub_sub` int(11) NOT NULL DEFAULT '0', COMMENT='';
-
 ALTER TABLE `lh_departament` ADD `inform_close_all` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `inform_close_all_email` varchar(250) NOT NULL, COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('product_show_departament',	'0',	0,	'Enable products show by departments',	1);
@@ -1543,9 +1552,6 @@ CREATE TABLE `lh_abstract_product_departament` (
   PRIMARY KEY (`id`),
   KEY `departament_id` (`departament_id`)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `lh_chat` ADD `uagent` varchar(250) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat` ADD `device_type` int(11) NOT NULL DEFAULT '0', COMMENT='';
 
 CREATE TABLE `lh_users_session` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1563,8 +1569,6 @@ CREATE TABLE `lh_users_session` (
   KEY `token` (`token`)
 )  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_msg` ADD INDEX `user_id` (`user_id`);
-
 CREATE TABLE `lh_canned_msg_tag_link` ( `id` int(11) NOT NULL AUTO_INCREMENT, `tag_id` int(11) NOT NULL, `canned_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `canned_id` (`canned_id`), KEY `tag_id` (`tag_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_canned_msg_tag` ( `id` int(11) NOT NULL AUTO_INCREMENT, `tag` varchar(40) NOT NULL, `cnt` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `tag` (`tag`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1574,20 +1578,9 @@ ALTER TABLE `lh_users` ADD `inactive_mode` tinyint(1) NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_group_work` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `group_id` int(11) NOT NULL, `group_work_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `group_id` (`group_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_chat` ADD `sender_user_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD INDEX `user_id_sender_user_id` (`user_id`, `sender_user_id`);
-ALTER TABLE `lh_chat` ADD INDEX `sender_user_id` (`sender_user_id`);
-ALTER TABLE `lh_chat` DROP INDEX `user_id`;
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `dynamic_invitation` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD INDEX `dynamic_invitation` (`dynamic_invitation`);
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `iddle_for` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `event_type` int(11) NOT NULL, COMMENT='';
-
 CREATE TABLE `lh_abstract_proactive_chat_variables` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `identifier` varchar(50) NOT NULL, `store_timeout` int(11) NOT NULL, `filter_val` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_abstract_proactive_chat_event` ( `id` int(11) NOT NULL AUTO_INCREMENT, `vid_id` int(11) NOT NULL, `ev_id` int(11) NOT NULL, `ts` int(11) NOT NULL, `val` varchar(50) NOT NULL, PRIMARY KEY (`id`), KEY `vid_id_ev_id_val_ts` (`vid_id`,`ev_id`,`val`,`ts`), KEY `vid_id_ev_id_ts` (`vid_id`,`ev_id`,`ts`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_abstract_proactive_chat_invitation_event` ( `id` int(11) NOT NULL AUTO_INCREMENT, `invitation_id` int(11) NOT NULL, `event_id` int(11) NOT NULL, `min_number` int(11) NOT NULL, `during_seconds` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `invitation_id` (`invitation_id`), KEY `event_id` (`event_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `event_invitation` int(11) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_departament` ADD `pending_max` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `pending_group_max` int(11) NOT NULL, COMMENT='';
@@ -1607,8 +1600,6 @@ CREATE TABLE `lh_departament_limit_group` (
    PRIMARY KEY (`id`))
 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_chat` ADD `auto_responder_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
-
 CREATE TABLE `lh_abstract_auto_responder_chat` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
                   `chat_id` int(11) NOT NULL,
@@ -1620,39 +1611,10 @@ CREATE TABLE `lh_abstract_auto_responder_chat` (
                   KEY `chat_id` (`chat_id`)
                 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_message_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_1` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_1` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_reply_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_reply_message_5` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `ignore_pa_chat` int(11) NOT NULL, COMMENT='';
-
-
-ALTER TABLE `lh_chat` DROP `wait_timeout`,COMMENT='';
-ALTER TABLE `lh_chat` DROP `wait_timeout_send`,COMMENT='';
-ALTER TABLE `lh_chat` DROP `timeout_message`,COMMENT='';
-ALTER TABLE `lh_chat` DROP `wait_timeout_repeat`,COMMENT='';
-
-ALTER TABLE `lh_chat` ADD `lsync` int(11) NOT NULL DEFAULT '0', COMMENT='';
-
 CREATE TABLE `lh_users_online_session` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `user_id` int(11) NOT NULL, `duration` int(11) NOT NULL, `time` int(11) NOT NULL, `lactivity` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `user_id_lactivity` (`user_id`, `lactivity`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE `lh_chat` ADD `usaccept` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_userdep` ADD `hide_online_ts` int(11) NOT NULL DEFAULT '0', COMMENT='';
 
-ALTER TABLE `lh_abstract_widget_theme` ADD `custom_popup_css` text NOT NULL, COMMENT='';
+
 
 CREATE TABLE `lh_chat_start_settings` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `data` longtext NOT NULL, `department_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `department_id` (`department_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1660,44 +1622,13 @@ ALTER TABLE `lh_departament` ADD INDEX `active_chats_counter` (`active_chats_cou
 ALTER TABLE `lh_departament` ADD INDEX `pending_chats_counter` (`pending_chats_counter`);
 ALTER TABLE `lh_departament` ADD INDEX `closed_chats_counter` (`closed_chats_counter`);
 
-ALTER TABLE `lh_chat` ADD `transfer_uid` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_transfer` ADD `ctime` int(11) NOT NULL, COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('transfer_configuration','0','0','Transfer configuration','1');
-
-ALTER TABLE `lh_abstract_auto_responder` ADD `survey_timeout` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `survey_id` int(11) NOT NULL, COMMENT='';
-
-
-
-ALTER TABLE `lh_abstract_auto_responder` ADD `only_proactive` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `name` varchar(50) NOT NULL, COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `autoresponder_id` int(11) NOT NULL, COMMENT='';
-
-ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `wait_message`,COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `wait_timeout`,COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `timeout_message`,COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` DROP `repeat_number`,COMMENT='';
-
-
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_1` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_2` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_3` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_4` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold_5` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `wait_timeout_hold` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_1` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_2` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_3` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_4` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_auto_responder` ADD `timeout_hold_message_5` text NOT NULL, COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('assign_workflow_timeout','0','0','Chats waiting in pending queue more than n seconds should be auto-assigned first. Time in seconds','0');
 
 ALTER TABLE `lh_rolefunction` ADD `limitation` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `hide_ts` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `widget_response_width` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `show_on_mobile` int(11) NOT NULL, COMMENT='';
+
 ALTER TABLE `lh_users` ADD `auto_accept` tinyint(1) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `max_active_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT='';
@@ -1710,25 +1641,12 @@ ALTER TABLE `lh_userdep` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT=''
 ALTER TABLE `lh_departament` ADD `exclude_inactive_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `max_ac_dep_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `delay_before_assign` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_archive_range` ADD `year_month` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_archive_range` ADD `older_than` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_archive_range` ADD `last_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_archive_range` ADD `first_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_canned_msg` ADD `languages` text NOT NULL, COMMENT='';
 ALTER TABLE `lh_speech_language_dialect` ADD `short_code` varchar(4) NOT NULL, COMMENT='';
 ALTER TABLE `lh_speech_language_dialect` ADD INDEX `short_code` (`short_code`);
 ALTER TABLE `lh_speech_language_dialect` ADD INDEX `lang_code` (`lang_code`);
-ALTER TABLE `lh_abstract_auto_responder` ADD `languages` text NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `delay_init` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `delay` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `show_instant` int(11) NOT NULL, COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('tracked_footprint_cleanup','90','0','How many days keep records of users footprint.','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cleanup_cronjob','0','0','Cleanup should should be done only using cronjob.','0');
-
-ALTER TABLE `lh_abstract_auto_responder` ADD `operator` varchar(50) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `show_need_help_delay` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `show_status_delay` int(11) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_userdep` ADD `ro` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 
@@ -1736,46 +1654,37 @@ CREATE TABLE `lh_abstract_subject` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name
 CREATE TABLE `lh_abstract_subject_dep` ( `id` int(11) NOT NULL AUTO_INCREMENT, `dep_id` int(11) NOT NULL, `subject_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `subject_id` (`subject_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_abstract_subject_chat` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `subject_id` int(11) NOT NULL, `chat_id` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_chat` ADD `pnd_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD `cls_time` int(11) NOT NULL DEFAULT '0', COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_user','4','0','How long operator can wait for message from visitor before time between messages are ignored. Values in minutes.','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cduration_timeout_operator','10','0','How long visitor can wait for message from operator before time between messages are ignored. Values in minutes.','0');
 ALTER TABLE `lh_chat_file` ADD `persistent` int(11) NOT NULL DEFAULT '0', COMMENT='';
 CREATE TABLE `lh_group_object` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `object_id` bigint(20) NOT NULL, `group_id` bigint(20) NOT NULL, `type` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `object_id_type` (`object_id`,`type`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `lh_group` ADD `required` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `modern_look` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 
-ALTER TABLE `lh_canned_msg` ADD `additional_data` text NOT NULL, COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('do_no_track_ip','0','0','Do not track visitors IP','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('encrypt_msg_after','0','0','After how many days anonymize messages','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('encrypt_msg_op','0','0','Anonymize also operators messages','0');
-ALTER TABLE `lh_chat` ADD `anonymized` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat` ADD INDEX `anonymized` (`anonymized`);
+
 
 ALTER TABLE `lh_departament` ADD `bot_configuration` text NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_departament_availability` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `dep_id` int(11) NOT NULL, `hour` int(11) NOT NULL, `hourminute` int(4) NOT NULL, `minute` int(11) NOT NULL, `time` int(11) NOT NULL, `ymdhi` bigint(20) NOT NULL, `ymd` int(11) NOT NULL, `status` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `ymdhi` (`ymdhi`), KEY `dep_id` (`dep_id`),  KEY `hourminute` (`hourminute`), KEY `time` (`time`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `lh_generic_bot_bot` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_bot` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL,`attr_str_1` varchar(100) NOT NULL,`attr_str_2` varchar(100) NOT NULL,`attr_str_3` varchar(100) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_group` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `bot_id` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_trigger` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `actions` longtext NOT NULL, `group_id` bigint(20) NOT NULL, `bot_id` int(11) NOT NULL, `default` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`) ,KEY `group_id` (`group_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_trigger_event` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `pattern` varchar(100) NOT NULL, `trigger_id` bigint(20) NOT NULL, `bot_id` int(11) NOT NULL, `type` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `pattern` (`pattern`), KEY `type` (`type`), KEY `trigger_id` (`trigger_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_payload` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `payload` varchar(100) NOT NULL, `bot_id` int(11) NOT NULL, `trigger_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`), KEY `trigger_id` (`trigger_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_chat_workflow` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL,`trigger_id` bigint(20) NOT NULL, `identifier` varchar(100) NOT NULL, `status` int(11) NOT NULL, `collected_data` text, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE `lh_msg` ADD `meta_msg` longtext NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_generic_bot_chat_event` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL, `content` longtext NOT NULL, `ctime` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE `lh_generic_bot_trigger` ADD `default_unknown` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `bot_status_text` varchar(250) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_generic_bot_chat_workflow` ADD `time` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_widget_theme` ADD `bot_configuration` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_bot` ADD `nick` varchar(100) NOT NULL, COMMENT='';
 
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `bot_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `trigger_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `bot_offline` tinyint(1) NOT NULL, COMMENT='';
-
 CREATE TABLE `lh_notification_subscriber` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL, `online_user_id` bigint(20) NOT NULL, `dep_id` int(11) NOT NULL, `theme_id` int(11) NOT NULL, `ctime` int(11) NOT NULL, `utime` int(11) NOT NULL, `status` int(11) NOT NULL, `params` text NOT NULL, `device_type` tinyint(1) NOT NULL,`subscriber_hash` varchar(50) NOT NULL, `uagent` varchar(250) NOT NULL, `ip` varchar(250) NOT NULL, `last_error` text NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`), KEY `dep_id` (`dep_id`), KEY `online_user_id` (`online_user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE `lh_abstract_widget_theme` ADD `notification_configuration` longtext NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('list_unread','0','0','List unread chats','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('list_closed','0','0','List closed chats','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('disable_live_autoassign','0','0','Disable live auto assign','0');
