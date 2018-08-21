@@ -74,12 +74,16 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash ) {
 	
 	$instance->request += (int)$Params['user_parameters']['request'];
 
-	if ($instance->expires == 0 || $instance->expires < time()) {
-		$instance->expires = time()+(int)$Params['user_parameters']['period']*24*3600;
-	} else{
-		$instance->expires += (int)$Params['user_parameters']['period']*24*3600;
-	}
-	
+    if ((int)$Params['user_parameters']['period'] == 0) {
+        $instance->expires = 0;
+    } else {
+        if ($instance->expires == 0 || $instance->expires < time()) {
+            $instance->expires = time() + (int)$Params['user_parameters']['period'] * 24 * 3600;
+        } else {
+            $instance->expires += (int)$Params['user_parameters']['period'] * 24 * 3600;
+        }
+    }
+
 	if (isset($_POST['custom_fields_1'])) {
 	    $instance->custom_fields_1 = $_POST['custom_fields_1'];
 	}
