@@ -145,7 +145,7 @@ class erLhcoreClassModelInstance
             }
             
             // Instance was created so we have to remove customer data first
-            if ($this->status == 1) {
+            if ($this->status == 1 || $this->status == 2) {
                 erLhcoreClassInstance::removeCustomer($this);
             }
             

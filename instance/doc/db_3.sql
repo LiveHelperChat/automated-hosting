@@ -1688,3 +1688,44 @@ CREATE TABLE `lh_notification_subscriber` ( `id` bigint(20) NOT NULL AUTO_INCREM
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('list_unread','0','0','List unread chats','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('list_closed','0','0','List closed chats','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('disable_live_autoassign','0','0','Disable live auto assign','0');
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_timeout_pending','0','0','Automatic pending chats closing. 0 - disabled, n > 0 time in minutes before chat is automatically closed','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_timeout_active','0','0','Automatic active chats closing. 0 - disabled, n > 0 time in minutes before chat is automatically closed','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_timeout_bot','0','0','Automatic bot chats closing. 0 - disabled, n > 0 time in minutes before chat is automatically closed','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('open_closed_chat_timeout','1800','0','How many seconds customer has to open already closed chat.','0');
+
+CREATE TABLE `lh_speech_user_language` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `user_id` bigint(20) NOT NULL, `language` varchar(20) NOT NULL, PRIMARY KEY (`id`), KEY `user_id_language` (`user_id`,`language`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `lh_departament` ADD `assign_same_language` int(11) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_chat` ADD `invitation_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `disabled` int(11) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_abstract_proactive_chat_campaign` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `text` text NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_proactive_chat_campaign_conv` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `device_type` tinyint(11) NOT NULL,
+  `invitation_type` tinyint(1) NOT NULL,
+  `invitation_status` tinyint(1) NOT NULL,
+  `chat_id` bigint(20) NOT NULL,
+  `campaign_id` int(11) NOT NULL,
+  `invitation_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `ctime` int(11) NOT NULL,
+  `con_time` int(11) NOT NULL,
+  `vid_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `campaign_id` (`campaign_id`),
+  KEY `invitation_id` (`invitation_id`),
+  KEY `ctime` (`ctime`),
+  KEY `invitation_status` (`invitation_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_chat_online_user` ADD `conversion_id` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `campaign_id` int(11) NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('departament_availability','364','0','How long department availability statistic should be kept? (days)','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('uonline_sessions','364','0','How long keep operators online sessions data? (days)','0');
+
+INSERT INTO `lh_users_setting_option` (`identifier`,`class`,`attribute`) VALUES ('ocountry','','');
+INSERT INTO `lh_users_setting_option` (`identifier`,`class`,`attribute`) VALUES ('otime_on_site','','');
