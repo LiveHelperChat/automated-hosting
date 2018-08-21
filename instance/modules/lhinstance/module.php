@@ -88,6 +88,11 @@ $ViewList['terminateinstance'] = array(
 		'functions' => array( )
 );
 
+$ViewList['fetchinstance'] = array(
+		'params' => array('address','hash'),
+		'functions' => array( )
+);
+
 /**
  * Reseller instance API functions
  * */

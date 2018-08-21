@@ -46,8 +46,24 @@ class LHCAutomatedHostingAPI {
 		} else {
 			throw new Exception('Could not determine instance status, received response - '.$response);
 		}
-	}	
-	
+	}
+
+	public function fetchInstance($address)
+	{
+        $validateHash = sha1((string)$address.$this->secretHash);
+
+        $response = $this->executeRequest('/instance/fetchinstance/'. $address . '/' . $validateHash);
+
+        $jsonData = json_decode($response);
+
+        if ($jsonData !== null) {
+            return $jsonData;
+        } else {
+            throw new Exception('Could not parse response - '.$response);
+        }
+	}
+
+
 	/*
 	 * Creates or suspends instance
 	 * */
