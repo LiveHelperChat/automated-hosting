@@ -5,6 +5,7 @@ $Instance = erLhcoreClassModelInstance::fetch((int) $Params['user_parameters']['
 
 $cfgSite = erConfigClassLhConfig::getInstance();
 $tpl->set('locales', $cfgSite->getSetting('site', 'available_site_access'));
+$tpl->set('currentTab','');
 
 if (isset($_POST['Cancel_departament'])) {
     erLhcoreClassModule::redirect('instance/list');
@@ -90,6 +91,8 @@ if (isset($_POST['ChangePassword'])) {
             'Username was not change'
         ));
     }
+
+    $tpl->set('currentTab','login');
 }
 
 /**
@@ -155,8 +158,8 @@ if (isset($_POST['UpdateUsers'])) {
     erLhcoreClassInstance::performOperatorsLimit($Instance);
 
     $tpl->set('updated', true);
+    $tpl->set('currentTab','users');
 }
-
 
 if (isset($_POST['UpdateClientData'])) {
     $definition = array(
@@ -180,6 +183,7 @@ if (isset($_POST['UpdateClientData'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+    $tpl->set('currentTab','clientdata');
 }
 
 if (isset($_POST['AddAlias'])) {
@@ -206,12 +210,12 @@ if (isset($_POST['AddAlias'])) {
     }
     
     if (empty($Errors)) {
-        
         $alias->saveThis();
-        
     } else {
         $tpl->set('errors',$Errors);
-    }  
+    }
+
+    $tpl->set('currentTab','aliases');
 }
 
 
@@ -261,6 +265,7 @@ if (isset($_POST['UpdateAttributes'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+    $tpl->set('currentTab','attributes');
 }
 
 if (isset($_POST['UpdateSMS'])) {
@@ -338,6 +343,7 @@ if (isset($_POST['UpdateSMS'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+    $tpl->set('currentTab','sms');
 }
 
 if (isset($_POST['UpdateFeatures'])) {
@@ -578,6 +584,7 @@ if (isset($_POST['UpdateFeatures'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+    $tpl->set('currentTab','features');
 }
 
 if (isset($_POST['UpdateReseller'])) {
@@ -621,6 +628,7 @@ if (isset($_POST['UpdateReseller'])) {
 
     $Instance->saveThis();
     $tpl->set('updated', true);
+    $tpl->set('currentTab','reseller');
 }
 
 if (isset($_POST['Update_departament']) || isset($_POST['Save_departament'])) {

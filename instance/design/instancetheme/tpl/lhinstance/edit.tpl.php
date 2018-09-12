@@ -13,21 +13,21 @@
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></li>
-		<li role="presentation"><a href="#clientdata" aria-controls="clientdata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client data');?></a></li>
-		<li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Users')?></a></li>
-		<li role="presentation"><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
-		<li role="presentation"><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
-		<li role="presentation"><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
-		<li role="presentation"><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
-		<li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
-		<li role="presentation"><a href="#aliases" aria-controls="aliases" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Aliases')?></a></li>
+		<li role="presentation" <?php if ($currentTab == '') :?>class="active"<?php endif?>><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'clientdata') :?>class="active"<?php endif?>><a href="#clientdata" aria-controls="clientdata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client data');?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'users') :?>class="active"<?php endif?>><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Users')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'attributes') :?>class="active"<?php endif?>><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'reseller') :?>class="active"<?php endif?>><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'features') :?>class="active"<?php endif?>><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'sms') :?>class="active"<?php endif?>><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'login') :?>class="active"<?php endif?>><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
+		<li role="presentation" <?php if ($currentTab == 'aliases') :?>class="active"<?php endif?>><a href="#aliases" aria-controls="aliases" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Aliases')?></a></li>
 		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/extension_tab_multiinclude.tpl.php'));?>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="maindata">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == '') :?> active<?php endif?>" id="maindata">
 		  <div class="row">
 			<div class="col-sm-8">
 				<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#maindata" method="post">		
@@ -76,14 +76,14 @@
 		  </div> 
 		</div>
 		
-		<div role="tabpanel" class="tab-pane" id="clientdata">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'clientdata') : ?> active<?php endif?>" id="clientdata">
 		   <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#clientdata" method="post" autocomplete="off">		
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/client_data.tpl.php'));?>
 			    <input type="submit" class="btn btn-default" name="UpdateClientData" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
 			</form>
 		</div>
 		
-		<div role="tabpanel" class="tab-pane" id="users">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'users') : ?> active<?php endif?>" id="users">
 		     <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#users" method="post" autocomplete="off">		
 				
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/users_attributes.tpl.php'));?>
@@ -92,7 +92,7 @@
 			  			    	
 			</form>	
 		</div>
-		<div role="tabpanel" class="tab-pane" id="attributes">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'attributes') : ?> active<?php endif?>" id="attributes">
 		     <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#attributes" method="post" autocomplete="off">		
 				
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_attributes.tpl.php'));?>
@@ -101,7 +101,7 @@
 			  			    	
 			</form>	
 		</div>
-		<div role="tabpanel" class="tab-pane" id="reseller">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'reseller') : ?> active<?php endif?>" id="reseller">
 
     		<div class="row">
     			<div class="col-sm-8">
@@ -119,7 +119,7 @@
     		</div>
 
 		</div>
-		<div role="tabpanel" class="tab-pane" id="login">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'login') : ?> active<?php endif?>" id="login">
 		
 		  <div class="row">
 		      <div class="col-xs-8">
@@ -137,26 +137,26 @@
 		      </div>
 		      <div class="col-xs-4">
 		          <?php if ($instance->full_domain == 0) : ?>
-		              <a href="http://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
+		              <a href="https://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
 		          <?php else : ?>
-		              <a href="http://<?php echo $instance->address?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
+		              <a href="https://<?php echo $instance->address?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
 		          <?php endif;?>
 		      </div>
 		  </div>
 					
 		</div>
-		<div role="tabpanel" class="tab-pane" id="features">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'features') : ?> active<?php endif?>" id="features">
 		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#features" method="post" autocomplete="off">		
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/features.tpl.php'));?>	
 			</form>			
 		</div>
-		<div role="tabpanel" class="tab-pane" id="sms">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'sms') : ?> active<?php endif?>" id="sms">
 		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#sms" method="post" autocomplete="off">		
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/sms.tpl.php'));?>	
 			</form>			
 		</div>
 		
-		<div role="tabpanel" class="tab-pane" id="aliases">
+		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'aliases') : ?> active<?php endif?>" id="aliases">
 		    <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#aliases" method="post" autocomplete="off">		
 		         <?php include(erLhcoreClassDesign::designtpl('lhinstance/aliases.tpl.php'));?>	
 			</form>			
