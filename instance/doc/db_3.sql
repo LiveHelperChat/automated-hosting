@@ -1733,3 +1733,12 @@ INSERT INTO `lh_users_setting_option` (`identifier`,`class`,`attribute`) VALUES 
 ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `design_data` longtext NOT NULL, COMMENT='';
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('reverse_pending','0','0','Make default pending chats order from old to new','0');
 ALTER TABLE `lh_abstract_widget_theme` ADD `pending_join_queue` varchar(250) NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('recaptcha_data','a:4:{i:0;b:0;s:8:"site_key";s:0:"";s:10:"secret_key";s:0:"";s:7:"enabled";i:0;}','0','Re-captcha configuration','1');
+
+ALTER TABLE `lh_admin_theme` ADD `css_attributes` longtext NOT NULL, COMMENT='';
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('mheight_op','200','0','Messages box height for operator','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('listd_op','10','0','Default number of online operators to show','0');
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('password_data','','0','Password requirements','1');
+ALTER TABLE `lh_users` ADD `pswd_updated` int(11) NOT NULL, COMMENT='';
