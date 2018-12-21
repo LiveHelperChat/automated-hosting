@@ -1742,3 +1742,38 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('password_data','','0','Password requirements','1');
 ALTER TABLE `lh_users` ADD `pswd_updated` int(11) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_abstract_rest_api_key_remote` ( `id` int(11) NOT NULL AUTO_INCREMENT, `api_key` varchar(50) NOT NULL, `username` varchar(50) NOT NULL, `name` varchar(50) NOT NULL, `host` varchar(250) NOT NULL, `active` tinyint(1) NOT NULL DEFAULT '0', `position` int(11) NOT NULL DEFAULT '0', PRIMARY KEY (`id`), KEY `active` (`active`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_abstract_chat_variable` ( `id` int(11) NOT NULL AUTO_INCREMENT, `var_name` varchar(255) NOT NULL, `var_identifier` varchar(255) NOT NULL, `type` tinyint(1) NOT NULL,`js_variable` varchar(255) NOT NULL, `dep_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `dep_id` (`dep_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_chat_column` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `column_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variable` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `conditions` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `column_icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `column_identifier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `enabled` (`enabled`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_chat_priority` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  `priority` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dep_id` (`dep_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_generic_bot_chat_event` ADD `counter` int(11) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_generic_bot_pending_event` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL, `trigger_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_exception` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `priority` int(11) NOT NULL, `active` tinyint(1) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_exception_message` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `code` varchar(20) NOT NULL, `exception_group_id` int(11) NOT NULL, `priority` int(11) NOT NULL, `active` tinyint(1) NOT NULL, `message` text NOT NULL, PRIMARY KEY (`id`), KEY `code` (`code`), KEY `exception_group_id` (`exception_group_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_generic_bot_bot` ADD `filepath` varchar(250) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_bot` ADD `filename` varchar(250) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_bot` ADD `configuration` longtext NOT NULL, COMMENT='';
