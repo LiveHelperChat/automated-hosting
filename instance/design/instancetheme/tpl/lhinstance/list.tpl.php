@@ -1,4 +1,4 @@
-<a href="<?php echo erLhcoreClassDesign::baseurl('instance/invoices')?>" class="btn btn-default btn-sm pull-right"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoices')?></a>
+<a href="<?php echo erLhcoreClassDesign::baseurl('instance/invoices')?>" class="btn btn-secondary btn-sm pull-right"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoices')?></a>
 
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instances');?></h1>
 
@@ -10,4 +10,4 @@
     <?php include(erLhcoreClassDesign::designtpl('lhkernel/paginator.tpl.php')); ?>
 <?php endif;?>
 
-<a class="btn btn-default" href="<?php echo erLhcoreClassDesign::baseurl('instance/new')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','New instance');?></a>
+<a class="btn btn-secondary" href="<?php echo erLhcoreClassDesign::baseurl('instance/new')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','New instance');?></a>

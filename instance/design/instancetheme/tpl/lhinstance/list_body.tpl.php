@@ -58,14 +58,14 @@
         <td nowrap>
 
         <?php if (isset($listInstancesParams['show_configuration'])) : ?>
-            <a class="btn btn-default btn-sm" href="#"><i class="material-icons mr-0">settings_applications</i></a>
+            <a class="btn btn-secondary btn-sm" href="#"><i class="material-icons mr-0">settings_applications</i></a>
         <?php endif;?>
 
         <?php if (isset($listInstancesParams['show_unasign'])) : ?>
-            <a class="btn btn-default btn-sm" href="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $departament->reseller_id?>/(unasign)/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Unasign');?></a>
+            <a class="btn btn-secondary btn-sm" href="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $departament->reseller_id?>/(unasign)/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Unasign');?></a>
         <?php endif;?>
 
-        <a class="btn btn-default btn-sm" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Edit');?></a>
+        <a class="btn btn-secondary btn-sm" href="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $departament->id?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Edit');?></a>
         </td>
     </tr>
 <?php endforeach; ?>

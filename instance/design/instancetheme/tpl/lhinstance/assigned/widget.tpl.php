@@ -1,8 +1,8 @@
 <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="card-header">
         <a href="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $instance->id?>" >Child instances [<?php echo $instance->reseller_instances_count?>]</a>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
        <table class="table">
        <tr>
            <th>Instance</th>

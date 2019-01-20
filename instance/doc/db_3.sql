@@ -1778,6 +1778,9 @@ ALTER TABLE `lh_generic_bot_bot` ADD `filepath` varchar(250) NOT NULL, COMMENT='
 ALTER TABLE `lh_generic_bot_bot` ADD `filename` varchar(250) NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_bot` ADD `configuration` longtext NOT NULL, COMMENT='';
 
+CREATE TABLE `lh_audits` (`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, `category` varchar(255) NOT NULL, `file` varchar(255), `object_id` bigint(20) DEFAULT '0', `line` bigint(20), `message` longtext NOT NULL, `severity` varchar(255) NOT NULL, `source` varchar(255) NOT NULL, `time` timestamp NOT NULL, KEY `object_id` (`object_id`), KEY `source` (`source`(191)), KEY `category` (`category`(191))) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE `lh_admin_theme` ADD `user_id` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_admin_theme` ADD INDEX `user_id` (`user_id`);
 
-
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('no_wildcard_cookie','0','0','Cookie should be valid only for domain where Javascript is embedded (excludes subdomains)','0');

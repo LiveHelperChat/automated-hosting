@@ -1,1 +1,1 @@
-<li><a href="<?php echo erLhcoreClassDesign::baseurl('instance/list')?>" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('pagelayout/pagelayout','Instances');?></a></li>
+<li class="nav-item"><a class="nav-link" href="<?php echo erLhcoreClassDesign::baseurl('instance/list')?>" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('pagelayout/pagelayout','Instances');?></a></li>

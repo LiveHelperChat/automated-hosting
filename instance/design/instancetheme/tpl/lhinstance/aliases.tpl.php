@@ -4,19 +4,19 @@
 
 <form method="post" action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#/aliases">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             <div class="form-group">
                 <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Address')?></label>
                 <input name="address" type="text" class="form-control" />
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             <div class="form-group">
                 <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default URL')?></label>
                 <input name="url" type="text" class="form-control" />
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-12">
             <div class="btn-group" role="group" aria-label="...">
         		<input type="submit" name="AddAlias" class="btn btn-primary" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Add')?>"> 
         	</div>

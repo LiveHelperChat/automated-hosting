@@ -12,7 +12,7 @@
   <div class="form-group">
      <input type="text" name="InstanceAddress" class="form-control" placeholder="Instance address">
   </div>
-  <button type="submit" name="AssignInstance" class="btn btn-default">Assign</button>
+  <button type="submit" name="AssignInstance" class="btn btn-secondary">Assign</button>
 </form>
 
 <?php $listInstancesParams = array(

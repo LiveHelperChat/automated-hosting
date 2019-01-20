@@ -18,7 +18,7 @@
         <td><?php echo htmlspecialchars($payment->currency)?></td>
         <td><?php echo htmlspecialchars($payment->option_selection1)?></td>
         <td><?php echo htmlspecialchars($payment->date_front)?></td>
-        <td><a target="_blank" href="<?php echo erLhcoreClassDesign::baseurl('instance/billingpdf')?>/<?php echo $payment->id?>" class="btn btn-default btn-sm">PDF</a> </td>
+        <td><a target="_blank" href="<?php echo erLhcoreClassDesign::baseurl('instance/billingpdf')?>/<?php echo $payment->id?>" class="btn btn-secondary btn-sm">PDF</a> </td>
     </tr>
 <?php endforeach; ?>
 </table>

@@ -13,15 +13,15 @@
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" <?php if ($currentTab == '') :?>class="active"<?php endif?>><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'clientdata') :?>class="active"<?php endif?>><a href="#clientdata" aria-controls="clientdata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client data');?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'users') :?>class="active"<?php endif?>><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Users')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'attributes') :?>class="active"<?php endif?>><a href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'reseller') :?>class="active"<?php endif?>><a href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'features') :?>class="active"<?php endif?>><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'sms') :?>class="active"<?php endif?>><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'login') :?>class="active"<?php endif?>><a href="#login" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
-		<li role="presentation" <?php if ($currentTab == 'aliases') :?>class="active"<?php endif?>><a href="#aliases" aria-controls="aliases" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Aliases')?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == '') :?>active<?php endif?>" href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Main data');?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == 'clientdata') :?>active<?php endif?>" href="#clientdata" aria-controls="clientdata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Client data');?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == 'users') :?>active<?php endif?>" href="#users" aria-controls="users" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Users')?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == 'attributes') :?>active<?php endif?>" href="#attributes" aria-controls="attributes" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Attributes')?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == 'reseller') :?>active<?php endif?>" href="#reseller" aria-controls="reseller" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Reseller')?></a></li>
+		<li role="presentation" class="nav-item"><a class="nav-link <?php if ($currentTab == 'features') :?>active<?php endif?>" href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features')?></a></li>
+		<li role="presentation" class="nav-item"><a href="#sms" class="nav-link <?php if ($currentTab == 'sms') :?>active<?php endif?>" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS information')?></a></li>
+		<li role="presentation" class="nav-item"><a href="#login" class="nav-link <?php if ($currentTab == 'login') :?>active<?php endif?>" aria-controls="login" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Login information')?></a></li>
+		<li role="presentation" class="nav-item"><a href="#aliases" class="nav-link <?php if ($currentTab == 'aliases') :?>active<?php endif?>" aria-controls="aliases" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Aliases')?></a></li>
 		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/extension_tab_multiinclude.tpl.php'));?>
 	</ul>
 
@@ -36,9 +36,9 @@
 				    <?php include(erLhcoreClassDesign::designtpl('lhkernel/csfr_token.tpl.php'));?>
 				
 					<div class="btn-group" role="group" aria-label="...">
-				      <input type="submit" class="btn btn-default" name="Save_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save');?>"/>
-				      <input type="submit" class="btn btn-default" name="Update_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>"/>
-				      <input type="submit" class="btn btn-default" name="Cancel_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Cancel');?>"/>
+				      <input type="submit" class="btn btn-secondary" name="Save_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save');?>"/>
+				      <input type="submit" class="btn btn-secondary" name="Update_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>"/>
+				      <input type="submit" class="btn btn-secondary" name="Cancel_departament" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Cancel');?>"/>
 				    </div>
 
 				</form>
@@ -57,8 +57,8 @@
 					</ul>
 
 					<div class="panel panel-default">
-                      <div class="panel-heading"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Quick maintain');?></div>
-                      <div class="panel-body">
+                      <div class="card-header"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Quick maintain');?></div>
+                      <div class="card-body">
                       
                           <?php if (isset($instance_maintain_message)) : ?>
                             <div class="alert alert-info" role="alert">
@@ -66,10 +66,10 @@
                             </div>
                           <?php endif;?>
                           
-                          <a href="?update_official=1" class="btn btn-default"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update instance stucture with official structure')?></a>
+                          <a href="?update_official=1" class="btn btn-secondary"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update instance stucture with official structure')?></a>
                           <br/>
                           <br/>
-                          <a href="?update_extension=1" class="btn btn-default"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update extensions structure')?></a>
+                          <a href="?update_extension=1" class="btn btn-secondary"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update extensions structure')?></a>
                       </div>
                     </div>
 			</div>	
@@ -79,7 +79,7 @@
 		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'clientdata') : ?> active<?php endif?>" id="clientdata">
 		   <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#clientdata" method="post" autocomplete="off">		
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/client_data.tpl.php'));?>
-			    <input type="submit" class="btn btn-default" name="UpdateClientData" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
+			    <input type="submit" class="btn btn-secondary" name="UpdateClientData" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
 			</form>
 		</div>
 		
@@ -88,7 +88,7 @@
 				
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/users_attributes.tpl.php'));?>
         			
-			    <input type="submit" class="btn btn-default" name="UpdateUsers" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
+			    <input type="submit" class="btn btn-secondary" name="UpdateUsers" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>"/>				  
 			  			    	
 			</form>	
 		</div>
@@ -97,7 +97,7 @@
 				
 				<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_attributes.tpl.php'));?>
         			
-			    <input type="submit" class="btn btn-default" name="UpdateAttributes" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update attributes');?>"/>				  
+			    <input type="submit" class="btn btn-secondary" name="UpdateAttributes" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update attributes');?>"/>				  
 			  			    	
 			</form>	
 		</div>
@@ -107,7 +107,7 @@
     			<div class="col-sm-8">
     				<form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#reseller" method="post" autocomplete="off">
     					<?php include(erLhcoreClassDesign::designtpl('lhinstance/form_reseller.tpl.php'));?>
-    				    <input type="submit" class="btn btn-default" name="UpdateReseller" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>" />
+    				    <input type="submit" class="btn btn-secondary" name="UpdateReseller" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Update');?>" />
     				</form>
     			 </div>
     			<div class="col-sm-4">
@@ -122,7 +122,7 @@
 		<div role="tabpanel" class="tab-pane<?php if ($currentTab == 'login') : ?> active<?php endif?>" id="login">
 		
 		  <div class="row">
-		      <div class="col-xs-8">
+		      <div class="col-8">
 		         <form action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#login" method="post" autocomplete="off">		
     		        <div class="form-group">											 
         				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Username')?></label>
@@ -132,10 +132,10 @@
     				    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Password')?></label>
     				    <input class="form-control" type="password" value="" name="InstancePassword" autocomplete="off">
     				</div>    				
-    			    <input type="submit" class="btn btn-default" name="ChangePassword" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>"/>		
+    			    <input type="submit" class="btn btn-secondary" name="ChangePassword" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Update');?>"/>		
     			</form>	
 		      </div>
-		      <div class="col-xs-4">
+		      <div class="col-4">
 		          <?php if ($instance->full_domain == 0) : ?>
 		              <a href="https://<?php echo $instance->address?>.<?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain')?>/site_admin/instance/logmein/<?php echo time()?>/<?php echo sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').sha1(erConfigClassLhConfig::getInstance()->getSetting('site','seller_secret_hash').$instance->address.time()));?>" target="_blank"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Log me in (will expire at')?> <?php echo date('H:i:s',time()+60)?>)</a>
 		          <?php else : ?>
