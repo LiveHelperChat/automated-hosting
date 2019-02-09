@@ -1784,3 +1784,30 @@ ALTER TABLE `lh_admin_theme` ADD `user_id` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_admin_theme` ADD INDEX `user_id` (`user_id`);
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('no_wildcard_cookie','0','0','Cookie should be valid only for domain where Javascript is embedded (excludes subdomains)','0');
+
+ALTER TABLE `lh_abstract_chat_column` ADD `chat_enabled` tinyint(1) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD `online_enabled` tinyint(1) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD INDEX `online_enabled` (`online_enabled`);
+ALTER TABLE `lh_abstract_chat_column` ADD INDEX `chat_enabled` (`chat_enabled`);
+
+CREATE TABLE `lh_generic_bot_tr_group` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_tr_item` ( `id` int(11) NOT NULL AUTO_INCREMENT, `group_id` int(11) NOT NULL, `identifier` varchar(50) NOT NULL, `translation` text NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`), KEY `group_id` (`group_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_generic_bot_tr_group` ADD `nick` varchar(100) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_tr_group` ADD `configuration` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_tr_group` ADD `filepath` varchar(250) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_tr_group` ADD `filename` varchar(250) NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('footprint_background','0','0','Footprint updates should be processed in the background. Make sure you are running workflow background cronjob.','0');
+
+CREATE TABLE `lh_chat_online_user_footprint_update` (
+  `online_user_id` bigint(20) NOT NULL,
+  `command` varchar(20) NOT NULL,
+  `args` varchar(250) NOT NULL,
+  `ctime` int(11) NOT NULL,
+  KEY `online_user_id` (`online_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `lh_generic_bot_trigger_event` ADD `on_start_type` tinyint(1) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_trigger_event` ADD `priority` int(11) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_trigger_event` ADD INDEX `on_start_type` (`on_start_type`);
