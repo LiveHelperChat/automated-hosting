@@ -97,6 +97,7 @@ CREATE TABLE `lh_abstract_proactive_chat_invitation` (
   `operator_ids` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dep_id` int(11) NOT NULL,
   `requires_username` int(11) NOT NULL,
+  `inject_only_html` tinyint(1) NOT NULL,
   `requires_phone` int(11) NOT NULL,
   `message_returning` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `message_returning_nick` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -128,6 +129,7 @@ CREATE TABLE `lh_canned_msg` (
   `explain` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fallback_msg` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `html_snippet` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` int(11) NOT NULL,
   `delay` int(11) NOT NULL,
   `department_id` int(11) NOT NULL,
@@ -312,7 +314,7 @@ CREATE TABLE `lh_chat_online_user` (
         	   	  `tt_pages_count` int(11) NOT NULL,
         	   	  `invitation_count` int(11) NOT NULL,
         	   	  `dep_id` int(11) NOT NULL,
-                  `user_agent` varchar(250) NOT NULL,
+                  `user_agent` text NOT NULL,
                   `visitor_tz` varchar(50) NOT NULL,
                   `user_country_code` varchar(50) NOT NULL,
                   `user_country_name` varchar(50) NOT NULL,
@@ -1672,7 +1674,7 @@ CREATE TABLE `lh_departament_availability` ( `id` bigint(20) NOT NULL AUTO_INCRE
 
 CREATE TABLE `lh_generic_bot_bot` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL,`attr_str_1` varchar(100) NOT NULL,`attr_str_2` varchar(100) NOT NULL,`attr_str_3` varchar(100) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_group` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `bot_id` bigint(20) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-CREATE TABLE `lh_generic_bot_trigger` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `actions` longtext NOT NULL, `group_id` bigint(20) NOT NULL, `bot_id` int(11) NOT NULL, `default` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`) ,KEY `group_id` (`group_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_trigger` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `default_always` int(11), `actions` longtext NOT NULL, `group_id` bigint(20) NOT NULL, `bot_id` int(11) NOT NULL, `default` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`) ,KEY `group_id` (`group_id`), KEY `default_always` (`default_always`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_trigger_event` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `pattern` varchar(250) NOT NULL,`pattern_exc` varchar(250) NOT NULL, `trigger_id` bigint(20) NOT NULL, `bot_id` int(11) NOT NULL, `type` int(11) NOT NULL,`configuration` text NOT NULL, PRIMARY KEY (`id`), KEY `pattern_v2` (`pattern`(191)), KEY `type` (`type`), KEY `trigger_id` (`trigger_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_payload` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `payload` varchar(100) NOT NULL, `bot_id` int(11) NOT NULL, `trigger_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `bot_id` (`bot_id`), KEY `trigger_id` (`trigger_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_chat_workflow` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL,`trigger_id` bigint(20) NOT NULL, `identifier` varchar(100) NOT NULL, `status` int(11) NOT NULL, `collected_data` text, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1682,6 +1684,7 @@ ALTER TABLE `lh_generic_bot_trigger` ADD `default_unknown` int(11) NOT NULL, COM
 
 ALTER TABLE `lh_generic_bot_chat_workflow` ADD `time` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_bot` ADD `nick` varchar(100) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_trigger_event` CHANGE `pattern_exc` `pattern_exc` text NOT NULL, CHANGE `pattern` `pattern` text NOT NULL, CHANGE `configuration` `configuration` longtext NOT NULL;
 
 CREATE TABLE `lh_notification_subscriber` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat_id` bigint(20) NOT NULL, `online_user_id` bigint(20) NOT NULL, `dep_id` int(11) NOT NULL, `theme_id` int(11) NOT NULL, `ctime` int(11) NOT NULL, `utime` int(11) NOT NULL, `status` int(11) NOT NULL, `params` text NOT NULL, `device_type` tinyint(1) NOT NULL,`subscriber_hash` varchar(50) NOT NULL, `uagent` varchar(250) NOT NULL, `ip` varchar(250) NOT NULL, `last_error` text NOT NULL, PRIMARY KEY (`id`), KEY `chat_id` (`chat_id`), KEY `dep_id` (`dep_id`), KEY `online_user_id` (`online_user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1811,3 +1814,6 @@ CREATE TABLE `lh_chat_online_user_footprint_update` (
 ALTER TABLE `lh_generic_bot_trigger_event` ADD `on_start_type` tinyint(1) NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_trigger_event` ADD `priority` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_trigger_event` ADD INDEX `on_start_type` (`on_start_type`);
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('preload_iframes','0','0','Preload widget. It will avoid loading delay after clicking widget','0');
+
+CREATE TABLE `lh_generic_bot_repeat_restrict` (`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, `chat_id` bigint(20) NOT NULL, `trigger_id` bigint(20), `counter` int(11) DEFAULT '0', KEY `chat_id_trigger_id` (`chat_id`,`trigger_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
