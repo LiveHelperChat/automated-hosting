@@ -93,6 +93,18 @@ $ViewList['fetchinstance'] = array(
 		'functions' => array( )
 );
 
+$ViewList['apikey'] = array(
+		'params' => array('address','hash','user_id','secret_hash'),
+        'uparams' => array(),
+		'functions' => array( )
+);
+
+$ViewList['deleteapikey'] = array(
+		'params' => array('address','hash','id'),
+        'uparams' => array(),
+		'functions' => array( )
+);
+
 /**
  * Reseller instance API functions
  * */

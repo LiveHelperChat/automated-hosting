@@ -16,9 +16,6 @@ class LHCAutomatedHostingAPI {
 	
 	private function executeRequest($url) 
 	{
-		
-		echo $url,"\n";
-	
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->host . $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -157,7 +154,33 @@ class LHCAutomatedHostingAPI {
 		} else {
 			throw new Exception('Could not parse response - '.$response);
 		}
-	}	
+	}
+
+	public function addAPIKey($address, $user_id, $secretHash) {
+        $validateHash = sha1((string)$address . $user_id . $this->secretHash);
+
+        $response = $this->executeRequest('/instance/apikey/'. $address . '/' . $validateHash . '/' . $user_id . '/' . $secretHash);
+        $jsonData = json_decode($response);
+        if ($jsonData !== null) {
+            return $jsonData;
+        } else {
+            throw new Exception('Could not parse response - '.$response);
+        }
+    }
+
+	public function deleteAPIKey($address, $apiKeyId) {
+        $validateHash = sha1((string)$address . $apiKeyId . $this->secretHash);
+
+        $response = $this->executeRequest('/instance/deleteapikey/'. $address . '/' . $validateHash . '/' . $apiKeyId);
+        $jsonData = json_decode($response);
+        if ($jsonData !== null) {
+            return $jsonData;
+        } else {
+            throw new Exception('Could not parse response - '.$response);
+        }
+    }
+
+
 }
 
 ?>
