@@ -12,7 +12,7 @@ try {
     $apiData = $lhc->addAPIKey('testdomain5',1,'customersecretkey');
 
     // To delete just create API Key
-    $apiData = $lhc->deleteAPIKey('testdomain5',$apiData['id']);
+    $apiData = $lhc->deleteAPIKey('testdomain5',$apiData['data']['id']);
 
 } catch (Exception $e) {
     echo $e->getMessage();
