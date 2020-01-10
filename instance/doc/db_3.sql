@@ -12,6 +12,7 @@ CREATE TABLE `lh_abstract_auto_responder` (
   `wait_message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `wait_timeout` int(11) NOT NULL,
   `position` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `timeout_message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `dep_id` int(11) NOT NULL,
   `repeat_number` int(11) NOT NULL DEFAULT 1,
