@@ -1818,3 +1818,6 @@ ALTER TABLE `lh_generic_bot_trigger_event` ADD INDEX `on_start_type` (`on_start_
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('preload_iframes','0','0','Preload widget. It will avoid loading delay after clicking widget','0');
 
 CREATE TABLE `lh_generic_bot_repeat_restrict` (`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, `chat_id` bigint(20) NOT NULL, `trigger_id` bigint(20), `counter` int(11) DEFAULT '0', KEY `chat_id_trigger_id` (`chat_id`,`trigger_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_speech_language` ADD `siteaccess` varchar(3) NOT NULL DEFAULT '', COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD `modified` int(11) NOT NULL, COMMENT='';
