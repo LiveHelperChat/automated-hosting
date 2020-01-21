@@ -279,7 +279,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 ('banned_ip_range','',0,'Which ip should not be allowed to chat',0),
 ('disable_popup_restore',	'0',	0,	'Disable option in widget to open new window. 0 - no, 1 - restore icon will be hidden',	0),
 ('export_hash',	'{export_hash_chats}',	0,	'Chats export secret hash',	0),
-('geo_data',	'a:8:{i:0;b:0;s:21:\"geo_detection_enabled\";i:1;s:22:\"geo_service_identifier\";s:10:\"mod_geoip2\";s:23:\"mod_geo_ip_country_code\";s:18:\"GEOIP_COUNTRY_CODE\";s:23:\"mod_geo_ip_country_name\";s:18:\"GEOIP_COUNTRY_NAME\";s:20:\"mod_geo_ip_city_name\";s:10:\"GEOIP_CITY\";s:19:\"mod_geo_ip_latitude\";s:14:\"GEOIP_LATITUDE\";s:20:\"mod_geo_ip_longitude\";s:15:\"GEOIP_LONGITUDE\";}',	0,	'',	1),
+('geo_data',	'a:5:{i:0;b:0;s:21:\"geo_detection_enabled\";i:1;s:22:\"geo_service_identifier\";s:8:\"max_mind\";s:23:\"max_mind_detection_type\";s:7:\"country\";s:22:\"max_mind_city_location\";s:37:\"var/external/geoip/GeoLite2-City.mmdb\";}',	0,	'',	1),
 ('geo_location_data',	'a:3:{s:4:\"zoom\";i:4;s:3:\"lat\";s:7:\"49.8211\";s:3:\"lng\";s:7:\"11.7835\";}',	0,	'',	1),
 ('list_online_operators',	'0',	0,	'List online operators, 0 - no, 1 - yes.',	0),
 ('message_seen_timeout',	'24',	0,	'Proactive message timeout in hours. After how many hours proactive chat mesasge should be shown again.',	0),
