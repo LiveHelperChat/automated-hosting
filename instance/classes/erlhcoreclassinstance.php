@@ -96,7 +96,7 @@ class erLhcoreClassInstance{
    }
 
    public static function instanceExists($instance) {
-   		if (in_array($instance, array('www','dev','dev2','demo','admin','manager'))){
+   		if (in_array($instance, array('wscb','www','dev','dev2','demo','admin','manager'))){
    			return true;
    		}
 

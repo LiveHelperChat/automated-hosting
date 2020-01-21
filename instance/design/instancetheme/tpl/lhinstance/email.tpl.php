@@ -13,17 +13,14 @@
 <?php echo $instance->expires > 0 ? date('Y-m-d',$instance->expires) : '-',"\n\n";?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Recommended embed code');?>:<?php echo "\n";?>
-<?php echo '<script type="text/javascript">
-var LHCChatOptions = {};
-LHCChatOptions.opt = {widget_height:190,widget_width:300,popup_height:520,popup_width:500};
-(function() {
-var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;
-var refferer = (document.referrer) ? encodeURIComponent(document.referrer) : \'\';
-var location  = (document.location) ? encodeURIComponent(document.location) : \'\';
-po.src = \'';?><?php echo erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode')?><?php echo $instance->address.'.'. erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain') .'/chat/getstatus/(click)/internal/(position)/bottom_right/(check_operator_messages)/true/(top)/350/(units)/pixels/(leaveamessage)/true?r=\'+refferer+\'&l=\'+location;
-var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);
-})();
-</script>',"\n\n"; ?>
+<?php echo '<script>var LHC_API = LHC_API||{};
+        LHC_API.args = {mode:\'widget\',lhc_base_url:\'//' . $instance->address . '.' . erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain') . '\',wheight:450,wwidth:350,pheight:520,pwidth:500,leaveamessage:true};
+        (function() {
+            var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;
+            var date = new Date();po.src = \'//'.$instance->address . '.' . erConfigClassLhConfig::getInstance()->getSetting( 'site', 'seller_domain') .'/design/defaulttheme/js/widgetv2/index.js?\'+(""+date.getFullYear() + date.getMonth() + date.getDate());
+            var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>',"\n\n"; ?>
 
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Sincerely');?>,<?php echo "\n";?>
 <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/email','Live Support Team');?>
