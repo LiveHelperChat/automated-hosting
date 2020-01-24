@@ -549,6 +549,7 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhuser',	'see_assigned_departments'),
 (2,	'lhuser',	'canseedepartmentstats'),
 (2,	'lhchat',	'use'),
+(2,	'lhchat',	'allowtransferdirectly'),
 (2,	'lhchat',	'singlechatwindow'),
 (2,	'lhchat',	'allowopenremotechat'),
 (2,	'lhchat',	'allowchattabs'),
@@ -559,6 +560,7 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhchat',	'chattabschrome'),
 (2,	'lhchat',	'take_screenshot'),
 (2,	'lhchat',	'allowredirect'),
+(2,	'lhchat',	'open_all'),
 (2,	'lhchat',	'sees_all_online_visitors'),
 (2,	'lhpermission',	'see_permissions'),
 (2,	'lhtranslation',	'use'),
@@ -577,6 +579,9 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhquestionary',	'manage_questionary'),
 (2,	'lhfaq',	'manage_faq'),
 (2,	'lhchatbox',	'manage_chatbox'),
+(2,	'lhcannedmsg',	'use'),
+(2,	'lhtheme',	'personaltheme'),
+(2,	'lhspeech',	'change_chat_recognition'),
 (2,	'lhxml',	'*');
 
 DROP TABLE IF EXISTS `lh_transfer`;
