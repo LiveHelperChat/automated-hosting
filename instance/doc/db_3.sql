@@ -1443,7 +1443,7 @@ ADD `closed_chats_counter` int(11) NOT NULL AFTER `pending_chats_counter`,
 COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', '[["online_operators","departments_stats","online_visitors"],["my_chats","pending_chats","transfered_chats"],["active_chats","bot_chats"]]', '0', 'Home page dashboard widgets order', '0');
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('hide_right_column_frontpage', '0', '0', 'Hide right column in frontpage', '0');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('hide_right_column_frontpage', '1', '0', 'Hide right column in frontpage', '0');
 
 CREATE TABLE `lh_abstract_survey_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
