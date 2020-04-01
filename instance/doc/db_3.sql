@@ -279,7 +279,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 ('banned_ip_range','',0,'Which ip should not be allowed to chat',0),
 ('disable_popup_restore',	'0',	0,	'Disable option in widget to open new window. 0 - no, 1 - restore icon will be hidden',	0),
 ('export_hash',	'{export_hash_chats}',	0,	'Chats export secret hash',	0),
-('geo_data',	'a:5:{i:0;b:0;s:21:\"geo_detection_enabled\";i:1;s:22:\"geo_service_identifier\";s:8:\"max_mind\";s:23:\"max_mind_detection_type\";s:7:\"country\";s:22:\"max_mind_city_location\";s:37:\"var/external/geoip/GeoLite2-City.mmdb\";}',	0,	'',	1),
+('geo_data',	'a:5:{i:0;b:0;s:21:\"geo_detection_enabled\";i:1;s:22:\"geo_service_identifier\";s:8:\"max_mind\";s:23:\"max_mind_detection_type\";s:4:\"city\";s:22:\"max_mind_city_location\";s:37:\"var/external/geoip/GeoLite2-City.mmdb\";}',	0,	'',	1),
 ('geo_location_data',	'a:3:{s:4:\"zoom\";i:4;s:3:\"lat\";s:7:\"49.8211\";s:3:\"lng\";s:7:\"11.7835\";}',	0,	'',	1),
 ('list_online_operators',	'0',	0,	'List online operators, 0 - no, 1 - yes.',	0),
 ('message_seen_timeout',	'24',	0,	'Proactive message timeout in hours. After how many hours proactive chat mesasge should be shown again.',	0),
@@ -600,17 +600,27 @@ CREATE TABLE `lh_transfer` (
 
 
 DROP TABLE IF EXISTS `lh_userdep`;
-CREATE TABLE `lh_userdep` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `dep_id` int(11) NOT NULL,
-  `last_activity` int(11) NOT NULL,
-  `hide_online` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `last_activity_hide_online_dep_id` (`last_activity`,`hide_online`,`dep_id`),
-  KEY `dep_id` (`dep_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS `lh_userdep` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `user_id` int(11) NOT NULL,
+                  `dep_id` int(11) NOT NULL,
+                  `last_activity` int(11) NOT NULL,
+                  `exclude_autoasign` tinyint(1) NOT NULL DEFAULT '0',
+                  `hide_online` int(11) NOT NULL,
+                  `last_accepted` int(11) NOT NULL DEFAULT '0',
+                  `active_chats` int(11) NOT NULL DEFAULT '0',
+                  `pending_chats` int(11) NOT NULL DEFAULT '0',
+                  `inactive_chats` int(11) NOT NULL DEFAULT '0',
+                  `max_chats` int(11) NOT NULL DEFAULT '0',
+                  `type` int(11) NOT NULL DEFAULT '0',
+                  `ro` tinyint(1) NOT NULL DEFAULT '0',
+                  `hide_online_ts` int(11) NOT NULL DEFAULT '0',
+                  `dep_group_id` int(11) NOT NULL DEFAULT '0',
+                  PRIMARY KEY (`id`),
+                  KEY `last_activity_hide_online_dep_id` (`last_activity`,`hide_online`,`dep_id`),
+                  KEY `dep_id` (`dep_id`),
+                  KEY `user_id_type` (`user_id`,`type`)
+                ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `lh_userdep` (`id`, `user_id`, `dep_id`, `last_activity`, `hide_online`) VALUES
 (1,	1,	0,	1381856323,	0);
@@ -946,18 +956,10 @@ INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('autoclose_timeout','0', 0, 'Automatic chats closing. 0 - disabled, n > 0 time in minutes before chat is automatically closed', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('autopurge_timeout','0', 0, 'Automatic chats purging. 0 - disabled, n > 0 time in minutes before chat is automatically deleted', '0');
 
-ALTER TABLE `lh_userdep`
-ADD `last_accepted` int(11) NOT NULL,
-COMMENT='';
-
 ALTER TABLE `lh_departament`
 ADD `active_balancing` tinyint(1) NOT NULL,
 ADD `max_active_chats` int NOT NULL AFTER `active_balancing`,
 ADD `max_timeout_seconds` int NOT NULL AFTER `max_active_chats`,
-COMMENT='';
-
-ALTER TABLE `lh_userdep`
-ADD `active_chats` int(11) NOT NULL,
 COMMENT='';
 
 CREATE TABLE `lh_abstract_widget_theme` (
@@ -1091,21 +1093,6 @@ CREATE TABLE `lh_cobrowse` (
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('speech_data','a:3:{i:0;b:0;s:8:\"language\";i:7;s:7:\"dialect\";s:5:\"en-US\";}',	1,	'',	1);
 
-CREATE TABLE IF NOT EXISTS `lh_speech_language` (
-                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `name` varchar(100) NOT NULL,
-                  PRIMARY KEY (`id`)
-               )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
-                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `language_id` int(11) NOT NULL,
-                  `lang_name` varchar(100) NOT NULL,
-                  `lang_code` varchar(100) NOT NULL,
-                  PRIMARY KEY (`id`),
-                  KEY `language_id` (`language_id`)
-               )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `lh_speech_chat_language` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
                   `chat_id` int(11) NOT NULL,
@@ -1115,103 +1102,253 @@ CREATE TABLE IF NOT EXISTS `lh_speech_chat_language` (
                   KEY `chat_id` (`chat_id`)
                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_speech_language` (`id`, `name`) VALUES
-        	   (1,	'Afrikaans'),
-        	   (2,	'Bahasa Indonesia'),
-        	   (3,	'Bahasa Melayu'),
-        	   (4,	'Català'),
-        	   (5,	'Čeština'),
-        	   (6,	'Deutsch'),
-        	   (7,	'English'),
-        	   (8,	'Español'),
-        	   (9,	'Euskara'),
-        	   (10,	'Français'),
-        	   (11,	'Galego'),
-        	   (12,	'Hrvatski'),
-        	   (13,	'IsiZulu'),
-        	   (14,	'Íslenska'),
-        	   (15,	'Italiano'),
-        	   (16,	'Magyar'),
-        	   (17,	'Nederlands'),
-        	   (18,	'Norsk bokmål'),
-        	   (19,	'Polski'),
-        	   (20,	'Português'),
-        	   (21,	'Română'),
-        	   (22,	'Slovenčina'),
-        	   (23,	'Suomi'),
-        	   (24,	'Svenska'),
-        	   (25,	'Türkçe'),
-        	   (26,	'български'),
-        	   (27,	'Pусский'),
-        	   (28,	'Српски'),
-        	   (29,	'한국어'),
-        	   (30,	'中文'),
-        	   (31,	'日本語'),
-        	   (32,	'Lingua latīna');
+CREATE TABLE IF NOT EXISTS `lh_speech_language` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `name` varchar(100) NOT NULL,
+                  `siteaccess` varchar(3) NOT NULL DEFAULT '',
+                  PRIMARY KEY (`id`)
+               ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lang_code`) VALUES
-                (1,	1,	'Afrikaans',	'af-ZA'),
-                (2,	2,	'Bahasa Indonesia',	'id-ID'),
-                (3,	3,	'Bahasa Melayu',	'ms-MY'),
-                (4,	4,	'Català',	'ca-ES'),
-                (5,	5,	'Čeština',	'cs-CZ'),
-                (6,	6,	'Deutsch',	'de-DE'),
-                (7,	7,	'Australia',	'en-AU'),
-                (8,	7,	'Canada',	'en-CA'),
-                (9,	7,	'India',	'en-IN'),
-                (10,	7,	'New Zealand',	'en-NZ'),
-                (11,	7,	'South Africa',	'en-ZA'),
-                (12,	7,	'United Kingdom',	'en-GB'),
-                (13,	7,	'United States',	'en-US'),
-                (14,	8,	'Argentina',	'es-AR'),
-                (15,	8,	'Bolivia',	'es-BO'),
-                (16,	8,	'Chile',	'es-CL'),
-                (17,	8,	'Colombia',	'es-CO'),
-                (18,	8,	'Costa Rica',	'es-CR'),
-                (19,	8,	'Ecuador',	'es-EC'),
-                (20,	8,	'El Salvador',	'es-SV'),
-                (21,	8,	'España',	'es-ES'),
-                (22,	8,	'Estados Unidos',	'es-US'),
-                (23,	8,	'Guatemala',	'es-GT'),
-                (24,	8,	'Honduras',	'es-HN'),
-                (25,	8,	'México',	'es-MX'),
-                (26,	8,	'Nicaragua',	'es-NI'),
-                (27,	8,	'Panamá',	'es-PA'),
-                (28,	8,	'Paraguay',	'es-PY'),
-                (29,	8,	'Perú',	'es-PE'),
-                (30,	8,	'Puerto Rico',	'es-PR'),
-                (31,	8,	'República Dominicana',	'es-DO'),
-                (32,	8,	'Uruguay',	'es-UY'),
-                (33,	8,	'Venezuela',	'es-VE'),
-                (34,	9,	'Euskara',	'eu-ES'),
-                (35,	10,	'Français',	'fr-FR'),
-                (36,	11,	'Galego',	'gl-ES'),
-                (37,	12,	'Hrvatski',	'hr_HR'),
-                (38,	13,	'IsiZulu',	'zu-ZA'),
-                (39,	14,	'Íslenska',	'is-IS'),
-                (40,	15,	'Italia',	'it-IT'),
-                (41,	15,	'Svizzera',	'it-CH'),
-                (42,	16,	'Magyar',	'hu-HU'),
-                (43,	17,	'Nederlands',	'nl-NL'),
-                (44,	18,	'Norsk bokmål',	'nb-NO'),
-                (45,	19,	'Polski',	'pl-PL'),
-                (46,	20,	'Brasil',	'pt-BR'),
-                (47,	20,	'Portugal',	'pt-PT'),
-                (48,	21,	'Română',	'ro-RO'),
-                (49,	22,	'Slovenčina',	'sk-SK'),
-                (50,	23,	'Suomi',	'fi-FI'),
-                (51,	24,	'Svenska',	'sv-SE'),
-                (52,	25,	'Türkçe',	'tr-TR'),
-                (53,	26,	'български',	'bg-BG'),
-                (54,	27,	'Pусский',	'ru-RU'),
-                (55,	28,	'Српски',	'sr-RS'),
-                (56,	29,	'한국어',	'ko-KR'),
-                (57,	30,	'普通话 (中国大陆)',	'cmn-Hans-CN'),
-                (58,	30,	'普通话 (香港)',	'cmn-Hans-HK'),
-                (59,	30,	'中文 (台灣)',	'cmn-Hant-TW'),
-                (60,	30,	'粵語 (香港)',	'yue-Hant-HK'),
-                (61,	31,	'日本語',	'ja-JP'),
-                (62,	32,	'Lingua latīna',	'la');
+CREATE TABLE IF NOT EXISTS `lh_speech_language_dialect` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `language_id` int(11) NOT NULL,
+                  `lang_name` varchar(100) NOT NULL,
+                  `lang_code` varchar(100) NOT NULL,
+                  `short_code` varchar(4) NOT NULL DEFAULT '',
+                  PRIMARY KEY (`id`),
+                  KEY `language_id` (`language_id`),
+                  KEY `short_code` (`short_code`),
+                  KEY `lang_code` (`lang_code`)
+                ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `lh_speech_language` (`id`, `name`, `siteaccess`) VALUES
+				(1,	'Afrikaans',''),
+				(2,	'Bahasa Indonesia',''),
+				(3,	'Bahasa Melayu',''),
+				(4,	'Català',''),
+				(5,	'Čeština',''),
+				(6,	'Deutsch','ger'),
+				(7,	'English',''),
+				(8,	'Español','esp'),
+				(9,	'Euskara',''),
+				(10,	'Français','fre'),
+				(11,	'Galego',''),
+				(12,	'Hrvatski',''),
+				(13,	'IsiZulu',''),
+				(14,	'Íslenska',''),
+				(15,	'Italiano','ita'),
+				(16,	'Magyar',''),
+				(17,	'Nederlands','nld'),
+				(18,	'Norsk bokmål',''),
+				(19,	'Polski','pol'),
+				(20,	'Português','por'),
+				(21,	'Română',''),
+				(22,	'Slovenčina',''),
+				(23,	'Suomi','fin'),
+				(24,	'Svenska',''),
+				(25,	'Türkçe','tur'),
+				(26,	'български',''),
+				(27,	'Pусский','rus'),
+				(28,	'Српски',''),
+				(29,	'한국어',''),
+				(30,	'中文',''),
+				(31,	'日本語',''),
+				(32,	'Lingua latīna',''),
+				(33,	'Lithuanian','lit'),
+				(34,	'Latvia',''),
+				(35,	'Afar',''),
+				(36,	'Arabic',''),
+				(37,	'Assamese',''),
+				(38,	'Azerbaijani',''),
+				(39,	'Bulgarian','bgr'),
+				(40,	'Bangla',''),
+				(41,	'Bosnian',''),
+				(42,	'Cakchiquel',''),
+				(43,	'Danish',''),
+				(44,	'Greek',''),
+				(45,	'Estonian',''),
+				(46,	'Persian',''),
+				(47,	'Filipino',''),
+				(48,	'Gujarati',''),
+				(49,	'Hebrew',''),
+				(50,	'Croatian',''),
+				(51,	'Indonesia',''),
+				(52,	'Icelandic',''),
+				(53,	'Georgian',''),
+				(54,	'Maori (New Zealand)',''),
+				(55,	'Macedonian',''),
+				(56,	'Malay (Latin)',''),
+				(57,	'Maltese',''),
+				(58,	'Norwegian Nynorsk',''),
+				(59,	'Norwegian','nor'),
+				(60,	'Northern Sotho (South Africa)',''),
+				(61,	'Slovenian',''),
+				(63,	'Thai',''),
+				(64,	'Tagalog',''),
+				(65,	'Tongan',''),
+				(66,	'Ukrainian',''),
+				(67,	'Vietnamese','vnm'),
+				(68,	'Chinese','chn');
+
+INSERT INTO `lh_speech_language_dialect` (`id`, `language_id`, `lang_name`, `lang_code`, `short_code`) VALUES
+(1,	1,	'Afrikaans',	'af-ZA',	'af'),
+(2,	2,	'Bahasa Indonesia',	'id-ID',	'id'),
+(3,	3,	'Bahasa Melayu',	'ms-MY',	''),
+(4,	4,	'Català',	'ca-ES',	''),
+(5,	5,	'Čeština',	'cs-CZ',	'cs'),
+(6,	6,	'Deutsch',	'de-DE',	'de'),
+(7,	7,	'Australia',	'en-AU',	''),
+(8,	7,	'Canada',	'en-CA',	''),
+(9,	7,	'India',	'en-IN',	''),
+(10,	7,	'New Zealand',	'en-NZ',	''),
+(11,	7,	'South Africa',	'en-ZA',	''),
+(12,	7,	'United Kingdom',	'en-GB',	'en'),
+(13,	7,	'United States',	'en-US',	''),
+(14,	8,	'Argentina',	'es-AR',	''),
+(15,	8,	'Bolivia',	'es-BO',	''),
+(16,	8,	'Chile',	'es-CL',	''),
+(17,	8,	'Colombia',	'es-CO',	''),
+(18,	8,	'Costa Rica',	'es-CR',	''),
+(19,	8,	'Ecuador',	'es-EC',	''),
+(20,	8,	'El Salvador',	'es-SV',	''),
+(21,	8,	'España',	'es-ES',	'es'),
+(22,	8,	'Estados Unidos',	'es-US',	''),
+(23,	8,	'Guatemala',	'es-GT',	''),
+(24,	8,	'Honduras',	'es-HN',	''),
+(25,	8,	'México',	'es-MX',	''),
+(26,	8,	'Nicaragua',	'es-NI',	''),
+(27,	8,	'Panamá',	'es-PA',	''),
+(28,	8,	'Paraguay',	'es-PY',	''),
+(29,	8,	'Perú',	'es-PE',	''),
+(30,	8,	'Puerto Rico',	'es-PR',	''),
+(31,	8,	'República Dominicana',	'es-DO',	''),
+(32,	8,	'Uruguay',	'es-UY',	''),
+(33,	8,	'Venezuela',	'es-VE',	''),
+(34,	9,	'Euskara',	'eu-ES',	''),
+(35,	10,	'Français',	'fr-FR',	'fr'),
+(36,	11,	'Galego',	'gl-ES',	''),
+(37,	12,	'Hrvatski',	'hr_HR',	''),
+(38,	13,	'IsiZulu',	'zu-ZA',	''),
+(39,	14,	'Íslenska',	'is-IS',	''),
+(40,	15,	'Italia',	'it-IT',	'it'),
+(41,	15,	'Svizzera',	'it-CH',	'it'),
+(42,	16,	'Magyar',	'hu-HU',	'hu'),
+(43,	17,	'Nederlands',	'nl-NL',	'nl'),
+(44,	18,	'Norsk bokmål',	'nb-NO',	'nb'),
+(45,	19,	'Polski',	'pl-PL',	'pl'),
+(46,	20,	'Brasil',	'pt-BR',	''),
+(47,	20,	'Portugal',	'pt-PT',	'pt'),
+(48,	21,	'Română',	'ro-RO',	'ro'),
+(49,	22,	'Slovenčina',	'sk-SK',	'sk'),
+(50,	23,	'Suomi',	'fi-FI',	'fi'),
+(51,	24,	'Swedish',	'sv-SE',	'sv'),
+(52,	25,	'Türkçe',	'tr-TR',	'tr'),
+(53,	26,	'български',	'bg-BG',	''),
+(54,	27,	'Pусский',	'ru-RU',	'ru'),
+(55,	28,	'Serbian',	'sr-RS',	'sr'),
+(56,	29,	'한국어',	'ko-KR',	'ko'),
+(57,	30,	'普通话 (中国大陆)',	'cmn-Hans-CN',	''),
+(58,	30,	'普通话 (香港)',	'cmn-Hans-HK',	''),
+(59,	30,	'中文 (台灣)',	'cmn-Hant-TW',	''),
+(60,	30,	'粵語 (香港)',	'yue-Hant-HK',	''),
+(61,	31,	'日本語',	'ja-JP',	'ja'),
+(62,	32,	'Lingua latīna',	'la',	''),
+(64,	33,	'Lithuanian',	'lt-LT',	'lt'),
+(65,	34,	'Latvia',	'lv-LV',	'lv'),
+(66,	35,	'Afar',	'aa-DJ',	'aa'),
+(67,	36,	'Egypt',	'ar-EG',	'ar'),
+(68,	37,	'India',	'as-IN',	'as'),
+(69,	38,	'Azerbaijani',	'az-AZ',	'az'),
+(70,	39,	'Bulgarian',	'bg',	'bg'),
+(71,	40,	'Bangla',	'bn',	'bn'),
+(72,	41,	'Bosnian',	'bs-BA',	'bs'),
+(73,	42,	'Cakchiquel',	'cak',	'cak'),
+(74,	43,	'Danish',	'da-dk',	'da'),
+(75,	44,	'Greek',	'el-GR',	'el'),
+(76,	45,	'Estonian',	'et-EE',	'et'),
+(77,	46,	'Persian',	'fa-IR',	'fa'),
+(78,	47,	'Filipino',	'fil',	'fil'),
+(79,	48,	'Gujarati',	'gu-IN',	'gu'),
+(80,	49,	'Hebrew',	'he',	'he'),
+(81,	50,	'Croatian',	'hr-HR',	'hr'),
+(82,	51,	'Indonesia',	'in',	'in'),
+(83,	52,	'Icelandic',	'is',	'is'),
+(84,	53,	'Georgian',	'ka-ge',	'ka'),
+(85,	54,	'Maori (New Zealand)',	'mi-nz',	'mi'),
+(86,	55,	'Macedonian',	'mk-MK',	'mk'),
+(87,	56,	'Malay (Latin)',	'ms',	'ms'),
+(88,	57,	'Maltese',	'mt',	'mt'),
+(89,	58,	'Norwegian Nynorsk',	'nn-NO',	'nn'),
+(90,	59,	'Norwegian',	'no',	'no'),
+(91,	60,	'Northern Sotho (South Africa)',	'nso-za',	'nso'),
+(92,	61,	'Slovenian',	'sl-SI',	'sl'),
+(94,	63,	'Thai',	'th-TH',	'th'),
+(95,	64,	'Tagalog',	'tl',	'tl'),
+(96,	65,	'Tongan',	'to-TO',	'to'),
+(97,	66,	'Ukrainian',	'uk-UA',	'uk'),
+(98,	67,	'Vietnamese',	'vi-VN',	'vi'),
+(99,	68,	'Chinese',	'zh-CN',	'zh'),
+(100,	36,	'Egypt',	'ar-AE',	''),
+(101,	36,	'Egypt',	'ar-IQ',	''),
+(102,	41,	'Bosnian',	'bs-Latn-BA',	''),
+(103,	6,	'Deutsch',	'de-at',	''),
+(104,	6,	'Deutsch',	'de-ch',	''),
+(105,	6,	'Deutsch',	'de-GB',	''),
+(106,	6,	'Deutsch',	'de-LI',	''),
+(107,	6,	'Deutsch',	'de-LU',	''),
+(108,	7,	'United Kingdom',	'en-029',	''),
+(109,	7,	'United Kingdom',	'en-AS',	''),
+(110,	7,	'United Kingdom',	'en-BE',	''),
+(111,	7,	'United Kingdom',	'en-BM',	''),
+(112,	7,	'United Kingdom',	'en-BS',	''),
+(113,	7,	'United Kingdom',	'en-BW',	''),
+(114,	7,	'United Kingdom',	'en-CH',	''),
+(115,	7,	'United Kingdom',	'en-CX',	''),
+(116,	7,	'United Kingdom',	'en-CY',	''),
+(117,	7,	'United Kingdom',	'en-DE',	''),
+(118,	7,	'United Kingdom',	'en-DK',	''),
+(119,	7,	'United Kingdom',	'en-DM',	''),
+(120,	7,	'United Kingdom',	'en-GY',	''),
+(121,	7,	'United Kingdom',	'en-HK',	''),
+(122,	7,	'United Kingdom',	'en-ie',	''),
+(123,	7,	'United Kingdom',	'en-IM',	''),
+(124,	7,	'United Kingdom',	'en-JM',	''),
+(125,	7,	'United Kingdom',	'en-KY',	''),
+(126,	7,	'United Kingdom',	'en-MY',	''),
+(127,	7,	'United Kingdom',	'en-NF',	''),
+(128,	7,	'United Kingdom',	'en-NG',	''),
+(129,	7,	'United Kingdom',	'en-NL',	''),
+(130,	7,	'United Kingdom',	'en-PH',	''),
+(131,	7,	'United Kingdom',	'en-SE',	''),
+(132,	7,	'United Kingdom',	'en-sg',	''),
+(133,	7,	'United Kingdom',	'en-SI',	''),
+(134,	7,	'United Kingdom',	'en-SS',	''),
+(135,	7,	'United Kingdom',	'en-TO',	''),
+(136,	7,	'United Kingdom',	'en-TZ',	''),
+(137,	7,	'United Kingdom',	'en-UG',	''),
+(138,	7,	'United Kingdom',	'en-UK',	''),
+(139,	7,	'United Kingdom',	'en-ZG',	''),
+(140,	7,	'United Kingdom',	'en-ZM',	''),
+(141,	7,	'United Kingdom',	'en-ZW',	''),
+(142,	8,	'España',	'es-419',	''),
+(143,	8,	'España',	'es-xl',	''),
+(144,	47,	'Filipino',	'fil-PH',	''),
+(145,	10,	'Français',	'fr-BE',	''),
+(146,	10,	'Français',	'fr-ca',	''),
+(147,	10,	'Français',	'fr-ch',	''),
+(148,	10,	'Français',	'fr-CM',	''),
+(149,	10,	'Français',	'fr-MC',	''),
+(150,	49,	'Hebrew',	'he-IL',	''),
+(151,	50,	'Croatian',	'hr-BA',	''),
+(152,	17,	'Nederlands',	'nl-BE',	''),
+(153,	19,	'Polski',	'pl-GB',	''),
+(154,	27,	'Pусский',	'ru-KZ',	''),
+(155,	27,	'Pусский',	'ru-UA',	''),
+(156,	28,	'Serbian',	'sr-BA',	''),
+(157,	28,	'Serbian',	'sr-Latn-RS',	''),
+(158,	68,	'Chinese',	'zh-MO',	''),
+(159,	68,	'Chinese',	'zh-SG',	''),
+(160,	68,	'Chinese',	'zh-TW',	'');
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('front_tabs', 'dashboard,online_users,online_map', '0', 'Home page tabs order', '0');
 
@@ -1520,11 +1657,6 @@ ALTER TABLE `lh_departament` ADD INDEX `active_sud` (`online_hours_active`,`sud_
 ALTER TABLE `lh_departament` DROP INDEX `oha_sh_eh`;
 CREATE TABLE IF NOT EXISTS `lh_departament_custom_work_hours` (`id` int(11) NOT NULL AUTO_INCREMENT,`dep_id` int(11) NOT NULL,`date_from` int(11) NOT NULL,`date_to` int(11) NOT NULL,`start_hour` int(11) NOT NULL,`end_hour` int(11) NOT NULL,PRIMARY KEY (`id`),KEY `dep_id` (`dep_id`),KEY `date_from` (`date_from`),KEY `search_active` (`date_from`, `date_to`, `dep_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_userdep` ADD `type` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_userdep` ADD `dep_group_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_userdep` ADD INDEX `user_id_type` (`user_id`, `type`);
-ALTER TABLE `lh_userdep` DROP INDEX `user_id`;
-
 CREATE TABLE `lh_departament_group_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dep_group_id` int(11) NOT NULL,
@@ -1620,7 +1752,6 @@ CREATE TABLE `lh_abstract_auto_responder_chat` (
                 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_users_online_session` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `user_id` int(11) NOT NULL, `duration` int(11) NOT NULL, `time` int(11) NOT NULL, `lactivity` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `user_id_lactivity` (`user_id`, `lactivity`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-ALTER TABLE `lh_userdep` ADD `hide_online_ts` int(11) NOT NULL DEFAULT '0', COMMENT='';
 
 
 
@@ -1641,22 +1772,16 @@ ALTER TABLE `lh_users` ADD `auto_accept` tinyint(1) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `max_active_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT='';
 
-ALTER TABLE `lh_userdep` ADD `pending_chats` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_userdep` ADD `inactive_chats` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_userdep` ADD `max_chats` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_userdep` ADD `exclude_autoasign` tinyint(1) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_departament` ADD `exclude_inactive_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `max_ac_dep_chats` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_departament` ADD `delay_before_assign` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_speech_language_dialect` ADD `short_code` varchar(4) NOT NULL, COMMENT='';
-ALTER TABLE `lh_speech_language_dialect` ADD INDEX `short_code` (`short_code`);
-ALTER TABLE `lh_speech_language_dialect` ADD INDEX `lang_code` (`lang_code`);
+
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('tracked_footprint_cleanup','90','0','How many days keep records of users footprint.','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('cleanup_cronjob','0','0','Cleanup should should be done only using cronjob.','0');
 
-ALTER TABLE `lh_userdep` ADD `ro` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
 
 CREATE TABLE `lh_abstract_subject` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_abstract_subject_dep` ( `id` int(11) NOT NULL AUTO_INCREMENT, `dep_id` int(11) NOT NULL, `subject_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `subject_id` (`subject_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1824,7 +1949,6 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 
 CREATE TABLE `lh_generic_bot_repeat_restrict` (`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, `chat_id` bigint(20) NOT NULL, `trigger_id` bigint(20), `counter` int(11) DEFAULT '0', KEY `chat_id_trigger_id` (`chat_id`,`trigger_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_speech_language` ADD `siteaccess` varchar(3) NOT NULL DEFAULT '', COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` ADD `modified` int(11) NOT NULL, COMMENT='';
 
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`, `user_mail_as_sender`) VALUES
