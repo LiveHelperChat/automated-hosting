@@ -281,7 +281,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 ('export_hash',	'{export_hash_chats}',	0,	'Chats export secret hash',	0),
 ('geo_data',	'a:5:{i:0;b:0;s:21:\"geo_detection_enabled\";i:1;s:22:\"geo_service_identifier\";s:8:\"max_mind\";s:23:\"max_mind_detection_type\";s:4:\"city\";s:22:\"max_mind_city_location\";s:37:\"var/external/geoip/GeoLite2-City.mmdb\";}',	0,	'',	1),
 ('geo_location_data',	'a:3:{s:4:\"zoom\";i:4;s:3:\"lat\";s:7:\"49.8211\";s:3:\"lng\";s:7:\"11.7835\";}',	0,	'',	1),
-('list_online_operators',	'0',	0,	'List online operators, 0 - no, 1 - yes.',	0),
+('list_online_operators',	'1',	0,	'List online operators, 0 - no, 1 - yes.',	0),
 ('message_seen_timeout',	'24',	0,	'Proactive message timeout in hours. After how many hours proactive chat mesasge should be shown again.',	0),
 ('pro_active_invite',	'1',	0,	'Is pro active chat invitation active. Online users tracking also has to be enabled',	0),
 ('pro_active_limitation',	'-1',	0,	'Pro active chats invitations limitation based on pending chats, (-1) do not limit, (0,1,n+1) number of pending chats can be for invitation to be shown.',	0),
@@ -582,6 +582,7 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhcannedmsg',	'use'),
 (2,	'lhtheme',	'personaltheme'),
 (2,	'lhspeech',	'change_chat_recognition'),
+(2,	'lhuser',	'userlistonline'),
 (2,	'lhxml',	'*');
 
 DROP TABLE IF EXISTS `lh_transfer`;
@@ -1441,7 +1442,7 @@ ADD `pending_chats_counter` int(11) NOT NULL AFTER `active_chats_counter`,
 ADD `closed_chats_counter` int(11) NOT NULL AFTER `pending_chats_counter`,
 COMMENT='';
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', '[["online_operators","departments_stats","online_visitors"],["pending_chats","unread_chats","transfered_chats"],["active_chats","closed_chats"]]', '0', 'Home page dashboard widgets order', '0');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', '[["online_operators","departments_stats","online_visitors"],["my_chats","pending_chats","transfered_chats"],["active_chats","bot_chats"]]', '0', 'Home page dashboard widgets order', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('hide_right_column_frontpage', '0', '0', 'Hide right column in frontpage', '0');
 
 CREATE TABLE `lh_abstract_survey_item` (
