@@ -1879,7 +1879,7 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 ALTER TABLE `lh_users` ADD `pswd_updated` int(11) NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_abstract_rest_api_key_remote` ( `id` int(11) NOT NULL AUTO_INCREMENT, `api_key` varchar(50) NOT NULL, `username` varchar(50) NOT NULL, `name` varchar(50) NOT NULL, `host` varchar(250) NOT NULL, `active` tinyint(1) NOT NULL DEFAULT '0', `position` int(11) NOT NULL DEFAULT '0', PRIMARY KEY (`id`), KEY `active` (`active`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-CREATE TABLE `lh_abstract_chat_variable` ( `id` int(11) NOT NULL AUTO_INCREMENT, `var_name` varchar(255) NOT NULL, `var_identifier` varchar(255) NOT NULL, `type` tinyint(1) NOT NULL,`js_variable` varchar(255) NOT NULL, `dep_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `dep_id` (`dep_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_abstract_chat_variable` ( `id` int(11) NOT NULL AUTO_INCREMENT, `var_name` varchar(255) NOT NULL, `var_identifier` varchar(255) NOT NULL, `type` tinyint(1) NOT NULL,`js_variable` varchar(255) NOT NULL, `dep_id` int(11) NOT NULL, `persistent` tinyint(1) NOT NULL, PRIMARY KEY (`id`), KEY `dep_id` (`dep_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_abstract_chat_column` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1962,3 +1962,9 @@ ALTER TABLE `lh_abstract_widget_theme` ADD `modified` int(11) NOT NULL, COMMENT=
 
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`, `user_mail_as_sender`) VALUES
 (12,	'Visitor returned',	'Live Helper Chat',	0,	'',	0,	'Hello,\r\n\r\nVisitor information\r\nName: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\nDepartment: {department}\r\nCountry: {country}\r\nCity: {city}\r\nIP: {ip}\r\nCreated:	{created}\r\nUser left:	{user_left}\r\nWaited:	{waited}\r\nChat duration:	{chat_duration}\r\n\r\nSee more information at\r\n{url_accept}\r\n\r\nLast chat:\r\n{message}\r\n\r\nAdditional data, if any:\r\n{additional_data}\r\n\r\nSincerely,\r\nLive Support Team',	'Visitor returned - {username}',	0,	'',	0,	'',	'',	0);
+
+CREATE TABLE `lh_generic_bot_rest_api` (`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(20) NOT NULL, `description` varchar(250), `configuration` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `lh_generic_bot_trigger` ADD `default_unknown_btn` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_generic_bot_trigger` ADD INDEX `default_unknown_btn` (`default_unknown_btn`);
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('valid_domains','','0','Domains where script can be embedded. E.g example.com, google.com','0');
