@@ -583,6 +583,7 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhtheme',	'personaltheme'),
 (2,	'lhspeech',	'change_chat_recognition'),
 (2,	'lhuser',	'userlistonline'),
+(2,	'lhgroupchat',	'use'),
 (2,	'lhxml',	'*');
 
 DROP TABLE IF EXISTS `lh_transfer`;
@@ -1442,7 +1443,7 @@ ADD `pending_chats_counter` int(11) NOT NULL AFTER `active_chats_counter`,
 ADD `closed_chats_counter` int(11) NOT NULL AFTER `pending_chats_counter`,
 COMMENT='';
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', '[["online_operators","departments_stats","online_visitors"],["my_chats","pending_chats","transfered_chats"],["active_chats","bot_chats"]]', '0', 'Home page dashboard widgets order', '0');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('dashboard_order', '[["online_operators","departments_stats","online_visitors"],["group_chats","my_chats","pending_chats","transfered_chats"],["active_chats","bot_chats"]]', '0', 'Home page dashboard widgets order', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('hide_right_column_frontpage', '1', '0', 'Hide right column in frontpage', '0');
 
 CREATE TABLE `lh_abstract_survey_item` (
@@ -1968,3 +1969,44 @@ ALTER TABLE `lh_generic_bot_trigger` ADD `default_unknown_btn` int(11) NOT NULL 
 ALTER TABLE `lh_generic_bot_trigger` ADD INDEX `default_unknown_btn` (`default_unknown_btn`);
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('valid_domains','','0','Domains where script can be embedded. E.g example.com, google.com','0');
+
+CREATE TABLE `lh_group_chat` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `last_msg_op_id` bigint(20) NOT NULL,
+  `last_msg` varchar(200) NOT NULL,
+  `last_user_msg_time` int(11) NOT NULL,
+  `last_msg_id` bigint(20) NOT NULL,
+  `type` tinyint(1) NOT NULL DEFAULT 0,
+  `tm` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_group_msg` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `name_support` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_msg` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `chat_id_id` (`chat_id`,`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_group_chat_member` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `group_id` bigint(20) NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  `jtime` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
