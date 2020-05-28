@@ -2010,3 +2010,6 @@ CREATE TABLE `lh_group_chat_member` (
   KEY `group_id` (`group_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_userdep` ADD `always_on` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_users` ADD `always_on` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
