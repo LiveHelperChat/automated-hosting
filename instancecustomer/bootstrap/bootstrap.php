@@ -113,7 +113,9 @@ class erLhcoreClassExtensionInstancecustomer {
 		$instanceCustomer = erLhcoreClassInstance::getInstance();
 				
 		$dispatcher->listen('chat.core.default_url',array($this,'defaultURL'));
-		
+
+        $dispatcher->listen('widgetrestapi.screensharesettings',array($this,'screenshareSettings'));
+
 		if (is_object($instanceCustomer))
 		{
 		    erLhcoreClassModule::$cacheDbVariables = false;
@@ -160,7 +162,14 @@ class erLhcoreClassExtensionInstancecustomer {
     		}	
 		}
 	}
-	
+
+	public function screenshareSettings($params) {
+        $params['output']['nodejssettings']['nodejshost'] = 'https://wscboh.' . erConfigClassLhConfig::getInstance()->getSetting('site','seller_domain');
+        $params['output']['nodejssettings']['nodejssocket'] = 'https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js';
+        $params['output']['nodejssettings']['secure'] = true;
+        $params['output']['nodejsenabled'] = 1;
+    }
+
 	public function registerAutoload()
 	{
 	    spl_autoload_register(array(
