@@ -1129,7 +1129,7 @@ INSERT INTO `lh_speech_language` (`id`, `name`, `siteaccess`) VALUES
 				(2,	'Bahasa Indonesia',''),
 				(3,	'Bahasa Melayu',''),
 				(4,	'Català',''),
-				(5,	'Čeština',''),
+				(5,	'Čeština','cse'),
 				(6,	'Deutsch','ger'),
 				(7,	'English',''),
 				(8,	'Español','esp'),
@@ -1146,7 +1146,7 @@ INSERT INTO `lh_speech_language` (`id`, `name`, `siteaccess`) VALUES
 				(19,	'Polski','pol'),
 				(20,	'Português','por'),
 				(21,	'Română',''),
-				(22,	'Slovenčina',''),
+				(22,	'Slovenčina','svk'),
 				(23,	'Suomi','fin'),
 				(24,	'Svenska',''),
 				(25,	'Türkçe','tur'),
@@ -2015,3 +2015,10 @@ CREATE TABLE `lh_group_chat_member` (
 
 ALTER TABLE `lh_userdep` ADD `always_on` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_users` ADD `always_on` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_chat_online_user`
+ADD `device_type` tinyint(1) NOT NULL DEFAULT '0',
+COMMENT='';
+
+ALTER TABLE `lh_abstract_proactive_chat_invitation`
+ADD INDEX `show_on_mobile` (`show_on_mobile`);
