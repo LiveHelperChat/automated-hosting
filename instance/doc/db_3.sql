@@ -2023,7 +2023,6 @@ COMMENT='';
 ALTER TABLE `lh_abstract_proactive_chat_invitation`
 ADD INDEX `show_on_mobile` (`show_on_mobile`);
 
-ALTER TABLE `lh_users_session` ADD `notifications_status` int(11) NOT NULL DEFAULT '1', COMMENT='';
 ALTER TABLE `lh_users_session` ADD `error` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_users_session` ADD `last_error` varchar(255) NOT NULL, COMMENT='';
 ALTER TABLE `lh_users_session` ADD INDEX `error` (`error`);
