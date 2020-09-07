@@ -2032,3 +2032,5 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 ALTER TABLE `lh_chat_blocked_user` ADD `chat_id` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_chat_blocked_user` ADD `dep_id` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_chat_blocked_user` ADD `nick` varchar(50) NOT NULL, COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('ignore_typing','0','0','Do not store what visitor is typing','0');
