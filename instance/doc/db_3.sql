@@ -2034,3 +2034,14 @@ ALTER TABLE `lh_chat_blocked_user` ADD `dep_id` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_chat_blocked_user` ADD `nick` varchar(50) NOT NULL, COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('ignore_typing','0','0','Do not store what visitor is typing','0');
+
+CREATE TABLE `lh_generic_bot_command` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `command` varchar(50) NOT NULL,
+  `bot_id` int(11) NOT NULL,
+  `trigger_id` int(11) NOT NULL,
+  `dep_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `dep_id` (`dep_id`),
+  KEY `command` (`command`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
