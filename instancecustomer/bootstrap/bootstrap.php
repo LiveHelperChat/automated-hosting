@@ -167,6 +167,7 @@ class erLhcoreClassExtensionInstancecustomer {
         $params['output']['nodejssettings']['nodejshost'] = 'https://wscboh.' . erConfigClassLhConfig::getInstance()->getSetting('site','seller_domain');
         $params['output']['nodejssettings']['nodejssocket'] = 'https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js';
         $params['output']['nodejssettings']['secure'] = true;
+        $params['output']['nodejssettings']['path'] = '';
         $params['output']['nodejsenabled'] = 1;
     }
 
