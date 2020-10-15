@@ -2057,3 +2057,13 @@ ALTER TABLE `lh_abstract_widget_theme` ADD `widget_survey` int(11) NOT NULL, COM
 ALTER TABLE `lh_abstract_widget_theme` ADD `widget_position` varchar(50) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` ADD `widget_pright` int(11) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` ADD `widget_pbottom` int(11) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_webhook` ( `id` int(11) NOT NULL AUTO_INCREMENT, `event` varchar(50) NOT NULL, `bot_id` int(11) NOT NULL, `trigger_id` int(11) NOT NULL, `disabled` tinyint(1) NOT NULL, PRIMARY KEY (`id`), KEY `event_disabled` (`event`,`disabled`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_userdep` ADD `lastd_activity` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament` ADD `archive` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_group_chat` ADD `chat_id` bigint(20) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_blocked_user` ADD `btype` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_blocked_user` ADD `expires` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament` ADD INDEX `archive` (`archive`);
+ALTER TABLE `lh_group_chat` ADD INDEX `chat_id` (`chat_id`);
