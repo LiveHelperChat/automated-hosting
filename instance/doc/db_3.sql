@@ -1974,3 +1974,7 @@ CREATE TABLE `lh_abstract_stats` (
   PRIMARY KEY (`id`),
   KEY `type_object_id` (`type`,`object_id`)
 ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_departament` DROP INDEX `identifier`;
+ALTER TABLE `lh_departament` CHANGE `identifier` `identifier` varchar(2083) NOT NULL;
+ALTER TABLE `lh_departament` ADD INDEX `identifier_2` (`identifier`(191));
