@@ -1941,16 +1941,19 @@ ALTER TABLE `lh_abstract_widget_theme` ADD `widget_pright` int(11) NOT NULL, COM
 ALTER TABLE `lh_abstract_widget_theme` ADD `widget_pbottom` int(11) NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_webhook` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `event` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bot_id` int(11) NOT NULL,
-  `trigger_id` int(11) NOT NULL,
-  `disabled` tinyint(1) NOT NULL,
-  `type` tinyint(1) NOT NULL DEFAULT 0,
-  `configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `event_disabled` (`event`,`disabled`)
+                              `id` int(11) NOT NULL AUTO_INCREMENT,
+                              `event` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                              `bot_id` int(11) NOT NULL,
+                              `trigger_id` int(11) NOT NULL,
+                              `disabled` tinyint(1) NOT NULL,
+                              `type` tinyint(1) NOT NULL DEFAULT 0,
+                              `configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                              `bot_id_alt` int(11) NOT NULL DEFAULT 0,
+                              `trigger_id_alt` int(11) NOT NULL DEFAULT 0,
+                              PRIMARY KEY (`id`),
+                              KEY `event_disabled` (`event`,`disabled`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 ALTER TABLE `lh_userdep` ADD `lastd_activity` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_group_chat` ADD `chat_id` bigint(20) NOT NULL DEFAULT '0', COMMENT='';
