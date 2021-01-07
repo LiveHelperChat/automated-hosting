@@ -1981,3 +1981,5 @@ CREATE TABLE `lh_abstract_stats` (
 ALTER TABLE `lh_departament` DROP INDEX `identifier`;
 ALTER TABLE `lh_departament` CHANGE `identifier` `identifier` varchar(2083) NOT NULL;
 ALTER TABLE `lh_departament` ADD INDEX `identifier_2` (`identifier`(191));
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_activity_timeout','0','0','Automatically close active chat if from last visitor/operator message passed. 0 - disabled, n > 0 time in minutes','0');
