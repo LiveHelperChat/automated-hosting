@@ -1983,3 +1983,4 @@ ALTER TABLE `lh_departament` CHANGE `identifier` `identifier` varchar(2083) NOT 
 ALTER TABLE `lh_departament` ADD INDEX `identifier_2` (`identifier`(191));
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_activity_timeout','0','0','Automatically close active chat if from last visitor/operator message passed. 0 - disabled, n > 0 time in minutes','0');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_abandon_pending','0,0','0','Automatically close pending chats where visitor has left a chat. Timeout in minutes, last activity by visitor <desktop timeout>,<mobile timeout>.','0');
