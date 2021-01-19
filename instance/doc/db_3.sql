@@ -1984,3 +1984,19 @@ ALTER TABLE `lh_departament` ADD INDEX `identifier_2` (`identifier`(191));
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_activity_timeout','0','0','Automatically close active chat if from last visitor/operator message passed. 0 - disabled, n > 0 time in minutes','0');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('autoclose_abandon_pending','0,0','0','Automatically close pending chats where visitor has left a chat. Timeout in minutes, last activity by visitor <desktop timeout>,<mobile timeout>.','0');
+
+CREATE TABLE IF NOT EXISTS `lh_chat_voice_video` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `chat_id` bigint(20) NOT NULL,
+    `user_id` bigint(20) NOT NULL,
+    `op_status` tinyint(4) NOT NULL,
+    `vi_status` tinyint(4) NOT NULL,
+    `voice` tinyint(4) NOT NULL,
+    `video` tinyint(4) NOT NULL,
+    `screen_share` tinyint(4) NOT NULL,
+    `status` tinyint(4) NOT NULL,
+    `ctime` int(11) NOT NULL,
+    `token` varchar(200) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `chat_id` (`chat_id`)
+    ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
