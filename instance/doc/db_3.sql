@@ -2000,3 +2000,6 @@ CREATE TABLE IF NOT EXISTS `lh_chat_voice_video` (
     PRIMARY KEY (`id`),
     KEY `chat_id` (`chat_id`)
     ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_email_template` ADD `translations` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_email_template` ADD `use_chat_locale` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
