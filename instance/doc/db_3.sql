@@ -2003,3 +2003,9 @@ CREATE TABLE IF NOT EXISTS `lh_chat_voice_video` (
 
 ALTER TABLE `lh_abstract_email_template` ADD `translations` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_email_template` ADD `use_chat_locale` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_users` ADD `avatar` varchar(150) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_bot` ADD `avatar` varchar(150) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_abstract_form_collected` ADD `custom_fields` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_form_collected` ADD `chat_id` bigint(20) NOT NULL, COMMENT='';
