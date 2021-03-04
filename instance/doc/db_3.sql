@@ -2009,3 +2009,6 @@ ALTER TABLE `lh_generic_bot_bot` ADD `avatar` varchar(150) NOT NULL, COMMENT='';
 
 ALTER TABLE `lh_abstract_form_collected` ADD `custom_fields` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_form_collected` ADD `chat_id` bigint(20) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_canned_msg` ADD `unique_id` varchar(20) NOT NULL, COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD INDEX `unique_id` (`unique_id`);
