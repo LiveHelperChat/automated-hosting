@@ -189,6 +189,7 @@ CREATE TABLE `lh_chat` (
   `online_user_id` int(11) NOT NULL,
   `transfer_timeout_ts` int(11) NOT NULL,
   `transfer_timeout_ac` int(11) NOT NULL,
+  `cls_us` tinyint(1) NOT NULL DEFAULT '0',
   `transfer_if_na` int(11) NOT NULL,
   `na_cb_executed` int(11) NOT NULL,
   `fbst` tinyint(1) NOT NULL,
