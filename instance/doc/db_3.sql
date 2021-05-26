@@ -2019,3 +2019,5 @@ CREATE TABLE `lh_chat_incoming` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `chat
 
 ALTER TABLE `lh_incoming_webhook`    ADD `scope` varchar(50) COLLATE 'utf8mb4_unicode_ci' NOT NULL,    COMMENT='';
 ALTER TABLE `lh_abstract_survey` ADD `configuration` longtext NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_chat_event_track` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `data` longtext NOT NULL, `department_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `department_id` (`department_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
