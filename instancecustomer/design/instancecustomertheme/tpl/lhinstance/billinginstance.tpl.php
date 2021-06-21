@@ -1,6 +1,6 @@
 <h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Billing');?></h1>
 
-<div class="row">
+<div class="row" ng-non-bindable>
 	<div class="col-sm-6">
 		<table class="table">
 			<?php if ($instance->is_reseller) : ?>
@@ -38,7 +38,7 @@
 
 
 <?php if ($instance->is_reseller) : ?>
-<div role="tabpanel">
+<div role="tabpanel" ng-non-bindable>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="clients" aria-controls="clients" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Clients');?></a></li>

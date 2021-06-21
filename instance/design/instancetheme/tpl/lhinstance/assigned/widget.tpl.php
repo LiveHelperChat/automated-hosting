@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-non-bindable>
     <div class="card-header">
         <a href="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $instance->id?>" >Child instances [<?php echo $instance->reseller_instances_count?>]</a>
     </div>

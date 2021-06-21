@@ -6,7 +6,7 @@
 
 
 
-<div class="row">
+<div class="row" ng-non-bindable>
 	<div class="columns col-xs-8">
 
 		<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>#sms" method="post">

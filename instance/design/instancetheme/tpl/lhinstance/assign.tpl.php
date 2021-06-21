@@ -8,7 +8,7 @@
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
 <?php endif; ?>
 
-<form class="form-inline" method="post" action="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $instance->id?>">
+<form class="form-inline" method="post" action="<?php echo erLhcoreClassDesign::baseurl('instance/assign')?>/<?php echo $instance->id?>" ng-non-bindable>
   <div class="form-group">
      <input type="text" name="InstanceAddress" class="form-control" placeholder="Instance address">
   </div>

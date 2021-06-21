@@ -4,7 +4,7 @@
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/alert_success.tpl.php'));?>
 <?php endif; ?>
 
-<div class="row">
+<div class="row" ng-non-bindable>
 	<div class="col-sm-6">
 		<table class="table">
 			<?php if ($instance->is_reseller) : ?>

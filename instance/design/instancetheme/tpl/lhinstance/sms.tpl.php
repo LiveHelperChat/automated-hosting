@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-non-bindable>
 	<div class="columns col-8">
 
 		<div class="form-group">

@@ -1,19 +1,19 @@
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Date format')?></label>
     <input class="form-control" type="text" value="<?php echo $instance->date_format?>" name="DateFormat">			
 </div>
 
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Hour format')?></label>
     <input class="form-control" type="text" value="<?php echo $instance->date_hour_format?>" name="DateHourFormat">	
 </div>
 
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Date and hour format')?></label>
     <input class="form-control" type="text" value="<?php echo $instance->date_date_hour_format?>" name="DateAndHourFormat">	
 </div>
 	
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Instance time zone');?></label>
     <?php $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL); ?>
     <select class="form-control" name="UserTimeZone">
@@ -24,7 +24,7 @@
     </select>
 </div>
 
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default frontend users site access')?></label>
     <select class="form-control" name="FrontSiteaccess">
         <?php foreach ($locales as $locale ) : ?>
@@ -33,7 +33,7 @@
     </select>
 </div>
 
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default operators language')?></label>
     <select class="form-control" name="Language">
     	<?php foreach (erLhcoreClassSiteaccessGenerator::getLanguages() as $language) : ?>
@@ -42,7 +42,7 @@
     </select>
 </div>
 
-<div class="form-group">
+<div class="form-group" ng-non-bindable>
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Default URL')?></label>
     <input class="form-control" type="text" value="<?php echo htmlspecialchars($instance->default_url)?>" name="DefaultURL">	
 </div>

@@ -1,5 +1,5 @@
 <?php if (erConfigClassLhConfig::getInstance()->getSetting('site','seller_paypal_enabled') == true) : ?>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-non-bindable>
 	<input type="hidden" name="cmd" value="_s-xclick">
 	<input type="hidden" name="hosted_button_id" value="MCCCZQSD6V6UQ">
 	<div class="row">	

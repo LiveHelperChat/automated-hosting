@@ -2,7 +2,7 @@
 
 <?php $aliases = erLhcoreClassModelInstanceAlias::getList(array('filter' => array('instance_id' => $instance->id))); ?>
 
-<form method="post" action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#/aliases">
+<form method="post" action="<?php echo erLhcoreClassDesign::baseurl('instance/edit')?>/<?php echo $instance->id?>#/aliases" ng-non-bindable>
     <div class="row">
         <div class="col-6">
             <div class="form-group">
@@ -26,7 +26,7 @@
 
 <hr>
 
-<table class="table" width="100%" cellpadding="0" cellspacing="0">
+<table class="table" width="100%" cellpadding="0" cellspacing="0" ng-non-bindable>
 <thead>
     <tr>
         <th><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Address')?></th>

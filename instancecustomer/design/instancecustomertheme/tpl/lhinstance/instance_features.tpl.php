@@ -9,7 +9,7 @@
 
 
 
-<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" method="post">
+<form action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" method="post" ng-non-bindable>
     <div class="row">
         <div class="form-group col-xs-6">											 
         	<label><input <?php echo $instance->chat_supported == 1 ? 'disabled checked="checked"' : ''?> type="checkbox" value="on" name="chat_supported" > <?php echo $modules_features['chat_supported'] ?></label>
