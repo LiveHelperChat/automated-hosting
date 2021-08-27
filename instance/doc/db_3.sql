@@ -2021,3 +2021,49 @@ ALTER TABLE `lh_incoming_webhook`    ADD `scope` varchar(50) COLLATE 'utf8mb4_un
 ALTER TABLE `lh_abstract_survey` ADD `configuration` longtext NOT NULL, COMMENT='';
 
 CREATE TABLE `lh_chat_event_track` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `data` longtext NOT NULL, `department_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `department_id` (`department_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_generic_bot_trigger` ADD `as_argument` int(11) NOT NULL DEFAULT '0', COMMENT='';
+CREATE TABLE `lh_canned_msg_dep` (
+                                     `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                     `canned_id` int(11) NOT NULL,
+                                     `dep_id` int(11) NOT NULL,
+                                     PRIMARY KEY (`id`),
+                                     KEY `canned_id` (`canned_id`),
+                                     KEY `dep_id` (`dep_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_users`
+    CHANGE `username` `username` varchar(80) COLLATE 'utf8mb4_unicode_ci' NOT NULL AFTER `id`,
+    COMMENT='';
+
+ALTER TABLE `lh_users` CHANGE `departments_ids` `departments_ids` varchar(500) NOT NULL;
+
+ALTER TABLE `lh_abstract_chat_priority` ADD `sort_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_priority` ADD `dest_dep_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('vwait_to_long','120','0','How long we should wait before we inform operator about unanswered chat.','0');
+
+CREATE TABLE `lh_canned_msg_subject` (
+                                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                                         `canned_id` int(11) NOT NULL,
+                                         `subject_id` int(11) NOT NULL,
+                                         PRIMARY KEY (`id`),
+                                         KEY `canned_id` (`canned_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_msg` CHANGE `id` `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT FIRST;
+ALTER TABLE `lh_chat` CHANGE `id` `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `lh_chat_accept` CHANGE `chat_id` `chat_id` bigint(20) NOT NULL;
+ALTER TABLE `lh_chat_online_user` CHANGE `id` `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+ALTER TABLE `lh_chat_online_user` CHANGE `chat_id` `chat_id` bigint(20) NOT NULL;
+ALTER TABLE `lh_chat_online_user_footprint` CHANGE `id` `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, CHANGE `chat_id` `chat_id` bigint(20) NOT NULL;
+ALTER TABLE `lh_chat_file` CHANGE `chat_id` `chat_id` bigint(20) NOT NULL;
+
+ALTER TABLE `lh_users` ADD `cache_version` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_departament` CHANGE `product_configuration` `product_configuration` longtext NOT NULL;
+ALTER TABLE `lh_chat_blocked_user` ADD INDEX `nick` (`nick`);
+
+CREATE TABLE `lh_canned_msg_replace` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT, `identifier` varchar(50) NOT NULL, `default` text NOT NULL, `conditions` longtext NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `lh_users` CHANGE `departments_ids` `departments_ids` text NOT NULL;
+
+CREATE TABLE `lh_canned_msg_use` (`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, `canned_id` int(11) unsigned NOT NULL, `chat_id` bigint(20) unsigned NOT NULL, `ctime` bigint(20) unsigned NOT NULL, `user_id` bigint(20) unsigned NOT NULL, PRIMARY KEY (`id`), KEY `ctime` (`ctime`), KEY `chat_id` (`chat_id`), KEY `canned_id` (`canned_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
