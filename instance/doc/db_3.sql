@@ -2067,3 +2067,48 @@ CREATE TABLE `lh_canned_msg_replace` ( `id` int(11) unsigned NOT NULL AUTO_INCRE
 ALTER TABLE `lh_users` CHANGE `departments_ids` `departments_ids` text NOT NULL;
 
 CREATE TABLE `lh_canned_msg_use` (`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, `canned_id` int(11) unsigned NOT NULL, `chat_id` bigint(20) unsigned NOT NULL, `ctime` bigint(20) unsigned NOT NULL, `user_id` bigint(20) unsigned NOT NULL, PRIMARY KEY (`id`), KEY `ctime` (`ctime`), KEY `chat_id` (`chat_id`), KEY `canned_id` (`canned_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_saved_search` (
+                                            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                            `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `params` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `user_id` bigint(20) unsigned NOT NULL,
+                                            `position` int(11) unsigned NOT NULL,
+                                            `scope` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `days` int(11) unsigned NOT NULL,
+                                            `updated_at` bigint(20) unsigned NOT NULL,
+                                            `requested_at` bigint(20) unsigned NOT NULL,
+                                            `total_records` bigint(20) unsigned NOT NULL,
+                                            PRIMARY KEY (`id`),
+                                            KEY `user_id` (`user_id`),
+                                            KEY `scope` (`scope`),
+                                            KEY `updated_at` (`updated_at`),
+                                            KEY `requested_at` (`requested_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_saved_search` ADD `passive` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_departament_group_user` ADD `read_only` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_users` ADD `force_logout` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_users` ADD `llogin` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_abstract_rest_api_key` ADD `ip_restrictions` varchar(250) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_canned_msg` ADD `updated_at` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `created_at` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `active_from` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `active_to` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `repetitiveness` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD `days_activity` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD INDEX `repetitiveness` (`repetitiveness`);
+
+CREATE TABLE `lh_chat_action` (
+                                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                  `chat_id` bigint(20) NOT NULL,
+                                  `action` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                                  `created_at` bigint(20) unsigned NOT NULL,
+                                  PRIMARY KEY (`id`),
+                                  KEY `chat_id` (`chat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

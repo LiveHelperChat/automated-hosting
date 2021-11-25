@@ -132,6 +132,11 @@ $ViewList['apigetinstance'] = array(
     'functions' => array( )
 );
 
+$ViewList['listexport'] = array(
+    'params' => array(),
+    'functions' => array( )
+);
+
 $FunctionList['manageinstance'] = array('explain' => 'Access to instance management');
 
 ?>
