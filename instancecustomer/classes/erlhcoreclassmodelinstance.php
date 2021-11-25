@@ -107,36 +107,58 @@ class erLhcoreClassModelInstance {
            $this->$key = $val;
        }
    }
-   
-   public function removeInstanceData(){
-   
-	   	foreach (erLhAbstractModelFormCollected::getList(array('limit' => 1000000)) as $item){
-	   		$item->removeThis();
-	   	}
-	   
-	   	foreach (erLhAbstractModelWidgetTheme::getList(array('limit' => 1000000)) as $item){
-	   		$item->removeThis();
-	   	}
-	   
-	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000)) as $item){
-	   		$item->removeThis();
-	   	}
-	   
-	   	foreach (erLhcoreClassChat::getList(array('limit' => 1000000),'erLhcoreClassModelChatFile','lh_chat_file') as $item){
-	   		$item->removeThis();
-	   	}
-	   		   
-	   	foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
-	   		$item->removeFile();
-	   	}
 
-	   	// Dispatch event for extensions
-	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.destroyed', array(
-	   	    'instance' => $this
-	   	));
-	   	
-	   	return true;
-   }
+    public function removeInstanceData() {
+
+        $hasFiles = true;
+        while ($hasFiles) {
+            $files = erLhAbstractModelFormCollected::getList(array('limit' => 1000));
+            foreach ($files as $item) {
+                $item->removeThis();
+            }
+            if (count($files) == 0) {
+                $hasFiles = false;
+            }
+        }
+
+        foreach (erLhAbstractModelWidgetTheme::getList(array('limit' => 1000000)) as $item){
+            $item->removeThis();
+        }
+
+        $hasFiles = true;
+        while ($hasFiles) {
+            $files = erLhcoreClassChat::getList(array('limit' => 1000));
+            foreach ($files as $item) {
+                $item->removeThis();
+            }
+            if (count($files) == 0) {
+                $hasFiles = false;
+            }
+        }
+
+        $hasFiles = true;
+        while ($hasFiles) {
+            $files = erLhcoreClassChat::getList(array('limit' => 1000),'erLhcoreClassModelChatFile','lh_chat_file');
+            foreach ($files as $item){
+                $item->removeThis();
+            }
+            if (count($files) == 0) {
+                $hasFiles = false;
+            }
+        }
+
+
+        foreach (erLhcoreClassModelUser::getUserList(array('limit' => 1000000)) as $item){
+            $item->removeFile();
+        }
+
+        // Dispatch event for extensions
+        erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.destroyed', array(
+            'instance' => $this
+        ));
+
+        return true;
+    }
    
    public static function fetch($dep_id, $useCache = false) {
 

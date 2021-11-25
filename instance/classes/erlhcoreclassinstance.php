@@ -60,11 +60,15 @@ class erLhcoreClassInstance{
 	   	$secretHash = $cfg->getSetting('site','seller_secret_hash');
 	   
 	   	$hash = sha1($instance->id . date('Ym') . $secretHash);
-	   
-	   	$url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
-	   	$response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
 
-	   	$responseData = json_decode($response);
+        for ($i = 1; $i < 20; $i++) {
+           $url = erConfigClassLhConfig::getInstance()->getSetting( 'site', 'http_mode').$instance->address . '.' . $cfg->getSetting( 'site', 'seller_domain').'/index.php/instance/remove/' . $instance->id . '/' . date('Ym') . '/' . $hash;
+           $response = erLhcoreClassModelChatOnlineUser::executeRequest($url);
+           $responseData = json_decode($response);
+           if (isset($responseData->error) && $responseData->error == false) {
+               break;
+           }
+        }
 
 	   	if (isset($responseData->error) && $responseData->error == false){
 	   		self::deleteDatabase($instance->id);
