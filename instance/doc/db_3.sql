@@ -2112,3 +2112,21 @@ CREATE TABLE `lh_chat_action` (
                                   PRIMARY KEY (`id`),
                                   KEY `chat_id` (`chat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_departament` ADD `alias` varchar(50) NOT NULL, COMMENT='';
+ALTER TABLE `lh_departament` ADD INDEX `alias` (`alias`);
+
+ALTER TABLE `lh_abstract_widget_theme` ADD `alias` varchar(50) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` ADD INDEX `alias` (`alias`);
+
+ALTER TABLE `lh_canned_msg` ADD `disabled` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD INDEX `disabled` (`disabled`);
+
+ALTER TABLE `lh_abstract_widget_theme` CHANGE `support_joined` `support_joined` text NOT NULL, CHANGE `need_help_text` `need_help_text` text NOT NULL, CHANGE `online_text` `online_text` text NOT NULL, CHANGE `offline_text` `offline_text` text NOT NULL, CHANGE `intro_operator_text` `intro_operator_text` text NOT NULL, CHANGE `department_title` `department_title` text NOT NULL;
+ALTER TABLE `lh_abstract_widget_theme` CHANGE `support_closed` `support_closed` text NOT NULL, CHANGE `bot_status_text` `bot_status_text` text NOT NULL, CHANGE `pending_join` `pending_join` text NOT NULL, CHANGE `pending_join_queue` `pending_join_queue` text NOT NULL, CHANGE `noonline_operators` `noonline_operators` text NOT NULL, CHANGE `noonline_operators_offline` `noonline_operators_offline` text NOT NULL, CHANGE `name_company` `name_company` text NOT NULL;
+ALTER TABLE `lh_abstract_widget_theme` CHANGE `widget_copyright_url` `widget_copyright_url` text NOT NULL, CHANGE `need_help_header` `need_help_header` text NOT NULL;
+
+ALTER TABLE `lh_abstract_subject` ADD `internal` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_subject` ADD `internal_type` varchar(20) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_subject` ADD INDEX `internal` (`internal`);
+ALTER TABLE `lh_abstract_subject` ADD INDEX `internal_type` (`internal_type`);
