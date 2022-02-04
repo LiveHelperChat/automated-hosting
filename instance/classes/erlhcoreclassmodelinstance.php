@@ -230,11 +230,13 @@ class erLhcoreClassModelInstance
                 } else {
                     $this->phone_number = array(array('phone' => $this->phone_number_data, 'department' => 0));
                 }
-            
-                for ($i = count($this->phone_number); $i < 15; $i++) {
-                    $this->phone_number[] = array('phone' => '', 'department' => 0);
+
+                if (is_countable($this->phone_number)){
+                    for ($i = count($this->phone_number); $i < 15; $i++) {
+                        $this->phone_number[] = array('phone' => '', 'department' => 0);
+                    }
                 }
-            
+
                 return $this->phone_number;
                 break;
                     

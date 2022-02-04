@@ -2130,3 +2130,12 @@ ALTER TABLE `lh_abstract_subject` ADD `internal` tinyint(1) NOT NULL DEFAULT '0'
 ALTER TABLE `lh_abstract_subject` ADD `internal_type` varchar(20) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_subject` ADD INDEX `internal` (`internal`);
 ALTER TABLE `lh_abstract_subject` ADD INDEX `internal_type` (`internal_type`);
+
+ALTER TABLE `lh_generic_bot_trigger` ADD `in_progress` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_generic_bot_trigger` ADD INDEX `in_progress` (`in_progress`);
+
+ALTER TABLE `lh_users_online_session` ADD INDEX `lactivity` (`lactivity`);
+ALTER TABLE `lh_notification_subscriber` ADD INDEX `subscriber_hash` (`subscriber_hash`);
+ALTER TABLE `lh_chat` ADD INDEX `nick` (`nick`);
+ALTER TABLE `lh_chat` ADD INDEX `email` (`email`);
+ALTER TABLE `lh_canned_msg_use` ADD INDEX IF NOT EXISTS `chat_id` (`chat_id`);
