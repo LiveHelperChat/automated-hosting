@@ -254,12 +254,20 @@ CREATE TABLE `lh_chat_archive_range` (
 
 DROP TABLE IF EXISTS `lh_chat_blocked_user`;
 CREATE TABLE `lh_chat_blocked_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip` varchar(100) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `datets` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ip` (`ip`)
+                                        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                        `ip` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                        `user_id` bigint(20) unsigned NOT NULL,
+                                        `datets` bigint(20) unsigned NOT NULL,
+                                        `chat_id` bigint(20) unsigned NOT NULL,
+                                        `dep_id` bigint(20) unsigned NOT NULL,
+                                        `nick` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                        `btype` tinyint(1) NOT NULL DEFAULT 0,
+                                        `expires` bigint(20) unsigned NOT NULL DEFAULT 0,
+                                        `online_user_id` bigint(20) unsigned NOT NULL DEFAULT 0,
+                                        PRIMARY KEY (`id`),
+                                        KEY `ip` (`ip`),
+                                        KEY `nick` (`nick`),
+                                        KEY `online_user_id` (`online_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -1912,10 +1920,6 @@ ALTER TABLE `lh_users_session` ADD INDEX `error` (`error`);
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
 ('mobile_options',	'a:2:{s:13:\"notifications\";i:0;s:7:\"fcm_key\";s:152:\"AAAAiF8DeNk:APA91bFVHu2ybhBUTtlEtQrUEPpM2fb-5ovgo0FVNm4XxK3cYJtSwRcd-pqcBot_422yDOzHyw2p9ZFplkHrmNXjm8f5f-OIzfalGmpsypeXvnPxhU6Db1B2Z1Acc-TamHUn2F4xBJkP\";}',	0,	'',	1);
 
-ALTER TABLE `lh_chat_blocked_user` ADD `chat_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_blocked_user` ADD `dep_id` int(11) NOT NULL, COMMENT='';
-ALTER TABLE `lh_chat_blocked_user` ADD `nick` varchar(50) NOT NULL, COMMENT='';
-
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('ignore_typing','0','0','Do not store what visitor is typing','0');
 
 CREATE TABLE `lh_generic_bot_command` (
@@ -1958,8 +1962,6 @@ CREATE TABLE `lh_webhook` (
 
 ALTER TABLE `lh_userdep` ADD `lastd_activity` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_group_chat` ADD `chat_id` bigint(20) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat_blocked_user` ADD `btype` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat_blocked_user` ADD `expires` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_group_chat` ADD INDEX `chat_id` (`chat_id`);
 
 ALTER TABLE `lh_group_chat_member` ADD `type` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
@@ -2061,7 +2063,6 @@ ALTER TABLE `lh_chat_file` CHANGE `chat_id` `chat_id` bigint(20) NOT NULL;
 ALTER TABLE `lh_users` ADD `cache_version` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
 ALTER TABLE `lh_departament` CHANGE `product_configuration` `product_configuration` longtext NOT NULL;
-ALTER TABLE `lh_chat_blocked_user` ADD INDEX `nick` (`nick`);
 
 CREATE TABLE `lh_canned_msg_replace` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT, `identifier` varchar(50) NOT NULL, `default` text NOT NULL, `conditions` longtext NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE `lh_users` CHANGE `departments_ids` `departments_ids` text NOT NULL;
