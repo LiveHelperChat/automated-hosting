@@ -236,6 +236,7 @@ CREATE TABLE `lh_chat` (
   KEY `status` (`status`),
   KEY `dep_id_status` (`dep_id`,`status`),
   KEY `anonymized` (`anonymized`),
+  KEY `phone` (`phone`),
   KEY `has_unread_messages` (`has_unread_messages`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2140,3 +2141,14 @@ ALTER TABLE `lh_notification_subscriber` ADD INDEX `subscriber_hash` (`subscribe
 ALTER TABLE `lh_chat` ADD INDEX `nick` (`nick`);
 ALTER TABLE `lh_chat` ADD INDEX `email` (`email`);
 ALTER TABLE `lh_canned_msg_use` ADD INDEX IF NOT EXISTS `chat_id` (`chat_id`);
+
+CREATE TABLE `lh_abstract_proactive_chat_invitation_dep` (
+ `id` bigint(20) NOT NULL AUTO_INCREMENT,
+ `invitation_id` int(11) NOT NULL,
+ `dep_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `invitation_id` (`invitation_id`),
+ KEY `dep_id` (`dep_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_chat_online_user` ADD `chat_time` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_online_user` ADD `last_visit_prev` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
