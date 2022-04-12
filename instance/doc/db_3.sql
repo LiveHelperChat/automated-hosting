@@ -2081,14 +2081,16 @@ CREATE TABLE `lh_abstract_saved_search` (
                                             `updated_at` bigint(20) unsigned NOT NULL,
                                             `requested_at` bigint(20) unsigned NOT NULL,
                                             `total_records` bigint(20) unsigned NOT NULL,
+                                            `passive` tinyint(1) unsigned NOT NULL DEFAULT 0,
+                                            `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `status` tinyint(1) unsigned NOT NULL DEFAULT 0,
+                                            `sharer_user_id` bigint(20) unsigned NOT NULL,
                                             PRIMARY KEY (`id`),
-                                            KEY `user_id` (`user_id`),
                                             KEY `scope` (`scope`),
                                             KEY `updated_at` (`updated_at`),
-                                            KEY `requested_at` (`requested_at`)
+                                            KEY `requested_at` (`requested_at`),
+                                            KEY `user_id_status` (`user_id`,`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `lh_abstract_saved_search` ADD `passive` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
 ALTER TABLE `lh_departament_group_user` ADD `read_only` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
@@ -2152,3 +2154,4 @@ CREATE TABLE `lh_abstract_proactive_chat_invitation_dep` (
 
 ALTER TABLE `lh_chat_online_user` ADD `chat_time` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_chat_online_user` ADD `last_visit_prev` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
