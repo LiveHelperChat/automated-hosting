@@ -2155,3 +2155,21 @@ CREATE TABLE `lh_abstract_proactive_chat_invitation_dep` (
 ALTER TABLE `lh_chat_online_user` ADD `chat_time` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_chat_online_user` ADD `last_visit_prev` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
+ALTER TABLE `lh_abstract_chat_column` ADD `icon_mode` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD `has_popup` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD `popup_content` longtext NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_generic_bot_rest_api_cache` (
+                                                 `hash` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                                                 `rest_api_id` bigint(20) unsigned NOT NULL,
+                                                 `response` text NOT NULL,
+                                                 `ctime` bigint(20) NOT NULL,
+                                                 UNIQUE KEY `rest_api_id_hash` (`rest_api_id`,`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_generic_bot_trigger_event` ADD `skip` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('disable_txt_dwnld','0','0','Disable chat download','0');
+
+CREATE TABLE `lh_generic_bot_trigger_template` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `actions` longtext NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_generic_bot_trigger_event_template` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `configuration` longtext NOT NULL, `name` varchar(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
