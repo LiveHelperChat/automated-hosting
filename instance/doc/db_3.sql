@@ -2173,3 +2173,21 @@ INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VA
 
 CREATE TABLE `lh_generic_bot_trigger_template` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(100) NOT NULL, `actions` longtext NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_generic_bot_trigger_event_template` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `configuration` longtext NOT NULL, `name` varchar(100) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_chat_variable` ADD `old_js_id` varchar(50) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_generic_bot_command` ADD `shortcut_1` varchar(10) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_command` ADD `shortcut_2` varchar(10) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_command` ADD `sub_command` varchar(100) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_command` ADD `info_msg` varchar(100) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_userdep` ADD `exc_indv_autoasign` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `exc_indv_autoasign` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_abstract_chat_column` ADD `sort_column` varchar(200) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD `sort_enabled` tinyint(1) NOT NULL DEFAULT 0, COMMENT='';
+
+ALTER TABLE `lh_generic_bot_tr_group` CHANGE `name` `name` varchar(100) NOT NULL;
+ALTER TABLE `lh_generic_bot_tr_group` ADD `use_translation_service` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_generic_bot_tr_group` ADD `bot_lang` varchar(10) NOT NULL, COMMENT='';
+ALTER TABLE `lh_generic_bot_tr_item` ADD `auto_translate` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
