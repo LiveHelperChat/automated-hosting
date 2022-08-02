@@ -108,81 +108,78 @@ class erLhcoreClassInstance{
    }
 
    public static function createCustomer($instance) {
+       $originalSiteAccess = erLhcoreClassSystem::instance()->SiteAccess;
+       if ($instance->locale != '') {
+           erLhcoreClassSystem::instance()->setSiteAccessByLocale($instance->locale);
+       }
 
-   		$originalSiteAccess = erLhcoreClassSystem::instance()->SiteAccess;
-   		if ($instance->locale != '') {
-   			erLhcoreClassSystem::instance()->setSiteAccessByLocale($instance->locale);
-   		}
-   		
-   		$password = erLhcoreClassModelForgotPassword::randomPassword(10);
-   		$chat_box_hash = erLhcoreClassModelForgotPassword::randomPassword(10);
-   		$searchArray = array('{email_replace}','{password_hash}','{export_hash_chats}','{chat_box_hash}','{chat_box_hash_length}');
-   		
-   		$cfg = erConfigClassLhConfig::getInstance();   		   		
-   		$replaceArray = array($instance->email,sha1($password. $cfg->getSetting( 'site', 'secrethash') .sha1($password)),erLhcoreClassModelForgotPassword::randomPassword(10),$chat_box_hash,strlen($chat_box_hash));
+       $password = erLhcoreClassModelForgotPassword::randomPassword(10);
+       $chat_box_hash = erLhcoreClassModelForgotPassword::randomPassword(10);
+       $searchArray = array('{email_replace}','{password_hash}','{export_hash_chats}','{chat_box_hash}','{chat_box_hash_length}');
 
-	   	$db = ezcDbInstance::get();
-	   		   	
-	   	self::deleteDatabase($instance->id);
-	   	self::createDatabase($instance->id);
-	      		   	
-	   	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id);
-	   	$sql = file_get_contents('extension/instance/doc/db_3.sql');
-	   	$sql = str_replace($searchArray, $replaceArray, $sql);
-	   	$db->query($sql);
-	   	
-	   	$dbPostUpdate = ltrim(erLhcoreClassDesign::design('db_post_update/db.sql'),'/');
-	   	if (file_exists($dbPostUpdate)){
-	   	    $db->query(file_get_contents($dbPostUpdate));
-	   	}
-	   	
-	   	// Insert default user language
-	   	if ($instance->locale != ''){
-	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
-	   		$stm->bindValue(':value',$instance->locale);
-	   		$stm->execute();
-	   	} else {
-	   		$stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
-	   		$stm->bindValue(':value','en_EN');
-	   		$stm->execute();	   		
-	   	}
+       $cfg = erConfigClassLhConfig::getInstance();
+       $replaceArray = array($instance->email,sha1($password. $cfg->getSetting( 'site', 'secrethash') .sha1($password)),erLhcoreClassModelForgotPassword::randomPassword(10),$chat_box_hash,strlen($chat_box_hash));
 
-	   	$tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/email.tpl.php');
-	   	$tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'password' => $password, 'client_attributes_array' => $instance->client_attributes_array));
+       $db = ezcDbInstance::get();
 
-	   	$mail = new PHPMailer();
-	   	$mail->CharSet = 'UTF-8';
-	   	$mail->Sender = $mail->From = $cfg->getSetting( 'site', 'seller_mail');
-	   	$mail->FromName = $cfg->getSetting( 'site', 'seller_title');
-	   	$mail->Subject = $cfg->getSetting( 'site', 'seller_title');
-	   	$mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
-	   	
-	   	$mail->AddAddress( $instance->email );
+       self::deleteDatabase($instance->id);
+       self::createDatabase($instance->id);
 
-	   	erLhcoreClassChatMail::setupSMTP($mail);
-	   	
-	   	// Dispatch event for listeners
-	   	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.registered.created', array(
-	   	    'instance' => & $instance,
-	   	    'tpl' => & $tpl,
-	   	    'mail' => & $mail,
-	   	    'password' => $password
-	   	));
-	   	
-	   	$mail->Body = $tpl->fetch();
-	   	$mail->Send();
-	   	$mail->ClearAddresses();
-	   	
-	   	$db->query('USE '.$cfg->getSetting( 'db', 'database'));
-	   	
-	   	// Activate instance
-	   	$sql = "UPDATE lhc_instance_client SET status = 1 WHERE id = {$instance->id}";
-	   	$db->query($sql);
-	   		   		   	
-	   	if ($instance->locale != '') {
-	   		erLhcoreClassSystem::instance()->setSiteAccess($originalSiteAccess);
-	   	}  	
-	   	
+       $mail = new PHPMailer();
+       $mail->CharSet = 'UTF-8';
+       $mail->Sender = $mail->From = $cfg->getSetting( 'site', 'seller_mail');
+       $mail->FromName = $cfg->getSetting( 'site', 'seller_title');
+       $mail->Subject = $cfg->getSetting( 'site', 'seller_title');
+       $mail->AddReplyTo($cfg->getSetting( 'site', 'seller_mail'),$cfg->getSetting( 'site', 'seller_title'));
+       $mail->AddAddress( $instance->email );
+
+       erLhcoreClassChatMail::setupSMTP($mail);
+
+       $db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id);
+       $sql = file_get_contents('extension/instance/doc/db_3.sql');
+       $sql = str_replace($searchArray, $replaceArray, $sql);
+       $db->query($sql);
+
+       $dbPostUpdate = ltrim(erLhcoreClassDesign::design('db_post_update/db.sql'),'/');
+       if (file_exists($dbPostUpdate)){
+           $db->query(file_get_contents($dbPostUpdate));
+       }
+
+       // Insert default user language
+       if ($instance->locale != ''){
+           $stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
+           $stm->bindValue(':value',$instance->locale);
+           $stm->execute();
+       } else {
+           $stm = $db->prepare("INSERT INTO `lh_users_setting` (`user_id`, `identifier`, `value`) VALUES (1,'user_language',:value)");
+           $stm->bindValue(':value','en_EN');
+           $stm->execute();
+       }
+
+       $tpl = erLhcoreClassTemplate::getInstance( 'lhinstance/email.tpl.php');
+       $tpl->setArray(array('instance' => $instance, 'email' => $instance->email, 'password' => $password, 'client_attributes_array' => $instance->client_attributes_array));
+
+       // Dispatch event for listeners
+       erLhcoreClassChatEventDispatcher::getInstance()->dispatch('instance.registered.created', array(
+           'instance' => & $instance,
+           'tpl' => & $tpl,
+           'mail' => & $mail,
+           'password' => $password
+       ));
+
+       $mail->Body = $tpl->fetch();
+       $mail->Send();
+       $mail->ClearAddresses();
+
+       $db->query('USE '.$cfg->getSetting( 'db', 'database'));
+
+       // Activate instance
+       $sql = "UPDATE lhc_instance_client SET status = 1 WHERE id = {$instance->id}";
+       $db->query($sql);
+
+       if ($instance->locale != '') {
+           erLhcoreClassSystem::instance()->setSiteAccess($originalSiteAccess);
+       }
    }
 
    /**
