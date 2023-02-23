@@ -2198,3 +2198,71 @@ ALTER TABLE `lh_canned_msg_replace` ADD `repetitiveness` int(11) unsigned NOT NU
 ALTER TABLE `lh_canned_msg_replace` ADD `days_activity` text NOT NULL, COMMENT='';
 ALTER TABLE `lh_canned_msg_replace` ADD `time_zone` varchar(100) NOT NULL, COMMENT='';
 
+CREATE TABLE `lh_abstract_saved_report` (
+                                            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                            `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `params` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `user_id` bigint(20) unsigned NOT NULL,
+                                            `position` int(11) unsigned NOT NULL,
+                                            `days` int(11) unsigned NOT NULL,
+                                            `date_type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                            `days_end` int(11) unsigned NOT NULL,
+                                            `updated_at` bigint(20) unsigned NOT NULL,
+                                            PRIMARY KEY (`id`),
+                                            KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_saved_report` ADD `recurring_options` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_saved_report` ADD `send_log` longtext NOT NULL, COMMENT='';
+INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`, `user_mail_as_sender`, `translations`, `use_chat_locale`) VALUES
+    (13,	'Report prepared',	'Live Helper Chat',	0,	'',	0,	'Hello,\r\n\r\nReport prepared - {report_name}, {date_range}\r\n\r\n{report_description}\r\n\r\nView report at:\r\n{url_report}',	'Report prepared - {report_name}',	0,	'',	0,	'',	'',	0,	'[]',	0);
+
+
+ALTER TABLE `lh_chat_start_settings` ADD `dep_ids` text NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD `parent_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_invitation` ADD INDEX `parent_id` (`parent_id`);
+
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD `variation_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` DROP INDEX `invitation_id`;
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `invitation_id_variation_id` (`invitation_id`, `variation_id`);
+
+
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD `conv_int_expires` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD `conv_int_time` bigint(20) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD `conv_event` varchar(20) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `conv_event_vid_id` (`conv_event`, `vid_id`);
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` CHANGE `variation_id` `variation_id` bigint(20) unsigned NOT NULL DEFAULT '0';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD `unique_id` varchar(20) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `unique_id` (`unique_id`);
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `conv_int_time` (`conv_int_time`);
+
+
+ALTER TABLE `lh_chat` ADD `iwh_id` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD INDEX `iwh_id` (`iwh_id`);
+ALTER TABLE `lh_incoming_webhook` ADD `icon` varchar(50) NOT NULL, COMMENT='';
+ALTER TABLE `lh_incoming_webhook` ADD `icon_color` varchar(50) NOT NULL, COMMENT='';
+
+ALTER TABLE `lh_chat` ADD `theme_id` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD INDEX `theme_id` (`theme_id`);
+
+ALTER TABLE `lh_chat` ADD INDEX `time` (`time`);
+ALTER TABLE `lh_audits` ADD INDEX `time` (`time`);
+ALTER TABLE `lh_departament_group_user` ADD `assign_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `chat_min_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `chat_max_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep` ADD `assign_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep` ADD `chat_max_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep` ADD `chat_min_priority` int(11) NOT NULL DEFAULT '0', COMMENT='';
+
+CREATE TABLE `lh_abstract_auto_responder_dep` (`id` bigint(20) NOT NULL AUTO_INCREMENT, `autoresponder_id` int(11) NOT NULL, `dep_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `autoresponder_id` (`autoresponder_id`),KEY `dep_id` (`dep_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_survey_item` ADD `online_user_id` bigint(20) unsigned NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_survey_item` ADD INDEX `online_user_id` (`online_user_id`);
+
+ALTER TABLE `lh_abstract_survey` ADD `identifier` varchar(50) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_survey` ADD INDEX `identifier` (`identifier`);
+
+ALTER TABLE `lh_canned_msg` ADD `delete_on_exp` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_canned_msg` ADD INDEX `delete_on_exp` (`delete_on_exp`);
