@@ -2266,3 +2266,78 @@ ALTER TABLE `lh_abstract_survey` ADD INDEX `identifier` (`identifier`);
 
 ALTER TABLE `lh_canned_msg` ADD `delete_on_exp` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_canned_msg` ADD INDEX `delete_on_exp` (`delete_on_exp`);
+
+
+ALTER TABLE `lh_abstract_chat_column` ADD `chat_list_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+CREATE TABLE `lh_userdep_alias` (
+                                    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                    `dep_id` bigint(20) unsigned NOT NULL,
+                                    `dep_group_id` bigint(20) unsigned NOT NULL,
+                                    `user_id` bigint(20) unsigned NOT NULL,
+                                    `nick` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `filepath` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `filename` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `avatar` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    PRIMARY KEY (`id`),
+                                    KEY `dep_id_user_id` (`dep_id`,`user_id`),
+                                    KEY `dep_group_id_user_id` (`dep_group_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_msg_protection` (
+                                              `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                                              `pattern` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                                              `enabled` int(11) NOT NULL DEFAULT 1,
+                                              `remove` int(11) NOT NULL DEFAULT 0,
+                                              `v_warning` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                                              PRIMARY KEY (`id`),
+                                              KEY `enabled` (`enabled`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `lh_incoming_webhook` ADD `log_incoming` tinyint(1) unsigned NOT NULL, COMMENT='';
+ALTER TABLE `lh_incoming_webhook` ADD `log_failed_parse` tinyint(1) unsigned NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_incoming` ADD UNIQUE `incoming_ext_id_uniq` (`incoming_id`, `chat_external_id`), DROP INDEX `incoming_ext_id`;
+
+CREATE TABLE `lh_chat_participant` (
+                                       `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                       `chat_id` bigint(20) NOT NULL,
+                                       `user_id` bigint(20) NOT NULL,
+                                       `duration` int(11) unsigned NOT NULL,
+                                       `time` bigint(20) unsigned NOT NULL,
+                                       `dep_id` bigint(20) unsigned NOT NULL,
+                                       PRIMARY KEY (`id`),
+                                       KEY `chat_id` (`chat_id`),
+                                       KEY `time` (`time`),
+                                       KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_chat_priority` ADD `role_destination` varchar(50) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_chat_priority` ADD `present_role_is` varchar(50) NOT NULL, COMMENT='';
+
+CREATE TABLE `lh_brand` (
+                            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                            `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_brand_member` (
+                                   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                   `dep_id` bigint(20) unsigned NOT NULL,
+                                   `brand_id` bigint(20) unsigned NOT NULL,
+                                   `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                                   PRIMARY KEY (`id`),
+                                   KEY `dep_id` (`dep_id`),
+                                   KEY `brand_id_role` (`brand_id`,`role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_bot_condition` (
+                                    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                                    `configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `identifier` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    PRIMARY KEY (`id`),
+                                    KEY `identifier` (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_msg` ADD `del_st` tinyint(1) unsigned NOT NULL DEFAULT '0';
