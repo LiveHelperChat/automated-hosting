@@ -2341,3 +2341,6 @@ CREATE TABLE `lh_bot_condition` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `lh_msg` ADD `del_st` tinyint(1) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `lh_abstract_chat_column` ADD `mail_list_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_column` ADD `mail_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
