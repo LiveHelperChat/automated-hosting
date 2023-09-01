@@ -23,11 +23,11 @@
 			<?php endif; ?>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Request left');?></td>
-				<td><?php echo $instance->request?></td>
+				<td <?php $instance->request < 0 ? print 'class="text-danger"' : '' ?>><?php echo $instance->request?></td>
 			</tr>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Expires');?></td>
-				<td><?php echo $instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : '-'?></td>
+				<td <?php $instance->expires < time() ? print 'class="text-danger"' : '' ?>><?php echo $instance->expires > 0 ? date('Y-m-d H:i:s',$instance->expires) : '-'?></td>
 			</tr>
 			<tr>
 				<td><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Maximum operators');?></td>
@@ -46,8 +46,8 @@
 				<td>
 				
 				<form method="post" class="form-inline" action="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>">
-    				<input class="form-control" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Enter your Name or Surname or Company name to override invoice receiver name')?>" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Enter your Name or Surname or Company name to override invoice receiver name')?>" type="text" name="ClientTitle" value="<?php echo htmlspecialchars($instance->client_title)?>" />
-    				<input type="submit" class="btn btn-default" name="SaveClientName" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save')?>" />
+    				<input class="form-control form-control-sm mb-2" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Enter your Name or Surname or Company name to override invoice receiver name')?>" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Enter your Name or Surname or Company name to override invoice receiver name')?>" type="text" name="ClientTitle" value="<?php echo htmlspecialchars($instance->client_title)?>" />
+    				<input type="submit" class="btn btn-secondary btn-sm" name="SaveClientName" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/buttons','Save')?>" />
 				</form>
 				
 				</td>

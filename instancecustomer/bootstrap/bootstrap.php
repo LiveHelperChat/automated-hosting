@@ -16,6 +16,8 @@ class erLhcoreClassExtensionInstancecustomer {
 		$dispatcher->listen('user.edit.photo_path',array($this,'userEditPhotoPath'));
 				
 		$dispatcher->listen('chat.getstatus',array($this,'getStatus'));
+		$dispatcher->listen('widgetrestapi.onlinesettings',array($this,'getStatus'));
+		$dispatcher->listen('widgetrestapi.settings',array($this,'getStatusWidgetRestAPI'));
 		$dispatcher->listen('file.storescreenshot.screenshot_path',array($this,'screenshotPath'));
 		$dispatcher->listen('file.uploadfile.file_path',array($this,'screenshotPath'));
 		$dispatcher->listen('file.uploadfileadmin.file_path',array($this,'screenshotPath'));
@@ -445,7 +447,14 @@ class erLhcoreClassExtensionInstancecustomer {
 			exit;
 		}
 	}
-	
+
+    public function getStatusWidgetRestAPI($params){
+        if (erLhcoreClassInstance::getInstance()->is_active === false) {
+            erLhcoreClassRestAPIHandler::outputResponse(array('terminate' => true, "reason" => "Instance expired or request limit is reached"));
+            exit;
+        }
+    }
+
 	public function userEditPhotoPath($params) {		
 		$params['dir'] = 'var/userphoto/' . date('Y') . 'y/' . date('m') . '/' . date('d') .'/'. erLhcoreClassInstance::getInstance()->id . '/' . $params['storage_id'] . '/';
 	}
