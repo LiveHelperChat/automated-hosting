@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class erLhcoreClassInstanceDBMysql {
       
    public static function deleteDB($client_id)

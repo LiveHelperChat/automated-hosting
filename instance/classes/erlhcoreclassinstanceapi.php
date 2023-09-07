@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class erLhcoreClassInstanceAPI {
 
    public static function getInstanceByHost($host)

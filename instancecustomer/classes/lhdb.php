@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class erLhcoreClassLazyDatabaseConfiguration implements ezcBaseConfigurationInitializer
 {
      private static $connectionMaster;

@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 /**
  * Socket communication class.
  *

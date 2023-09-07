@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+#[\AllowDynamicProperties]
 class erLhcoreClassExtensionInstancecustomer {
 
 	public function __construct() {
