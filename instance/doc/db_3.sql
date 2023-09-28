@@ -2349,3 +2349,6 @@ ALTER TABLE `lh_msg` ADD `del_st` tinyint(1) unsigned NOT NULL DEFAULT '0';
 
 ALTER TABLE `lh_abstract_chat_column` ADD `mail_list_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_chat_column` ADD `mail_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_abstract_widget_theme` ADD `hide_op_ts` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` CHANGE `hide_ts` `hide_ts` tinyint(1) unsigned NOT NULL DEFAULT '0';
