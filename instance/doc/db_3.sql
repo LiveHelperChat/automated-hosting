@@ -297,7 +297,7 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 ('pro_active_invite',	'1',	0,	'Is pro active chat invitation active. Online users tracking also has to be enabled',	0),
 ('pro_active_limitation',	'-1',	0,	'Pro active chats invitations limitation based on pending chats, (-1) do not limit, (0,1,n+1) number of pending chats can be for invitation to be shown.',	0),
 ('pro_active_show_if_offline',	'0',	0,	'Should invitation logic be executed if there is no online operators, 0 - no, 1 - yes',	0),
-('reopen_chat_enabled',	'1',	0,	'Reopen chat functionality enabled, 0 - No, 1 - Yes',	0),
+('reopen_chat_enabled',	'0',	0,	'Reopen chat functionality enabled, 0 - No, 1 - Yes',	0),
 ('run_departments_workflow',	'0',	0,	'Should cronjob run departments tranfer workflow, even if user leaves a chat, 0 - no, 1 - yes',	0),
 ('run_unaswered_chat_workflow',	'0',	0,	'Should cronjob run unanswered chats workflow and execute unaswered chats callback, 0 - no, any other number bigger than 0 is a minits how long chat have to be not accepted before executing callback.',	0),
 ('smtp_data',	'a:5:{s:4:\"host\";s:0:\"\";s:4:\"port\";s:2:\"25\";s:8:\"use_smtp\";i:0;s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";}',	0,	'SMTP configuration',	1),
@@ -1052,7 +1052,7 @@ CREATE TABLE `lh_abstract_widget_theme` (
 INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('new_user_bn', '', '');
 INSERT INTO `lh_users_setting_option` (`identifier`, `class`, `attribute`) VALUES ('new_user_sound', '', '');
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('allow_reopen_closed','1', 0, 'Allow user to reopen closed chats?', '0');
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('allow_reopen_closed','0', 0, 'Allow user to reopen closed chats?', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('reopen_as_new','1', 0, 'Reopen closed chat as new? Otherwise it will be reopened as active.', '0');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('default_theme_id','0', 0, 'Default theme ID.', '1');
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('update_ip','127.0.0.1',0,'Which ip should be allowed to update DB by executing http request, separate by comma?',0);
