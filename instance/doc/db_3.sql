@@ -2311,6 +2311,9 @@ CREATE TABLE `lh_chat_participant` (
                                        `duration` int(11) unsigned NOT NULL,
                                        `time` bigint(20) unsigned NOT NULL,
                                        `dep_id` bigint(20) unsigned NOT NULL,
+                                       `frt` int(11) unsigned NOT NULL DEFAULT 0,
+                                       `aart` int(11) unsigned NOT NULL DEFAULT 0,
+                                       `mart` int(11) unsigned NOT NULL DEFAULT 0,
                                        PRIMARY KEY (`id`),
                                        KEY `chat_id` (`chat_id`),
                                        KEY `time` (`time`),
@@ -2352,3 +2355,7 @@ ALTER TABLE `lh_abstract_chat_column` ADD `mail_enabled` tinyint(1) NOT NULL DEF
 
 ALTER TABLE `lh_abstract_widget_theme` ADD `hide_op_ts` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_widget_theme` CHANGE `hide_ts` `hide_ts` tinyint(1) unsigned NOT NULL DEFAULT '0';
+
+ALTER TABLE `lh_chat` ADD `frt` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD `aart` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat` ADD `mart` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
