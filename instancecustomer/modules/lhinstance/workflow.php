@@ -7,6 +7,7 @@ if ( (string)$Params['user_parameters']['hash'] == $validateHash && $Params['use
     
     // Let the core to do the main job
 	include 'modules/lhcron/workflow.php';
+    include 'modules/lhcron/transfer_workflow.php';
     
 	erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.instance.workflow',array('instance' => erLhcoreClassInstance::$instanceChat));
 	
