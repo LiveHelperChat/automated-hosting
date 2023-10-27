@@ -633,6 +633,7 @@ INSERT INTO `lh_rolefunction` (`role_id`, `module`, `function`) VALUES
 (2,	'lhchat',	'allowtransferdirectly'),
 (2,	'lhchat',	'singlechatwindow'),
 (2,	'lhchat',	'allowopenremotechat'),
+(2,	'lhchat',	'allowopenclosedchats'),
 (2,	'lhchat',	'allowchattabs'),
 (2,	'lhchat',	'use_onlineusers'),
 (2,	'lhchat',	'allowtransfer'),
