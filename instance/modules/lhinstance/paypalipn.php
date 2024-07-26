@@ -136,12 +136,32 @@ if (strcmp ($res, "VERIFIED") == 0) {
 	    	throw new Exception('This transaction was already processed');
 	    }	    
     } catch (Exception $e) {
-    	erLhcoreClassLog::write(print_r($raw_post_data,true)."\n".$e->getMessage());    	
-    }       
-    
+    	erLhcoreClassLog::write(print_r($raw_post_data,true)."\n".$e->getMessage());
+        erLhcoreClassLog::write(
+            json_encode($_POST,JSON_PRETTY_PRINT) .json_encode($raw_post_data,JSON_PRETTY_PRINT)."\n".$e->getMessage(),
+            ezcLog::SUCCESS_AUDIT,
+            array(
+                'source' => 'lhc',
+                'category' => 'cronjob_exception',
+                'line' => __LINE__,
+                'file' => __FILE__,
+                'object_id' => 0
+            )
+        );
+    }
 } else if (strcmp ($res, "INVALID") == 0) {
-	erLhcoreClassLog::write("Invalid");
-	erLhcoreClassLog::write(print_r($raw_post_data,true)."\n".$res);
+    erLhcoreClassLog::write(print_r($raw_post_data,true)."\n".$res);
+    erLhcoreClassLog::write(
+        json_encode($_POST,JSON_PRETTY_PRINT) . json_encode($raw_post_data,JSON_PRETTY_PRINT)."\n".$res,
+        ezcLog::SUCCESS_AUDIT,
+        array(
+            'source' => 'lhc',
+            'category' => 'cronjob_exception',
+            'line' => __LINE__,
+            'file' => __FILE__,
+            'object_id' => 0
+        )
+    );
 }
 exit;
 ?>
