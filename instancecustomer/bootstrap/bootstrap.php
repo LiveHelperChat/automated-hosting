@@ -302,7 +302,7 @@ class erLhcoreClassExtensionInstancecustomer {
 	        
 	        // Set hostname, *.example.com is not valid domain for Google Mail, so we cannot rely on detection
 	        $params['phpmailer']->Hostname = $smtpData['hostname'];
-	    } else {
+	    } elseif (isset($smtpData['hostname'])) {
             $params['phpmailer']->Hostname = $smtpData['hostname'];
         }
 	    
