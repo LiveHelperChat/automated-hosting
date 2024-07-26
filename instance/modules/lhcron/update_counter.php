@@ -101,6 +101,10 @@ if ( is_file( $logFilePath ) )
                     $logPartArray = preg_split( "/[\"]+/", $line );
                     $timeIPPart = $logPartArray[0];
 
+                    if (strpos($timeIPPart, '[') === false) {
+                        continue;
+                    }
+
                     list( $ip, $timePart ) = explode( '[', $timeIPPart );
                     list( $time, $rest ) = explode( ' ', $timePart );
 
