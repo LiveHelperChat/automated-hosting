@@ -1495,7 +1495,7 @@ class TCPDF_FONTS {
 			return chr($c);
 		} elseif ($c <= 0x7F) {
 			// one byte
-			return chr($c);
+			return chr((int)$c);
 		} elseif ($c <= 0x7FF) {
 			// two bytes
 			return chr(0xC0 | $c >> 6).chr(0x80 | $c & 0x3F);

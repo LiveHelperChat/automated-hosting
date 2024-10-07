@@ -24,7 +24,7 @@ class erLhcoreClassModelInstanceInvoice {
        }
    }
 
-   public function fetch($dep_id, $useCache = false) {
+   public static function fetch($dep_id, $useCache = false) {
    
    		if ($useCache == true && isset($GLOBALS['erLhcoreClassModelInstanceInvoice'.$dep_id])) return $GLOBALS['erLhcoreClassModelInstanceInvoice'.$dep_id];
    		

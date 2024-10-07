@@ -62,17 +62,16 @@
 <div role="tabpanel">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" <?php if (!isset($tab)) : ?> class="active"<?php endif;?>><a href="#features" aria-controls="features" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features');?></a></li> 
-		    
-		    
+		    <li role="presentation" <?php if (!isset($tab)) : ?> class="active"<?php endif;?>><a href="#features"  class="<?php if (!isset($tab)) : ?> active<?php endif;?> nav-link" aria-controls="features" role="tab" data-bs-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Features');?></a></li>
+
 		    <?php if ($instance->sms_supported == 1) : ?>
-    			<li role="presentation" <?php if (isset($tab) && $tab == 'sms') : ?> class="active"<?php endif;?>><a href="#sms" aria-controls="sms" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS Chat');?></a></li>
+    			<li role="presentation" <?php if (isset($tab) && $tab == 'sms') : ?> class="active"<?php endif;?>><a href="#sms"  class="nav-link" aria-controls="sms" role="tab" data-bs-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','SMS Chat');?></a></li>
     		<?php endif;?>
     		
     		<?php include(erLhcoreClassDesign::designtpl('lhinstance/tabs/feature_tab_multiinclude.tpl.php'));?>
     		
     		<?php if ($pages->items_total > 0) : ?>
-    			<li role="presentation"><a href="#maindata" aria-controls="maindata" role="tab" data-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoice list');?></a></li>
+    			<li role="presentation"><a href="#maindata" aria-controls="maindata" class="nav-link" role="tab" data-bs-toggle="tab"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('instance/edit','Invoice list');?></a></li>
     		<?php endif;?>
     		
     		<?php if ($instance->is_reseller) : ?>
