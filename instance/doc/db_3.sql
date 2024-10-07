@@ -2478,3 +2478,11 @@ ALTER TABLE `lh_abstract_chat_variable` ADD `content_field` varchar(50) NOT NULL
 ALTER TABLE `lh_abstract_form` ADD `configuration` longtext NOT NULL, COMMENT='';
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('bbcode_options','a:2:{s:3:\"div\";a:0:{}s:3:\"dio\";a:0:{}}','0','','1');
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('unban_ip_range','','0','Which ip should not be allowed to be blocked','0');
+ALTER TABLE `lhc_mailconv_conversation` ADD `from_address_clean` varchar(250) NOT NULL DEFAULT '', COMMENT='';
+ALTER TABLE `lhc_mailconv_conversation` ADD INDEX `from_address_clean` (`from_address_clean`);
+UPDATE `lhc_mailconv_conversation` SET `from_address_clean` = LOWER(CONCAT(replace(regexp_replace(`from_address`, '(@+)(.*)', ''),'.',''),'@',regexp_replace(`from_address`, '(.*)(@+)', '')));
+ALTER TABLE `lh_abstract_auto_responder` ADD `disabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_auto_responder` ADD INDEX `disabled` (`disabled`);
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('remember_phone_email','1','0','Should we remember E-Mail, Phone for the next time visitor starts a chat?','0');
+ALTER TABLE `lh_users_session` CHANGE `last_error` `last_error` text NOT NULL;
