@@ -2486,3 +2486,6 @@ ALTER TABLE `lh_abstract_auto_responder` ADD `disabled` tinyint(1) NOT NULL DEFA
 ALTER TABLE `lh_abstract_auto_responder` ADD INDEX `disabled` (`disabled`);
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('remember_phone_email','1','0','Should we remember E-Mail, Phone for the next time visitor starts a chat?','0');
 ALTER TABLE `lh_users_session` CHANGE `last_error` `last_error` text NOT NULL;
+ALTER TABLE `lh_departament` ADD `dep_offline` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament` ADD INDEX `dep_offline` (`dep_offline`);
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('notice_message','','0','','1');
