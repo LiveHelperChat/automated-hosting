@@ -2489,3 +2489,7 @@ ALTER TABLE `lh_users_session` CHANGE `last_error` `last_error` text NOT NULL;
 ALTER TABLE `lh_departament` ADD `dep_offline` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_departament` ADD INDEX `dep_offline` (`dep_offline`);
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('notice_message','','0','','1');
+
+ALTER TABLE `lh_users_online_session` ADD `type` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_custom_work_hours` ADD `repetitiveness` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_custom_work_hours` ADD INDEX `repetitiveness` (`repetitiveness`);
