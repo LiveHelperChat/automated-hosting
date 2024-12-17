@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 fileCron='/tmp/running-workflow'
 
 # Run every minute

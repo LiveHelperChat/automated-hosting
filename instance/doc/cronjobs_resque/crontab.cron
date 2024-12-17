@@ -1,4 +1,4 @@
 * * * * * www-data cd /var/app/current/scripts && ./workflow.sh >> /dev/null 2>&1
 * * * * * www-data cd /var/app/current/scripts && ./webhook.sh >> /dev/null 2>&1
-17 */8 * * * www-data cd /var/app/current/scripts && php cron.php -s site_admin -e instance -c cron/archive_resque >> /dev/null 2>&1
-*/4 * * * * www-data cd /var/app/current/scripts && php cron.php -s site_admin -e instance -c cron/delete_resque >> /dev/null 2>&1
+17 */8 * * * www-data cd /var/app/current/scripts && php cron.php -s site_admin -e instance -c cron/resque_archive >> /dev/null 2>&1
+*/4 * * * * www-data cd /var/app/current/scripts && php cron.php -s site_admin -e instance -c cron/resque_delete >> /dev/null 2>&1
