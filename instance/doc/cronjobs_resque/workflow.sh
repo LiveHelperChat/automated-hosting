@@ -8,7 +8,7 @@ do
     if [ ! -f $fileCron ];
     then
       touch $fileCron;
-      cd /code && /usr/local/bin/php cron.php -s site_admin -e instance -c cron/resque_workflow >> cache/workflow.log
+      cd /home/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/resque_workflow >> cache/workflow.log
       echo "$(tail -1000 cache/workflow.log)" > cache/workflow.log
       rm -f $fileCron;
     else

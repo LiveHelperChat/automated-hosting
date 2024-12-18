@@ -266,6 +266,8 @@ http://manager.livehelperchat.com/instance/paypalipn
 */4 * * * * cd /home/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/resque_delete >> /dev/null 2>&1
 ```
 
+`workflow.sh` and `webhook.sh` can be found [here](https://github.com/LiveHelperChat/automated-hosting/tree/master/instance/doc/cronjobs_resque)
+
 PHP-Resque will be running itself under client directory.
 
 ```cron

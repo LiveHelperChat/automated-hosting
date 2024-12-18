@@ -9,7 +9,7 @@ do
     if [ ! -f $fileCronHook ];
     then
       touch $fileCronHook;
-      cd /code && php cron.php -s site_admin -e instance -c cron/resque_webhook >> cache/webhook.log
+      cd /home/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/resque_webhook >> cache/webhook.log
       echo "$(tail -1000 cache/webhook.log)" > cache/webhook.log
       rm -f $fileCronHook;
     else
