@@ -9,7 +9,7 @@ $cfg = erConfigClassLhConfig::getInstance();
 
 $db = ezcDbInstance::get();
 
-foreach (erLhcoreClassModelInstance::getList(array('limit' => 1000000,'filter' => array('status' => erLhcoreClassModelInstance::WORKING))) as $instance) {
+foreach (erLhcoreClassModelInstance::getList(array('limit' => 1000000,'filterin' => array('status' => [erLhcoreClassModelInstance::WORKING, erLhcoreClassModelInstance::IN_PROGRESS]))) as $instance) {
 	echo "Updating database for customer - ",$instance->id,"\n";
 	$db->query('USE '.$cfg->getSetting( 'db', 'database_user_prefix').$instance->id);
 	erLhcoreClassUpdate::doTablesUpdate(json_decode($contentData,true));

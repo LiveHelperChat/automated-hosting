@@ -118,6 +118,7 @@ Plain php version. `cron.php` is located in the installation folder.
 
 ```shell
 php cron.php -s site_admin -e instance -c cron/maintain
+php cron.php -s site_admin -e instance -c cron/maintain -p 1
 ```
 
 You main need to adjust paths here and in cron_lhc.sh script itself. sh script is located at `extension/instance/doc/cron_lhc.sh`
