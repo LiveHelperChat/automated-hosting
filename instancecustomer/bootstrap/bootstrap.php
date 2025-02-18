@@ -265,9 +265,15 @@ class erLhcoreClassExtensionInstancecustomer {
 	
 	public function setupSMTP($params) {
 	    $params['phpmailer']->Sender = erConfigClassLhConfig::getInstance()->getSetting('site','sender_mail');
-	    $params['phpmailer']->From = erConfigClassLhConfig::getInstance()->getSetting('site','seller_mail');
-	    $params['phpmailer']->FromName = erConfigClassLhConfig::getInstance()->getSetting('site','seller_title');
-	    
+        
+        if (empty($params['phpmailer']->From)) {
+            $params['phpmailer']->From = erConfigClassLhConfig::getInstance()->getSetting('site','seller_mail');
+        }
+
+        if (empty($params['phpmailer']->FromName)) {
+            $params['phpmailer']->FromName = erConfigClassLhConfig::getInstance()->getSetting('site','seller_title');
+        }
+
 	    $smtpData = erConfigClassLhConfig::getInstance()->getSetting('site','seller_smtp',false);
 	    
 	    if (is_array($smtpData) && $smtpData['enabled']) {
