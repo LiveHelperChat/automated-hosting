@@ -557,6 +557,7 @@ class erLhcoreClassModelInstance {
 
    const PENDING_CREATE = 0;
    const WORKING = 1;
+   const IN_PROGRESS = 2;
 
    public $id = null;
    public $request = 0;   
