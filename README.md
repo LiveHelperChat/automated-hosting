@@ -117,11 +117,11 @@ Now you will see instance from top menu. There you can create manually new insta
 Plain php version. `cron.php` is located in the installation folder.
 
 ```shell
-php cron.php -s site_admin -e instance -c cron/maintain
-php cron.php -s site_admin -e instance -c cron/maintain -p 1
+* * * * * cd /home/www/domains/livehelperchat_manager_com && php cron.php -s site_admin -e instance -c cron/maintain
 ```
 
 You main need to adjust paths here and in cron_lhc.sh script itself. sh script is located at `extension/instance/doc/cron_lhc.sh`
+
 ```cron
 * * * * * cd /home/www/cronjobs && ./cron_lhc.sh > cron_lhc.log /dev/null 2>&1
 ```
@@ -199,18 +199,25 @@ instancecustomeroverride -> /home/www/admin/automated-hosting/instancecustomerov
 nodejshelper -> /home/www/git/NodeJS-Helper/nodejshelper
 ```
 
+Install cronjob which will remove expired instances
 
+```cron
+* * * * * cd /home/www/client/lhc_web && php cron.php -s site_admin -e instancecustomer -c cron/remove_expired
+```
 
 * Activate extension in main `lhc_web/settings/settings.ini.php` file . It should look like
 
 ```php 
     'extensions' =>
-    array (
-    'instancecustomeroverride','instancecustomer','lhcphpresque','nodejshelper',
+     array (
+        'instancecustomeroverride',
+        'instancecustomer',
+        'lhcphpresque',
+        'nodejshelper',
     ),
 ```
 
-* Change in main `lhc_web/settings/settings.ini.php` file    `'default_site_access' => 'eng'` to `'default_site_access' => 'noneexist'`
+* Change in main `lhc_web/settings/settings.ini.php` file `'default_site_access' => 'eng'` to `'default_site_access' => 'noneexist'`
 
 * Apppend in `site_access_options` one more array
 
@@ -254,7 +261,6 @@ http://manager.livehelperchat.com/instance/paypalipn
     instancecustomeroverride
     instanceoverride
 ```
-
 
 ## PHP-Resque installation
 
@@ -398,7 +404,7 @@ cd /var/www/client/lhc_web && git pull origin master
 cd /var/www/manager/lhc_web && php cron.php -s site_admin -c cron/util/update_database
 cd /var/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/update_structure
 cd /var/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/update_instances
-​cd /var/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/extensions_update
+cd /var/www/manager/lhc_web && php cron.php -s site_admin -e instance -c cron/extensions_update
 cd /var/www/manager/lhc_web && php cron.php -s site_admin -c cron/util/clear_cache
 cd /var/www/client/lhc_web && php cron.php -s site_admin -c cron/util/clear_cache
 ```
