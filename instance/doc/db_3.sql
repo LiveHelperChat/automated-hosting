@@ -817,7 +817,7 @@ CREATE TABLE `lh_chat_file` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
-('file_configuration',	'a:7:{i:0;b:0;s:5:\"ft_op\";s:43:\"gif|jpe?g|png|zip|rar|xls|doc|docx|xlsx|pdf\";s:5:\"ft_us\";s:26:\"gif|jpe?g|png|doc|docx|pdf\";s:6:\"fs_max\";i:2048;s:18:\"active_user_upload\";b:0;s:16:\"active_op_upload\";b:1;s:19:\"active_admin_upload\";b:1;}',	0,	'Files configuration item',	1);
+    ('file_configuration',	'a:22:{i:0;b:0;s:5:\"ft_op\";s:59:\"gif|jpe?g|png|zip|svg|rar|xls|doc|docx|xlsx|pdf|ogg|m4a|wav\";s:5:\"ft_us\";s:30:\"gif|jpe?g|png|svg|doc|docx|pdf\";s:6:\"fs_max\";i:2048;s:18:\"active_user_upload\";b:0;s:16:\"active_op_upload\";b:1;s:19:\"active_admin_upload\";b:1;s:12:\"mtype_delete\";a:0:{}s:13:\"mtype_cdelete\";a:0:{}s:11:\"mdays_older\";N;s:19:\"mdays_older_visitor\";N;s:18:\"chat_file_policy_v\";i:1;s:18:\"chat_file_policy_o\";i:0;s:16:\"mail_file_policy\";i:0;s:15:\"one_file_upload\";b:0;s:11:\"remove_meta\";b:0;s:14:\"clamav_enabled\";b:0;s:14:\"sound_messages\";b:0;s:17:\"sound_messages_op\";b:0;s:12:\"sound_length\";i:30;s:10:\"clamd_sock\";s:26:\"/var/run/clamav/clamd.sock\";s:14:\"clamd_sock_len\";i:20000;}',	0,	'Files configuration item',	1);
 
 ALTER TABLE `lh_faq`
 ADD `is_wildcard` tinyint(1) NOT NULL,
