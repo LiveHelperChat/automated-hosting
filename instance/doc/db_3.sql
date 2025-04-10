@@ -2495,3 +2495,8 @@ ALTER TABLE `lh_departament_custom_work_hours` ADD `repetitiveness` tinyint(1) u
 ALTER TABLE `lh_departament_custom_work_hours` ADD INDEX `repetitiveness` (`repetitiveness`);
 ALTER TABLE `lh_generic_bot_trigger` ADD `pos` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_webhook` ADD `delay` int(11) NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_audits` ADD `user_id` bigint(20) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_audits` ADD INDEX `user_id` (`user_id`);
+
+CREATE TABLE `lh_notification_op_subscriber` ( `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, `user_id` bigint(20) unsigned NOT NULL, `device_type` tinyint(1) NOT NULL, `ctime` bigint(20) unsigned NOT NULL, `utime` bigint(20) unsigned NOT NULL, `status` tinyint(1) unsigned NOT NULL, `achat` tinyint(1) unsigned NOT NULL, `pchat` tinyint(1) unsigned NOT NULL, `params` text COLLATE utf8mb4_unicode_ci NOT NULL, `last_error` text COLLATE utf8mb4_unicode_ci NOT NULL, `subscriber_hash` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL, PRIMARY KEY (`id`), KEY `status` (`status`), KEY `user_id` (`user_id`), KEY `subscriber_hash` (`subscriber_hash`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
