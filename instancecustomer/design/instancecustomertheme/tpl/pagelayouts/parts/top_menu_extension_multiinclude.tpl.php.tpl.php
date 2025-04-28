@@ -1,3 +1,3 @@
 <?php if (erConfigClassLhConfig::getInstance()->getSetting('site','hide_billing') == false && $currentUser->hasAccessTo('lhinstance','billing')) : ?>
-<li class="nav-item"><a class="nav-link" href="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" ><i class="material-icons">account_balance</i> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('pagelayout/pagelayout','Billing');?></a></li>
+<li class="nav-item"><a class="nav-link <?php if (erLhcoreClassInstance::getInstance()->is_active === false) : ?>text-danger<?php endif;?>" href="<?php echo erLhcoreClassDesign::baseurl('instance/billing')?>" ><i class="material-icons">account_balance</i> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('pagelayout/pagelayout','Billing');?></a></li>
 <?php endif;?>
