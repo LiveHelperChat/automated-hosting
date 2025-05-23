@@ -445,6 +445,8 @@ CREATE TABLE `lh_departament` (
   `inactive_chats_cnt` int(11) NOT NULL DEFAULT 0,
   `inop_chats_cnt` int(11) NOT NULL DEFAULT 0,
   `acop_chats_cnt` int(11) NOT NULL DEFAULT 0,
+  `max_load_op` int(11) unsigned NOT NULL DEFAULT 0,
+  `max_load_op_h` int(11) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `identifier` (`identifier`),
   KEY `disabled_hidden` (`disabled`,`hidden`),
@@ -1611,7 +1613,9 @@ CREATE TABLE `lh_departament_group` (
   `inachats_cnt` int(11) NOT NULL DEFAULT 0,
   `inopchats_cnt` int(11) NOT NULL DEFAULT 0,
   `acopchats_cnt` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `max_load_op` int(11) unsigned NOT NULL DEFAULT 0,
+  `max_load_op_h` int(11) unsigned NOT NULL DEFAULT 0,
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('product_show_departament',	'0',	0,	'Enable products show by departments',	1);
@@ -2556,7 +2560,7 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'331',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'332',	0,	'',	1);
 
 ALTER TABLE `lh_users` ADD INDEX `username` (`username`);
 
