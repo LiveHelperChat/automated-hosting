@@ -106,7 +106,10 @@ if ( is_file( $logFilePath ) )
                     }
 
                     list( $ip, $timePart ) = explode( '[', $timeIPPart );
-                    list( $time, $rest ) = explode( ' ', $timePart );
+
+                    $timeParts = explode(' ', $timePart);
+                    $time = isset($timeParts[0]) ? $timeParts[0] : '';
+                    $rest = isset($timeParts[1]) ? $timeParts[1] : '';
 
                     if ( $time == $startTime )
                         $stopParse = true;
