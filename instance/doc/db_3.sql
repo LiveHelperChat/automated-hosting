@@ -2560,7 +2560,7 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'332',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'333',	0,	'',	1);
 
 ALTER TABLE `lh_users` ADD INDEX `username` (`username`);
 
@@ -2569,3 +2569,4 @@ INSERT IGNORE INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `
 ALTER TABLE `lh_abstract_chat_column` ADD `chat_window_enabled` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_chat_column` ADD INDEX `chat_window_enabled` (`chat_window_enabled`);
 ALTER TABLE `lh_abstract_chat_variable` ADD `try_decrypt` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_variable` ADD `case_insensitive` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
