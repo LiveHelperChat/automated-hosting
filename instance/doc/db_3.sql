@@ -2570,3 +2570,4 @@ ALTER TABLE `lh_abstract_chat_column` ADD `chat_window_enabled` tinyint(1) NOT N
 ALTER TABLE `lh_abstract_chat_column` ADD INDEX `chat_window_enabled` (`chat_window_enabled`);
 ALTER TABLE `lh_abstract_chat_variable` ADD `try_decrypt` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_chat_variable` ADD `case_insensitive` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_chat_priority` ADD `skip_bot` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
