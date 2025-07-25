@@ -126,7 +126,7 @@ class erLhcoreClassExtensionInstancecustomer {
 		    erConfigClassLhCacheConfig::getInstance()->setExpiredInRuntime(true);
 
             if ($instanceCustomer->time_zone != '') {
-                erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
+                erLhcoreClassModule::$defaultTimeZoneSystem = erLhcoreClassModule::$defaultTimeZone = $instanceCustomer->time_zone;
             }
 
     		erLhcoreClassModule::$dateFormat = $instanceCustomer->date_format;

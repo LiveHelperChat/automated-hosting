@@ -2571,3 +2571,10 @@ ALTER TABLE `lh_abstract_chat_column` ADD INDEX `chat_window_enabled` (`chat_win
 ALTER TABLE `lh_abstract_chat_variable` ADD `try_decrypt` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_chat_variable` ADD `case_insensitive` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_chat_priority` ADD `skip_bot` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_chat_file` ADD `meta_msg` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lh_chat_file` ADD `width` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lhc_mailconv_file` ADD `meta_msg` longtext NOT NULL, COMMENT='';
+ALTER TABLE `lhc_mailconv_file` ADD `width` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lhc_mailconv_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
