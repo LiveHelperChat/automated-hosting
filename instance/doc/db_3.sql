@@ -2290,6 +2290,7 @@ CREATE TABLE `lh_userdep_alias` (
                                     `filepath` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
                                     `filename` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
                                     `avatar` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                    `job_title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
                                     PRIMARY KEY (`id`),
                                     KEY `dep_id_user_id` (`dep_id`,`user_id`),
                                     KEY `dep_group_id_user_id` (`dep_group_id`,`user_id`)
@@ -2578,3 +2579,4 @@ ALTER TABLE `lh_chat_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', C
 ALTER TABLE `lhc_mailconv_file` ADD `meta_msg` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `width` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_file` ADD `tmp` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
