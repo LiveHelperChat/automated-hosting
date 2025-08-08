@@ -2142,7 +2142,7 @@ ALTER TABLE `lh_abstract_widget_theme` CHANGE `support_closed` `support_closed` 
 ALTER TABLE `lh_abstract_widget_theme` CHANGE `widget_copyright_url` `widget_copyright_url` text NOT NULL, CHANGE `need_help_header` `need_help_header` text NOT NULL;
 
 ALTER TABLE `lh_abstract_subject` ADD `internal` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_abstract_subject` ADD `internal_type` varchar(20) NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_subject` ADD `internal_type` varchar(50) NOT NULL, COMMENT='';
 ALTER TABLE `lh_abstract_subject` ADD INDEX `internal` (`internal`);
 ALTER TABLE `lh_abstract_subject` ADD INDEX `internal_type` (`internal_type`);
 
