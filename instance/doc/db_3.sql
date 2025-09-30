@@ -1595,11 +1595,11 @@ CREATE TABLE `lh_departament_group_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_departament_group_member` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dep_id` int(11) NOT NULL,
-  `dep_group_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `dep_group_id` (`dep_group_id`)
+                                               `id` int(11) NOT NULL AUTO_INCREMENT,
+                                               `dep_id` int(11) NOT NULL,
+                                               `dep_group_id` int(11) NOT NULL,
+                                               PRIMARY KEY (`id`),
+                                               UNIQUE KEY `dep_group_id_dep_id` (`dep_group_id`,`dep_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_departament_group` (
