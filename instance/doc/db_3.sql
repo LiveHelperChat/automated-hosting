@@ -2561,7 +2561,7 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'333',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'341',	0,	'',	1);
 
 ALTER TABLE `lh_users` ADD INDEX `username` (`username`);
 
@@ -2580,3 +2580,8 @@ ALTER TABLE `lhc_mailconv_file` ADD `meta_msg` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `width` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_chat_file` ADD `tmp` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+
+ALTER TABLE `lh_userdep` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep_disabled` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user_disabled` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
