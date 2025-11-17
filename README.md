@@ -97,19 +97,6 @@ lhcphpresque -> /home/www/git/lhc-php-resque/lhcphpresque
 'extensions' => array ('instanceoverride','instance','lhcphpresque')
 ```
 
-* Edit `lhc_web/var/autolaods/lhextension_autoload.php`
-
-```php
-return array(
-        'erLhcoreClassModelInstance' 		=> 'extension/instance/classes/erlhcoreclassmodelinstance.php',
-        'erLhcoreClassInstance' 		    => 'extension/instance/classes/erlhcoreclassinstance.php',
-        'erLhcoreClassInstanceDBMysql' 		=> 'extension/instance/classes/dbhandlers/mysql.php',
-        'erLhcoreClassInstanceDBDirectAdmin'=> 'extension/instance/classes/dbhandlers/directadmin.php',
-        'HTTPSocket' 				        => 'extension/instance/classes/dbhandlers/httpsocket.php',
-        'erLhcoreClassModelInstanceInvoice'	=> 'extension/instance/classes/erlhcoreclassmodelinstanceinvoice.php',
-);
-```
-
 Now you will see instance from top menu. There you can create manually new instances.
 
 * Setup cronjonb to run every minute. I have also prepared an sh version of cronjob which avoids running script more than once at the same time.
@@ -178,16 +165,30 @@ Delete from copied folder `extension/instance` and `extension/instanceoverride` 
 
 All subdomains should be pointed to new copied directory. Update Apache virtual hosts or nginx as needed. See nginx configuration below.
 
-* Edit  `var/autoloads/lhextension_autoload.php` in copied directory and make it look like
+Edit `composer.json` file `autoload` section looks like 
+```json
+"autoload": {
+    "exclude-from-classmap": [
+      "extension/instancecustomer/classes/tcpdf_min"
+    ],
+    "psr-4": {
+      "LiveHelperChat\\": "lib/vendor_lhc/LiveHelperChat/",
+      "Pachico\\": "lib/vendor_lhc/Pachico/",
+      "enshrined\\": "lib/vendor_lhc/enshrined/",
+      "LiveHelperChatExtension\\": "extension/"
+    },
+    "classmap": [
+      "extension/instancecustomer/classes",
+      "lib/core",
+      "lib/models"
+    ]
+  },
+```
 
-```php
-return array(
-'erLhcoreClassModelInstance' 		    => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
-'erLhcoreClassInstance' 		        => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
-'erLhcoreClassLazyDatabaseConfiguration'=> 'extension/instancecustomer/classes/lhdb.php',
-'erLhcoreClassModelInstanceInvoice' 	=> 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php',
-'erLhcoreClassModelInstanceAlias' 	    => 'extension/instancecustomer/classes/erlhcoreclassmodelinstancealias.php'
-);
+Run composer command to generate client autoload.
+
+```
+php composer.phar dump-autoload -o -a
 ```
 
 * Symbolic links in extensions folder should look like this

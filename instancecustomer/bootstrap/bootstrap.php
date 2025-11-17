@@ -184,9 +184,13 @@ class erLhcoreClassExtensionInstancecustomer {
 	public function autoload($className)
 	{
 	    $classesAutoload = array(
-	        'erLhcoreClassModelInstanceAlias' => 'extension/instancecustomer/classes/erlhcoreclassmodelinstancealias.php',
+            'erLhcoreClassModelInstance'            => 'extension/instancecustomer/classes/erlhcoreclassmodelinstance.php',
+            'erLhcoreClassInstance'                 => 'extension/instancecustomer/classes/erlhcoreclassinstance.php',
+            'erLhcoreClassLazyDatabaseConfiguration'=> 'extension/instancecustomer/classes/lhdb.php',
+            'erLhcoreClassModelInstanceInvoice'     => 'extension/instancecustomer/classes/erlhcoreclassmodelinstanceinvoice.php',
+            'erLhcoreClassModelInstanceAlias'       => 'extension/instancecustomer/classes/erlhcoreclassmodelinstancealias.php'
 	    );
-	
+
 	    if (key_exists($className, $classesAutoload)) {
 	        include_once $classesAutoload[$className];
 	    }
