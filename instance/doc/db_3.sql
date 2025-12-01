@@ -2302,10 +2302,13 @@ CREATE TABLE `lh_abstract_msg_protection` (
                                               `enabled` int(11) NOT NULL DEFAULT 1,
                                               `remove` int(11) NOT NULL DEFAULT 0,
                                               `v_warning` text COLLATE utf8mb4_unicode_ci NOT NULL,
+                                              `rule_type` tinyint(1) unsigned NOT NULL DEFAULT 0,
+                                              `has_dep` tinyint(1) unsigned NOT NULL DEFAULT 0,
+                                              `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                              `dep_ids` text COLLATE utf8mb4_unicode_ci NOT NULL,
                                               PRIMARY KEY (`id`),
-                                              KEY `enabled` (`enabled`)
+                                              KEY `enabled_type` (`enabled`,`rule_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 ALTER TABLE `lh_incoming_webhook` ADD `log_incoming` tinyint(1) unsigned NOT NULL, COMMENT='';
 ALTER TABLE `lh_incoming_webhook` ADD `log_failed_parse` tinyint(1) unsigned NOT NULL, COMMENT='';
@@ -2511,7 +2514,6 @@ ALTER TABLE `lh_userdep` ADD INDEX `online_op_widget_3` (`user_id`, `active_chat
 
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('del_on_close_no_msg','0','0','Delete chat on close if there are no messages from the visitor','0');
 
-
 CREATE TABLE `lh_userdep_disabled` (
                                        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
                                        `user_id` int(11) NOT NULL,
@@ -2539,6 +2541,7 @@ CREATE TABLE `lh_userdep_disabled` (
                                        `assign_priority` int(11) NOT NULL DEFAULT 0,
                                        `chat_max_priority` int(11) NOT NULL DEFAULT 0,
                                        `chat_min_priority` int(11) NOT NULL DEFAULT 0,
+                                       `only_priority` tinyint(1) unsigned NOT NULL DEFAULT 0,
                                        PRIMARY KEY (`id`),
                                        KEY `dep_id` (`dep_id`),
                                        KEY `user_id_type` (`user_id`,`type`),
@@ -2548,7 +2551,7 @@ CREATE TABLE `lh_userdep_disabled` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `lh_departament_group_user_disabled` (
-                                                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                                                      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
                                                       `dep_group_id` int(11) NOT NULL,
                                                       `user_id` int(11) NOT NULL,
                                                       `read_only` tinyint(1) unsigned NOT NULL DEFAULT 0,
@@ -2556,6 +2559,7 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       `assign_priority` int(11) NOT NULL DEFAULT 0,
                                                       `chat_min_priority` int(11) NOT NULL DEFAULT 0,
                                                       `chat_max_priority` int(11) NOT NULL DEFAULT 0,
+                                                      `only_priority` tinyint(1) unsigned NOT NULL DEFAULT 0,
                                                       PRIMARY KEY (`id`),
                                                       KEY `dep_group_id` (`dep_group_id`),
                                                       KEY `user_id` (`user_id`)
@@ -2583,5 +2587,3 @@ ALTER TABLE `lh_chat_file` ADD `tmp` tinyint(1) NOT NULL DEFAULT '0', COMMENT=''
 
 ALTER TABLE `lh_userdep` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_departament_group_user` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_userdep_disabled` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_departament_group_user_disabled` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
