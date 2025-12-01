@@ -410,8 +410,8 @@ CREATE TABLE `lh_departament` (
   `attr_int_1` int(11) NOT NULL DEFAULT 0,
   `attr_int_2` int(11) NOT NULL DEFAULT 0,
   `attr_int_3` int(11) NOT NULL DEFAULT 0,
-  `active_chats_counter` int(11) NOT NULL,
-  `pending_chats_counter` int(11) NOT NULL,
+  `active_chats_counter` int(11) NOT NULL DEFAULT 0,
+  `pending_chats_counter` int(11) NOT NULL DEFAULT 0,
   `visible_if_online` tinyint(1) NOT NULL,
   `sort_priority` int(11) NOT NULL,
   `mod_start_hour` int(4) NOT NULL DEFAULT -1,
@@ -428,8 +428,8 @@ CREATE TABLE `lh_departament` (
   `sad_end_hour` int(4) NOT NULL DEFAULT -1,
   `sud_start_hour` int(4) NOT NULL DEFAULT -1,
   `sud_end_hour` int(4) NOT NULL DEFAULT -1,
-  `inform_close_all` int(11) NOT NULL,
-  `inform_close_all_email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `inform_close_all` int(11) NOT NULL DEFAULT '0',
+  `inform_close_all_email` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `product_configuration` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pending_max` int(11) NOT NULL,
   `pending_group_max` int(11) NOT NULL,
@@ -1020,11 +1020,11 @@ CREATE TABLE `lh_abstract_widget_theme` (
   `close_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `popup_image` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `popup_image_path` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hide_close` int(11) NOT NULL,
-  `hide_popup` int(11) NOT NULL,
-  `header_height` int(11) NOT NULL,
-  `header_padding` int(11) NOT NULL,
-  `widget_border_width` int(11) NOT NULL,
+  `hide_close` int(11) NOT NULL DEFAULT '0',
+  `hide_popup` int(11) NOT NULL DEFAULT '0',
+  `header_height` int(11) NOT NULL DEFAULT '0',
+  `header_padding` int(11) NOT NULL DEFAULT '0',
+  `widget_border_width` int(11) NOT NULL DEFAULT '0',
   `support_joined` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `support_closed` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pending_join` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1043,9 +1043,9 @@ CREATE TABLE `lh_abstract_widget_theme` (
   `buble_operator_text_color` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `custom_popup_css` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `hide_ts` int(11) NOT NULL,
-  `widget_response_width` int(11) NOT NULL,
-  `show_need_help_delay` int(11) NOT NULL,
-  `show_status_delay` int(11) NOT NULL,
+  `widget_response_width` int(11) NOT NULL DEFAULT '0',
+  `show_need_help_delay` int(11) NOT NULL DEFAULT '0',
+  `show_status_delay` int(11) NOT NULL DEFAULT '0',
   `modern_look` tinyint(1) NOT NULL DEFAULT 0,
   `bot_status_text` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bot_configuration` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2565,7 +2565,8 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'341',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'342',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('guardrails_enabled','0','0','Enable guardrails for operators and visitors','1');
 
 ALTER TABLE `lh_users` ADD INDEX `username` (`username`);
 
@@ -2583,7 +2584,7 @@ ALTER TABLE `lh_chat_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', C
 ALTER TABLE `lhc_mailconv_file` ADD `meta_msg` longtext NOT NULL, COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `width` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lhc_mailconv_file` ADD `height` int(11) unsigned NOT NULL DEFAULT '0', COMMENT='';
-ALTER TABLE `lh_chat_file` ADD `tmp` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_chat_file` ADD `tmp` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
 ALTER TABLE `lh_userdep` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_departament_group_user` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
