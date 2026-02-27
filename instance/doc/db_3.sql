@@ -57,6 +57,16 @@ CREATE TABLE `lh_abstract_auto_responder` (
   KEY `siteaccess_position` (`siteaccess`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+DROP TABLE IF EXISTS `lh_abstract_proactive_chat_invitation_one_time`;
+CREATE TABLE `lh_abstract_proactive_chat_invitation_one_time` (
+                                                                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                                                                  `invitation_id` bigint(20) unsigned NOT NULL,
+                                                                  `vid_id` bigint(20) unsigned NOT NULL,
+                                                                  PRIMARY KEY (`id`),
+                                                                  KEY `invitation_id_vid_id` (`invitation_id`,`vid_id`),
+                                                                  KEY `vid_id` (`vid_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 DROP TABLE IF EXISTS `lh_abstract_email_template`;
 CREATE TABLE `lh_abstract_email_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
