@@ -2602,3 +2602,8 @@ ALTER TABLE `lh_userdep` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAUL
 ALTER TABLE `lh_departament_group_user` ADD `only_priority` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 
 CREATE TABLE `lhc_mailconv_pending_import` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `uid` bigint(20) unsigned NOT NULL,  `mailbox_id` int(11) unsigned NOT NULL,  `status` tinyint(1) unsigned NOT NULL DEFAULT 0,  `attempt` tinyint(1) unsigned NOT NULL DEFAULT 0,  `last_failure` text COLLATE utf8mb4_unicode_ci NOT NULL,  `created_at` int(11) unsigned NOT NULL,  `updated_at` int(11) unsigned NOT NULL,  PRIMARY KEY (`id`),  UNIQUE KEY `mailbox_id_uid` (`mailbox_id`,`uid`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `inv_vid` (`invitation_id`,`invitation_status`,`vid_id`);
+
+ALTER TABLE `lh_abstract_subject` ADD `archive` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_abstract_subject` ADD INDEX `archive` (`archive`);
