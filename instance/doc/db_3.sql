@@ -2577,7 +2577,7 @@ CREATE TABLE `lh_departament_group_user_disabled` (
                                                       KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'342',	0,	'',	1);
+INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('version_updates',	'351',	0,	'',	1);
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('guardrails_enabled','0','0','Enable guardrails for operators and visitors','1');
 
 ALTER TABLE `lh_users` ADD INDEX `username` (`username`);
@@ -2607,3 +2607,7 @@ ALTER TABLE `lh_abstract_proactive_chat_campaign_conv` ADD INDEX `inv_vid` (`inv
 
 ALTER TABLE `lh_abstract_subject` ADD `archive` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_abstract_subject` ADD INDEX `archive` (`archive`);
+
+
+CREATE TABLE `lh_abstract_content_chunk` (`id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(250) NOT NULL, `in_active` tinyint(1) NOT NULL DEFAULT 0, `identifier` varchar(50) NOT NULL, `content` longtext NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`, `in_active`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_abstract_content_chunk_dep` (`id` bigint(20) NOT NULL AUTO_INCREMENT, `chunk_id` bigint(20) NOT NULL, `dep_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `chunk_id` (`chunk_id`), KEY `dep_id` (`dep_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
