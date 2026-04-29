@@ -40,6 +40,13 @@ class InstanceWorkerArchive {
         } catch (\Exception $e) {
             \LiveHelperChatExtension\instancecustomer\providers\InstanceWorker::logInstanceError($e);
         }
+
+        try {
+            include 'modules/lhcron/util/maintain_files.php ';
+        } catch (\Exception $e) {
+            \LiveHelperChatExtension\instancecustomer\providers\InstanceWorker::logInstanceError($e);
+        }
+
     }
 
 }
