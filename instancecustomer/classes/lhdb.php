@@ -3,6 +3,8 @@
 class erLhcoreClassLazyDatabaseConfiguration implements ezcBaseConfigurationInitializer
 {
      private static $connectionMaster;
+    public static $connectionTime = null;
+    public static $connectionStartTime = null;
 
      public static function configureObject( $instance )
      {
@@ -49,8 +51,10 @@ class erLhcoreClassLazyDatabaseConfiguration implements ezcBaseConfigurationInit
              {
                 try {
                     if (isset(self::$connectionMaster)) return self::$connectionMaster; // If we do not user slaves and slave request already got connection
+                    self::$connectionStartTime = microtime(true);
                     $db = ezcDbFactory::create( "mysql://{$cfg->getSetting( 'db', 'user' )}:{$cfg->getSetting( 'db', 'password' )}@{$cfg->getSetting( 'db', 'host' )}:{$cfg->getSetting( 'db', 'port' )}/{$cfg->getSetting( 'db', 'database' )}" );
                     $db->query("SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'");
+                    self::$connectionTime = microtime(true) - self::$connectionStartTime;
                     self::$connectionMaster = $db;
                     erLhcoreClassInstance::setupInstance(self::$connectionMaster);
                     return $db;
