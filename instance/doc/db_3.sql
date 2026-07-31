@@ -945,30 +945,39 @@ CREATE TABLE `lh_abstract_browse_offer_invitation` (
 INSERT INTO `lh_abstract_email_template` (`id`, `name`, `from_name`, `from_name_ac`, `from_email`, `from_email_ac`, `content`, `subject`, `subject_ac`, `reply_to`, `reply_to_ac`, `recipient`, `bcc_recipients`) VALUES
 (7,	'New unread message',	'Live support',	0,	'',	0,	'Hello,\r\n\r\nUser request data:\r\nName: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\nDepartment: {department}\r\nCountry: {country}\r\nCity: {city}\r\nIP: {ip}\r\n\r\nMessage:\r\n{message}\r\n\r\nURL of page from which user has send request:\r\n{url_request}\r\n\r\nClick to accept chat automatically\r\n{url_accept}\r\n\r\nSincerely,\r\nLive Support Team',	'New unread message',	0,	'',	0,	'',	'');
 
-CREATE TABLE `lh_abstract_form` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `content` longtext NOT NULL,
-  `recipient` varchar(250) NOT NULL,
-  `active` int(11) NOT NULL,
-  `name_attr` varchar(250) NOT NULL,
-  `intro_attr` varchar(250) NOT NULL,
-  `xls_columns` text NOT NULL,
-  `pagelayout` varchar(200) NOT NULL,
-  `post_content` text NOT NULL,
-  PRIMARY KEY (`id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE `lh_abstract_form_collected` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `form_id` int(11) NOT NULL,
-  `ctime` int(11) NOT NULL,
-  `ip` varchar(250) NOT NULL,
-  `identifier` varchar(250) NOT NULL,
-  `content` longtext NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `form_id` (`form_id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                                              `id` int(11) NOT NULL AUTO_INCREMENT,
+                                              `form_id` int(11) NOT NULL,
+                                              `ctime` int(11) NOT NULL,
+                                              `ip` varchar(250) NOT NULL,
+                                              `content` longtext NOT NULL,
+                                              `identifier` varchar(250) NOT NULL,
+                                              `custom_fields` longtext NOT NULL,
+                                              `chat_id` bigint(20) NOT NULL,
+                                              `user_id` bigint(20) NOT NULL DEFAULT 0,
+                                              `attr_int_1` int(11) NOT NULL DEFAULT 0,
+                                              `attr_int_2` int(11) NOT NULL DEFAULT 0,
+                                              `attr_int_3` int(11) NOT NULL DEFAULT 0,
+                                              PRIMARY KEY (`id`),
+                                              KEY `form_id_chat_id` (`form_id`,`chat_id`),
+                                              KEY `chat_id` (`chat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `lh_abstract_form` (
+                                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                                    `name` varchar(100) NOT NULL,
+                                    `content` longtext NOT NULL,
+                                    `recipient` varchar(250) NOT NULL,
+                                    `active` int(11) NOT NULL,
+                                    `name_attr` varchar(250) NOT NULL,
+                                    `intro_attr` varchar(400) NOT NULL,
+                                    `xls_columns` text NOT NULL,
+                                    `pagelayout` varchar(200) NOT NULL,
+                                    `post_content` text NOT NULL,
+                                    `configuration` longtext NOT NULL,
+                                    `form_type` tinyint(1) NOT NULL DEFAULT 0,
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES ('bbc_button_visible','1',0,'Show BB Code button', '0');
 
@@ -2033,9 +2042,6 @@ ALTER TABLE `lh_abstract_email_template` ADD `use_chat_locale` tinyint(1) NOT NU
 ALTER TABLE `lh_users` ADD `avatar` varchar(150) NOT NULL, COMMENT='';
 ALTER TABLE `lh_generic_bot_bot` ADD `avatar` varchar(150) NOT NULL, COMMENT='';
 
-ALTER TABLE `lh_abstract_form_collected` ADD `custom_fields` longtext NOT NULL, COMMENT='';
-ALTER TABLE `lh_abstract_form_collected` ADD `chat_id` bigint(20) NOT NULL, COMMENT='';
-
 ALTER TABLE `lh_canned_msg` ADD `unique_id` varchar(20) NOT NULL, COMMENT='';
 ALTER TABLE `lh_canned_msg` ADD INDEX `unique_id` (`unique_id`);
 
@@ -2494,8 +2500,6 @@ ALTER TABLE `lh_departament` ADD INDEX `ignore_op_status` (`ignore_op_status`);
 
 ALTER TABLE `lh_abstract_chat_variable` ADD `content_field` varchar(50) NOT NULL, COMMENT='';
 
-ALTER TABLE `lh_abstract_form` ADD `configuration` longtext NOT NULL, COMMENT='';
-
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('bbcode_options','a:2:{s:3:\"div\";a:0:{}s:3:\"dio\";a:0:{}}','0','','1');
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('unban_ip_range','','0','Which ip should not be allowed to be blocked','0');
 ALTER TABLE `lhc_mailconv_conversation` ADD `from_address_clean` varchar(250) NOT NULL DEFAULT '', COMMENT='';
@@ -2627,3 +2631,6 @@ CREATE TABLE `lh_abstract_performance` (
 INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`) VALUES
                                                                                       ('statistic_performance',	'a:4:{s:7:\"columns\";a:7:{i:0;s:2:\"cr\";i:1;s:2:\"ca\";i:2;s:2:\"wt\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";}s:9:\"positions\";a:7:{s:2:\"cr\";i:1;s:2:\"ca\";i:3;s:2:\"wt\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";i:7;}s:15:\"update_interval\";i:300;s:12:\"wrap_headers\";b:0;}',	0,	'ignore',	1),
                                                                                       ('statistic_performance_op',	'a:4:{s:7:\"columns\";a:7:{i:0;s:3:\"ton\";i:1;s:4:\"toff\";i:2;s:2:\"ca\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";}s:9:\"positions\";a:7:{s:3:\"ton\";i:1;s:4:\"toff\";i:2;s:2:\"ca\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";i:7;}s:15:\"update_interval\";i:300;s:12:\"wrap_headers\";b:0;}',	0,	'ignore',	1);
+
+
+
