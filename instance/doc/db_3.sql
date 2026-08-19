@@ -1702,7 +1702,22 @@ CREATE TABLE `lh_abstract_auto_responder_chat` (
                   KEY `chat_id` (`chat_id`)
                 )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `lh_users_online_session` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `user_id` int(11) NOT NULL, `duration` int(11) NOT NULL, `time` int(11) NOT NULL, `lactivity` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `user_id_lactivity` (`user_id`, `lactivity`))  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `lh_users_online_session` (
+                                           `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                           `user_id` int(11) NOT NULL,
+                                           `lactivity` int(11) NOT NULL,
+                                           `duration` int(11) NOT NULL,
+                                           `time` int(11) NOT NULL,
+                                           `type` tinyint(1) NOT NULL DEFAULT 0,
+                                           `offline_reason_id` int(11) unsigned NOT NULL DEFAULT 0,
+                                           `updated_by_user_id` int(11) unsigned NOT NULL DEFAULT 0,
+                                           `online_by_user_id` int(11) unsigned NOT NULL DEFAULT 0,
+                                           PRIMARY KEY (`id`),
+                                           KEY `user_id_lactivity` (`user_id`,`lactivity`),
+                                           KEY `lactivity` (`lactivity`),
+                                           KEY `user_id_time` (`user_id`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `lh_chat_start_settings` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(50) NOT NULL, `data` longtext NOT NULL, `department_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `department_id` (`department_id`))  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `lh_transfer` ADD `ctime` int(11) NOT NULL, COMMENT='';
@@ -2166,7 +2181,6 @@ ALTER TABLE `lh_abstract_subject` ADD INDEX `internal_type` (`internal_type`);
 ALTER TABLE `lh_generic_bot_trigger` ADD `in_progress` int(11) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_generic_bot_trigger` ADD INDEX `in_progress` (`in_progress`);
 
-ALTER TABLE `lh_users_online_session` ADD INDEX `lactivity` (`lactivity`);
 ALTER TABLE `lh_notification_subscriber` ADD INDEX `subscriber_hash` (`subscriber_hash`);
 ALTER TABLE `lh_chat` ADD INDEX `nick` (`nick`);
 ALTER TABLE `lh_chat` ADD INDEX `email` (`email`);
@@ -2513,7 +2527,6 @@ ALTER TABLE `lh_departament` ADD `dep_offline` tinyint(1) NOT NULL DEFAULT '0', 
 ALTER TABLE `lh_departament` ADD INDEX `dep_offline` (`dep_offline`);
 INSERT INTO `lh_chat_config` (`identifier`,`value`,`type`,`explain`,`hidden`) VALUES ('notice_message','','0','','1');
 
-ALTER TABLE `lh_users_online_session` ADD `type` tinyint(1) NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_departament_custom_work_hours` ADD `repetitiveness` tinyint(1) unsigned NOT NULL DEFAULT '0', COMMENT='';
 ALTER TABLE `lh_departament_custom_work_hours` ADD INDEX `repetitiveness` (`repetitiveness`);
 ALTER TABLE `lh_generic_bot_trigger` ADD `pos` int(11) NOT NULL DEFAULT '0', COMMENT='';
@@ -2616,8 +2629,6 @@ ALTER TABLE `lh_abstract_subject` ADD INDEX `archive` (`archive`);
 CREATE TABLE `lh_abstract_content_chunk` (`id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(250) NOT NULL, `in_active` tinyint(1) NOT NULL DEFAULT 0, `identifier` varchar(50) NOT NULL, `content` longtext NOT NULL, PRIMARY KEY (`id`), KEY `identifier` (`identifier`, `in_active`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE `lh_abstract_content_chunk_dep` (`id` bigint(20) NOT NULL AUTO_INCREMENT, `chunk_id` bigint(20) NOT NULL, `dep_id` int(11) NOT NULL, PRIMARY KEY (`id`), KEY `chunk_id` (`chunk_id`), KEY `dep_id` (`dep_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-ALTER TABLE `lh_users_online_session` ADD KEY `user_id_time` (`user_id`, `time`);
-
 CREATE TABLE `lh_abstract_performance` (
                                            `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
                                            `type` tinyint(1) unsigned NOT NULL DEFAULT 0,
@@ -2632,5 +2643,5 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
                                                                                       ('statistic_performance',	'a:4:{s:7:\"columns\";a:7:{i:0;s:2:\"cr\";i:1;s:2:\"ca\";i:2;s:2:\"wt\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";}s:9:\"positions\";a:7:{s:2:\"cr\";i:1;s:2:\"ca\";i:3;s:2:\"wt\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";i:7;}s:15:\"update_interval\";i:300;s:12:\"wrap_headers\";b:0;}',	0,	'ignore',	1),
                                                                                       ('statistic_performance_op',	'a:4:{s:7:\"columns\";a:7:{i:0;s:3:\"ton\";i:1;s:4:\"toff\";i:2;s:2:\"ca\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";}s:9:\"positions\";a:7:{s:3:\"ton\";i:1;s:4:\"toff\";i:2;s:2:\"ca\";i:3;s:3:\"frt\";i:4;s:4:\"aart\";i:5;s:3:\"tup\";i:6;s:5:\"tdown\";i:7;}s:15:\"update_interval\";i:300;s:12:\"wrap_headers\";b:0;}',	0,	'ignore',	1);
 
-
-
+CREATE TABLE `lh_abstract_offline_reason` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `name` varchar(250) NOT NULL, `description` text NOT NULL, `icon` varchar(250) NOT NULL, `pos` int(11) unsigned NOT NULL DEFAULT 0, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `lh_users` ADD `offline_reason_id` int(11) unsigned NOT NULL DEFAULT 0, COMMENT='';
