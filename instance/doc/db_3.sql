@@ -2645,3 +2645,6 @@ INSERT INTO `lh_chat_config` (`identifier`, `value`, `type`, `explain`, `hidden`
 
 CREATE TABLE `lh_abstract_offline_reason` (`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `name` varchar(250) NOT NULL, `description` text NOT NULL, `icon` varchar(250) NOT NULL, `pos` int(11) unsigned NOT NULL DEFAULT 0, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ALTER TABLE `lh_users` ADD `offline_reason_id` int(11) unsigned NOT NULL DEFAULT 0, COMMENT='';
+
+ALTER TABLE `lh_canned_msg_replace` ADD `configuration` text NOT NULL, COMMENT='';
+ALTER TABLE `lh_abstract_widget_theme` CHANGE `custom_status_css` `custom_status_css` mediumtext NOT NULL, CHANGE `custom_container_css` `custom_container_css` mediumtext NOT NULL, CHANGE `custom_widget_css` `custom_widget_css` mediumtext NOT NULL, CHANGE `custom_popup_css` `custom_popup_css` mediumtext NOT NULL;
