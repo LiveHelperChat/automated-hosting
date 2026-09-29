@@ -2657,3 +2657,6 @@ CREATE TABLE `lh_mcp_session` (
                                   PRIMARY KEY (`session_id`),
                                   KEY `utime` (`utime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `lh_users` ADD `team_lead_user_id` int(11) unsigned NOT NULL DEFAULT 0;
+ALTER TABLE `lh_users` ADD INDEX `team_lead_user_id` (`team_lead_user_id`);
