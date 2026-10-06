@@ -2660,3 +2660,12 @@ CREATE TABLE `lh_mcp_session` (
 
 ALTER TABLE `lh_users` ADD `team_lead_user_id` int(11) unsigned NOT NULL DEFAULT 0;
 ALTER TABLE `lh_users` ADD INDEX `team_lead_user_id` (`team_lead_user_id`);
+
+ALTER TABLE `lh_userdep` ADD `chat_min_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep` ADD `chat_max_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep_disabled` ADD `chat_min_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_userdep_disabled` ADD `chat_max_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `chat_min_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user` ADD `chat_max_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user_disabled` ADD `chat_min_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
+ALTER TABLE `lh_departament_group_user_disabled` ADD `chat_max_priority_std` int(11) NOT NULL DEFAULT '0', COMMENT='';
