@@ -44,12 +44,64 @@ You will have manager interface where you can create instances for your clients.
    'host' => 'smtp.gmail.com',
    'port' => 587,
    'smtp_secure' => 'tls',
+   'smtp_auto_tls' => false, // Optional. Defaults to true. See samples below
    'smtp_auth' => true,
    'username' => 'admin@example.com',
    'password' => 'password', // You may need to create an application password if you are suing google smtp
    'hostname' => 'example.com',
 ),
 ```
+
+#### `seller_smtp` samples
+
+Only `host` and `port` are required. `smtp_auto_tls` defaults to `true`, which keeps the previous behaviour (PHPMailer upgrades a plain connection to STARTTLS when the server advertises it).
+
+Local relay without TLS - this is the case where `smtp_auto_tls` has to be `false`, otherwise PHPMailer attempts STARTTLS and sending fails when the relay has no valid certificate:
+
+```php
+'seller_smtp' => array(
+   'enabled' => (php_sapi_name() != 'cli' ? true : false), // optional - skip CLI (cron.php) if needed
+   'host' => '127.0.0.1',
+   'port' => 25,
+   'smtp_secure' => '',        // no encryption
+   'smtp_auto_tls' => false,   // IMPORTANT - no opportunistic STARTTLS upgrade
+   'smtp_auth' => false,
+   'username' => '',
+   'password' => '',
+   'hostname' => 'example.com', // must be a valid FQDN, it is used in EHLO
+),
+```
+
+Local relay with a self-signed certificate on STARTTLS:
+
+```php
+'seller_smtp' => array(
+   'enabled' => true,
+   'host' => '127.0.0.1',
+   'port' => 587,
+   'smtp_secure' => 'tls',
+   'smtp_auto_tls' => false,
+   'smtp_auth' => false,
+   'verify_peer' => false,        // self-signed certificate
+   'verify_peer_name' => false,
+   'allow_self_signed' => true,
+   'hostname' => 'example.com',
+),
+```
+
+Supported combinations:
+
+| Scenario | host | port | smtp_secure | smtp_auto_tls |
+|---|---|---|---|---|
+| External provider (Gmail, Microsoft 365, SES, Mailgun, SendGrid) | smtp.example.com | 587 | `tls` | `false` |
+| External provider, implicit SSL | smtp.example.com | 465 | `ssl` | `false` |
+| Local relay, TLS not available | 127.0.0.1 | 25 | `''` | `false` |
+| Local relay, TLS optional | 127.0.0.1 | 25 | `''` | `true` |
+| Local relay, STARTTLS required | 127.0.0.1 | 587 | `tls` | `false` |
+
+Optional keys: `verify_peer`, `verify_peer_name`, `allow_self_signed` (TLS certificate checks - only applied when at least one of them is set, otherwise PHPMailer keeps the default `verify_peer = true`) and `bindip` - e.g. `'bindip' => '10.0.0.5,10.0.0.6'`, one of the listed IPs is picked at random for each message.
+
+Note: a lowercase `ssl://` or `tls://` prefix in `host` wins over `smtp_secure`, so keep only one style - either `'host' => 'smtp.example.com'` with `smtp_secure`, or `'host' => 'tls://smtp.example.com'` without it.
 
 * In `db` section add `database_user_prefix` parameter. It will be used to create new databases for each client. Example: "lhc_manage_client_23". 
 

@@ -49,11 +49,50 @@ If you are using DirectAdmin (http://www.directadmin.com/), you will have to app
            'host' => 'smtp.gmail.com',
            'port' => 587,
            'smtp_secure' => 'tls',
+           'smtp_auto_tls' => false, // Optional. Defaults to true
            'smtp_auth' => true,
            'username' => 'admin@example.com',
            'password' => 'password', // You may need to create an application password if you are suing google smtp
            'hostname' => 'example.com',
 ),
+
+Local relay without TLS - smtp_auto_tls has to be false, otherwise PHPMailer attempts
+STARTTLS and sending fails when the relay has no valid certificate
+'seller_smtp' => array(
+           'enabled' => true,
+           'host' => '127.0.0.1',
+           'port' => 25,
+           'smtp_secure' => '',        // no encryption
+           'smtp_auto_tls' => false,   // no opportunistic STARTTLS upgrade
+           'smtp_auth' => false,
+           'username' => '',
+           'password' => '',
+           'hostname' => 'example.com', // must be a valid FQDN, it is used in EHLO
+),
+
+Local relay with a self-signed certificate on STARTTLS
+'seller_smtp' => array(
+           'enabled' => true,
+           'host' => '127.0.0.1',
+           'port' => 587,
+           'smtp_secure' => 'tls',
+           'smtp_auto_tls' => false,
+           'smtp_auth' => false,
+           'verify_peer' => false,
+           'verify_peer_name' => false,
+           'allow_self_signed' => true,
+           'hostname' => 'example.com',
+),
+
+Supported combinations
+  external provider               587  smtp_secure => 'tls'  smtp_auto_tls => false
+  external provider, implicit SSL 465  smtp_secure => 'ssl'  smtp_auto_tls => false
+  local relay, TLS not available   25  smtp_secure => ''     smtp_auto_tls => false
+  local relay, TLS optional        25  smtp_secure => ''     smtp_auto_tls => true
+  local relay, STARTTLS required  587  smtp_secure => 'tls'  smtp_auto_tls => false
+
+A lowercase ssl:// or tls:// prefix in host wins over smtp_secure, keep only one style.
+Optional: 'bindip' => '10.0.0.5,10.0.0.6' - random IP is used for each message.
 
 3. In db section add
 'database_user_prefix' => 'lhc_manage_client_', // Each new customer database will be created with the following pattern 'lhc_manage_client_'.customer->id. Example: "lhc_manage_customer_23"

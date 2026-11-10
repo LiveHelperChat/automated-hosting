@@ -299,19 +299,49 @@ class erLhcoreClassExtensionInstancecustomer {
 	        $params['phpmailer']->Port = $smtpData['port'];
 	        
 	        //Set the encryption system to use - ssl (deprecated) or tls
-	        $params['phpmailer']->SMTPSecure = $smtpData['smtp_secure'];
-	        
+	        $params['phpmailer']->SMTPSecure = isset($smtpData['smtp_secure']) ? $smtpData['smtp_secure'] : '';
+
+	        //Automatic STARTTLS upgrade of a plain connection. Enabled by default to keep previous behaviour.
+	        //Set false for a local relay without TLS - otherwise PHPMailer attempts STARTTLS and sending fails
+	        //if the relay certificate or the TLS version is not acceptable.
+	        $params['phpmailer']->SMTPAutoTLS = isset($smtpData['smtp_auto_tls']) ? (bool)$smtpData['smtp_auto_tls'] : true;
+
 	        //Whether to use SMTP authentication
-	        $params['phpmailer']->SMTPAuth = $smtpData['smtp_auth'];
-	        
-	        //Username to use for SMTP authentication - use full email address for gmail
-	        $params['phpmailer']->Username = $smtpData['username'];
-	        
-	        //Password to use for SMTP authentication
-	        $params['phpmailer']->Password = $smtpData['password'];
-	        
+	        $params['phpmailer']->SMTPAuth = isset($smtpData['smtp_auth']) ? (bool)$smtpData['smtp_auth'] : false;
+
+	        if ($params['phpmailer']->SMTPAuth) {
+	            //Username to use for SMTP authentication - use full email address for gmail
+	            $params['phpmailer']->Username = isset($smtpData['username']) ? $smtpData['username'] : '';
+
+	            //Password to use for SMTP authentication
+	            $params['phpmailer']->Password = isset($smtpData['password']) ? $smtpData['password'] : '';
+	        }
+
+	        //Core setupSMTP is skipped because of STOP_WORKFLOW, so TLS options have to be set here.
+	        //Only applied when configured - otherwise PHPMailer keeps verifying the server certificate.
+	        $SMTPOptions = array();
+
+	        if (isset($smtpData['verify_peer']) || isset($smtpData['verify_peer_name']) || isset($smtpData['allow_self_signed'])) {
+	            $SMTPOptions['ssl'] = array(
+	                'verify_peer' => isset($smtpData['verify_peer']) ? (bool)$smtpData['verify_peer'] : true,
+	                'verify_peer_name' => isset($smtpData['verify_peer_name']) ? (bool)$smtpData['verify_peer_name'] : true,
+	                'allow_self_signed' => isset($smtpData['allow_self_signed']) ? (bool)$smtpData['allow_self_signed'] : false
+	            );
+	        }
+
+	        if (isset($smtpData['bindip']) && trim($smtpData['bindip']) != '') {
+	            $IPs = explode(",", $smtpData['bindip']);
+	            $SMTPOptions['socket']['bindto'] = trim($IPs[array_rand($IPs)]) . ':0';
+	        }
+
+	        if (!empty($SMTPOptions)) {
+	            $params['phpmailer']->SMTPOptions = $SMTPOptions;
+	        }
+
 	        // Set hostname, *.example.com is not valid domain for Google Mail, so we cannot rely on detection
-	        $params['phpmailer']->Hostname = $smtpData['hostname'];
+	        if (isset($smtpData['hostname']) && $smtpData['hostname'] != '') {
+	            $params['phpmailer']->Hostname = $smtpData['hostname'];
+	        }
 	    } elseif (isset($smtpData['hostname'])) {
             $params['phpmailer']->Hostname = $smtpData['hostname'];
         }
